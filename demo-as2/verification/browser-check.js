@@ -1,0 +1,41 @@
+// Run in an isolated browser session with agent-browser eval --stdin.
+(() => {
+  const results=[];
+  const check=(name,ok)=>{if(!ok)throw new Error(name);results.push(name);};
+  const field=(key,value)=>{
+    const el=document.querySelector(`[data-ab-field="${key}"]`);
+    if(!el)throw new Error('Missing field '+key);
+    if(el.type==='checkbox')el.checked=value;else el.value=value;
+    el.dispatchEvent(new Event(el.tagName==='SELECT'||el.type==='checkbox'?'change':'input',{bubbles:true}));
+  };
+  const click=(action,value)=>{const el=[...document.querySelectorAll(`[data-a="ab-${action}"]`)].find(el=>value===undefined||el.dataset.v===value);if(!el)throw new Error('Missing action '+action+' '+value);el.click();};
+  const prefix='联调 '+Date.now();
+  click('new','env');field('name',prefix+' 云端');field('config.image','node:20');click('save');
+  const env=abItems('env').find(x=>x.name===prefix+' 云端');check('Environment template saves V1',env?.version===1);
+  click('new','instance');field('name',prefix+' 实例');field('sourceMode','template');field('templateId',env.id);
+  check('Instance preloads template configuration',abEnsure().editor.config.image==='node:20'&&abEnsure().editor.templateVersion===1);
+  field('visibility','public');click('save');
+  const instance=abItems('instance').find(x=>x.name===prefix+' 实例');check('Public instance saves source and directory',instance?.templateId===env.id&&instance.workingDirectory.startsWith('/workspace/'));
+  click('new','task');field('name',prefix+' 原子');field('description','Human description only');field('config.presetPrompt','General preset');field('config.environment.mode','template');field('config.environment.templateId',env.id);
+  check('Environment binding pins selected version',abEnsure().editor.config.environment.version===1);click('save');
+  const atom=abItems('task').find(x=>x.name===prefix+' 原子');check('Atomic template saves separate prompts',atom?.config.presetPrompt==='General preset'&&atom.config.inputPromptTemplate==='');
+  click('new','workflow');field('name',prefix+' 串联');field('stages.0.steps.0.atomicId',atom.id);
+  check('Blank input template never falls back to description or preset',abEnsure().editor.stages[0].steps[0].input==='');
+  field('stages.0.steps.0.name','第一步');field('stages.0.steps.0.input','Create a report');
+  const draft=abEnsure().editor,first=draft.stages[0].steps[0],stageId=draft.stages[0].id;
+  click('step-add',stageId);field('stages.0.steps.1.source','inline');field('stages.0.steps.1.name','第二步');field('stages.0.steps.1.input','Review report');field('stages.0.steps.1.config.environment.mode','template');field('stages.0.steps.1.config.environment.templateId',env.id);field('stages.0.steps.1.reuseStepId',first.id);field('stages.0.steps.1.manualConfirm',true);
+  check('Reuse candidate references stable earlier step ID',draft.stages[0].steps[1].reuseStepId===first.id);
+  click('publish');const series=abItems('workflow').find(x=>x.name===prefix+' 串联');check('Series publishes complete configuration',series?.version===1&&!series.draft&&series.stages[0].steps[1].manualConfirm);
+  click('use',series.id);document.querySelector('#abRunName').value=prefix+' 任务';click('run-create');
+  const task=s.tasks.find(t=>t.title===prefix+' 任务');check('Task creates independent frozen design snapshot',task?.build36Snapshot.stages[0].steps.length===2);
+  check('Reused steps share one environment instance',task.environmentIds[0]===task.environmentIds[1]&&task.environments.length===1);
+  check('Task board receives standard temporary-task fields',task.type==='temp'&&task.kind==='board'&&task.status==='pending');
+  check('Environment association statistics count task once',abReferences(env).total.length===1&&abReferences(env).running.length===0);
+  abOpen(env.id);field('config.image','python:3.11');click('save');
+  check('Editing environment retains old pinned version',abSnapshot(abGet(env.id),1).config.image==='node:20'&&abGet(env.id).version===2);
+  check('Published series atomic snapshot remains fixed',series.stages[0].steps[0].atomicSnapshot.config.presetPrompt==='General preset');
+  abDelete(abGet(env.id));check('Unfinished task prevents environment deletion',!!document.querySelector('.modalbody .ab-error')&&!document.querySelector('[data-a="ab-delete-confirm"]'));closeModal();
+  click('new','instance');field('name',prefix+' 离线');field('config.location','本地');field('config.zone','黄区');click('save');check('Offline first runtime produces blocking inline error',document.querySelector('.ab-error')?.textContent.includes('离线'));
+  click('home');abOpen(series.id);s.build36QA={seriesId:series.id,envId:env.id,atomId:atom.id,taskId:task.id};save();
+  return {passed:results.length,checks:results,ids:s.build36QA};
+})();

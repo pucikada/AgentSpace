@@ -780,5 +780,6 @@ jsrep('class="channelwrap colink-channel${', 'class="channelwrap colink-channel$
 js = re.sub(r'font-size:(8|9|10)px', 'font-size:11px', js)
 
 out = head + '<style>\n' + css + '\n</style>' + body + '<script>' + js
-OUT.write_text(out)
+from sync_build import sync_build
+OUT.write_text(sync_build(out))
 print(f'wrote {OUT.name}: {len(out)/1024:.0f} KB (source {len(html)/1024:.0f} KB)')
