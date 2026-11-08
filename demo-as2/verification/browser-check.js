@@ -9,6 +9,10 @@
     el.dispatchEvent(new Event(el.tagName==='SELECT'||el.type==='checkbox'?'change':'input',{bubbles:true}));
   };
   const click=(action,value)=>{const el=[...document.querySelectorAll(`[data-a="ab-${action}"]`)].find(el=>value===undefined||el.dataset.v===value);if(!el)throw new Error('Missing action '+action+' '+value);el.click();};
+  abAction('ab-home','');
+  check('Sidebar has no creation shortcuts',document.querySelectorAll('[data-ab-sidebar] [data-a="ab-new"]').length===0);
+  check('Default workspace only contains four creation entries',document.querySelectorAll('.ab-home [data-a="ab-new"]').length===4&&!document.querySelector('.ab-home .ab-grid'));
+  check('Existing assets appear as sidebar cards',document.querySelectorAll('[data-ab-sidebar] .ab-side-card').length>0);
   const prefix='联调 '+Date.now();
   click('new','env');field('name',prefix+' 云端');field('config.image','node:20');click('save');
   const env=abItems('env').find(x=>x.name===prefix+' 云端');check('Environment template saves V1',env?.version===1);
@@ -26,7 +30,7 @@
   click('step-add',stageId);field('stages.0.steps.1.source','inline');field('stages.0.steps.1.name','第二步');field('stages.0.steps.1.input','Review report');field('stages.0.steps.1.config.environment.mode','template');field('stages.0.steps.1.config.environment.templateId',env.id);field('stages.0.steps.1.reuseStepId',first.id);field('stages.0.steps.1.manualConfirm',true);
   check('Reuse candidate references stable earlier step ID',draft.stages[0].steps[1].reuseStepId===first.id);
   click('publish');const series=abItems('workflow').find(x=>x.name===prefix+' 串联');check('Series publishes complete configuration',series?.version===1&&!series.draft&&series.stages[0].steps[1].manualConfirm);
-  click('use',series.id);document.querySelector('#abRunName').value=prefix+' 任务';click('run-create');
+  click('open',series.id);check('Selected sidebar card opens corresponding editor',abEnsure().editor.id===series.id&&!!document.querySelector('.ab-side-card.active'));click('use',series.id);document.querySelector('#abRunName').value=prefix+' 任务';click('run-create');
   const task=s.tasks.find(t=>t.title===prefix+' 任务');check('Task creates independent frozen design snapshot',task?.build36Snapshot.stages[0].steps.length===2);
   check('Reused steps share one environment instance',task.environmentIds[0]===task.environmentIds[1]&&task.environments.length===1);
   check('Task board receives standard temporary-task fields',task.type==='temp'&&task.kind==='board'&&task.status==='pending');
