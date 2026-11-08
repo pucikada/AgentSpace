@@ -27,6 +27,7 @@
   const atom=abItems('task').find(x=>x.name===prefix+' 原子');check('Atomic template saves separate prompts',atom?.config.presetPrompt==='General preset'&&atom.config.inputPromptTemplate==='');
   click('new','workflow');field('name',prefix+' 串联');field('stages.0.steps.0.atomicId',atom.id);
   check('Blank input template never falls back to description or preset',abEnsure().editor.stages[0].steps[0].input==='');
+  check('Series orchestration is above the step configuration',!!document.querySelector('.ab-stage-track')&&!document.querySelector('.ab-series-layout>aside')&&document.querySelector('.ab-orchestration').getBoundingClientRect().bottom<=document.querySelector('.ab-series-layout>.ab-panel').getBoundingClientRect().top);
   field('stages.0.steps.0.name','第一步');field('stages.0.steps.0.input','Create a report');
   const draft=abEnsure().editor,first=draft.stages[0].steps[0],stageId=draft.stages[0].id;
   click('step-add',stageId);field('stages.0.steps.1.source','inline');field('stages.0.steps.1.name','第二步');field('stages.0.steps.1.input','Review report');field('stages.0.steps.1.config.environment.mode','template');field('stages.0.steps.1.config.environment.templateId',env.id);field('stages.0.steps.1.reuseStepId',first.id);field('stages.0.steps.1.manualConfirm',true);

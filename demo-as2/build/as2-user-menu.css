@@ -1,0 +1,5 @@
+/* Keep nested flyouts open across their visual gaps, independent of CSS :hover. */
+.user-menu.um-managed :is(.um-item,.um-style):not([data-um-open])>.um-fly{display:none!important}
+.user-menu.um-managed [data-um-open]>.um-fly{display:block!important}
+
+.user-menu.um-managed .um-fly{animation:none!important}
