@@ -65,3 +65,5 @@ cp agentspace2.0_mvp.as2.html ../index.html
 | `lucide-extract.py` · `assets/lucide-icons.json` | 图标：从 lucide-react 按语义映射提取 Lucide 图标数据（修改映射后重新运行脚本） |
 
 头像菜单的多级外观选择由 `build/as2-user-menu.js` / `.css` 管理跨面板指针通道、延迟关闭与面板定位；只在菜单打开时处理指针，不改变主题数据模型。
+
+构建与扩展的二级筛选统一为「全部 / 个人 / 项目」；选择项目后再选择具体项目，切换扩展类型保留当前项目。编辑页不提供「返回构建」按钮，主导航可回到总览；阶段的添加步骤按钮位于标题栏。

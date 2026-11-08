@@ -10,6 +10,7 @@
   };
   const click=(action,value)=>{
     let el=[...document.querySelectorAll(`[data-a="ab-${action}"]`)].find(el=>value===undefined||el.dataset.v===value);
+    if(!el&&action==='home')el=document.querySelector('[data-a="studio"]');
     if(!el&&action==='new'){document.querySelector('[data-a="ab-create-menu"]').click();el=document.querySelector(`.ab-create-menu [data-a="ab-new"][data-v="${value}"]`);}
     if(!el)throw new Error('Missing action '+action+' '+value);el.click();
   };
@@ -18,8 +19,9 @@
   check('Overview tiles built assets across the content area',document.querySelectorAll('.ab-overview-grid .ab-side-card').length>0&&!document.querySelector('.ab-create'));
   document.querySelector('.ab-create-trigger').click();check('Creation dropdown exposes all four asset types',document.querySelectorAll('.ab-create-menu [data-a=ab-new]').length===4);abCloseCreateMenu();
   check('Overview has asset tabs and scope filters',document.querySelectorAll('.ab-overview-types [role=tab]').length===5&&document.querySelectorAll('.ab-overview-scopes [role=tab]').length===3);
+  check('Build scope tabs are ordered all, personal, project',[...document.querySelectorAll('.ab-overview-scopes [role=tab]')].map(e=>e.textContent.trim()).join(',')==='全部,个人,项目');
   const prefix='联调 '+Date.now();
-  click('new','env');check('Creating reveals the sidebar and right form',!!document.querySelector('[data-ab-sidebar]')&&document.querySelector('#demo').dataset.buildMode==='editor');check('Editor retains two levels of sidebar tabs',document.querySelectorAll('.ab-scope-tabs [role=tab]').length===3&&document.querySelectorAll('.ab-type-tabs [role=tab]').length===4);field('name',prefix+' 云端');field('config.image','node:20');click('save');
+  click('new','env');check('Editor has no redundant return-to-build button',!document.querySelector('.ab-page [data-a=ab-home]'));check('Creating reveals the sidebar and right form',!!document.querySelector('[data-ab-sidebar]')&&document.querySelector('#demo').dataset.buildMode==='editor');check('Editor retains two levels of sidebar tabs',document.querySelectorAll('.ab-scope-tabs [role=tab]').length===3&&document.querySelectorAll('.ab-type-tabs [role=tab]').length===4);field('name',prefix+' 云端');field('config.image','node:20');click('save');
   const env=abItems('env').find(x=>x.name===prefix+' 云端');check('Environment template saves V1',env?.version===1);
   click('new','instance');field('name',prefix+' 实例');field('sourceMode','template');field('templateId',env.id);
   check('Instance preloads template configuration',abEnsure().editor.config.image==='node:20'&&abEnsure().editor.templateVersion===1);
@@ -31,6 +33,7 @@
   click('new','workflow');field('name',prefix+' 串联');field('stages.0.steps.0.atomicId',atom.id);
   check('Blank input template never falls back to description or preset',abEnsure().editor.stages[0].steps[0].input==='');
   check('Series orchestration is above the step configuration',!!document.querySelector('.ab-stage-track')&&!document.querySelector('.ab-series-layout>aside')&&document.querySelector('.ab-orchestration').getBoundingClientRect().bottom<=document.querySelector('.ab-series-layout>.ab-panel').getBoundingClientRect().top);
+  check('Add step is compact in the stage header',!!document.querySelector('.ab-stage header [data-a=ab-step-add]')&&!document.querySelector('.ab-stage-steps [data-a=ab-step-add]'));
   field('stages.0.steps.0.name','第一步');field('stages.0.steps.0.input','Create a report');
   const draft=abEnsure().editor,first=draft.stages[0].steps[0],stageId=draft.stages[0].id;
   click('step-add',stageId);field('stages.0.steps.1.source','inline');field('stages.0.steps.1.name','第二步');field('stages.0.steps.1.input','Review report');field('stages.0.steps.1.config.environment.mode','template');field('stages.0.steps.1.config.environment.templateId',env.id);field('stages.0.steps.1.reuseStepId',first.id);field('stages.0.steps.1.manualConfirm',true);
@@ -47,5 +50,11 @@
   abDelete(abGet(env.id));check('Unfinished task prevents environment deletion',!!document.querySelector('.modalbody .ab-error')&&!document.querySelector('[data-a="ab-delete-confirm"]'));closeModal();
   click('new','instance');field('name',prefix+' 离线');field('config.location','本地');field('config.zone','黄区');click('save');check('Offline first runtime produces blocking inline error',document.querySelector('.ab-error')?.textContent.includes('离线'));
   click('home');abOpen(series.id);s.build36QA={seriesId:series.id,envId:env.id,atomId:atom.id,taskId:task.id};save();
+  s.view='extensions';s.extensionType='MCP';s.extensionScope='all';s.extensionQuery='';render();
+  check('Extensions scope tabs match build order',[...document.querySelectorAll('[data-a=ab-extension-scope]')].map(e=>e.textContent.trim()).join(',')==='全部,个人,项目');
+  click('extension-scope','personal');let extRows=s.installations.filter(extensionMatches);check('Personal extensions exclude project installations',extRows.length>0&&extRows.every(i=>['personal','global'].includes(i.scope)));
+  click('extension-scope','project');const projectSelect=document.querySelector('[data-ab-extension-project]');projectSelect.value='AICS';projectSelect.dispatchEvent(new Event('change',{bubbles:true}));extRows=s.installations.filter(extensionMatches);check('Project scope filters the selected project',s.extensionScope==='AICS'&&extRows.length>0&&extRows.every(i=>i.scope==='project'&&i.project==='AICS'));
+  document.querySelector('[data-a="ext-type"][data-v="Skill"]').click();check('Changing extension type preserves the project',s.extensionScope==='AICS'&&document.querySelector('[data-ab-extension-project]').value==='AICS');
+  click('extension-scope','all');check('All extensions hides project selection',!document.querySelector('[data-ab-extension-project]')&&s.extensionScope==='all');abOpen(series.id);
   return {passed:results.length,checks:results,ids:s.build36QA};
 })();
