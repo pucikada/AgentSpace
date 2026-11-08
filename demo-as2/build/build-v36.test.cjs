@@ -5,7 +5,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 
 function app(){
-  const context=vm.createContext({console,Date,Math,JSON,Set,Map,CSS:{escape:x=>x},document:{addEventListener(){},querySelector(){return null},activeElement:null},s:{view:'personal',prototypeRole:'admin',tasks:[],installations:[],workflowDrafts:[]},projectNames:['Project'],DIRECTORY:[],bx2ScopeNow:()=> '个人',bx2Items:()=>[],asset:()=>null,bfAction:()=>false,render(){},save(){},notify(){},modal(){},closeModal(){},btn(){return '';},ico(){return '';},esc:x=>String(x),buildItems:()=>[]});
+  const context=vm.createContext({console,Date,Math,JSON,Set,Map,window:{addEventListener(){}},CSS:{escape:x=>x},document:{addEventListener(){},querySelector(){return null},querySelectorAll(){return []},getElementById(){return null},activeElement:null},s:{view:'personal',prototypeRole:'admin',tasks:[],installations:[],workflowDrafts:[]},projectNames:['Project'],DIRECTORY:[],bx2ScopeNow:()=> '个人',bx2Items:()=>[],asset:()=>null,bfAction:()=>false,render(){},save(){},notify(){},modal(){},closeModal(){},btn(){return '';},ico(){return '';},esc:x=>String(x),buildItems:()=>[]});
   vm.runInContext(fs.readFileSync(path.join(__dirname,'as2-build.js'),'utf8'),context);
   return source=>vm.runInContext(source,context);
 }

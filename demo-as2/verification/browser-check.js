@@ -8,15 +8,18 @@
     if(el.type==='checkbox')el.checked=value;else el.value=value;
     el.dispatchEvent(new Event(el.tagName==='SELECT'||el.type==='checkbox'?'change':'input',{bubbles:true}));
   };
-  const click=(action,value)=>{const el=[...document.querySelectorAll(`[data-a="ab-${action}"]`)].find(el=>value===undefined||el.dataset.v===value);if(!el)throw new Error('Missing action '+action+' '+value);el.click();};
-  abAction('ab-home','');
-  check('Sidebar has no creation shortcuts',document.querySelectorAll('[data-ab-sidebar] [data-a="ab-new"]').length===0);
-  check('Default workspace only contains four creation entries',document.querySelectorAll('.ab-home [data-a="ab-new"]').length===4&&!document.querySelector('.ab-home .ab-grid'));
-  check('Existing assets appear as sidebar cards',document.querySelectorAll('[data-ab-sidebar] .ab-side-card').length>0);
-  check('Scope and asset categories use two levels of tabs',document.querySelectorAll('.ab-scope-tabs [role=tab]').length===3&&document.querySelectorAll('.ab-type-tabs [role=tab]').length===4);
-  check('Asset navigation has no expand or collapse controls',!document.querySelector('[data-a="ab-group"]')&&document.querySelectorAll('.ab-type-tabs [aria-selected=true]').length===1);
+  const click=(action,value)=>{
+    let el=[...document.querySelectorAll(`[data-a="ab-${action}"]`)].find(el=>value===undefined||el.dataset.v===value);
+    if(!el&&action==='new'){document.querySelector('[data-a="ab-create-menu"]').click();el=document.querySelector(`.ab-create-menu [data-a="ab-new"][data-v="${value}"]`);}
+    if(!el)throw new Error('Missing action '+action+' '+value);el.click();
+  };
+  abEnsure().overviewType='all';abAction('ab-home','');
+  check('Overview hides the left asset panel',!document.querySelector('[data-ab-sidebar]')&&getComputedStyle(document.querySelector('.demoside')).display==='none');
+  check('Overview tiles built assets across the content area',document.querySelectorAll('.ab-overview-grid .ab-side-card').length>0&&!document.querySelector('.ab-create'));
+  document.querySelector('.ab-create-trigger').click();check('Creation dropdown exposes all four asset types',document.querySelectorAll('.ab-create-menu [data-a=ab-new]').length===4);abCloseCreateMenu();
+  check('Overview has asset tabs and scope filters',document.querySelectorAll('.ab-overview-types [role=tab]').length===5&&document.querySelectorAll('.ab-overview-scopes [role=tab]').length===3);
   const prefix='联调 '+Date.now();
-  click('new','env');field('name',prefix+' 云端');field('config.image','node:20');click('save');
+  click('new','env');check('Creating reveals the sidebar and right form',!!document.querySelector('[data-ab-sidebar]')&&document.querySelector('#demo').dataset.buildMode==='editor');check('Editor retains two levels of sidebar tabs',document.querySelectorAll('.ab-scope-tabs [role=tab]').length===3&&document.querySelectorAll('.ab-type-tabs [role=tab]').length===4);field('name',prefix+' 云端');field('config.image','node:20');click('save');
   const env=abItems('env').find(x=>x.name===prefix+' 云端');check('Environment template saves V1',env?.version===1);
   click('new','instance');field('name',prefix+' 实例');field('sourceMode','template');field('templateId',env.id);
   check('Instance preloads template configuration',abEnsure().editor.config.image==='node:20'&&abEnsure().editor.templateVersion===1);
@@ -33,7 +36,7 @@
   click('step-add',stageId);field('stages.0.steps.1.source','inline');field('stages.0.steps.1.name','第二步');field('stages.0.steps.1.input','Review report');field('stages.0.steps.1.config.environment.mode','template');field('stages.0.steps.1.config.environment.templateId',env.id);field('stages.0.steps.1.reuseStepId',first.id);field('stages.0.steps.1.manualConfirm',true);
   check('Reuse candidate references stable earlier step ID',draft.stages[0].steps[1].reuseStepId===first.id);
   click('publish');const series=abItems('workflow').find(x=>x.name===prefix+' 串联');check('Series publishes complete configuration',series?.version===1&&!series.draft&&series.stages[0].steps[1].manualConfirm);
-  click('open',series.id);check('Selected sidebar card opens corresponding editor',abEnsure().editor.id===series.id&&!!document.querySelector('.ab-side-card.active'));document.querySelector('.ab-head-new').click();check('Header creation opens the overall four-entry page',!abEnsure().editor&&document.querySelectorAll('.ab-home [data-a=ab-new]').length===4);click('open',series.id);click('use',series.id);document.querySelector('#abRunName').value=prefix+' 任务';click('run-create');
+  click('open',series.id);check('Selected sidebar card opens corresponding editor',abEnsure().editor.id===series.id&&!!document.querySelector('.ab-side-card.active'));document.querySelector('.ab-head-new').click();check('Editor header opens the shared creation dropdown',!!abEnsure().editor&&document.querySelectorAll('.ab-create-menu [data-a=ab-new]').length===4);abCloseCreateMenu();click('open',series.id);click('use',series.id);document.querySelector('#abRunName').value=prefix+' 任务';click('run-create');
   const task=s.tasks.find(t=>t.title===prefix+' 任务');check('Task creates independent frozen design snapshot',task?.build36Snapshot.stages[0].steps.length===2);
   check('Reused steps share one environment instance',task.environmentIds[0]===task.environmentIds[1]&&task.environments.length===1);
   check('Task board receives standard temporary-task fields',task.type==='temp'&&task.kind==='board'&&task.status==='pending');

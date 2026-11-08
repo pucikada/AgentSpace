@@ -84,26 +84,32 @@ function abAtomicFields(c,prefix,scope,visibility){
   const local=abEnvironment(c.environment,scope).config?.location==='本地',available=abExts(scope);
   return `${abField('Agent类型',prefix+'.agentType',c.agentType,{options:['codeagent',...(!local||c.agentType==='zero'?['zero']:[])],hint:local?'本地仅支持 codeagent。':'云端支持 codeagent、zero。'})}${local&&c.agentType==='zero'?'<div class="ab-error">zero 与本地运行环境不兼容，请明确改为 codeagent。</div>':''}${abField('预置提示词 · 可选',prefix+'.presetPrompt',c.presetPrompt,{textarea:true,hint:'通用指引，启动时放在本次实际输入之前；描述不会拼入提示词。'})}${abField('输入提示词模板 · 可选',prefix+'.inputPromptTemplate',c.inputPromptTemplate,{textarea:true,hint:'仅用于预填本次输入或串联步骤输入，可以留空。'})}${abField('推荐使用模型 · 可选',prefix+'.model',c.model,{hint:'留空交给平台默认规则解析。'})}<section class="ab-section"><h2>扩展 · 可选</h2>${['Skill','Extension','MCP','CLI'].map(type=>{const rows=available.filter(i=>abExtType(asset(i.assetId))===type);return `<div class="ab-field">${type}</div><div class="ab-checks">${rows.map(i=>`<label><input type="checkbox" data-ab-set="${prefix}.extensions" value="${esc(i.assetId)}" ${(c.extensions||[]).includes(i.assetId)?'checked':''}>${esc(asset(i.assetId).name)} <small>v${esc(i.version)}</small></label>`).join('')||'<small>当前范围没有已安装并启用的 '+type+'。</small>'}</div>`;}).join('')}${(c.extensions||[]).filter(id=>!available.some(i=>i.assetId===id)).map(id=>`<div class="ab-error">扩展 ${esc(asset(id)?.name||id)} 在当前范围不可用。${abButton('移除此引用','ext-remove',prefix+'|'+id,'link sm')}</div>`).join('')}<div class="ab-note">仅使用当前应用范围安装并启用的扩展；项目不继承个人安装。各分组独立选择、独立清空。</div></section>${abGateFields(c,prefix)}<section class="ab-section"><h2>任务责任人</h2>${abField('责任人模式',prefix+'.ownerMode',c.ownerMode,{options:[['follow','跟随触发场景'],['fixed','固定责任人']]})}${c.ownerMode==='fixed'?abField('固定责任人 *',prefix+'.owner',c.owner,{options:[['','请选择成员'],...abMembers(scope)]}):''}</section>${abBindingFields(c,prefix,scope,visibility)}`;
 }
+function abRevealSidebar(){if(typeof sidebarState==='function'&&typeof sidebarApplyCollapsed==='function'){sidebarState().collapsed=false;sidebarApplyCollapsed();}}
 function abNew(type){
+  abRevealSidebar();
   const scope=abScope()==='all'?'个人':abScope();
   abEnsure().editor={type,scope,name:'',description:'',visibility:type==='env'?'public':type==='instance'?'private':abAdmin(scope)?'public':'private',templateOwner:abUser(),createdBy:abUser(),version:0,history:[],config:type==='task'?abConfig():abDefaults(),sourceMode:'direct',folderMode:'new',goal:'',stages:type==='workflow'?[{id:abId('stage'),name:'初始阶段',steps:[abStep()]}]:[],errors:[]};
   const d=abEnsure().editor;if(type==='workflow')d.selectedStep=d.stages[0].steps[0].id;
-  s.view='studio';s.newTask=null;s.taskDetail=null;s.buildSel=null;s.studioPage='';abEnsure().type=type;abRender(true);
+  s.view='studio';s.newTask=null;s.taskDetail=null;s.buildSel=null;s.studioPage='';abEnsure().type=type;abRender(true,true);
 }
-function abOpen(id){const x=abGet(id);if(!x||!abVisible(x))return;abEnsure().editor={...abCopy(x),errors:[],readOnly:x.type==='instance'||!abOwn(x)&&!(abAdmin(x.scope)&&abShared(x))};if(x.type==='workflow')abEnsure().editor.selectedStep=x.stages[0]?.steps[0]?.id;s.view='studio';abEnsure().type=x.type;abRender(true);}
-function abRender(reset=false){
+function abOpen(id){const x=abGet(id);if(!x||!abVisible(x))return;abRevealSidebar();abEnsure().editor={...abCopy(x),errors:[],readOnly:x.type==='instance'||!abOwn(x)&&!(abAdmin(x.scope)&&abShared(x))};if(x.type==='workflow')abEnsure().editor.selectedStep=x.stages[0]?.steps[0]?.id;s.view='studio';abEnsure().type=x.type;abRender(true,true,x.id);}
+function abRender(reset=false,animate=false,assetId=abEnsure().editor?.id){
+  abCloseCreateMenu();abEndMorph();
+  const source=animate&&assetId?document.querySelector(`.ab-side-card[data-v="${CSS.escape(assetId)}"]`):null,from=source?{node:source.cloneNode(true),rect:source.getBoundingClientRect()}:null;
   const old=document.querySelector('.ab-page'),top=reset?0:old?.scrollTop||0,sideTop=document.querySelector('[data-ab-sidebar]')?.scrollTop||0,trackLeft=reset?0:document.querySelector('.ab-stage-track')?.scrollLeft||0,active=document.activeElement,key=reset?null:active?.dataset?.abField,pos=active?.selectionStart;
-  render();const next=document.querySelector('.ab-page');if(next)next.scrollTop=top;
-  const side=document.querySelector('[data-ab-sidebar]');if(side)side.scrollTop=sideTop;
+  render();const root=document.getElementById('demo');if(root&&s.view==='studio'){root.toggleAttribute('data-solo',!abEnsure().editor);root.dataset.buildMode=abEnsure().editor?'editor':'overview';}
+  const next=document.querySelector('.ab-page');if(next)next.scrollTop=top;
+  const side=document.querySelector('[data-ab-sidebar]');if(side){side.scrollTop=sideTop;const chosen=side.querySelector('.ab-side-card.active');if(chosen){const a=chosen.getBoundingClientRect(),b=side.getBoundingClientRect();if(a.bottom>b.bottom)side.scrollTop+=a.bottom-b.bottom+12;else if(a.top<b.top)side.scrollTop-=b.top-a.top+12;}}
+  if(animate)abAnimateWorkspace(from,assetId);
   const track=document.querySelector('.ab-stage-track');if(track){track.scrollLeft=trackLeft;const selected=track.querySelector('.ab-step.active');if(selected){const a=selected.getBoundingClientRect(),b=track.getBoundingClientRect();if(a.right>b.right)track.scrollLeft+=a.right-b.right+12;else if(a.left<b.left)track.scrollLeft-=b.left-a.left+12;}}
   if(key){const field=document.querySelector(`[data-ab-field="${CSS.escape(key)}"]`);if(field){field.focus({preventScroll:true});if(typeof pos==='number'&&field.setSelectionRange&&field.type!=='number')try{field.setSelectionRange(pos,pos);}catch(e){}}}
 }
 function abHeading(title,subtitle,actions=''){return `<header class="ab-heading"><div><h1>${title}</h1><p>${subtitle}</p></div><div class="ab-actions">${actions}</div></header>`;}
 function abScopeControls(){const scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';return `<nav class="dtabs ab-scope-tabs" role="tablist" data-ab-tablist aria-label="应用范围">${[['personal','个人'],['project','项目'],['all','全部']].map(([v,l])=>`<button role="tab" data-a="ab-scope" data-v="${v}" class="${mode===v?'active':''}" aria-selected="${mode===v}" tabindex="${mode===v?0:-1}">${l}</button>`).join('')}</nav>${mode==='project'?`<label class="ab-field">当前项目<select data-ab-project>${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select></label>`:''}`;}
 function abSidebar(){
-  const state=abEnsure(),type=abTypes.includes(state.type)?state.type:'task',query=state.query.trim().toLowerCase(),rows=abItems(type).filter(x=>(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(query));
+  const state=abEnsure();if(!state.editor)return '';const type=abTypes.includes(state.type)?state.type:'task',query=state.query.trim().toLowerCase(),rows=abItems(type).filter(x=>(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(query));
   const tabs=`<nav class="bd-seg as2-seg ab-type-tabs" role="tablist" data-ab-tablist aria-label="构建资产类型">${abTypes.map(t=>`<button id="ab-tab-${t}" title="${abLabels[t]}" aria-label="${abLabels[t]}" role="tab" data-a="ab-type" data-v="${t}" class="${type===t?'active':''}" aria-selected="${type===t}" aria-controls="ab-asset-panel" tabindex="${type===t?0:-1}">${{task:"原子模板",workflow:"串联模板",env:"环境模板",instance:"环境实例"}[t]}<small>${abItems(t).length}</small></button>`).join('')}</nav>`;
-  return `<div class="sidehead"><h3>构建</h3><p>把工作能力，构建成可复用资产</p><button class="ab-head-new" data-a="ab-home" title="新建构建资产" aria-label="新建构建资产">${ico("plus")}</button></div><div class="sidebody bd-body ab-sidebody" data-ab-sidebar>${abScopeControls()}${tabs}<label class="ab-side-search bd-search">${ico('search')}<input data-ab-search value="${esc(state.query)}" placeholder="搜索当前分类资产" aria-label="搜索构建资产" type="search" autocomplete="off"></label><div class="ab-side-list bd-list" id="ab-asset-panel" role="tabpanel" aria-labelledby="ab-tab-${type}">${rows.map(abSideCard).join('')||`<div class="ab-side-empty">${query?'没有匹配的资产':'暂无'+abLabels[type]}</div>`}</div></div>`;
+  return `<div class="sidehead"><h3>构建</h3><p>把工作能力，构建成可复用资产</p><button class="ab-head-new" data-a="ab-create-menu" title="创建资产" aria-label="创建资产" aria-haspopup="menu" aria-expanded="false">${ico("plus")}</button></div><div class="sidebody bd-body ab-sidebody" data-ab-sidebar>${abScopeControls()}${tabs}<label class="ab-side-search bd-search">${ico('search')}<input data-ab-search value="${esc(state.query)}" placeholder="搜索当前分类资产" aria-label="搜索构建资产" type="search" autocomplete="off"></label><div class="ab-side-list bd-list" id="ab-asset-panel" role="tabpanel" aria-labelledby="ab-tab-${type}">${rows.map(abSideCard).join('')||`<div class="ab-side-empty">${query?'没有匹配的资产':'暂无'+abLabels[type]}</div>`}</div></div>`;
 }
 function abSideCard(x){
   const selected=abEnsure().editor?.id===x.id,version=x.draft?'草稿':'V'+x.version,description=x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${abAllSteps(x).length} 个步骤`:x.type==='instance'?(x.templateId?'基于 '+(abGet(x.templateId)?.name||'已删除模板')+' · V'+x.templateVersion:'直接创建 · 无来源模板'):'可复用的运行环境配置');
@@ -129,12 +135,35 @@ function abStats(x){const refs=abReferences(x);return `<div class="ab-stats">${[
 function abCard(x){
   return `<article class="ab-asset"><div class="ab-cardtop">${ico(abIcon(x.type))}<span class="ab-badge">${x.draft?'草稿 · 不可执行':'V'+x.version+' · '+(abShared(x)?'公开':'私密')}</span></div><h3>${esc(x.name)}</h3><div class="ab-meta">${esc(x.scope)} · 归属 ${esc(x.templateOwner||x.owner)}</div><p>${esc(x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${x.stages.reduce((n,g)=>n+g.steps.length,0)} 个步骤`:x.type==='instance'?'独立工作目录，可在任务中复用。':'可在当前应用范围内复用。'))}</p>${x.type==='env'?`<div class="ab-meta">${esc(x.config.location)} / ${esc(x.config.zone)} · ${esc(x.config.location==='本地'?'按责任人选择设备':x.config.image||'平台默认镜像')}</div>${abStats(x)}`:x.type==='instance'?`<div class="ab-meta">${esc(x.templateId?'来源：'+(abGet(x.templateId)?.name||'来源模板已删除')+' · V'+x.templateVersion:'直接创建 · 无来源模板')}<br>${esc(x.workingDirectory)}</div>${abStats(x)}`:x.type==='task'?`<div class="ab-meta">${esc(x.config.agentType)} · ${esc(abEnvLabel(x.config.environment,x.scope))}${x.legacy?'<br>由 1.0 角色迁移，保留原 ID 与提示词。':''}</div>`:`<div class="ab-meta">${esc(x.goal||'总体目标未预设')}<br>逐步配置环境与责任人</div>`}<footer>${abButton(x.type==='instance'?'查看详情':!abOwn(x)&&!abShared(x)?'管理详情':'详情 / 编辑','open',x.id)}${['task','workflow'].includes(x.type)&&!x.draft&&abUsable(x)?abButton('使用模板','use',x.id,'primary sm'):''}${x.type==='instance'&&abOwn(x)&&!abShared(x)?abButton('发布为公开','instance-public',x.id):''}${!abOwn(x)&&abAdmin(x.scope)&&!abShared(x)&&['task','workflow'].includes(x.type)?abButton('提升为公开','promote',x.id):''}</footer></article>`;
 }
-function abCreationArt(type){
-  if(type!=='instance')return bdArt(type);
-  return `<svg viewBox="0 0 320 138" fill="none" aria-hidden="true"><defs><pattern id="ab-instance-dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="var(--ac)" opacity=".2"/></pattern></defs><rect width="320" height="138" fill="url(#ab-instance-dots)"/><rect x="83" y="31" width="169" height="85" rx="13" fill="var(--ac)" opacity=".07"/><rect x="72" y="22" width="169" height="85" rx="12" fill="var(--as-card)" stroke="var(--ac)" stroke-opacity=".35"/><path d="M84 22h145a12 12 0 0 1 12 12v5H72v-5a12 12 0 0 1 12-12z" fill="var(--ac)" opacity=".8"/><circle cx="84" cy="31" r="2" fill="white"/><circle cx="92" cy="31" r="2" fill="white" opacity=".7"/><circle cx="100" cy="31" r="2" fill="white" opacity=".4"/><path d="m88 56 5 5-5 5m14 0h13" stroke="var(--ac)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="88" y="78" width="89" height="4" rx="2" fill="var(--ac)" opacity=".24"/><rect x="88" y="89" width="58" height="4" rx="2" fill="var(--ac)" opacity=".13"/><path d="M241 65h12" stroke="var(--ac)" stroke-opacity=".4" stroke-dasharray="2 3"/><rect x="252" y="48" width="40" height="39" rx="11" fill="var(--as-card)" stroke="var(--ac)" stroke-opacity=".3"/><path d="M261 60h8l3 3h11v13h-22z" fill="var(--ac)" opacity=".2"/><path d="M261 60h8l3 3h11v13h-22z" stroke="var(--ac)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="235" cy="101" r="9" fill="var(--as-card)" stroke="var(--ac)" stroke-opacity=".3"/><path d="m231 101 3 3 5-6" stroke="var(--ac)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-}
 function abHome(){
-  return `<div class="demopage ab-page ab-home">${abHeading('构建','选择要新建的内容，或从左侧选择已有资产继续编辑。')}<div class="ab-create">${abTypes.map(t=>`<button data-a="ab-new" data-v="${t}"><span class="ab-create-visual" aria-hidden="true">${abCreationArt(t)}<span class="ab-create-symbol">${ico(t==='instance'?'terminal':abIcon(t))}</span><span class="ab-create-plus">${ico('plus')}</span></span><span class="ab-create-copy"><b>新建${abLabels[t]}</b><small>${{task:'配置 Agent、提示词、扩展与准出机制',workflow:'按阶段与步骤串联任务，逐步绑定环境',env:'保存云端或本地的通用运行配置',instance:'基于模板或直接创建独立工作目录'}[t]}</small></span><span class="ab-create-footer"><span>开始构建</span><i>${ico('arrow')}</i></span></button>`).join('')}</div></div>`;
+  const state=abEnsure(),type=state.overviewType||'all',q=state.query.trim().toLowerCase(),all=abTypes.flatMap(t=>abItems(t)),rows=all.filter(x=>(type==='all'||x.type===type)&&(!q||(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(q))),scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';
+  const create=`<button class="btn primary ab-create-trigger" data-a="ab-create-menu" aria-haspopup="menu" aria-expanded="false">${ico('plus')}创建${ico('down')}</button>`;
+  const types=`<nav class="dtabs ab-overview-types" role="tablist" data-ab-tablist aria-label="构建资产类型">${['all',...abTypes].map(t=>`<button role="tab" aria-selected="${type===t}" tabindex="${type===t?0:-1}" class="${type===t?'active':''}" data-a="ab-overview-type" data-v="${t}">${t==='all'?'全部资产':abLabels[t]}<small>${t==='all'?all.length:abItems(t).length}</small></button>`).join('')}</nav>`;
+  const scopes=`<nav class="ms-filter-tabs" role="tablist" data-ab-tablist aria-label="应用范围">${[['personal','个人'],['project','项目'],['all','全部范围']].map(([v,label])=>`<button role="tab" class="${mode===v?'active':''}" aria-selected="${mode===v}" tabindex="${mode===v?0:-1}" data-a="ab-scope" data-v="${v}">${label}</button>`).join('')}</nav>`;
+  return `<div class="demopage ab-page ab-overview">${abHeading('构建','管理可复用的任务模板与运行环境。',create)}${types}<div class="ab-overview-toolbar"><div class="ab-overview-scopes">${scopes}${mode==='project'?`<select data-ab-project aria-label="当前项目">${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select>`:''}</div><label class="ab-side-search bd-search">${ico('search')}<input data-ab-search type="search" aria-label="搜索构建资产" placeholder="搜索资产名称或用途" value="${esc(state.query)}"></label></div><div class="ab-overview-grid">${rows.map(abSideCard).join('')||`<div class="ab-overview-empty">${ico(type==='all'?'grid':abIcon(type))}<h2>${q?'没有匹配的资产':'还没有'+(type==='all'?'构建资产':abLabels[type])}</h2><p>${q?'调整关键词或范围继续查找。':'从任务模板或运行环境开始构建。'}</p>${q?'':type==='all'?abButton('创建资产','create-menu','','primary sm'):abButton('新建'+abLabels[type],'new',type,'primary sm')}</div>`}</div></div>`;
+}
+function abCloseCreateMenu(){document.querySelector('.ab-create-menu')?.remove();document.querySelectorAll('[data-a="ab-create-menu"]').forEach(b=>b.setAttribute('aria-expanded','false'));}
+function abCreateMenu(){
+  const existing=document.querySelector('.ab-create-menu');if(existing){abCloseCreateMenu();return;}
+  const trigger=document.querySelector('.ab-create-trigger')||document.querySelector('.ab-head-new')||document.querySelector('[data-a="ab-create-menu"]');if(!trigger)return;
+  const r=trigger.getBoundingClientRect();trigger.setAttribute('aria-expanded','true');
+  document.body.insertAdjacentHTML('beforeend',`<div class="ab-create-menu" role="menu" aria-label="创建构建资产">${abTypes.map(type=>`<button role="menuitem" data-a="ab-new" data-v="${type}"><span class="ab-menu-type" data-asset-type="${type}">${ico(type==='instance'?'terminal':abIcon(type))}</span><span><b>新建${abLabels[type]}</b><small>${{task:'预设一次任务的执行配置',workflow:'编排阶段与步骤',env:'保存通用运行配置',instance:'创建独立工作目录'}[type]}</small></span></button>`).join('')}</div>`);
+  const menu=document.querySelector('.ab-create-menu');menu.style.left=Math.max(8,Math.min(r.right-menu.offsetWidth,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,Math.min(r.bottom+8,innerHeight-menu.offsetHeight-8))+'px';
+}
+let abMorphCleanup=null;
+function abEndMorph(){abMorphCleanup?.();abMorphCleanup=null;}
+function abAnimateWorkspace(from,id){
+  if(typeof matchMedia==='undefined'||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const page=document.querySelector('.ab-page'),sidebar=document.querySelector('[data-ab-sidebar]');
+  page?.animate?.([{opacity:.45,transform:'translateX(14px)'},{opacity:1,transform:'none'}],{duration:280,easing:'cubic-bezier(.2,.8,.2,1)'});
+  sidebar?.animate?.([{opacity:0,transform:'translateX(12px)'},{opacity:1,transform:'none'}],{duration:260,easing:'cubic-bezier(.2,.8,.2,1)'});
+  const target=id?document.querySelector(`.ab-side-card[data-v="${CSS.escape(id)}"]`):null;if(!from||!target?.animate)return;
+  const to=target.getBoundingClientRect(),old=from.rect;if(!old.width||!to.width||to.top>=innerHeight||old.top>=innerHeight)return;
+  const ghost=from.node;ghost.classList.add('ab-morph-ghost');ghost.setAttribute('aria-hidden','true');ghost.setAttribute('tabindex','-1');ghost.inert=true;
+  Object.assign(ghost.style,{position:'fixed',left:old.left+'px',top:old.top+'px',width:old.width+'px',height:old.height+'px',margin:'0',zIndex:'2000',transformOrigin:'top left',pointerEvents:'none'});document.body.append(ghost);target.style.opacity='0';
+  const reveal=target.animate([{opacity:0,offset:0},{opacity:0,offset:.55},{opacity:1,offset:1}],{duration:320,easing:'ease-out',fill:'forwards'});
+  const animation=ghost.animate([{transform:'none',opacity:1},{transform:`translate(${to.left-old.left}px,${to.top-old.top}px) scale(${to.width/old.width},${to.height/old.height})`,opacity:0}],{duration:320,easing:'cubic-bezier(.2,.8,.2,1)'});
+  let cleaned=false;const cleanup=()=>{if(cleaned)return;cleaned=true;animation.cancel();reveal.cancel();ghost.remove();target.style.opacity='';};abMorphCleanup=cleanup;animation.finished.then(cleanup,cleanup);
 }
 function abErrors(d){return d.errors?.length?`<div class="ab-error" role="alert">${d.errors.map(e=>`<p>${esc(e)}</p>`).join('')}</div>`:'';}
 function abTemplateUseAction(d){return d.id&&!d.draft&&['task','workflow'].includes(d.type)&&abUsable(abGet(d.id))?abButton('使用模板','use',d.id,'sm'):'';}
@@ -222,7 +251,7 @@ function abStore(d,{draft=false}={}){
   x.history=old?.history?abCopy(old.history):[];
   if(!draft){const snap=abCopy(x);delete snap.history;x.history.push({version:x.version,at:x.updatedAt,snapshot:snap});}
   if(old)state.assets[state.assets.indexOf(old)]=x;else state.assets.push(x);
-  abSyncLegacy(x);state.editor=null;state.query='';state.type=x.type;save();notify(draft?'草稿已保存，发布前仍需完整校验。':'已保存「'+x.name+'」'+(x.type==='instance'?'':' · V'+x.version));abRender();return true;
+  abSyncLegacy(x);state.editor=null;state.query='';state.type=x.type;save();notify(draft?'草稿已保存，发布前仍需完整校验。':'已保存「'+x.name+'」'+(x.type==='instance'?'':' · V'+x.version));abRender(true,true,x.id);return true;
 }
 function abSyncLegacy(x){
   if(!['env','task'].includes(x.type))return;
@@ -287,6 +316,8 @@ function abAction(a,v){
     case 'home':state.editor=null;s.buildSel=null;state.query='';s.studioPage='';break;
     case 'scope':s.bxScope=v==='personal'?'个人':v==='all'?'all':s.bx2LastProject||s.project||projectNames[0];state.editor=null;state.query='';break;
     case 'new':abNew(v);return true;
+    case 'create-menu':abCreateMenu();return true;
+    case 'overview-type':if(['all',...abTypes].includes(v)){state.overviewType=v;state.query='';}break;
     case 'list':state.type=v;state.query='';state.sourceFilter='';state.editor=null;s.buildSel=null;break;
     case 'type':if(abTypes.includes(v)){state.type=v;state.query='';save();abRender();document.getElementById('ab-tab-'+v)?.focus({preventScroll:true});}return true;
     case 'open':abOpen(v);return true;
@@ -316,7 +347,7 @@ function abAction(a,v){
     case 'run-create':abCreateTask();return true;
     default:return true;
   }
-  save();abRender();return true;
+  save();abRender(a==='ab-home',a==='ab-home',d?.id);return true;
 }
 // Template instantiation shares the complete atomic/series configuration and explicit empty values.
 function abUseForm(x){
@@ -353,7 +384,7 @@ function abCreateTask(){
 const abPreviousBfAction=bfAction;
 bfAction=function(a,v){
   if(a.startsWith('ab-'))return abAction(a,v);
-  if(a==='studio'&&(!v||v==='@home')||a==='build-home'){if(a==='build-home')abEnsure().editor=null;s.view='studio';s.buildSel=null;s.taskDetail=null;s.newTask=null;s.studioPage='';abRender();return true;}
+  if(a==='studio'&&(!v||v==='@home')||a==='build-home'){abEnsure().editor=null;s.view='studio';s.buildSel=null;s.taskDetail=null;s.newTask=null;s.studioPage='';abRender();return true;}
   if(['build-new','go-build'].includes(a)){const type=v==='templates'?'task':v;if(abTypes.includes(type)){if(s.view==='team')s.bxScope=s.project;else if(s.view==='personal')s.bxScope='个人';abNew(type);return true;}}
   if(a==='asset-use-template'){const x=abGet(v);if(x&&x.type==='task'){abUseForm(x);return true;}}
   if(a==='build-open'){const id=String(v).slice(String(v).indexOf(':')+1),x=abGet(id);if(x){abOpen(id);return true;}}
@@ -396,3 +427,11 @@ document.addEventListener('keydown',e=>{
   e.preventDefault();const tabs=[...tab.parentElement.querySelectorAll('[role="tab"]')],index=tabs.indexOf(tab),next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(index+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
   const action=tabs[next].dataset.a,value=tabs[next].dataset.v;abAction(action,value);document.querySelector(`[data-a="${action}"][data-v="${CSS.escape(value)}"]`)?.focus({preventScroll:true});
 });
+
+document.addEventListener('pointerdown',e=>{if(document.querySelector('.ab-create-menu')&&!e.target.closest('.ab-create-menu,[data-a="ab-create-menu"]'))abCloseCreateMenu();},true);
+document.addEventListener('keydown',e=>{
+  const menu=document.querySelector('.ab-create-menu');if(!menu)return;
+  if(e.key==='Escape'){e.preventDefault();abCloseCreateMenu();document.querySelector('[data-a="ab-create-menu"]')?.focus();return;}
+  if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;e.preventDefault();const items=[...menu.querySelectorAll('[role="menuitem"]')],index=items.indexOf(document.activeElement),next=e.key==='Home'?0:e.key==='End'?items.length-1:(index+(e.key==='ArrowUp'?-1:1)+items.length)%items.length;items[next].focus();
+});
+window.addEventListener('resize',abCloseCreateMenu);
