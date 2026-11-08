@@ -90,7 +90,7 @@ function abNew(type){
   const d=abEnsure().editor;if(type==='workflow')d.selectedStep=d.stages[0].steps[0].id;
   s.view='studio';s.newTask=null;s.taskDetail=null;s.buildSel=null;s.studioPage='';abEnsure().type=type;abRender(true);
 }
-function abOpen(id){const x=abGet(id);if(!x||!abVisible(x))return;abEnsure().editor={...abCopy(x),errors:[],readOnly:x.type==='instance'||!abOwn(x)&&!(abAdmin(x.scope)&&abShared(x))};if(x.type==='workflow')abEnsure().editor.selectedStep=x.stages[0]?.steps[0]?.id;s.view='studio';abEnsure().type=x.type;abEnsure().fold={...(abEnsure().fold||{}),[x.type]:false};abRender(true);}
+function abOpen(id){const x=abGet(id);if(!x||!abVisible(x))return;abEnsure().editor={...abCopy(x),errors:[],readOnly:x.type==='instance'||!abOwn(x)&&!(abAdmin(x.scope)&&abShared(x))};if(x.type==='workflow')abEnsure().editor.selectedStep=x.stages[0]?.steps[0]?.id;s.view='studio';abEnsure().type=x.type;abRender(true);}
 function abRender(reset=false){
   const old=document.querySelector('.ab-page'),top=reset?0:old?.scrollTop||0,sideTop=document.querySelector('[data-ab-sidebar]')?.scrollTop||0,active=document.activeElement,key=reset?null:active?.dataset?.abField,pos=active?.selectionStart;
   render();const next=document.querySelector('.ab-page');if(next)next.scrollTop=top;
@@ -98,14 +98,11 @@ function abRender(reset=false){
   if(key){const field=document.querySelector(`[data-ab-field="${CSS.escape(key)}"]`);if(field){field.focus({preventScroll:true});if(typeof pos==='number'&&field.setSelectionRange&&field.type!=='number')try{field.setSelectionRange(pos,pos);}catch(e){}}}
 }
 function abHeading(title,subtitle,actions=''){return `<header class="ab-heading"><div><h1>${title}</h1><p>${subtitle}</p></div><div class="ab-actions">${actions}</div></header>`;}
-function abScopeControls(){const scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';return `<nav class="ab-tabs" aria-label="应用范围">${[['personal','个人'],['project','项目'],['all','全部']].map(([v,l])=>`<button data-a="ab-scope" data-v="${v}" class="${mode===v?'active':''}" aria-pressed="${mode===v}">${l}</button>`).join('')}</nav>${mode==='project'?`<label class="ab-field">当前项目<select data-ab-project>${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select></label>`:''}`;}
+function abScopeControls(){const scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';return `<nav class="dtabs ab-scope-tabs" role="tablist" data-ab-tablist aria-label="应用范围">${[['personal','个人'],['project','项目'],['all','全部']].map(([v,l])=>`<button role="tab" data-a="ab-scope" data-v="${v}" class="${mode===v?'active':''}" aria-selected="${mode===v}" tabindex="${mode===v?0:-1}">${l}</button>`).join('')}</nav>${mode==='project'?`<label class="ab-field">当前项目<select data-ab-project>${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select></label>`:''}`;}
 function abSidebar(){
-  const state=abEnsure(),query=state.query.trim().toLowerCase();
-  const groups=abTypes.map(type=>{
-    const all=abItems(type),rows=all.filter(x=>(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(query)),open=query||!state.fold?.[type];
-    return `<section class="ab-side-group"><button class="ab-group-heading" data-a="ab-group" data-v="${type}" aria-expanded="${!!open}"><span class="ab-group-caret ${open?'open':''}">${ico('chevron')}</span>${ico(abIcon(type))}<b>${abLabels[type]}</b><small>${query?rows.length:all.length}</small></button>${open?`<div class="ab-side-list">${rows.map(abSideCard).join('')||`<div class="ab-side-empty">${query?'没有匹配的资产':'暂无'+abLabels[type]}</div>`}</div>`:''}</section>`;
-  }).join('');
-  return `<div class="sidehead"><h3>构建</h3><p>把工作能力，构建成可复用资产</p></div><div class="sidebody ab-sidebody" data-ab-sidebar>${abScopeControls()}<label class="ab-side-search bd-search">${ico('search')}<input data-ab-search value="${esc(state.query)}" placeholder="搜索构建资产" aria-label="搜索构建资产" type="search" autocomplete="off"></label>${groups}</div>`;
+  const state=abEnsure(),type=abTypes.includes(state.type)?state.type:'task',query=state.query.trim().toLowerCase(),rows=abItems(type).filter(x=>(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(query));
+  const tabs=`<nav class="bd-seg as2-seg ab-type-tabs" role="tablist" data-ab-tablist aria-label="构建资产类型">${abTypes.map(t=>`<button id="ab-tab-${t}" title="${abLabels[t]}" aria-label="${abLabels[t]}" role="tab" data-a="ab-type" data-v="${t}" class="${type===t?'active':''}" aria-selected="${type===t}" aria-controls="ab-asset-panel" tabindex="${type===t?0:-1}">${{task:"原子模板",workflow:"串联模板",env:"环境模板",instance:"环境实例"}[t]}<small>${abItems(t).length}</small></button>`).join('')}</nav>`;
+  return `<div class="sidehead"><h3>构建</h3><p>把工作能力，构建成可复用资产</p></div><div class="sidebody bd-body ab-sidebody" data-ab-sidebar>${abScopeControls()}${tabs}<label class="ab-side-search bd-search">${ico('search')}<input data-ab-search value="${esc(state.query)}" placeholder="搜索当前分类资产" aria-label="搜索构建资产" type="search" autocomplete="off"></label><div class="ab-side-list bd-list" id="ab-asset-panel" role="tabpanel" aria-labelledby="ab-tab-${type}">${rows.map(abSideCard).join('')||`<div class="ab-side-empty">${query?'没有匹配的资产':'暂无'+abLabels[type]}</div>`}</div></div>`;
 }
 function abSideCard(x){
   const selected=abEnsure().editor?.id===x.id,version=x.draft?'草稿':'V'+x.version,description=x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${abAllSteps(x).length} 个步骤`:x.type==='instance'?(x.templateId?'基于 '+(abGet(x.templateId)?.name||'已删除模板')+' · V'+x.templateVersion:'直接创建 · 无来源模板'):'可复用的运行环境配置');
@@ -286,7 +283,7 @@ function abAction(a,v){
     case 'scope':s.bxScope=v==='personal'?'个人':v==='all'?'all':s.bx2LastProject||s.project||projectNames[0];state.editor=null;state.query='';break;
     case 'new':abNew(v);return true;
     case 'list':state.type=v;state.query='';state.sourceFilter='';state.editor=null;s.buildSel=null;break;
-    case 'group':state.fold={...(state.fold||{}),[v]:!state.fold?.[v]};break;
+    case 'type':if(abTypes.includes(v)){state.type=v;state.query='';save();abRender();document.getElementById('ab-tab-'+v)?.focus({preventScroll:true});}return true;
     case 'open':abOpen(v);return true;
     case 'save':if(d&&!d.readOnly)abStore(d);return true;
     case 'draft':if(d&&!d.readOnly)abStore(d,{draft:true});return true;
@@ -388,3 +385,9 @@ document.addEventListener('change',e=>{
 });
 // The app has already performed its initial render before the inline modules load.
 if(s.view==='studio')abRender();
+
+document.addEventListener('keydown',e=>{
+  const tab=e.target.closest?.('[data-ab-tablist] [role="tab"]');if(!tab||!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;
+  e.preventDefault();const tabs=[...tab.parentElement.querySelectorAll('[role="tab"]')],index=tabs.indexOf(tab),next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(index+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+  const action=tabs[next].dataset.a,value=tabs[next].dataset.v;abAction(action,value);document.querySelector(`[data-a="${action}"][data-v="${CSS.escape(value)}"]`)?.focus({preventScroll:true});
+});

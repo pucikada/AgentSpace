@@ -13,6 +13,8 @@
   check('Sidebar has no creation shortcuts',document.querySelectorAll('[data-ab-sidebar] [data-a="ab-new"]').length===0);
   check('Default workspace only contains four creation entries',document.querySelectorAll('.ab-home [data-a="ab-new"]').length===4&&!document.querySelector('.ab-home .ab-grid'));
   check('Existing assets appear as sidebar cards',document.querySelectorAll('[data-ab-sidebar] .ab-side-card').length>0);
+  check('Scope and asset categories use two levels of tabs',document.querySelectorAll('.ab-scope-tabs [role=tab]').length===3&&document.querySelectorAll('.ab-type-tabs [role=tab]').length===4);
+  check('Asset navigation has no expand or collapse controls',!document.querySelector('[data-a="ab-group"]')&&document.querySelectorAll('.ab-type-tabs [aria-selected=true]').length===1);
   const prefix='联调 '+Date.now();
   click('new','env');field('name',prefix+' 云端');field('config.image','node:20');click('save');
   const env=abItems('env').find(x=>x.name===prefix+' 云端');check('Environment template saves V1',env?.version===1);
