@@ -12672,6 +12672,18 @@ html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-ex
 #demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card):is(:hover,:focus-within,:has([aria-expanded="true"]))>:is(footer,.wf-actions,.asset-card-foot){opacity:1;pointer-events:auto}
 @media(hover:none){#demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card)>:is(footer,.wf-actions,.asset-card-foot){opacity:1;pointer-events:auto}}
 
+/* Workbench list is a flat surface with uniform rows. */
+#demo #benchResults .demotable :is(thead,tbody,tr,th,td){background:transparent!important;box-shadow:none!important}
+#demo #benchResults .demotable{background:transparent!important;box-shadow:none!important;border-radius:0!important}
+
+#demo #benchResults .bench-list-title{display:block;max-width:100%;padding:0;border:0;background:transparent;color:var(--as-text);text-align:left;font:inherit;font-weight:600;cursor:pointer;transition:color .15s ease}
+#demo #benchResults tr:hover .bench-list-title,#demo #benchResults .bench-list-title:focus-visible{color:var(--as-brand)!important}
+#demo #benchResults .bench-list-actions{display:flex;align-items:center;gap:16px;white-space:nowrap}
+#demo #benchResults .bench-list-actions>.btn{padding:0;min-height:30px;border:0!important;background:transparent!important;box-shadow:none!important;color:var(--as-text-muted)}
+#demo #benchResults .bench-list-actions>.btn:hover{color:var(--as-brand)!important}
+#demo #benchResults .bench-list-actions>.btn[data-a="bench-card-delete"]:not(:disabled):hover{color:var(--as-danger,#d74747)!important}
+#demo #benchResults .bench-list-actions>.btn:disabled{opacity:.4;cursor:not-allowed}
+
 /* AS2 BUILD V36 css END */
 
 /* AS2 USER MENU css START */
@@ -13546,7 +13558,7 @@ function homeBenchAction(a,id){
   return true;
 }
 
-function renderBenchResults(matches){let arr=[...matches];if(s.benchFilter==='recent')arr.sort((a,b)=>b.updated.localeCompare(a.updated));return !arr.length?`<div class="empty">暂无匹配的工作台。${btn('新建工作台','new-bench','','link')}</div>`:s.benchList?`<div class="tablewrap"><table class="demotable"><thead><tr><th>工作台</th><th>来源与版本</th><th>最近更新</th><th>操作</th></tr></thead><tbody>${arr.map(b=>`<tr><td>${esc(b.title)}<small class="muted" style="display:block">${esc(b.range)}</small></td><td>${b.sourceCount} 个 · V${b.version}</td><td>${esc(b.updated)}</td><td>${btn('打开','open-bench',b.id,'sm')}${btn('管理','bench-manage',b.id,'link sm')}</td></tr>`).join('')}</tbody></table></div>`:`<div class="benchgrid">${arr.map(benchCard).join('')}</div>`;}
+function renderBenchResults(matches){let arr=[...matches];if(s.benchFilter==='recent')arr.sort((a,b)=>b.updated.localeCompare(a.updated));return !arr.length?`<div class="empty">暂无匹配的工作台。${btn('新建工作台','new-bench','','link')}</div>`:s.benchList?`<div class="tablewrap" style="background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important"><table class="demotable"><thead><tr><th>工作台</th><th>来源与版本</th><th>最近更新</th><th>操作</th></tr></thead><tbody>${arr.map(b=>`<tr><td><button class="bench-list-title" data-a="open-bench" data-v="${esc(b.id)}">${esc(b.title)}</button><small class="muted" style="display:block">${esc(b.range)}</small></td><td>${b.sourceCount} 个 · V${b.version}</td><td>${esc(b.updated)}</td><td><div class="bench-list-actions">${btn('编辑','wbh-continue',b.id,'link sm')}${btn(b.favorite?'取消收藏':'收藏','favorite',b.id,'link sm')}<button class="btn link sm" data-a="bench-card-delete" data-v="${esc(b.id)}" ${b.isDefault?'disabled title="默认工作台不可删除"':''}>删除</button></div></td></tr>`).join('')}</tbody></table></div>`:`<div class="benchgrid">${arr.map(benchCard).join('')}</div>`;}
 function sourceRows(ids){return ids.map(id=>{const a=sources.find(x=>x.id===id)||sources[0];return `<div class="sourceitem"><span class="sourcedot">${ico(a.icon)}</span><div class="grow"><b>${a.name}</b><small>${a.desc}</small></div><span class="tag green" style="font-size:11px">已授权</span></div>`;}).join('');}
 function renderBenchDetail(){const b=s.benches.find(x=>x.id===s.selectedBench)||s.benches[0];if(b&&b.isDefault)return renderPersonalBench(b);if(s.benchTab!=='schedule')return wbRenderDetail(b);return `<div class="demohead"><div><button class="btn link sm" data-a="nav-personal" data-v="benches">${ico('back')} 全部工作台</button><h1 style="margin-top:9px">${esc(b.title)}</h1><p>${esc(b.range)} · 独立会话 · 已采用 V${b.version}</p></div><div class="row wrap">${btn(ico('refresh')+'数据更新','bench-run',b.id)}${btn('用一句话调整','adjust-bench',b.id,'primary')}</div></div><div class="dtabs">${[['result','工作台'],['sources','来源与授权'],['versions','会话与版本'],['schedule','Workflow 与更新']].map(([v,l])=>`<button class="${s.benchTab===v?'active':''}" data-a="bench-tab" data-v="${v}">${l}</button>`).join('')}</div>${s.benchTab==='sources'?`<div class="card pad"><h3>已授权的数据来源</h3>${sourceRows(b.sources)}<div class="note" style="margin-top:18px;font-size:11px">生成说明：${esc(b.prompt)}<br>使用范围：${esc(b.range)}。个人会话与数据默认只对本人可见。</div></div>`:s.benchTab==='versions'?`<div class="card pad"><h3>独立会话 · ${b.id}-conversation</h3><div class="chatbubble mine" style="margin-top:17px"><small>我 · 生成说明</small>${esc(b.prompt)}</div><div class="chatbubble"><small>AgentSpace</small>基于已选择的 ${b.sourceCount} 个来源生成结果，已采用 V${b.version}。${b.change?'<br>最新调整：'+esc(b.change):''}</div>${btn('继续调整并预览','adjust-bench',b.id,'primary sm')}<div class="rule"></div><h4>已采用版本</h4>${Array.from({length:b.version},(_,i)=>b.version-i).map(v=>`<div class="sourceitem"><div class="grow"><b>V${v}${v===b.version?' · 当前':''}</b><small>扩展引用、生成说明与视图快照</small></div>${v<b.version?btn('恢复为新版本','restore-bench',b.id+':'+v,'sm'):tag('已采用','green')}</div>`).join('')}</div>`:s.benchTab==='schedule'?`<div class="card pad"><div class="row between"><div><h3>${esc(b.workflow)}</h3><p style="margin-top:7px">Binding · B-${b.id} · Workflow v1.2 · ${s.paused.includes(b.id)?'已暂停':esc(b.scheduleFreq?b.scheduleFreq+' '+(b.scheduleTime||'09:00')+' / '+(b.scheduleZone||'Asia/Shanghai'):'每天 09:00 / Asia/Shanghai')}</p></div>${tag(s.paused.includes(b.id)?'已暂停':'已启用',s.paused.includes(b.id)?'gray':'green')}</div><div class="rule"></div><div class="grid2"><div><h4>输入与接收位置</h4><p style="margin-top:8px">范围：${esc(b.range)}<br>输出：当前工作台 / 本人摘要<br>数据截止：执行前一天 24:00（当地时区）</p></div><div><h4>最近运行</h4><p style="margin-top:8px">R-${b.id}-1027 · 成功<br>最近更新：${esc(b.updated)}<br>异常时保留最近成功结果并提示</p></div></div><div class="row wrap" style="margin-top:24px">${btn(s.paused.includes(b.id)?'恢复更新':'暂停更新','pause-bench',b.id)}${btn('修改频率','schedule-bench',b.id)}${btn('打开 Workflow','studio',b.workflow,'primary')}</div></div>`:`<div class="benchdetail"><div><div class="minimetrics">${b.metrics.map(([n,l])=>`<div><b>${n}</b><small>${l}</small></div>`).join('')}</div><div class="card" style="margin-top:18px"><div class="row between"><h3>需要关注</h3>${tag('示例数据','gray')}</div>${(b.id==='repo'?[['MR !1284 · 补充并发重试用例','检视未覆盖缓存失效后的重入情况。'],['MR !1288 · CI 回归失败','需要定位两项集成测试差异。']]:b.id==='fleet'?[['区域 A · BMC 版本分布异常','同机型存在多个固件版本，建议按批次复核。'],['区域 B · 新增风险机器','与上一批次比较后有 7 台需要确认。']]:[['发布前回归结果待确认','2 项阻塞问题需要责任人补充验证证据。'],['RR-124 · 需求范围变更','验收条件已变化，建议重新核对用例范围。']]).map(([h,p])=>`<div class="sourceitem"><div class="grow"><b>${h}</b><small>${p}</small></div>${btn('追问','bench-ask',b.id,'link sm')}</div>`).join('')}</div><div class="note" style="font-size:11px;margin-top:18px">最后成功更新：${esc(b.updated)}。每条结论保留来源引用；完整证据按用户授权展示。</div></div><div class="card"><h3>数据与更新</h3>${sourceRows(b.sources)}<div style="margin-top:15px">${tag(s.paused.includes(b.id)?'自动更新已暂停':'每日 Workflow 更新',s.paused.includes(b.id)?'gray':'green')}</div><div class="row wrap" style="margin-top:14px">${btn('查看配置','bench-tab','schedule','sm')}${btn('查看来源','bench-tab','sources','sm')}</div></div></div>`}`;}
 function taskChip(t){return tag(statusNames[t.status],(statusClass[t.status]||'')+' status-'+t.status);}
@@ -15948,13 +15960,25 @@ function novaRenderBenches(){
   const tab=personalTabs().some(x=>x[0]===s.personalTab)?s.personalTab:'overview';
   const content=tab==='overview'?html.slice(b):renderPersonalTab(tab);
   const toolbarEnd=tab==='overview'?content.indexOf('<div id="benchResults">'):0;
-  return html.slice(0,a)+`<div class="proj-sticky personal-home-sticky" style="background:var(--as-bg,#fff)!important">${html.slice(a,b)}${personalTabHtml()}${toolbarEnd>0?content.slice(0,toolbarEnd):''}</div>`+(toolbarEnd>0?content.slice(toolbarEnd):content);
+  return html.slice(0,a)+`<div class="proj-sticky personal-home-sticky" style="background:transparent!important">${html.slice(a,b)}${personalTabHtml()}${toolbarEnd>0?content.slice(0,toolbarEnd):''}</div>`+(toolbarEnd>0?content.slice(toolbarEnd):content);
 }
 function personalTabAction(a,v){if(a==='personal-ext-type'){s.personalExtType=v;render();return true;}if(a!=='personal-tab')return false;s.personalTab=v;render();return true;}
 
 // 吸顶头部：内容滚动后才出现磨砂底（液态玻璃下，未滚动时与页面同色）
 (function(){
-  const sync=sc=>{const h=sc&&sc.querySelector?.('.proj-sticky');if(h)h.dataset.stuck=String(sc.scrollTop>4);};
+  const sync=sc=>{
+    const h=sc&&sc.querySelector?.('.proj-sticky');if(!h)return;
+    const stuck=sc.scrollTop>4;h.dataset.stuck=String(stuck);
+    if(!h.classList.contains('personal-home-sticky'))return;
+    let background='transparent';const glass=document.documentElement.dataset.appearanceStyle==='liquid';
+    if(stuck){
+      if(glass)background=document.documentElement.dataset.glassTone==='dark'?'rgba(24,29,40,.96)':'rgba(250,252,255,.96)';
+      else for(let p=h.parentElement;p;p=p.parentElement){const color=getComputedStyle(p).backgroundColor;if(color!=='transparent'&&color!=='rgba(0, 0, 0, 0)'){background=color;break;}}
+    }
+    h.style.setProperty('background',background,'important');
+    h.style.setProperty('backdrop-filter',stuck&&glass?'blur(18px)':'none','important');
+    h.style.setProperty('-webkit-backdrop-filter',stuck&&glass?'blur(18px)':'none','important');
+  };
   document.addEventListener('scroll',e=>{const sc=e.target;if(sc&&sc.nodeType===1&&sc.querySelector?.('.proj-sticky'))sync(sc);},true);
   try{const demo=document.getElementById('demo'),ob=new MutationObserver(()=>{setTimeout(()=>{const h=document.querySelector('#demo .proj-sticky');if(h)sync(h.parentElement.closest('#demo')?(()=>{let p=h.parentElement;while(p&&p!==demo&&!(p.scrollHeight>p.clientHeight&&/auto|scroll/.test(getComputedStyle(p).overflowY)))p=p.parentElement;return p;})():null);},80);ob.takeRecords();});ob.observe(demo,{childList:true});}catch(e){}
 })();

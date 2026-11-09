@@ -121,3 +121,15 @@ html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-ex
 #demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card)>:is(footer,.wf-actions,.asset-card-foot){opacity:0;pointer-events:none;transition:opacity .15s ease}
 #demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card):is(:hover,:focus-within,:has([aria-expanded="true"]))>:is(footer,.wf-actions,.asset-card-foot){opacity:1;pointer-events:auto}
 @media(hover:none){#demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card)>:is(footer,.wf-actions,.asset-card-foot){opacity:1;pointer-events:auto}}
+
+/* Workbench list is a flat surface with uniform rows. */
+#demo #benchResults .demotable :is(thead,tbody,tr,th,td){background:transparent!important;box-shadow:none!important}
+#demo #benchResults .demotable{background:transparent!important;box-shadow:none!important;border-radius:0!important}
+
+#demo #benchResults .bench-list-title{display:block;max-width:100%;padding:0;border:0;background:transparent;color:var(--as-text);text-align:left;font:inherit;font-weight:600;cursor:pointer;transition:color .15s ease}
+#demo #benchResults tr:hover .bench-list-title,#demo #benchResults .bench-list-title:focus-visible{color:var(--as-brand)!important}
+#demo #benchResults .bench-list-actions{display:flex;align-items:center;gap:16px;white-space:nowrap}
+#demo #benchResults .bench-list-actions>.btn{padding:0;min-height:30px;border:0!important;background:transparent!important;box-shadow:none!important;color:var(--as-text-muted)}
+#demo #benchResults .bench-list-actions>.btn:hover{color:var(--as-brand)!important}
+#demo #benchResults .bench-list-actions>.btn[data-a="bench-card-delete"]:not(:disabled):hover{color:var(--as-danger,#d74747)!important}
+#demo #benchResults .bench-list-actions>.btn:disabled{opacity:.4;cursor:not-allowed}
