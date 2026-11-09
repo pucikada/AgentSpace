@@ -12782,6 +12782,13 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 .spx-page .knowledge-space-card>.btn{position:absolute;right:12px;bottom:12px;margin:0}
 @media(max-width:760px){.spx-section{align-items:flex-start;flex-direction:column}.spx-list-tools{align-items:flex-start;flex-direction:column}.spx-page .demotable{min-width:680px}}
 
+.spx-env-card .spx-facts>div{grid-template-columns:130px minmax(0,1fr)}
+
+.spx-env-card .spx-facts dd{white-space:pre-wrap}
+
+#demo .spx-env-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media(max-width:1000px){#demo .spx-env-grid{grid-template-columns:minmax(0,1fr)!important}}
+
 /* AS2 SPACES css END */
 
 /* AS2 TASK CONFIG css START */
@@ -12790,7 +12797,7 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 .ntc-template-options{max-height:280px;overflow:auto;overscroll-behavior:contain}
 .ntc-menu .ntc-template-option,.ntc-menu>.ntc-custom-option{display:flex;align-items:center;gap:10px;width:100%;min-width:0;min-height:40px;height:auto;flex-shrink:0;padding:8px 10px;border:0;border-radius:9px;background:transparent;color:var(--as-text);font:inherit;font-size:13px;line-height:20px;text-align:left;cursor:pointer}
 .ntc-template-option>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
-.ntc-menu .ntc-template-option>.icon,.ntc-menu .nt-menu-gap,.ntc-menu>.ntc-custom-option>.icon{width:16px;height:16px;flex:0 0 16px}
+.ntc-menu .ntc-template-option>.icon,.ntc-menu>.ntc-custom-option>.icon{width:16px;height:16px;flex:0 0 16px}
 .ntc-menu .ntc-template-option>small{margin-left:auto;flex:none;padding:1px 6px;border-radius:5px;background:var(--as-muted-bg);color:var(--as-text-muted);font-size:11px;line-height:18px;font-weight:400}
 .ntc-menu :is(.ntc-template-option,.ntc-custom-option):is(:hover,:focus-visible,[data-selected="true"]){background:var(--as-hover);outline:none}
 .ntc-template-option[data-selected="true"]>.icon{color:var(--as-brand)}
@@ -12834,6 +12841,17 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 @media(max-width:720px){.ntc-template-preview{display:none}.ntc-menu{max-width:calc(100vw - 24px)}.ntc-drawer .ab-two{grid-template-columns:1fr}}
 
 .ntc-template-preview .ab-readonly{grid-template-columns:1fr;margin:8px 0;gap:10px}.ntc-template-preview .ab-readonly b{font-size:12px;font-weight:500}
+
+.ntc-template-preview>header>b,.ntc-template-preview-body h4{display:flex;align-items:center;gap:7px;min-width:0}
+.ntc-template-preview>header>b>.icon,.ntc-template-preview-body h4>.icon{width:15px;height:15px;flex:none;color:var(--as-text-muted)}
+.ntc-template-preview>header>b>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ntc-template-option>.icon:first-child{color:var(--as-brand)}
+.ntc-menu .ntc-template-option>.ntc-selected-icon{width:14px;height:14px;flex:0 0 14px;color:var(--as-brand)}
+.ntc-template-preview .btn.primary,.ntc-drawer .btn.primary{border:0!important;box-shadow:none!important}
+.ntc-template-preview .btn.primary:focus-visible,.ntc-drawer .btn.primary:focus-visible{outline:2px solid var(--as-text-muted)!important;outline-offset:3px}
+
+.ntc-facts dt{display:flex;align-items:center;gap:6px}
+.ntc-facts dt>.icon{width:14px;height:14px;flex:none;opacity:.8}
 
 /* AS2 TASK CONFIG css END */
 
@@ -18298,7 +18316,6 @@ function spxState(scope=spxScope()){
 function spxBtn(label,a,v='',cls='sm'){return btn(label,'spx-'+a,v,cls);}
 function spxTabs(personal){return [['knowledge','知识库','book'],...personal?[]:[['repos','代码仓','code']],['environment','运行环境','cloud'],['variables','环境变量','settings'],['templates','任务模板','task']];}
 function spxFacts(rows){return `<dl class="spx-facts">${rows.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v??'—')}</dd></div>`).join('')}</dl>`;}
-function spxRuntime(c){return c.location==='本地'?(abRuntimes(spxScope()).find(r=>r.id===c.runtimeId)?.name||'本地运行时'):c.image||'平台默认镜像';}
 function spxRepoNames(c){return (c.repos||[]).map(r=>r.name||spxState().repos.find(x=>x.id===r)?.name||r).join('、')||'无';}
 function spxSection(title,desc,actions=''){return `<header class="spx-section"><div><h2>${title}</h2><p>${desc}</p></div><div class="row wrap">${actions}</div></header>`;}
 function spxKnowledge(personal){
@@ -18312,18 +18329,18 @@ function spxKnowledge(personal){
 function spxEnvironment(){
   const st=spxState(),scope=spxScope(),envs=abItems('env',scope),instances=abItems('instance',scope),part=st.environment;
   const tabs=`<div class="dtabs asset-subtabs">${[['templates','运行环境模板',envs.length],['instances','运行环境实例',instances.length]].map(([k,l,n])=>`<button class="${part===k?'active':''}" data-a="spx-environment" data-v="${k}">${l} <span>${n}</span></button>`).join('')}</div>`;
-  const head=spxSection('运行环境','模板定义运行配置；实例独立保留工作目录与任务关联，也可直接创建。',spxBtn('前往构建','build',part==='templates'?'env':'instance','primary sm'));
+  const head=spxSection('运行环境','模板定义运行配置；实例独立保留工作目录与任务关联，也可直接创建。',spxBtn('前往构建 '+ico('arrow'),'build',part==='templates'?'env':'instance','primary sm'));
   if(part==='instances'){
     const rows=instances.filter(i=>!st.source||(st.source==='__direct'?!i.templateId:i.templateId===st.source));
     return head+tabs+`<div class="spx-list-tools"><select data-spx-source aria-label="来源运行环境模板"><option value="">全部来源</option><option value="__direct" ${st.source==='__direct'?'selected':''}>直接创建 · 无来源模板</option>${envs.map(e=>`<option value="${esc(e.id)}" ${st.source===e.id?'selected':''}>${esc(e.name)}</option>`).join('')}</select><small>${rows.length} 个可见实例 · 不含任务临时运行环境</small></div><div class="tablewrap"><table class="demotable"><thead><tr><th>运行环境实例</th><th>来源</th><th>共享类型</th><th>关联统计</th><th>操作</th></tr></thead><tbody>${rows.map(i=>`<tr><td><b>${esc(i.name)}</b><small>${esc(i.workingDirectory||'')}</small><small>${esc(scope)}</small></td><td>${esc(i.templateId?(abGet(i.templateId,scope)?.name||'来源模板已删除')+' · V'+i.templateVersion:'直接创建 · 无来源模板')}</td><td>${abShared(i)?'公开':'私密'}<small>${esc(i.owner||i.templateOwner||'我')}</small></td><td>${abStats(i)}</td><td><div class="row wrap">${spxBtn('查看详情','detail',i.id)}${abOwn(i)&&!abShared(i)?spxBtn('发布为公开','share',i.id):''}</div></td></tr>`).join('')||'<tr><td colspan="5"><div class="empty">暂无符合条件的运行环境实例</div></td></tr>'}</tbody></table></div>`;
   }
-  return head+tabs+`<div class="asset-grid">${envs.map(e=>{const c=e.config,refs=abReferences(e).task.length,n=instances.filter(i=>i.templateId===e.id).length;return `<article class="asset-card spx-resource"><div class="row between"><span class="asset-ic">${ico(c.location==='本地'?'monitor':'cloud')}</span>${tag('V'+e.version,'gray')}</div><h3>${esc(e.name)}</h3><p>${esc(c.location)} · ${esc(c.zone)} · ${esc(spxRuntime(c))}</p>${spxFacts([['代码仓',spxRepoNames(c)],['工作目录',c.location==='本地'?'本地运行时默认路径下新建':'每次创建独立目录']])}<div class="spx-links">${spxBtn(refs+' 个原子任务模板引用','env-tasks',e.id,'link sm')}${spxBtn(n+' 个可见实例 →','env-instances',e.id,'link sm')}</div><footer>${spxBtn('查看详情','detail',e.id)}${spxBtn('编辑','edit',e.id)}</footer></article>`;}).join('')||'<div class="empty">还没有运行环境模板，可前往构建创建。</div>'}</div>`;
+  return head+tabs+`<div class="asset-grid spx-env-grid">${envs.map(e=>{const c=e.config,refs=abReferences(e).task.length,n=instances.filter(i=>i.templateId===e.id).length;return `<article class="asset-card spx-resource spx-env-card"><div class="row between"><span class="asset-ic">${ico(c.location==='本地'?'monitor':'cloud')}</span>${tag('V'+e.version,'gray')}</div><h3>${esc(e.name)}</h3><p>${esc(e.description||c.location+' · '+c.zone)}</p>${spxFacts([['运行位置 / 安全区域',c.location+' / '+c.zone],[c.location==='本地'?'本地运行时':'镜像',c.location==='本地'?'任务创建时按责任人选择':c.image||'平台默认镜像'],...(c.location==='本地'?[]:[['工具集',(c.toolsets||[]).join('、')||'未选择'],['工具',(c.tools||[]).join('、')||'未选择']]),['代码仓 / 分支',(c.repos||[]).map(r=>(r.name||spxState().repos.find(x=>x.id===r)?.name||r)+' @ '+(r.branch||'main')).join('、')||'无'],['工作目录',c.location==='本地'?'本地运行时默认路径下新建':'每次创建独立目录'],['启动路径',c.path||'默认工作目录'],['初始化命令',c.init||'未配置']])}<div class="spx-links">${spxBtn(refs+' 个原子任务模板引用','env-tasks',e.id,'link sm')}${spxBtn(n+' 个可见实例 →','env-instances',e.id,'link sm')}</div><footer>${spxBtn('查看详情','detail',e.id)}${spxBtn('编辑','edit',e.id)}</footer></article>`;}).join('')||'<div class="empty">还没有运行环境模板，可前往构建创建。</div>'}</div>`;
 }
 function spxTemplates(){
   const st=spxState(),scope=spxScope(),type=st.kind||'task';
   const all=abItems(type,scope),items=all.filter(x=>!st.filter||x.config?.environment?.templateId===st.filter);
   const tabs=`<div class="dtabs asset-subtabs">${['task','workflow'].map(t=>`<button class="${type===t?'active':''}" data-a="spx-kind" data-v="${t}">${abLabels[t]} <span>${abItems(t,scope).length}</span></button>`).join('')}</div>`;
-  return spxSection('任务模板','汇集本空间的原子任务与串联任务模板，按需选择和复用。',spxBtn('前往构建','build',type,'primary sm'))+tabs+`<p class="spx-caption">${type==='task'?'原子任务模板：组合环境、扩展与 Agent 类型，可独立使用，也可串联为串联任务。':'串联任务模板：按顺序串联多个原子任务，每个步骤沿用各自的环境配置。'}</p>${st.filter?`<div class="note">已筛选关联环境：${esc(abGet(st.filter)?.name||'已删除模板')}${spxBtn('查看全部','clear-filter','','link sm')}</div>`:''}<div class="asset-grid">${items.map(x=>{const env=x.type==='task'?abEnvironment(x.config.environment,scope):null;return `<article class="asset-card spx-resource"><div class="row between"><span class="asset-ic">${ico(abIcon(type))}</span>${tag(x.draft?'草稿':'V'+x.version,'gray')}</div><h3>${esc(x.name)}</h3><p>${esc(x.description||x.goal||'')}</p>${spxFacts(type==='task'?[['环境',abEnvLabel(x.config.environment,scope)],['Agent类型',x.config.agentType],['代码与路径',(env?.config?.repos?.length?'已关联代码仓':'无代码仓')+' · '+(env?.config?.path||'默认目录')]]:[['阶段',(x.stages||[]).length+' 个'],['原子任务',abAllSteps(x).length+' 个'],['状态',x.draft?'草稿':'已发布 / 可编辑']])}<footer>${spxBtn('查看 / 编辑','edit',x.id)}${!x.draft&&abUsable(x)?spxBtn('使用模板','use',x.id,'primary sm'):''}</footer></article>`;}).join('')||'<div class="empty">本空间暂无此类任务模板，可前往构建创建。</div>'}</div>`;
+  return spxSection('任务模板','汇集本空间的原子任务与串联任务模板，按需选择和复用。',spxBtn('前往构建 '+ico('arrow'),'build',type,'primary sm'))+tabs+`<p class="spx-caption">${type==='task'?'原子任务模板：组合环境、扩展与 Agent 类型，可独立使用，也可串联为串联任务。':'串联任务模板：按顺序串联多个原子任务，每个步骤沿用各自的环境配置。'}</p>${st.filter?`<div class="note">已筛选关联环境：${esc(abGet(st.filter)?.name||'已删除模板')}${spxBtn('查看全部','clear-filter','','link sm')}</div>`:''}<div class="asset-grid">${items.map(x=>{const env=x.type==='task'?abEnvironment(x.config.environment,scope):null;return `<article class="asset-card spx-resource"><div class="row between"><span class="asset-ic">${ico(abIcon(type))}</span>${tag(x.draft?'草稿':'V'+x.version,'gray')}</div><h3>${esc(x.name)}</h3><p>${esc(x.description||x.goal||'')}</p>${spxFacts(type==='task'?[['环境',abEnvLabel(x.config.environment,scope)],['Agent类型',x.config.agentType],['代码与路径',(env?.config?.repos?.length?'已关联代码仓':'无代码仓')+' · '+(env?.config?.path||'默认目录')]]:[['阶段',(x.stages||[]).length+' 个'],['原子任务',abAllSteps(x).length+' 个'],['状态',x.draft?'草稿':'已发布 / 可编辑']])}<footer>${spxBtn('查看 / 编辑','edit',x.id)}${!x.draft&&abUsable(x)?spxBtn('使用模板','use',x.id,'primary sm'):''}</footer></article>`;}).join('')||'<div class="empty">本空间暂无此类任务模板，可前往构建创建。</div>'}</div>`;
 }
 function spxRepos(){
   const scope=spxScope(),envs=abItems('env',scope);
@@ -18331,7 +18348,7 @@ function spxRepos(){
 }
 function spxPage(personal){
   const st=spxState(),tabs=spxTabs(personal);if(!tabs.some(([k])=>k===st.tab))st.tab='knowledge';
-  const heading=`<div class="demohead"><div><h1>${personal?'个人空间':'项目空间'}</h1><p>${personal?'个人知识与可复用的执行资源。':'项目共享的知识、代码、环境与任务能力 · '+esc(s.project)}</p></div>${spxBtn(ico('workflow')+'前往构建','build','','primary sm')}</div>`;
+  const heading=`<div class="demohead"><div><h1>${personal?'个人空间':'项目空间'}</h1><p>${personal?'个人知识与可复用的执行资源。':'项目共享的知识、代码、环境与任务能力 · '+esc(s.project)}</p></div></div>`;
   const nav=`<div class="dtabs asset-tabs" role="tablist" aria-label="${personal?'个人':'项目'}空间资源">${tabs.map(([k,l,i])=>`<button role="tab" aria-selected="${st.tab===k}" class="${st.tab===k?'active':''}" data-a="spx-tab" data-v="${k}">${ico(i)}${l}</button>`).join('')}</div>`;
   const body=st.tab==='knowledge'?spxKnowledge(personal):st.tab==='repos'?spxRepos():st.tab==='environment'?spxEnvironment():st.tab==='templates'?spxTemplates():`<section class="empty spx-variables">${ico('settings')}<h2>环境变量</h2><p>应用范围：${esc(spxScope())}</p><p>环境变量配置将在这里提供，具体交互待补充。</p>${tag('功能占位','gray')}</section>`;
   return `<div class="spx-page">${heading}${nav}${body}</div>`;
@@ -18385,7 +18402,8 @@ function ntcSummary(x){
   if(x.type==='workflow')return `<div class="ntc-preview-steps">${(x.stages||[]).map((g,i)=>`<section><b>${i+1}. ${esc(g.name)}</b>${g.steps.map((st,j)=>`<div><strong>${i+1}.${j+1} ${esc(st.name)}</strong><p>${esc(st.input||'尚未填写步骤输入')}</p><small>${st.manualConfirm?'人工确认':'自动流转'} · 最大重试 ${st.maxRetries} 次</small>${ntcSummary({type:'task',scope:x.scope,config:st.config})}</div>`).join('')}</section>`).join('')}</div>`;
   const c=x.config;
   const environment=abEnvironment(c.environment,x.scope);
-  return spxFacts([['Agent类型',c.agentType],['模型',c.model||'平台默认模型'],['运行环境',abEnvLabel(c.environment,x.scope)],['责任人',c.ownerMode==='fixed'?c.owner:'跟随本次触发人'],['扩展',(c.extensions||[]).map(id=>asset(id)?.name||id).join('、')||'未选择'],['准出规则',(c.gates||[]).map(g=>({prompt:'Prompt',artifact:'产物存在性',command:'自定义命令'})[g.type]+': '+g.value).join('；')||'未配置']])+`<h4>预置提示词</h4><p class="ntc-preview-prompt">${esc(c.presetPrompt||'未设置')}</p><h4>输入提示词模板</h4><p class="ntc-preview-prompt">${esc(c.inputPromptTemplate||'未设置')}</p><h4>运行配置</h4>${environment.ok?abReadonly(c.environment.mode==='instance'?environment.config:c.environmentOverride||environment.config,environment.asset):`<p>${esc(environment.message)}</p>`}`;
+  const facts=[['agent','Agent类型',c.agentType],['spark','模型',c.model||'平台默认模型'],['cloud','运行环境',abEnvLabel(c.environment,x.scope)],['personal','责任人',c.ownerMode==='fixed'?c.owner:'跟随本次触发人'],['grid','扩展',(c.extensions||[]).map(id=>asset(id)?.name||id).join('、')||'未选择'],['shield','准出规则',(c.gates||[]).map(g=>({prompt:'Prompt',artifact:'产物存在性',command:'自定义命令'})[g.type]+': '+g.value).join('；')||'未配置']];
+  return `<dl class="spx-facts ntc-facts">${facts.map(([icon,label,value])=>`<div><dt>${ico(icon)}<span>${esc(label)}</span></dt><dd>${esc(value)}</dd></div>`).join('')}</dl>`+`<h4>${ico('file')}预置提示词</h4><p class="ntc-preview-prompt">${esc(c.presetPrompt||'未设置')}</p><h4>${ico('task')}输入提示词模板</h4><p class="ntc-preview-prompt">${esc(c.inputPromptTemplate||'未设置')}</p><h4>${ico('cloud')}运行配置</h4>${environment.ok?abReadonly(c.environment.mode==='instance'?environment.config:c.environmentOverride||environment.config,environment.asset):`<p>${esc(environment.message)}</p>`}`;
 }
 const ntcPreviousRenderNewTask=renderNewTaskPage;
 renderNewTaskPage=function(){
@@ -18403,14 +18421,14 @@ newTaskMenu=function(key){
   const same=document.querySelector('.ntc-menu');closeExtMenu();if(same)return;
   const trigger=document.querySelector('.nt-tray [data-v="executor"]');if(!trigger)return;
   const r=trigger.getBoundingClientRect(),rows=ntcTemplates(d);
-  document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu ntc-menu" role="menu" data-for="nt" aria-label="选择任务模板"><div class="as2-menu-label">${abLabels[ntcType(d)]}</div><div class="ntc-template-options">${rows.map(t=>`<button class="ntc-template-option" role="menuitem" data-selected="${x.id===t.id}" data-a="ntc-select" data-v="${esc(t.id)}" data-ntc-preview="${esc(t.id)}">${x.id===t.id?ico('check'):'<i class="nt-menu-gap"></i>'}<span>${esc(t.name)}</span><small>V${t.version}</small></button>`).join('')||'<div class="ntc-menu-empty">当前范围暂无可用模板</div>'}</div><div class="as2-menu-sep"></div><button class="ntc-custom-option" role="menuitem" data-selected="${!x.id}" data-a="ntc-custom" data-ntc-preview="custom">${ico('settings')}<span><strong>自定义配置</strong><small>不使用模板，按本次任务配置</small></span></button></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu ntc-menu" role="menu" data-for="nt" aria-label="选择任务模板"><div class="as2-menu-label">${abLabels[ntcType(d)]}</div><div class="ntc-template-options">${rows.map(t=>`<button class="ntc-template-option" role="menuitem" data-selected="${x.id===t.id}" data-a="ntc-select" data-v="${esc(t.id)}" data-ntc-preview="${esc(t.id)}">${ico(abIcon(t.type))}<span>${esc(t.name)}</span>${x.id===t.id?ico('check').replace('class="icon lucide"','class="icon lucide ntc-selected-icon"'):''}<small>V${t.version}</small></button>`).join('')||'<div class="ntc-menu-empty">当前范围暂无可用模板</div>'}</div><div class="as2-menu-sep"></div><button class="ntc-custom-option" role="menuitem" data-selected="${!x.id}" data-a="ntc-custom" data-ntc-preview="custom">${ico('settings')}<span><strong>自定义配置</strong><small>不使用模板，按本次任务配置</small></span></button></div>`);
   const menu=document.querySelector('.ntc-menu');menu.style.left=Math.max(8,Math.min(r.left,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,r.bottom+menu.offsetHeight+6>innerHeight?r.top-menu.offsetHeight-6:r.bottom+6)+'px';
 };
 function ntcPreview(id){
   const menu=document.querySelector('.ntc-menu');if(!menu)return;
   const current=ntcEnsure(),x=id==='custom'?(current.id?ntcCustom(ntcType(newTaskDraft()),newTaskDraft().project):current):current.id===id?current:abGet(id,newTaskDraft().project);if(!x)return;
   menu.querySelector('.ntc-template-preview')?.remove();
-  menu.insertAdjacentHTML('beforeend',`<aside class="ntc-template-preview" aria-label="${esc(x.name)}的配置预览"><header><b>${esc(x.name)}</b><small>${x.id?'V'+x.version:'从空白开始'}</small></header><div class="ntc-template-preview-body">${ntcSummary(x)}</div><footer>${ntcBtn('编辑本次配置','edit',id,'primary sm')}</footer></aside>`);
+  menu.insertAdjacentHTML('beforeend',`<aside class="ntc-template-preview" aria-label="${esc(x.name)}的配置预览"><header><b>${ico(x.id?abIcon(x.type):'settings')}<span>${esc(x.name)}</span></b><small>${x.id?'V'+x.version:'从空白开始'}</small></header><div class="ntc-template-preview-body">${ntcSummary(x)}</div><footer>${ntcBtn(ico('edit')+'编辑本次配置','edit',id,'primary sm')}</footer></aside>`);
   const p=menu.querySelector('aside'),r=menu.getBoundingClientRect(),w=Math.min(380,innerWidth-24);p.style.width=w+'px';p.style.left=Math.max(8-r.left,r.right+w+8>innerWidth?-w-8:r.width+8)+'px';p.style.top=Math.max(8-r.top,Math.min(0,innerHeight-r.top-p.offsetHeight-8))+'px';
 }
 function ntcSelect(id){

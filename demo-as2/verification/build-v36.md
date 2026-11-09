@@ -185,3 +185,10 @@
 - Linked tasks supply execution data; original demo rules carry separately marked illustrative completed/skipped/failed examples. New rules start empty. Historical timestamps and illustrative inputs persist without being rewritten by rule edits or subsequent runs.
 - Next-run display uses the configured time zone for hourly/daily/weekly/monthly/one-time schedules; Cron remains explicitly described as a Cron plan. This prototype does not dispatch background jobs.
 - Verified 26 execution-history checks, 44 task aggregation checks, 38 card/theme checks, 12 header checks and 10 build unit checks. Inspected expanded records at 1024px and verified no content overflow at 768/1024/1600px, inline syntax and diff checks.
+
+### 2026-11-09 Task preview icons and complete environment summaries
+
+- Added task/workflow icons to template choices, semantic icons to preview headings/fact labels, and an edit icon to the preview action. Preview/drawer primary buttons have no colored border or shadow, with a neutral keyboard focus outline retained.
+- Environment template cards expose location/zone, image or local-runtime selection policy, cloud toolsets/tools, repository branches, working-directory policy, startup path and initialization command. Configured values use the underlying environment data. Cards use at most two columns.
+- Removed the shared build button from personal/project space page headers; environment/template tab-level build links remain and include right arrows.
+- Verified 34 space/task regression checks, both spaces' tab/header controls, configured image/tool/repository/path/init values, and preview icons/border styling across five themes. Checked inline syntax and diff hygiene; inspected preview and environment screenshots at 1600px.

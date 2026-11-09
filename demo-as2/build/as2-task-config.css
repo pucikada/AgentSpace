@@ -3,7 +3,7 @@
 .ntc-template-options{max-height:280px;overflow:auto;overscroll-behavior:contain}
 .ntc-menu .ntc-template-option,.ntc-menu>.ntc-custom-option{display:flex;align-items:center;gap:10px;width:100%;min-width:0;min-height:40px;height:auto;flex-shrink:0;padding:8px 10px;border:0;border-radius:9px;background:transparent;color:var(--as-text);font:inherit;font-size:13px;line-height:20px;text-align:left;cursor:pointer}
 .ntc-template-option>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
-.ntc-menu .ntc-template-option>.icon,.ntc-menu .nt-menu-gap,.ntc-menu>.ntc-custom-option>.icon{width:16px;height:16px;flex:0 0 16px}
+.ntc-menu .ntc-template-option>.icon,.ntc-menu>.ntc-custom-option>.icon{width:16px;height:16px;flex:0 0 16px}
 .ntc-menu .ntc-template-option>small{margin-left:auto;flex:none;padding:1px 6px;border-radius:5px;background:var(--as-muted-bg);color:var(--as-text-muted);font-size:11px;line-height:18px;font-weight:400}
 .ntc-menu :is(.ntc-template-option,.ntc-custom-option):is(:hover,:focus-visible,[data-selected="true"]){background:var(--as-hover);outline:none}
 .ntc-template-option[data-selected="true"]>.icon{color:var(--as-brand)}
@@ -47,3 +47,14 @@
 @media(max-width:720px){.ntc-template-preview{display:none}.ntc-menu{max-width:calc(100vw - 24px)}.ntc-drawer .ab-two{grid-template-columns:1fr}}
 
 .ntc-template-preview .ab-readonly{grid-template-columns:1fr;margin:8px 0;gap:10px}.ntc-template-preview .ab-readonly b{font-size:12px;font-weight:500}
+
+.ntc-template-preview>header>b,.ntc-template-preview-body h4{display:flex;align-items:center;gap:7px;min-width:0}
+.ntc-template-preview>header>b>.icon,.ntc-template-preview-body h4>.icon{width:15px;height:15px;flex:none;color:var(--as-text-muted)}
+.ntc-template-preview>header>b>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ntc-template-option>.icon:first-child{color:var(--as-brand)}
+.ntc-menu .ntc-template-option>.ntc-selected-icon{width:14px;height:14px;flex:0 0 14px;color:var(--as-brand)}
+.ntc-template-preview .btn.primary,.ntc-drawer .btn.primary{border:0!important;box-shadow:none!important}
+.ntc-template-preview .btn.primary:focus-visible,.ntc-drawer .btn.primary:focus-visible{outline:2px solid var(--as-text-muted)!important;outline-offset:3px}
+
+.ntc-facts dt{display:flex;align-items:center;gap:6px}
+.ntc-facts dt>.icon{width:14px;height:14px;flex:none;opacity:.8}
