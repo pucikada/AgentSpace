@@ -161,3 +161,12 @@
 - Schedule/event card switches remain visible at top right; more actions appear at bottom right on hover/focus without occupying layout space.
 - Removed secondary outlined surfaces from hover action containers across extension/resource/workbench/task cards. Buttons retain their own surface and more-button backgrounds.
 - Verified 40 aggregation/sidebar checks, 38 card-action/theme checks, 34 space/task regression checks, 12 header checks, 10 build unit checks, inline JavaScript syntax, and real hover screenshots. No browser errors observed.
+
+### 2026-11-09 Scope menus and flat project settings
+
+- Sidebar task filter is an always-visible icon beside the section heading; its anchored menu groups task scope and project choices, marks selection, and supports arrow navigation, Escape, outside-click dismissal and trigger toggling.
+- Task center scope and specific project filters are separate controls. A concrete project selector appears after choosing project tasks. Existing saved selections remain valid.
+- Board card category wording changes from collaboration tasks to thread tasks. Header's legacy version link includes a history icon.
+- Members/settings use flat sections with working existing fields and save action. Project template import/export buttons are explicitly illustrative entries and do not change configuration.
+- Project sticky headers now cover the scroll container's complete top/side padding with an opaque surface, preventing scrolled content from showing above or through the header. Initial layout also synchronizes when a page has no overflow.
+- Verified 44 aggregation/menu checks, 38 card/theme checks, 28 project settings/scroll checks across five themes, 12 header checks with the default-theme fixture, menu keyboard/outside-click behavior, viewport containment at 1024px and 1600px screenshots, inline syntax and diff checks.
