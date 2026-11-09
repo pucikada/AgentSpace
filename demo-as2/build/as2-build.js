@@ -40,7 +40,7 @@ function abEnsure(){
 function abItems(type,scope=abScope()){return abEnsure().assets.filter(x=>x.type===type&&(scope==='all'||x.scope===scope)&&!x.deleted&&!x.temporary&&abVisible(x));}
 function abGet(id,scope){return abEnsure().assets.find(x=>x.id===id&&!x.deleted&&(!scope||x.scope===scope));}
 function abRuntimes(scope,owner=abUser(),zone='绿区'){
-  const rows=Array.isArray(s.localRuntimes)&&s.localRuntimes.length?s.localRuntimes:[{id:'rt-mac',name:'开发工作站 · 示例',owner:abUser(),zone:'绿区',status:'online',defaultPath:'/Users/me/AgentSpace'},{id:'rt-linux',name:'联调工作站 · 示例',owner:abUser(),zone:'绿区',status:'online',defaultPath:'/home/me/AgentSpace'},{id:'rt-win',name:'黄区开发机 · 示例',owner:abUser(),zone:'黄区',status:'offline',defaultPath:'C:/AgentSpace'}];
+  const rows=Array.isArray(s.localRuntimes)?s.localRuntimes:[{id:'rt-mac',name:'开发工作站 · 示例',owner:abUser(),zone:'绿区',status:'online',defaultPath:'/Users/me/AgentSpace'},{id:'rt-linux',name:'联调工作站 · 示例',owner:abUser(),zone:'绿区',status:'online',defaultPath:'/home/me/AgentSpace'},{id:'rt-win',name:'黄区开发机 · 示例',owner:abUser(),zone:'黄区',status:'offline',defaultPath:'C:/AgentSpace'}];
   return rows.filter(r=>(r.owner||r.user||abUser())===owner&&(r.zone||'绿区')===zone);
 }
 function abMembers(scope){return [abUser(),...DIRECTORY.filter(p=>p.type==='person'&&scope!=='个人'&&p.projects.includes(scope)).map(p=>p.name)];}
