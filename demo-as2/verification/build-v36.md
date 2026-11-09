@@ -137,3 +137,10 @@
 - WeLink 按参考 MVP 更新为总开关和七个事件：待输入、失败、新增待人工启动、定时自动启动、事件自动启动、排队、完成；关闭总开关时禁用子开关，修改进入草稿并显式保存，支持七类消息预览和提示关闭。不会发送真实消息。
 - 验证：settings-page-check.js 29 项、原有构建/扩展 33 项、空间/任务 34 项、构建逻辑 10 项通过；额外检查所有分类、五主题颜色、运行时拖拽排序、内联语法、重复同步幂等和 diff。原型中的命令仅展示/复制，未执行安装或连接设备。
 - 截图：settings-runtime-fullpage.png、settings-welink-fullpage.png、settings-general-dark.png。
+
+### 2026-11-08 Header navigation and default appearance
+
+- Added global back/forward controls with disabled endpoints and branch truncation. Route history preserves task/build drafts without restoring preference or asset data snapshots.
+- Removed the settings sidebar return control; compacted settings search to 36px.
+- Set the requested default to Aurora light with Aurora blue (#3F6BFF), applied once to existing stored sessions; subsequent user theme selections remain saved. Appearance reset uses this default too.
+- Verification: 12 header/navigation browser checks, 29 settings browser checks, 10 build unit checks, inline JavaScript syntax, and 1600px/1024px header layout inspection passed.

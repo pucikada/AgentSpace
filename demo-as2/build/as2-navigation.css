@@ -1,0 +1,8 @@
+.appbrand .anh-history{display:flex;align-items:center;gap:2px;margin-left:6px;order:2}
+.appbrand .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:transparent;box-shadow:none;color:var(--as-text-2);border-radius:8px}
+.appbrand .anh-history .iconbtn:disabled{opacity:.32;cursor:default;pointer-events:none}
+.appbrand .anh-history .iconbtn:not(:disabled):hover{background:var(--as-muted-bg);color:var(--as-text)}
+.appbrand .anh-history .iconbtn:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
+.anh-history .icon{width:16px;height:16px}
+.anh-history [data-a="anh-forward"]>.icon{transform:rotate(180deg)}
+@media(max-width:900px){.appbrand .anh-history{margin-left:0}.appbar .appbrand{gap:5px}}
