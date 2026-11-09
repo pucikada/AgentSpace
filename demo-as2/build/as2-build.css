@@ -133,3 +133,9 @@ html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-ex
 #demo #benchResults .bench-list-actions>.btn:hover{color:var(--as-brand)!important}
 #demo #benchResults .bench-list-actions>.btn[data-a="bench-card-delete"]:not(:disabled):hover{color:var(--as-danger,#d74747)!important}
 #demo #benchResults .bench-list-actions>.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* Extension enablement is persistent; secondary actions remain on hover. */
+#demo .extension-card>.ext-card-switch.as2-switch{position:absolute;z-index:3;top:16px;right:16px;margin:0;opacity:1!important;pointer-events:auto!important}
+#demo.slack-shell .extension-grid .extension-card.ext-item:has(>.ext-card-switch){grid-template-columns:40px minmax(0,1fr)!important}
+#demo .extension-card:has(>.ext-card-switch) .ext-item-title{padding-right:54px}
+#demo .extension-card:has(>.ext-card-switch)>.ext-item-actions{padding:4px}
