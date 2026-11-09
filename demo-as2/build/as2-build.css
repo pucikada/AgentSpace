@@ -139,3 +139,6 @@ html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-ex
 #demo.slack-shell .extension-grid .extension-card.ext-item:has(>.ext-card-switch){grid-template-columns:40px minmax(0,1fr)!important}
 #demo .extension-card:has(>.ext-card-switch) .ext-item-title{padding-right:54px}
 #demo .extension-card:has(>.ext-card-switch)>.ext-item-actions{padding:4px}
+
+/* Favorite state is persistent information, independent of hover actions. */
+#demo .bench-preview-card .bench-preview-title>.star{opacity:1!important;pointer-events:auto!important}
