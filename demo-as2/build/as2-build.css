@@ -142,3 +142,14 @@ html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-ex
 
 /* Favorite state is persistent information, independent of hover actions. */
 #demo .bench-preview-card .bench-preview-title>.star{opacity:1!important;pointer-events:auto!important}
+
+/* Automation enablement remains visible; more actions float without layout space. */
+#demo.slack-shell .automation-card.ac-card>.ac-card-switch.as2-switch{position:absolute;z-index:3;top:16px;right:16px;margin:0;opacity:1!important;pointer-events:auto!important}
+#demo.slack-shell .automation-card.ac-card>.ac-title{padding-right:58px}
+#demo.slack-shell .automation-card.ac-card>.ac-card-actions{position:absolute;z-index:4;right:12px;bottom:12px;opacity:0;pointer-events:none;transition:opacity .15s ease}
+#demo.slack-shell .automation-card.ac-card:is(:hover,:focus-within,:has([aria-expanded="true"]))>.ac-card-actions{opacity:1;pointer-events:auto}
+html body #demo.slack-shell .automation-card .ac-card-actions>.ac-more{width:32px!important;height:32px!important;border:1px solid var(--as-border-soft)!important;border-radius:999px!important;background:var(--as-card)!important;box-shadow:none!important}
+@media(hover:none){#demo.slack-shell .automation-card.ac-card>.ac-card-actions{opacity:1;pointer-events:auto}}
+
+/* Hover tools use each button's own surface, without a second outlined capsule. */
+html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-actions,.ext-item-actions,.asset-card-acts,.tk-actions,.bench-card-actions,.spx-resource>footer,.catalog-card>footer,.wfcard>.wf-actions,.project-agent-card>.asset-card-foot,.ab-asset>footer){border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;padding:0!important;backdrop-filter:none!important}

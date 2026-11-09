@@ -153,3 +153,11 @@
 - Home workbench filters are All/Favorites/Archived; old Recent selection falls back to All. Home extensions provide read-only details and a link to extension management.
 - AgentCenter imports support only personal/project scopes, including validation and confirmation. Header links to the existing 1.0 prototype beside the guide.
 - Verification: 32 new aggregation/home/import checks, 34 build browser checks, 34 space/task checks, 16 workbench archive checks, 10 build unit checks, inline syntax and diff checks passed. Inspected 1600px task grouping and home-extension screenshots and 1024px Header bounds.
+
+### 2026-11-09 Flat task sidebar and hover actions
+
+- Personal sidebar uses one flat task section with a persistent project selector. Default is personal manual tasks; users can choose all tasks, all related project tasks, or one joined project. Archived/unrelated tasks stay excluded, and task details preserve the selected scope.
+- Both personal/project task centers use four primary tabs. Legacy temporary/thread tabs map to run-board trigger filters; manual and thread filters remain distinct.
+- Schedule/event card switches remain visible at top right; more actions appear at bottom right on hover/focus without occupying layout space.
+- Removed secondary outlined surfaces from hover action containers across extension/resource/workbench/task cards. Buttons retain their own surface and more-button backgrounds.
+- Verified 40 aggregation/sidebar checks, 38 card-action/theme checks, 34 space/task regression checks, 12 header checks, 10 build unit checks, inline JavaScript syntax, and real hover screenshots. No browser errors observed.
