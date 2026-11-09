@@ -1,0 +1,28 @@
+.spx-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:24px 0 18px}
+.spx-section h2{font-size:18px;line-height:28px;margin:0}
+.spx-section p,.spx-caption{font-size:13px;color:var(--as-text-muted);line-height:22px;margin-top:5px}
+.spx-page>.asset-tabs{margin-bottom:20px}
+.spx-page .asset-subtabs{width:max-content;max-width:100%;margin:16px 0 20px}
+.spx-page .asset-grid{margin-top:18px}
+.spx-page .spx-resource{display:flex;flex-direction:column;gap:12px}
+.spx-resource h3{font-size:17px;line-height:26px;margin:0}
+.spx-resource>p{font-size:13px;line-height:22px;margin:0}
+.spx-facts{display:grid;gap:10px;font-size:13px;margin:8px 0}
+.spx-facts>div{display:grid;grid-template-columns:85px minmax(0,1fr);gap:12px}
+.spx-facts dt{color:var(--as-text-muted)}
+.spx-facts dd{margin:0;overflow-wrap:anywhere;color:var(--as-text)}
+.spx-resource footer{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:14px;border-top:1px solid var(--as-border-soft)}
+.spx-links{display:flex;flex-wrap:wrap;gap:6px;font-size:12px}
+.spx-list-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0}
+.spx-list-tools select{max-width:280px}
+.spx-page .demotable td small{display:block;color:var(--as-text-muted);margin-top:5px;font-size:12px}
+.spx-page .ab-stats{gap:4px;margin:0;grid-template-columns:repeat(2,minmax(70px,1fr))}
+.spx-page .ab-stats button{padding:6px}
+.spx-page .ab-stats strong{font-size:16px}
+.spx-page .ab-stats small{font-size:11px!important}
+.spx-artifacts{margin-top:28px}
+.spx-variables{padding:64px 24px;display:grid;justify-items:center;gap:12px}
+.spx-variables>.icon{width:32px;height:32px}
+.spx-page .knowledge-space-card{display:flex;flex-direction:column;gap:14px}
+.spx-page .knowledge-space-card>.btn{align-self:flex-start;margin-top:auto}
+@media(max-width:760px){.spx-section{align-items:flex-start;flex-direction:column}.spx-list-tools{align-items:flex-start;flex-direction:column}.spx-page .demotable{min-width:680px}}
