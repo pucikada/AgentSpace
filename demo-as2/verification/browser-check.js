@@ -18,7 +18,8 @@
   check('Overview hides the left asset panel',!document.querySelector('[data-ab-sidebar]')&&getComputedStyle(document.querySelector('.demoside')).display==='none');
   check('Overview tiles built assets across the content area',document.querySelectorAll('.ab-overview-grid .ab-side-card').length>0&&!document.querySelector('.ab-create'));
   document.querySelector('.ab-create-trigger').click();check('Creation dropdown exposes all four asset types',document.querySelectorAll('.ab-create-menu [data-a=ab-new]').length===4);abCloseCreateMenu();
-  check('Overview has asset tabs and scope filters',document.querySelectorAll('.ab-overview-types [role=tab]').length===5&&document.querySelectorAll('.ab-overview-scopes [role=tab]').length===3);
+  check('Overview has asset tabs and scope filters',document.querySelectorAll('.ab-overview-types [role=tab]').length===4&&document.querySelectorAll('.ab-overview-scopes [role=tab]').length===3);
+  check('Legacy all-assets selection defaults to atomic templates',abEnsure().overviewType==='task'&&!document.querySelector('[data-a=ab-overview-type][data-v=all]'));
   check('Build scope tabs are ordered all, personal, project',[...document.querySelectorAll('.ab-overview-scopes [role=tab]')].map(e=>e.textContent.trim()).join(',')==='全部,个人,项目');
   const prefix='联调 '+Date.now();
   click('new','env');check('Editor has no redundant return-to-build button',!document.querySelector('.ab-page [data-a=ab-home]'));check('Creating reveals the sidebar and right form',!!document.querySelector('[data-ab-sidebar]')&&document.querySelector('#demo').dataset.buildMode==='editor');check('Editor retains two levels of sidebar tabs',document.querySelectorAll('.ab-scope-tabs [role=tab]').length===3&&document.querySelectorAll('.ab-type-tabs [role=tab]').length===4);field('name',prefix+' 云端');field('config.image','node:20');click('save');

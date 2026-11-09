@@ -144,3 +144,12 @@
 - Removed the settings sidebar return control; compacted settings search to 36px.
 - Set the requested default to Aurora light with Aurora blue (#3F6BFF), applied once to existing stored sessions; subsequent user theme selections remain saved. Appearance reset uses this default too.
 - Verification: 12 header/navigation browser checks, 29 settings browser checks, 10 build unit checks, inline JavaScript syntax, and 1600px/1024px header layout inspection passed.
+
+### 2026-11-08 Personal task aggregation and navigation cleanup
+
+- Removed Build's all-assets tab; legacy selection falls back to atomic templates. Saving selects the asset's own category.
+- My Tasks now aggregates personal tasks plus owned/triggered tasks across joined projects, with scope/project and relationship filters. The sidebar groups related tasks by project; project headings filter My Tasks without changing project context.
+- My Tasks uses runs/schedule/event/archive tabs; thread tasks move into the run trigger filter. Project task tabs retain their existing categories. Cards identify project origin.
+- Home workbench filters are All/Favorites/Archived; old Recent selection falls back to All. Home extensions provide read-only details and a link to extension management.
+- AgentCenter imports support only personal/project scopes, including validation and confirmation. Header links to the existing 1.0 prototype beside the guide.
+- Verification: 32 new aggregation/home/import checks, 34 build browser checks, 34 space/task checks, 16 workbench archive checks, 10 build unit checks, inline syntax and diff checks passed. Inspected 1600px task grouping and home-extension screenshots and 1024px Header bounds.
