@@ -12621,8 +12621,6 @@ html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell
 .bench-personal-preview section{background:var(--as-bg);border:1px solid var(--as-border-soft);border-radius:16px;padding:20px;overflow:hidden}
 .bench-personal-preview section>b{font-size:20px}
 .bench-personal-preview section>svg{display:block;width:100%;height:130px;color:var(--as-brand)}
-.bench-preview-open{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:var(--as-card);color:var(--as-text);font-size:12px;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s}
-.bench-thumbnail:hover .bench-preview-open,.bench-thumbnail:focus-visible .bench-preview-open{opacity:1;transform:none}
 .bench-preview-info{padding:16px 10px 6px}
 .bench-preview-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
 #demo .bench-preview-title h3{display:flex;align-items:center;min-width:0;margin:0;font-size:17px;line-height:26px}
@@ -12634,7 +12632,18 @@ html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell
 .bench-preview-updated{display:flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap}
 .bench-preview-updated .icon{width:13px;height:13px}
 .bench-preview-meta>.iconbtn{width:28px;height:28px;min-height:28px;flex-shrink:0}
-@media(prefers-reduced-motion:reduce){.bench-preview-open{transition:none}}
+
+
+.bench-cover-wrap{position:relative}
+.bench-card-actions{position:absolute;z-index:2;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .16s,transform .16s,visibility .16s}
+#demo .bench-card-actions>:is(.btn,.iconbtn){background:var(--as-card);color:var(--as-text);border:1px solid var(--as-border-soft);height:32px;min-height:32px}
+#demo .bench-card-actions>.iconbtn{width:32px}
+.bench-preview-card:hover .bench-card-actions,.bench-preview-card:focus-within .bench-card-actions,.bench-preview-card:has([data-a="bench-card-menu"][aria-expanded="true"]) .bench-card-actions{opacity:1;visibility:visible;transform:none}
+#demo .bench-preview-title>.star.on{color:var(--as-brand)!important}
+#demo .bench-preview-title>.star.on .icon{fill:currentColor!important}
+.bench-card-menu [disabled]{opacity:.4;cursor:not-allowed}
+@media(hover:none){.bench-card-actions{opacity:1;visibility:visible;transform:none}}
+@media(prefers-reduced-motion:reduce){.bench-card-actions{transition:none}}
 
 /* AS2 BUILD V36 css END */
 
@@ -13414,9 +13423,24 @@ function benchThumbnail(b){
   wbEnsureBench(b);
   const v=b.history.find(v=>v.version===b.version)||b.history[0];
   const preview=b.isDefault?`<div class="bench-personal-preview"><h2>${esc(b.title)}</h2><div class="bn-grid">${bnLayout().map(c=>{const d=bnDef(c.id);return d?`<section style="grid-column:span ${c.w};grid-row:span ${c.h}"><b>${esc(d.title)}</b>${bnThumb(c.id)}</section>`:'';}).join('')}</div></div>`:wbDashboardBase(v);
-  return `<button class="bench-thumbnail" data-a="open-bench" data-v="${esc(b.id)}" aria-label="打开 ${esc(b.title)}"><div class="bench-preview-canvas" inert aria-hidden="true">${preview}</div><span class="bench-preview-open">${ico('arrow')}打开工作台</span></button>`;
+  return `<button class="bench-thumbnail" data-a="open-bench" data-v="${esc(b.id)}" aria-label="打开 ${esc(b.title)}"><div class="bench-preview-canvas" inert aria-hidden="true">${preview}</div></button>`;
 }
-function benchCard(b){return `<article class="benchcard bench-preview-card${b.isDefault?' is-default':''}">${benchThumbnail(b)}<div class="bench-preview-info"><div class="bench-preview-title"><h3><button data-a="open-bench" data-v="${esc(b.id)}">${esc(b.title)}</button>${b.isDefault?'<em class="bench-default">默认</em>':''}</h3><button class="star ${b.favorite?'on':''}" data-a="favorite" data-v="${esc(b.id)}" aria-label="${b.favorite?'取消常用':'设为常用'} ${esc(b.title)}">${ico('star')}</button></div><p>${esc(b.range)}</p><div class="bench-preview-meta"><span class="bench-preview-version">V${b.version} · 已采用</span>${wbhCardDraft(b)}<span class="bench-preview-updated">${ico('clock')}${esc(b.updated)}</span><button class="iconbtn" data-a="wbh-continue" data-v="${esc(b.id)}" aria-label="编辑 ${esc(b.title)}" title="编辑工作台">${ico('edit')}</button></div></div></article>`;}
+function benchCard(b){return `<article class="benchcard bench-preview-card${b.isDefault?' is-default':''}"><div class="bench-cover-wrap">${benchThumbnail(b)}<div class="bench-card-actions"><button class="btn sm" data-a="open-bench" data-v="${esc(b.id)}">打开工作台${ico('arrow')}</button><button class="iconbtn" data-a="bench-card-menu" data-v="${esc(b.id)}" aria-label="${esc(b.title)}的更多操作" aria-haspopup="menu" aria-expanded="false">${ico('more')}</button></div></div><div class="bench-preview-info"><div class="bench-preview-title"><h3><button data-a="open-bench" data-v="${esc(b.id)}">${esc(b.title)}</button>${b.isDefault?'<em class="bench-default">默认</em>':''}</h3><button class="star ${b.favorite?'on':''}" data-a="favorite" data-v="${esc(b.id)}" aria-pressed="${!!b.favorite}" aria-label="${b.favorite?'取消收藏':'收藏'} ${esc(b.title)}">${ico('star')}</button></div><p>${esc(b.range)}</p><div class="bench-preview-meta"><span class="bench-preview-version">V${b.version} · 已采用</span>${wbhCardDraft(b)}<span class="bench-preview-updated">${ico('clock')}${esc(b.updated)}</span></div></div></article>`;}
+function homeBenchAction(a,id){
+  if(!['bench-card-menu','bench-card-delete','bench-card-delete-do'].includes(a))return false;
+  const b=s.benches.find(b=>b.id===id);if(!b)return true;
+  if(a==='bench-card-menu'){
+    const trigger=document.querySelector(`[data-a="bench-card-menu"][data-v="${CSS.escape(id)}"]`),same=trigger?.getAttribute('aria-expanded')==='true';closeExtMenu();if(same||!trigger)return true;
+    const r=trigger.getBoundingClientRect();trigger.setAttribute('aria-expanded','true');
+    document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu bench-card-menu" role="menu" data-for="${esc(id)}" aria-label="${esc(b.title)}的操作"><button role="menuitem" data-a="wbh-continue" data-v="${esc(id)}">${ico('edit')}<span>编辑</span></button><button role="menuitem" data-a="favorite" data-v="${esc(id)}">${ico('star')}<span>${b.favorite?'取消收藏':'收藏'}</span></button><button role="menuitem" data-a="open-bench" data-v="${esc(id)}">${ico('arrow')}<span>打开工作台</span></button><div class="as2-menu-sep"></div><button role="menuitem" class="is-danger" data-a="bench-card-delete" data-v="${esc(id)}" ${b.isDefault?'disabled title="默认工作台不可删除"':''}>${ico('close')}<span>删除${b.isDefault?'（默认工作台）':''}</span></button></div>`);
+    const menu=document.querySelector('.bench-card-menu');menu.style.left=Math.max(8,Math.min(r.right-menu.offsetWidth,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,r.bottom+menu.offsetHeight+6>innerHeight?r.top-menu.offsetHeight-6:r.bottom+6)+'px';requestAnimationFrame(()=>menu.querySelector('[role="menuitem"]')?.focus({preventScroll:true}));return true;
+  }
+  if(b.isDefault)return true;
+  closeExtMenu();
+  if(a==='bench-card-delete')modal('删除工作台',`<p>确定删除「${esc(b.title)}」？工作台及其会话和版本记录将被删除。</p>`,`${btn('取消','close-modal','','sm')}${btn('删除','bench-card-delete-do',id,'primary sm')}`);
+  else{s.benches=s.benches.filter(b=>b.id!==id);delete s.workbenchEditors?.[id];s.paused=(s.paused||[]).filter(v=>v!==id);if(s.selectedBench===id)s.selectedBench=null;closeModal();save();render();notify('工作台已删除。');}
+  return true;
+}
 
 function renderBenchResults(matches){let arr=[...matches];if(s.benchFilter==='recent')arr.sort((a,b)=>b.updated.localeCompare(a.updated));return !arr.length?`<div class="empty">暂无匹配的工作台。${btn('新建工作台','new-bench','','link')}</div>`:s.benchList?`<div class="tablewrap"><table class="demotable"><thead><tr><th>工作台</th><th>来源与版本</th><th>最近更新</th><th>操作</th></tr></thead><tbody>${arr.map(b=>`<tr><td>${esc(b.title)}<small class="muted" style="display:block">${esc(b.range)}</small></td><td>${b.sourceCount} 个 · V${b.version}</td><td>${esc(b.updated)}</td><td>${btn('打开','open-bench',b.id,'sm')}${btn('管理','bench-manage',b.id,'link sm')}</td></tr>`).join('')}</tbody></table></div>`:`<div class="benchgrid">${arr.map(benchCard).join('')}</div>`;}
 function sourceRows(ids){return ids.map(id=>{const a=sources.find(x=>x.id===id)||sources[0];return `<div class="sourceitem"><span class="sourcedot">${ico(a.icon)}</span><div class="grow"><b>${a.name}</b><small>${a.desc}</small></div><span class="tag green" style="font-size:11px">已授权</span></div>`;}).join('');}
@@ -13595,7 +13619,7 @@ function artifact(id){const t=s.tasks.find(x=>x.id===id);modal('产物预览 · 
 function addNode(type){s.nodes.push({type,label:type==='Skill'?'选择 Skill 方法':type==='MCP 工具'?'选择已安装 MCP':type==='CLI 工具'?'选择已安装 CLI':type==='Agent'?'配置 Agent':type,hint:'待配置',icon:type==='Skill'?'spark':type==='MCP 工具'?'link':type==='CLI 工具'?'code':type==='Agent'?'team':type==='人工确认'?'shield':'workflow'});s.selectedNode=s.nodes.length-1;s.wfDirty=true;s.wfTested=false;closeModal();render();}
 function legacyDependencies(){modal('当前 Workflow 的依赖与连接',`<p class="small muted">依赖由 Workflow 统一引用和发布。以下为示例配置。</p>${s.nodes.filter(n=>['Skill','MCP 工具','Agent','人工确认'].includes(n.type)).map(n=>`<div class="sourceitem"><span class="sourcedot">${ico(NODE_ICON[n.type]||n.icon)}</span><div class="grow"><b>${esc(n.type)} · ${esc(n.label)}</b><small>${esc(n.hint)}</small></div>${tag(n.hint==='待配置'?'待配置':'已就绪',n.hint==='待配置'?'gold':'green')}</div>`).join('')}<div class="note" style="margin-top:18px">发布固定方法与工具版本。MCP 凭证在运行时按 Binding 的执行身份解析；缺少授权时暂停并请求授权。</div>`,`${btn('关闭','close-modal')}`);}
 function workflowBinding(){modal('选择 Workflow 的采用位置',`<div class="note">${esc(s.wfLabel)} · 已发布 v${s.wfVersion}<br>同一流程定义可以创建个人或团队 Binding。</div><div class="grid2" style="margin-top:20px"><div class="card pad"><span class="tag">个人 Binding</span><h4 style="margin:12px 0">工作台 / 订阅</h4><p class="small muted">配置来源范围、更新频率和接收工作台。</p><div style="margin-top:17px">${btn('在个人视图采用','bind-personal','','primary sm')}</div></div><div class="card pad"><span class="tag">项目 Binding</span><h4 style="margin:12px 0">Project / Channel / Thread</h4><p class="small muted">配置项目范围、Owner、人工节点与接收位置。</p><div style="margin-top:17px">${btn('在团队项目采用','bind-team','','primary sm')}</div></div></div>`,`${btn('关闭','close-modal')}`);}
-async function action(a,v){if(channelTabsAction(a,v)||projSettingsAction(a,v)||railAction(a,v)||bfAction(a,v)||bx2Action(a,v)||buildAction(a,v)||casesAction(a,v)||wfEditorAction(a,v)||mentionAction(a,v)||newTaskAction(a,v)||taskPageAction(a,v)||settingsAction(a,v)||glassAction(a,v)||assetAction(a,v)||bentoAction(a,v)||userMenuAction(a,v)||personalTabAction(a,v)||runAction(a,v)||sidebarAction(a,v)||messageAction(a,v)||composerAction(a,v)||boardAction(a,v)||extensionAction(a,v))return;if(a.startsWith('wbh-')){wbhAction(a,v);save();return;}if(a.startsWith('wb2-')){await wb2Action(a,v);save();return;}if(a.startsWith('wb-')){await wbAction(a,v);save();return;}if(a.startsWith('co-members-')){coMembersAction(a,v);save();return;}if(s.channelMemberPanel&&['mode','channel','project','project-tab','task-board','select-project','project-thread-open','open-thread','studio','extensions','evolution'].includes(a))s.channelMemberPanel.open=false;if(a==='evolution'||a.startsWith('evolution-')){evolutionAction(a,v);save();return;}const t=s.tasks.find(x=>x.id===v),b=s.benches.find(x=>x.id===v);switch(a){
+async function action(a,v){if(homeBenchAction(a,v)||channelTabsAction(a,v)||projSettingsAction(a,v)||railAction(a,v)||bfAction(a,v)||bx2Action(a,v)||buildAction(a,v)||casesAction(a,v)||wfEditorAction(a,v)||mentionAction(a,v)||newTaskAction(a,v)||taskPageAction(a,v)||settingsAction(a,v)||glassAction(a,v)||assetAction(a,v)||bentoAction(a,v)||userMenuAction(a,v)||personalTabAction(a,v)||runAction(a,v)||sidebarAction(a,v)||messageAction(a,v)||composerAction(a,v)||boardAction(a,v)||extensionAction(a,v))return;if(a.startsWith('wbh-')){wbhAction(a,v);save();return;}if(a.startsWith('wb2-')){await wb2Action(a,v);save();return;}if(a.startsWith('wb-')){await wbAction(a,v);save();return;}if(a.startsWith('co-members-')){coMembersAction(a,v);save();return;}if(s.channelMemberPanel&&['mode','channel','project','project-tab','task-board','select-project','project-thread-open','open-thread','studio','extensions','evolution'].includes(a))s.channelMemberPanel.open=false;if(a==='evolution'||a.startsWith('evolution-')){evolutionAction(a,v);save();return;}const t=s.tasks.find(x=>x.id===v),b=s.benches.find(x=>x.id===v);switch(a){
 
 case 'appearance-settings':openSettings();break;
 case 'appearance-preset':appearanceSetTransparency(v);break;
@@ -14652,7 +14676,7 @@ function composerAction(a,v){
 document.addEventListener('pointerover',e=>{const b=e.target.closest?.('.ms-message-actions button[title]');if(!b)return;if(!b.getAttribute('aria-label'))b.setAttribute('aria-label',b.title);b.removeAttribute('title');});
 
 // ---- Extension rows: the ··· button opens an anchored menu (details · enable/disable · remove).
-function closeExtMenu(){const m=document.querySelector('.as2-menu');if(!m)return;document.querySelector(`[data-a="ext-menu"][data-v="${m.dataset.for}"]`)?.setAttribute('aria-expanded','false');m.remove();}
+function closeExtMenu(){const m=document.querySelector('.as2-menu');if(!m)return;document.querySelector(`[data-a="ext-menu"][data-v="${m.dataset.for}"], [data-a="bench-card-menu"][data-v="${m.dataset.for}"]`)?.setAttribute('aria-expanded','false');m.remove();}
 function openExtMenu(id){
   const open=document.querySelector('.as2-menu'),same=open?.dataset.for===id;closeExtMenu();if(same)return;
   const btn=document.querySelector(`[data-a="ext-menu"][data-v="${id}"]`),i=s.installations.find(x=>x.id===id);if(!btn||!i)return;
@@ -14672,10 +14696,10 @@ function openExtMenu(id){
 function extensionAction(a,v){if(a!=='ext-menu')return false;openExtMenu(v);return true;}
 // Picking an item runs its action through the normal dispatcher, then the menu closes.
 document.addEventListener('click',e=>{if(e.target.closest('.as2-menu [data-a]'))setTimeout(closeExtMenu);});
-document.addEventListener('pointerdown',e=>{if(document.querySelector('.as2-menu')&&!e.target.closest('.as2-menu, [data-a="ext-menu"], [data-a="composer-model"], [data-a="composer-add"], [data-a="ac-menu"], [data-a="nt-pick"], #channelInput, #threadInput'))closeExtMenu();},true);
+document.addEventListener('pointerdown',e=>{if(document.querySelector('.as2-menu')&&!e.target.closest('.as2-menu, [data-a="ext-menu"], [data-a="bench-card-menu"], [data-a="composer-model"], [data-a="composer-add"], [data-a="ac-menu"], [data-a="nt-pick"], #channelInput, #threadInput'))closeExtMenu();},true);
 document.addEventListener('keydown',e=>{
   const m=document.querySelector('.as2-menu');if(!m)return;
-  if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();const id=m.dataset.for;closeExtMenu();document.querySelector(`[data-a="ext-menu"][data-v="${id}"]`)?.focus();return;}
+  if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();const id=m.dataset.for;closeExtMenu();document.querySelector(`[data-a="ext-menu"][data-v="${id}"], [data-a="bench-card-menu"][data-v="${id}"]`)?.focus();return;}
   if(['ArrowDown','ArrowUp'].includes(e.key)){e.preventDefault();const items=[...m.querySelectorAll('[role="menuitem"]')],k=items.indexOf(document.activeElement);items[(k+(e.key==='ArrowDown'?1:-1)+items.length)%items.length]?.focus();}
 },true);
 window.addEventListener('resize',closeExtMenu);
