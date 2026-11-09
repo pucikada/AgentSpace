@@ -170,3 +170,10 @@
 - Members/settings use flat sections with working existing fields and save action. Project template import/export buttons are explicitly illustrative entries and do not change configuration.
 - Project sticky headers now cover the scroll container's complete top/side padding with an opaque surface, preventing scrolled content from showing above or through the header. Initial layout also synchronizes when a page has no overflow.
 - Verified 44 aggregation/menu checks, 38 card/theme checks, 28 project settings/scroll checks across five themes, 12 header checks with the default-theme fixture, menu keyboard/outside-click behavior, viewport containment at 1024px and 1600px screenshots, inline syntax and diff checks.
+
+### 2026-11-09 Header search grouping and knowledge cleanup
+
+- Moved back/forward controls into the search group immediately before the search box; navigation history is unchanged. Verified 768px, 1024px and 1600px Header geometry plus 12 existing navigation checks.
+- Removed the visible project-template illustrative caption while retaining its description and entry buttons.
+- Removed the appended project-artifact section from project knowledge libraries. Existing knowledge documents and the project's dedicated artifacts tab remain available.
+- Verified 34 space/task regression checks, preserved document titles, dedicated artifact rendering, inline JavaScript syntax and diff checks.

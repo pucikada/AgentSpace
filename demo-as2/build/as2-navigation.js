@@ -11,10 +11,11 @@ function anhKey(r){
   return JSON.stringify({...r,newTask:!!r.newTask,buildEditor:r.buildEditor?`${r.buildEditor.id||'new'}:${r.buildEditor.type}`:null});
 }
 function anhControls(){
-  const brand=document.querySelector('.appbar .appbrand');if(!brand)return;
-  if(!brand.querySelector('.anh-history'))brand.insertAdjacentHTML('beforeend',`<nav class="anh-history" aria-label="页面导航"><button class="iconbtn" data-a="anh-back" title="上一步" aria-label="上一步">${ico('back')}</button><button class="iconbtn" data-a="anh-forward" title="下一步" aria-label="下一步">${ico('back')}</button></nav>`);
-  brand.querySelector('[data-a="anh-back"]').disabled=anhIndex<=0;
-  brand.querySelector('[data-a="anh-forward"]').disabled=anhIndex>=anhEntries.length-1;
+  const search=document.querySelector('.appbar .appsearch');if(!search)return;
+  let group=search.closest('.anh-search-group');if(!group){group=document.createElement('div');group.className='anh-search-group';search.before(group);group.appendChild(search);}
+  if(!group.querySelector('.anh-history'))group.insertAdjacentHTML('afterbegin',`<nav class="anh-history" aria-label="页面导航"><button class="iconbtn" data-a="anh-back" title="上一步" aria-label="上一步">${ico('back')}</button><button class="iconbtn" data-a="anh-forward" title="下一步" aria-label="下一步">${ico('back')}</button></nav>`);
+  group.querySelector('[data-a="anh-back"]').disabled=anhIndex<=0;
+  group.querySelector('[data-a="anh-forward"]').disabled=anhIndex>=anhEntries.length-1;
 }
 function anhRecord(){
   const route=anhRoute(),key=anhKey(route);

@@ -21,8 +21,7 @@ function spxKnowledge(personal){
   if(!sp)return '<div class="empty">当前项目还没有知识库。</div>';
   const actions=(personal?btn(ico('back')+'全部知识库','space-list','','link sm'):'')+btn('空间内提问','space-tab','chat','sm')+btn(ico('plus')+'添加资料','space-add',sp.id,'primary sm');
   let html=renderKnowledgeDetail(sp).replace('知识库问答','空间问答').replace('知识库设置','空间设置');
-  const artifacts=personal?'':renderProjectArtifacts(projectArtifacts(),false);
-  return spxSection(esc(sp.name),esc(sp.description),actions)+`<div class="asset-knowledge">${html}</div>`+(personal?'':`<section class="spx-artifacts">${artifacts}</section>`);
+  return spxSection(esc(sp.name),esc(sp.description),actions)+`<div class="asset-knowledge">${html}</div>`;
 }
 function spxEnvironment(){
   const st=spxState(),scope=spxScope(),envs=abItems('env',scope),instances=abItems('instance',scope),part=st.environment;

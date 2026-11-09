@@ -12558,6 +12558,30 @@ html:root body #modalHost .ap-style .ap-style-copy small:not(#_a):not(#_b):not(#
 #demo .personal-ext-guidance{margin:0 0 18px;font-size:12px;line-height:20px}
 
 
+#demo .side-sec-head>.side-task-filter-icon{display:grid;place-items:center;flex:none;width:26px;height:26px;min-height:26px;padding:5px;border:0;border-radius:7px;background:transparent;color:var(--as-text-muted);cursor:pointer}
+#demo .side-task-filter-icon .icon{width:15px;height:15px}
+#demo .side-task-filter-icon:is(:hover,[aria-expanded="true"],.is-filtered){background:var(--as-muted-bg);color:var(--as-brand)}
+#demo .side-task-filter-icon:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
+.side-task-scope-menu{width:236px;min-width:0!important;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;padding:6px}
+.side-task-menu-label{padding:7px 10px 4px;font-size:11px;line-height:18px;color:var(--as-text-muted)}
+.side-task-scope-menu button{display:flex;align-items:center;gap:12px;width:100%;min-height:34px;padding:7px 10px;border:0;border-radius:8px;background:transparent;color:var(--as-text);font:inherit;font-size:13px;text-align:left;cursor:pointer}
+.side-task-scope-menu button:is(:hover,:focus-visible){background:var(--as-hover);outline:none}
+.side-task-scope-menu button>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side-task-scope-menu button.selected{background:var(--as-brand-soft,var(--as-muted-bg));color:var(--as-brand)}
+.side-task-scope-menu button>.icon,.side-task-check-gap{width:14px;height:14px;flex:none}
+
+.appactions .legacy-version-link{gap:6px}
+.appactions .legacy-version-link>.icon{width:15px;height:15px;flex:none}
+#demo .project-settings-flat>.ps-section{padding:24px 0;margin:0;border:0;border-top:1px solid var(--as-border-soft);border-radius:0;background:transparent;box-shadow:none}
+#demo .project-settings-flat>.ps-basic{padding-top:0;border-top:0}
+#demo .project-settings-flat .ps-head h3,#demo .project-settings-flat .ps-sub,#demo .ps-template h3{font-size:15px;line-height:24px;margin:0 0 8px;font-weight:600}
+#demo .project-settings-flat .ps-foot{padding-top:0;border-top:0;margin-top:20px;justify-content:flex-start;padding-left:112px}
+#demo .ps-members .sourceitem{padding:16px 0;background:transparent;border-radius:0;box-shadow:none}
+#demo .ps-template{display:flex;align-items:center;justify-content:space-between;gap:24px}
+#demo .ps-template p{font-size:13px;line-height:22px;color:var(--as-text-muted);margin:4px 0 8px}
+.ps-template-actions{display:flex;flex-wrap:wrap;gap:8px;flex:none}
+@media(max-width:720px){#demo .project-settings-flat .ps-foot{padding-left:0}#demo .ps-template{align-items:flex-start;flex-direction:column;gap:12px}}
+
 /* AS2 BUILD V36 css START */
 /* Build uses the existing AS2 tokens and controls. */
 .ab-page{max-width:1540px;margin:auto;padding:30px 36px 64px;min-width:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--as-border-strong) transparent}
@@ -12876,41 +12900,18 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 /* AS2 SETTINGS CONTENT css END */
 
 /* AS2 NAVIGATION css START */
-.appbrand .anh-history{display:flex;align-items:center;gap:2px;margin-left:6px;order:2}
-.appbrand .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:transparent;box-shadow:none;color:var(--as-text-2);border-radius:8px}
-.appbrand .anh-history .iconbtn:disabled{opacity:.32;cursor:default;pointer-events:none}
-.appbrand .anh-history .iconbtn:not(:disabled):hover{background:var(--as-muted-bg);color:var(--as-text)}
-.appbrand .anh-history .iconbtn:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
+.appbar .anh-search-group{display:flex;align-items:center;gap:12px;width:100%;max-width:690px;min-width:0;justify-self:center}
+.appbar .anh-search-group>.appsearch{flex:1;min-width:0}
+.anh-search-group .anh-history{display:flex;align-items:center;gap:2px;flex:none}
+.anh-search-group .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:transparent;box-shadow:none;color:var(--as-text-2);border-radius:8px}
+.anh-search-group .anh-history .iconbtn:disabled{opacity:.32;cursor:default;pointer-events:none}
+.anh-search-group .anh-history .iconbtn:not(:disabled):hover{background:var(--as-muted-bg);color:var(--as-text)}
+.anh-search-group .anh-history .iconbtn:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
 .anh-history .icon{width:16px;height:16px}
 .anh-history [data-a="anh-forward"]>.icon{transform:rotate(180deg)}
-@media(max-width:900px){.appbrand .anh-history{margin-left:0}.appbar .appbrand{gap:5px}}
+@media(max-width:900px){.appbar .anh-search-group{gap:6px}}
 
 /* AS2 NAVIGATION css END */
-
-#demo .side-sec-head>.side-task-filter-icon{display:grid;place-items:center;flex:none;width:26px;height:26px;min-height:26px;padding:5px;border:0;border-radius:7px;background:transparent;color:var(--as-text-muted);cursor:pointer}
-#demo .side-task-filter-icon .icon{width:15px;height:15px}
-#demo .side-task-filter-icon:is(:hover,[aria-expanded="true"],.is-filtered){background:var(--as-muted-bg);color:var(--as-brand)}
-#demo .side-task-filter-icon:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
-.side-task-scope-menu{width:236px;min-width:0!important;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;padding:6px}
-.side-task-menu-label{padding:7px 10px 4px;font-size:11px;line-height:18px;color:var(--as-text-muted)}
-.side-task-scope-menu button{display:flex;align-items:center;gap:12px;width:100%;min-height:34px;padding:7px 10px;border:0;border-radius:8px;background:transparent;color:var(--as-text);font:inherit;font-size:13px;text-align:left;cursor:pointer}
-.side-task-scope-menu button:is(:hover,:focus-visible){background:var(--as-hover);outline:none}
-.side-task-scope-menu button>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.side-task-scope-menu button.selected{background:var(--as-brand-soft,var(--as-muted-bg));color:var(--as-brand)}
-.side-task-scope-menu button>.icon,.side-task-check-gap{width:14px;height:14px;flex:none}
-
-.appactions .legacy-version-link{gap:6px}
-.appactions .legacy-version-link>.icon{width:15px;height:15px;flex:none}
-#demo .project-settings-flat>.ps-section{padding:24px 0;margin:0;border:0;border-top:1px solid var(--as-border-soft);border-radius:0;background:transparent;box-shadow:none}
-#demo .project-settings-flat>.ps-basic{padding-top:0;border-top:0}
-#demo .project-settings-flat .ps-head h3,#demo .project-settings-flat .ps-sub,#demo .ps-template h3{font-size:15px;line-height:24px;margin:0 0 8px;font-weight:600}
-#demo .project-settings-flat .ps-foot{padding-top:0;border-top:0;margin-top:20px;justify-content:flex-start;padding-left:112px}
-#demo .ps-members .sourceitem{padding:16px 0;background:transparent;border-radius:0;box-shadow:none}
-#demo .ps-template{display:flex;align-items:center;justify-content:space-between;gap:24px}
-#demo .ps-template p{font-size:13px;line-height:22px;color:var(--as-text-muted);margin:4px 0 8px}
-#demo .ps-template small{font-size:12px;color:var(--as-text-subtle)}
-.ps-template-actions{display:flex;flex-wrap:wrap;gap:8px;flex:none}
-@media(max-width:720px){#demo .project-settings-flat .ps-foot{padding-left:0}#demo .ps-template{align-items:flex-start;flex-direction:column;gap:12px}}
 </style></head><body class="as-root">
 <header class="appbar"><div class="appbrand"><button class="iconbtn navtoggle" onclick="toggleSidebar()" aria-label="打开导航"><svg class="icon lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg></button><span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28.000000" height="28.000000" fill="none">
 	<defs>
@@ -16158,7 +16159,7 @@ function renderProjectMembers(){
       <label class="ps-field ps-wide"><span>项目简介</span><input id="psDesc" maxlength="40" value="${esc(m.desc||'')}" placeholder="需求与研发交付"></label>
     </div><div class="ps-foot">${btn('保存设置','ps-save','','primary sm')}</div></section>`;
   const members=renderProjectMembersBase().replace(/^.*?<div class="card pad">/s,'').replace(/<\/div>$/,'');
-  return `<div class="project-settings-flat">${projectSectionHead('成员与设置','项目基础信息、成员、职责与协作范围。')}${basic}<section class="ps-section ps-members"><h3 class="ps-sub">项目成员</h3>${members}</section><section class="ps-section ps-template"><div><h3>项目模板配置</h3><p>导入项目模板以复用项目配置，或将当前项目配置导出为模板。</p><small>功能入口示意</small></div><div class="ps-template-actions">${btn('导入项目模板','ps-template-import','','sm')}${btn('导出项目模板','ps-template-export','','sm')}</div></section></div>`;
+  return `<div class="project-settings-flat">${projectSectionHead('成员与设置','项目基础信息、成员、职责与协作范围。')}${basic}<section class="ps-section ps-members"><h3 class="ps-sub">项目成员</h3>${members}</section><section class="ps-section ps-template"><div><h3>项目模板配置</h3><p>导入项目模板以复用项目配置，或将当前项目配置导出为模板。</p></div><div class="ps-template-actions">${btn('导入项目模板','ps-template-import','','sm')}${btn('导出项目模板','ps-template-export','','sm')}</div></section></div>`;
 }
 let psDraftColor;
 function psPreviewApply(){const pv=document.getElementById('psPreview');if(!pv)return;const c=psDraftColor===undefined?psMeta().color:(psDraftColor||null);
@@ -18253,8 +18254,7 @@ function spxKnowledge(personal){
   if(!sp)return '<div class="empty">当前项目还没有知识库。</div>';
   const actions=(personal?btn(ico('back')+'全部知识库','space-list','','link sm'):'')+btn('空间内提问','space-tab','chat','sm')+btn(ico('plus')+'添加资料','space-add',sp.id,'primary sm');
   let html=renderKnowledgeDetail(sp).replace('知识库问答','空间问答').replace('知识库设置','空间设置');
-  const artifacts=personal?'':renderProjectArtifacts(projectArtifacts(),false);
-  return spxSection(esc(sp.name),esc(sp.description),actions)+`<div class="asset-knowledge">${html}</div>`+(personal?'':`<section class="spx-artifacts">${artifacts}</section>`);
+  return spxSection(esc(sp.name),esc(sp.description),actions)+`<div class="asset-knowledge">${html}</div>`;
 }
 function spxEnvironment(){
   const st=spxState(),scope=spxScope(),envs=abItems('env',scope),instances=abItems('instance',scope),part=st.environment;
@@ -18605,10 +18605,11 @@ function anhKey(r){
   return JSON.stringify({...r,newTask:!!r.newTask,buildEditor:r.buildEditor?`${r.buildEditor.id||'new'}:${r.buildEditor.type}`:null});
 }
 function anhControls(){
-  const brand=document.querySelector('.appbar .appbrand');if(!brand)return;
-  if(!brand.querySelector('.anh-history'))brand.insertAdjacentHTML('beforeend',`<nav class="anh-history" aria-label="页面导航"><button class="iconbtn" data-a="anh-back" title="上一步" aria-label="上一步">${ico('back')}</button><button class="iconbtn" data-a="anh-forward" title="下一步" aria-label="下一步">${ico('back')}</button></nav>`);
-  brand.querySelector('[data-a="anh-back"]').disabled=anhIndex<=0;
-  brand.querySelector('[data-a="anh-forward"]').disabled=anhIndex>=anhEntries.length-1;
+  const search=document.querySelector('.appbar .appsearch');if(!search)return;
+  let group=search.closest('.anh-search-group');if(!group){group=document.createElement('div');group.className='anh-search-group';search.before(group);group.appendChild(search);}
+  if(!group.querySelector('.anh-history'))group.insertAdjacentHTML('afterbegin',`<nav class="anh-history" aria-label="页面导航"><button class="iconbtn" data-a="anh-back" title="上一步" aria-label="上一步">${ico('back')}</button><button class="iconbtn" data-a="anh-forward" title="下一步" aria-label="下一步">${ico('back')}</button></nav>`);
+  group.querySelector('[data-a="anh-back"]').disabled=anhIndex<=0;
+  group.querySelector('[data-a="anh-forward"]').disabled=anhIndex>=anhEntries.length-1;
 }
 function anhRecord(){
   const route=anhRoute(),key=anhKey(route);
