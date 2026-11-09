@@ -2,7 +2,7 @@
 const anhEntries=[];
 let anhIndex=-1,anhRestoring=false;
 function anhRoute(){
-  const keys=['view','page','newTask','taskDetail'],groups={personal:['personalPage','personalTab','personalSpaceId','spaceTab','selectedBench','benchTab'],team:['teamPage','project','channel','projectTab','channelTab','threadOpen','threadKey','threadTab','assetTab'],messages:['messageTab','activeConversation'],settings:['settingsSection'],extensions:['extensionPage','extensionType'],studio:['studioPage']};
+  const keys=['view','page','newTask','taskDetail','automationDetail'],groups={personal:['personalPage','personalTab','personalSpaceId','spaceTab','selectedBench','benchTab'],team:['teamPage','project','channel','projectTab','channelTab','threadOpen','threadKey','threadTab','assetTab'],messages:['messageTab','activeConversation'],settings:['settingsSection'],extensions:['extensionPage','extensionType'],studio:['studioPage']};
   const route=Object.fromEntries([...keys,...(groups[s.view]||[])].map(k=>[k,s[k]]));
   if(s.view==='studio')route.buildEditor=abEnsure().editor;
   return route;

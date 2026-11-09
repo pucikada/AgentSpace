@@ -177,3 +177,11 @@
 - Removed the visible project-template illustrative caption while retaining its description and entry buttons.
 - Removed the appended project-artifact section from project knowledge libraries. Existing knowledge documents and the project's dedicated artifacts tab remain available.
 - Verified 34 space/task regression checks, preserved document titles, dedicated artifact rendering, inline JavaScript syntax and diff checks.
+
+### 2026-11-09 Automation execution-history detail
+
+- Schedule/event execution-record menu entries open a dedicated rule detail with a main trigger/history column and basic-information rail. Existing filters are preserved when returning, editing or manually running.
+- Expandable rows show execution state, origin, time, reason and per-task input, with links to associated task details. State filters, enablement, rule editing and immediate execution reuse existing actions. Header history includes the detail route.
+- Linked tasks supply execution data; original demo rules carry separately marked illustrative completed/skipped/failed examples. New rules start empty. Historical timestamps and illustrative inputs persist without being rewritten by rule edits or subsequent runs.
+- Next-run display uses the configured time zone for hourly/daily/weekly/monthly/one-time schedules; Cron remains explicitly described as a Cron plan. This prototype does not dispatch background jobs.
+- Verified 26 execution-history checks, 44 task aggregation checks, 38 card/theme checks, 12 header checks and 10 build unit checks. Inspected expanded records at 1024px and verified no content overflow at 768/1024/1600px, inline syntax and diff checks.

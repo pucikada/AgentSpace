@@ -12899,6 +12899,59 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 
 /* AS2 SETTINGS CONTENT css END */
 
+/* AS2 AUTOMATION HISTORY css START */
+.ahr-detail{max-width:1400px;margin:0 auto}
+.ahr-breadcrumb{display:flex;align-items:center;gap:10px;min-width:0;margin-bottom:30px;font-size:12px;color:var(--as-text-muted)}
+.ahr-breadcrumb>.btn{padding-left:0;flex:none}.ahr-breadcrumb>span:not(.ahr-enabled){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ahr-enabled{flex:none}
+.ahr-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;align-items:start;gap:40px}
+.ahr-main{min-width:0}
+.ahr-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:36px}
+.ahr-heading>div:first-child{min-width:0}
+.ahr-heading h1{font-size:26px;line-height:36px;letter-spacing:-.5px;overflow-wrap:anywhere;margin:0}
+.ahr-heading p{font-size:13px;line-height:23px;color:var(--as-text-muted);margin:14px 0 0;white-space:pre-wrap}
+.ahr-heading-actions{display:flex;align-items:center;gap:8px;flex:none;padding-top:3px}
+.ahr-section{margin-bottom:32px}.ahr-section h2{font-size:15px!important;line-height:24px;margin:0 0 14px;font-weight:600}
+.ahr-trigger{display:flex;align-items:center;gap:14px;padding:18px;border:1px solid var(--as-border-soft);border-radius:14px;background:var(--as-card)}
+.ahr-trigger-icon{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:10px;background:var(--as-muted-bg);color:var(--as-text-muted)}
+.ahr-trigger-icon .icon{width:18px;height:18px}.ahr-trigger>div{flex:1;min-width:0}
+.ahr-trigger b{font-size:14px;font-weight:600}.ahr-trigger p{font-size:12px;color:var(--as-text-muted);line-height:20px;margin:4px 0 0;overflow-wrap:anywhere}
+.ahr-trigger small{font-size:12px;color:var(--as-text-subtle);line-height:20px;display:block}
+.ahr-trigger>.as2-switch,.ahr-trigger>.iconbtn{flex:none}
+.ahr-records-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.ahr-records-heading h2{margin:0}.ahr-records-heading h2>span{font-size:12px;font-weight:400;color:var(--as-text-subtle);margin-left:4px}
+.ahr-records-heading select{width:124px;height:30px;min-height:30px;padding:0 28px 0 10px;font-size:12px}
+.ahr-records{border:1px solid var(--as-border-soft);border-radius:14px;background:var(--as-card);overflow:hidden}
+.ahr-run+.ahr-run{border-top:1px solid var(--as-border-soft)}
+.ahr-run>summary{display:grid;grid-template-columns:14px 92px minmax(0,1fr) auto;gap:12px;align-items:center;padding:18px 16px;cursor:pointer;list-style:none}
+.ahr-run>summary::-webkit-details-marker{display:none}.ahr-run>summary:hover{background:var(--as-hover)}
+.ahr-run>summary>.icon{width:12px;height:12px;color:var(--as-text-subtle);transition:transform .15s}
+.ahr-run[open]>summary>.icon{transform:rotate(90deg)}
+.ahr-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--as-text-muted);white-space:nowrap}
+.ahr-status>.icon{width:15px;height:15px}
+.ahr-status[data-status=done]{color:var(--as-success,#168452)}.ahr-status[data-status=failed]{color:var(--as-fail,#d74747)}
+.ahr-status[data-status=running]{color:var(--as-brand)}.ahr-status[data-status=review]{color:var(--as-review,#8060d0)}.ahr-status[data-status=wait]{color:var(--as-wait,#c38315)}
+.ahr-run-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.ahr-run-copy>b{font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
+.ahr-run-copy b>small{font-size:10px;color:var(--as-text-subtle);font-weight:400;background:var(--as-muted-bg);padding:1px 5px;border-radius:4px}
+.ahr-run-copy>span{font-size:12px;line-height:19px;color:var(--as-text-muted);overflow-wrap:anywhere}
+.ahr-run>summary>time{font-size:12px;line-height:20px;color:var(--as-text-subtle);white-space:nowrap}
+.ahr-run-body{padding:0 18px 20px 42px;font-size:12px}
+.ahr-run-body dl{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin:0 0 16px}
+.ahr-run-body dt{color:var(--as-text-subtle);margin-bottom:4px}.ahr-run-body dd{margin:0;color:var(--as-text-2);overflow-wrap:anywhere}
+.ahr-run-result{padding:10px 12px;background:var(--as-muted-bg);border-radius:8px;line-height:20px;margin-bottom:14px}
+.ahr-run-result[data-status=failed]{color:var(--as-fail)}
+.ahr-run-input>span{color:var(--as-text-subtle)}.ahr-run-input p{line-height:21px;white-space:pre-wrap;margin:6px 0 14px;color:var(--as-text-2)}
+.ahr-info{border-left:1px solid var(--as-border-soft);padding-left:24px;position:sticky;top:0}
+.ahr-info h2{font-size:12px!important;font-weight:500;line-height:20px;margin:0 0 24px;color:var(--as-text-subtle)}
+.ahr-info dl{display:flex;flex-direction:column;gap:23px;margin:0}.ahr-info dt{font-size:12px;color:var(--as-text-subtle);margin-bottom:7px}.ahr-info dd{margin:0;font-size:13px;line-height:22px;overflow-wrap:anywhere}
+.ahr-empty{padding:42px 20px;text-align:center;color:var(--as-text-muted)}.ahr-empty>.icon{width:25px;height:25px;color:var(--as-text-subtle)}
+.ahr-empty h3{font-size:14px;margin:12px 0 6px}.ahr-empty p{font-size:12px;line-height:22px;margin:0}
+@media(max-width:1180px){.ahr-layout{grid-template-columns:minmax(0,1fr) 210px;gap:24px}.ahr-heading{flex-wrap:wrap;gap:14px}.ahr-info{padding-left:18px}.ahr-run>summary{grid-template-columns:12px 76px minmax(0,1fr);gap:9px}.ahr-run>summary>time{grid-column:3}}
+@media(max-width:800px){.ahr-layout{grid-template-columns:minmax(0,1fr)}.ahr-info{position:static;border-left:0;border-top:1px solid var(--as-border-soft);padding:24px 0 0}.ahr-info dl{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ahr-heading h1{font-size:23px;line-height:32px}.ahr-heading-actions{flex-wrap:wrap}.ahr-run-body{padding-left:18px}.ahr-run-body dl{grid-template-columns:1fr}.ahr-trigger{gap:10px;padding:14px}.ahr-trigger>.iconbtn{display:none}}
+
+/* AS2 AUTOMATION HISTORY css END */
+
 /* AS2 NAVIGATION css START */
 .appbar .anh-search-group{display:flex;align-items:center;gap:12px;width:100%;max-width:690px;min-width:0;justify-self:center}
 .appbar .anh-search-group>.appsearch{flex:1;min-width:0}
@@ -13574,7 +13627,7 @@ normalizeWorkflowBuilder();
 normalizeMessenger();
 normalizeCollaborationUI();
 if(!localStorage.getItem('agentspace-mvp-workbench-history-v28')&&!localStorage.getItem('agentspace-mvp-workbench-composer-v27')&&!localStorage.getItem('agentspace-mvp-workbench-builder-v26')&&!localStorage.getItem('agentspace-mvp-evolution-v25')&&!localStorage.getItem('agentspace-mvp-channel-members-v24')&&!localStorage.getItem('agentspace-mvp-product-project-v23')){s.view='team';s.page='project';s.personalPage=s.personalPage||'benches';s.teamPage='project';s.project=joinedProjects().includes('AgentSpace 2.0')?'AgentSpace 2.0':joinedProjects()[0]||'AgentSpace 2.0';s.projectTab='overview';s.channel=s.project==='AgentSpace 2.0'?'IM能力构建':'development';s.channelTab='messages';s.threadOpen=false;s.threadExpanded=false;s.threadKind='temp';s.activeTempThread='space23-im-dedup';s.threadTab='discussion';}
-(function resetNavOnOpen(){const ini=initialState();['view','page','personalPage','teamPage','project','channel','projectTab','channelTab','threadOpen','threadExpanded','threadKind','threadTab','taskFilter','selectedBench','benchTab','messageTab','messageScope','messageFilter','messageQuery','activeConversation','extensionPage','extensionType','extensionScope','extensionQuery'].forEach(k=>{if(k in ini)s[k]=ini[k];});['taskDetail','newTask','studioPage','buildSel','buildTab','bdScope','bdProject','buildQuery','bxScope','bx2Type','bx2Query','bx2Picker','taskTool','taskTabs','taskArtifact','taskChange','taskFilePath','boardAutomationId','channelMemberPanel','channelTaskFilter','personalSpaceId'].forEach(k=>{delete s[k];});s.coViewport={};s.messageScrolls={};})();
+(function resetNavOnOpen(){const ini=initialState();['view','page','personalPage','teamPage','project','channel','projectTab','channelTab','threadOpen','threadExpanded','threadKind','threadTab','taskFilter','selectedBench','benchTab','messageTab','messageScope','messageFilter','messageQuery','activeConversation','extensionPage','extensionType','extensionScope','extensionQuery'].forEach(k=>{if(k in ini)s[k]=ini[k];});['taskDetail','newTask','automationDetail','studioPage','buildSel','buildTab','bdScope','bdProject','buildQuery','bxScope','bx2Type','bx2Query','bx2Picker','taskTool','taskTabs','taskArtifact','taskChange','taskFilePath','boardAutomationId','channelMemberPanel','channelTaskFilter','personalSpaceId'].forEach(k=>{delete s[k];});s.coViewport={};s.messageScrolls={};})();
 let wizard={step:1,sources:['quality','issues','release'],prompt:'',name:'',range:'AICS / 当前迭代'},dragIndex=null,dragPalette=null,lastFocused=null,toastTimer;
 // Four interface styles and six independent colors form twenty-four themes.
 const APPEARANCE_STYLES={
@@ -18591,12 +18644,90 @@ document.addEventListener('dragend',()=>{spsRuntimeDrag='';});
 
 /* AS2 SETTINGS CONTENT js END */
 
+/* AS2 AUTOMATION HISTORY js START */
+// Automation detail reuses the rule and its linked task instances.
+const ahrExpanded=new Set();
+function ahrRule(){return s.automations.find(a=>a.id===s.automationDetail);}
+function ahrParts(date,zone){return Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(date).filter(p=>p.type!=='literal').map(p=>[p.type,Number(p.value)]));}
+function ahrZoned(year,month,day,hour,minute,zone){const wall=Date.UTC(year,month-1,day,hour,minute);let stamp=wall;for(let i=0;i<3;i++){const p=ahrParts(new Date(stamp),zone);stamp+=wall-Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second);}return stamp;}
+function ahrTime(stamp,zone){return new Intl.DateTimeFormat('zh-CN',{timeZone:zone,month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(stamp));}
+function ahrNext(a,now=Date.now()){
+  if(!a.enabled)return '已暂停';if(a.trigger==='event')return '等待匹配事件';if(a.frequency==='cron')return '按 Cron 计划触发';
+  const zone=a.zone||'Asia/Shanghai',p=ahrParts(new Date(now),zone),[hour,minute]=String(a.time||'09:00').split(':').map(Number),start=String(a.date||'').split('-').map(Number);
+  if(a.frequency==='once'){const stamp=ahrZoned(start[0],start[1],start[2],hour,minute,zone);return Number.isFinite(stamp)&&stamp>now?ahrTime(stamp,zone):'计划已结束';}
+  const anchor=new Date(Date.UTC(start[0]||p.year,(start[1]||p.month)-1,start[2]||p.day));
+  for(let i=0;i<370;i++){
+    const d=new Date(Date.UTC(p.year,p.month-1,p.day+(a.frequency==='hourly'?0:i),a.frequency==='hourly'?p.hour+i:hour,minute));
+    if(a.frequency==='weekly'&&d.getUTCDay()!==anchor.getUTCDay())continue;
+    if(a.frequency==='monthly'&&d.getUTCDate()!==Math.min(anchor.getUTCDate(),new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate()))continue;
+    const stamp=ahrZoned(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),d.getUTCHours(),d.getUTCMinutes(),zone);
+    if(stamp>now&&(!a.date||d.toISOString().slice(0,10)>=a.date))return ahrTime(stamp,zone);
+  }
+  return '按所设计划触发';
+}
+function ahrStamp(text,a){
+  if(typeof text==='number')return text;if(!text)return 0;
+  const value=String(text),m=value.match(/(\d+)月(\d+)日?\s*(\d+):(\d+)/);
+  if(m)return ahrZoned(Number(a.date?.slice(0,4))||2026,...m.slice(1).map(Number),a.zone||'Asia/Shanghai');
+  return Date.parse(value)||0;
+}
+function ahrRows(a){
+  const messages={pending:'任务已创建，等待启动。',running:'执行器正在处理本次任务。',wait:'需要补充输入或确认后继续。',review:'执行结果已返回，等待验收。',done:'任务已完成。',failed:'本次执行失败，请查看任务中的错误与执行记录。',cancelled:'本次执行已取消。'};
+  const times=s.automationTaskRunTimes||(s.automationTaskRunTimes={});
+  const rows=s.tasks.filter(t=>t.automationId===a.id).map(t=>{
+    const stamp=ahrStamp(t.runStartedAt||t.createdAt||t.time||t.title,a)||times[t.id]||ahrStamp(a.lastRun,a);if(stamp)times[t.id]=stamp;
+    return {id:t.id,taskId:t.id,status:t.status,stamp,time:t.time||'时间未记录',origin:t.runOrigin||(isMe(taskTriggeredBy(t))?'manual':a.trigger),message:t.error||t.failureReason||messages[t.status]||'查看本次任务的执行进展。',prompt:t.goal||'',executor:t.executor||a.executor,owner:t.owner||a.owner,finished:t.runFinishedAt||null};
+  });
+  // Original demo rules carry illustrative dispatch history; new rules start empty.
+  const examples=s.automationHistoryExamples||(s.automationHistoryExamples={});
+  if(!examples[a.id]&&a.trigger==='schedule'&&(automationSeeds().some(x=>x.id===a.id)||['AUTO-P01','AUTO-P02'].includes(a.id))){
+    const base=ahrStamp(a.lastRun,a);if(base){const interval=(a.frequency==='weekly'?7:a.frequency==='monthly'?30:1)*86400000,created=ahrStamp((a.created||'')+' 00:00',a);
+      examples[a.id]=[['done',1,0,'manual'],['skipped',2,0,'schedule'],['failed',2,7200000,'manual']].map(([status,days,offset,origin],i)=>({id:a.id+'-example-'+i,status,stamp:base-days*interval+offset,origin,sample:true,prompt:a.prompt||'',executor:a.executor,owner:a.owner,message:status==='done'?'执行完成，已生成结果摘要。':status==='skipped'?'触发时本地执行器离线，已跳过本次计划；未创建任务实例。':'运行环境连接中断，执行未完成。请检查设备与网络后重试。'})).filter(r=>!created||r.stamp>=created);
+    }
+  }
+  rows.push(...(examples[a.id]||[]));
+  return rows.sort((a,b)=>b.stamp-a.stamp||b.id.localeCompare(a.id));
+}
+function ahrState(status){return {pending:['待开始','dashed'],running:['运行中','running'],wait:['待输入','needInput'],review:['待验收','review'],done:['已完成','checkCircle'],failed:['失败','xCircle'],skipped:['已跳过','clock'],cancelled:['已取消','xCircle']}[status]||['未知状态','clock'];}
+function ahrOrigin(origin){return origin==='manual'?'手动运行':origin==='event'?'事件触发':'计划运行';}
+function ahrRow(r,a){
+  const [label,icon]=ahrState(r.status),zone=a.zone||'Asia/Shanghai',time=r.stamp?ahrTime(r.stamp,zone):r.time;
+  return `<details class="ahr-run" data-ahr-run="${esc(r.id)}" ${ahrExpanded.has(r.id)?'open':''}><summary>${ico('chevron')}<span class="ahr-status" data-status="${esc(r.status)}">${ico(icon)}${label}</span><span class="ahr-run-copy"><b>${ahrOrigin(r.origin)}${r.sample?'<small>示例</small>':''}</b><span>${esc(r.message)}</span></span><time>${esc(time)}</time></summary><div class="ahr-run-body"><dl><div><dt>执行记录</dt><dd>${esc(r.id)}</dd></div><div><dt>执行者</dt><dd>${esc(r.executor||'未指定')}</dd></div><div><dt>责任人</dt><dd>${esc(r.owner||'未指定')}</dd></div><div><dt>触发时间</dt><dd>${esc(time)} · ${esc(zone)}</dd></div>${r.finished?`<div><dt>完成时间</dt><dd>${esc(ahrTime(r.finished,zone))}</dd></div>`:''}</dl><div class="ahr-run-result" data-status="${esc(r.status)}">${esc(r.message)}</div>${r.prompt?`<div class="ahr-run-input"><span>本次输入</span><p>${esc(r.prompt)}</p></div>`:''}${r.taskId?btn('打开任务详情 '+ico('arrow'),'open-task',r.taskId,'sm'):''}</div></details>`;
+}
+function ahrRender(a){
+  const rows=ahrRows(a),filter=s.automationRunFilter||'all',shown=rows.filter(r=>filter==='all'||r.status===filter),last=rows[0],next=ahrNext(a),event=a.trigger==='event';
+  const info=(label,value)=>`<div><dt>${label}</dt><dd>${esc(value||'未记录')}</dd></div>`;
+  return `<section class="ahr-detail"><div class="ahr-breadcrumb">${btn(ico('back')+(event?'所有事件任务':'所有定时任务'),'ahr-back','','link sm')}<span>/</span><span>${esc(a.name)}</span><span class="ahr-enabled">${tag(a.enabled?'已启用':'已暂停',a.enabled?'green':'gray')}</span></div><div class="ahr-layout"><main class="ahr-main"><header class="ahr-heading"><div><h1>${esc(a.name)}</h1><p>${esc(a.prompt||'按所选执行者的默认指引执行。')}</p></div><div class="ahr-heading-actions">${btn(ico('edit')+'编辑','automation-edit',a.id,'sm')}${btn(ico('play')+(event?'模拟事件':'立即运行'),'automation-run',a.id,'primary sm')}</div></header><section class="ahr-section"><h2>${event?'事件触发器':'触发计划'}</h2><div class="ahr-trigger"><span class="ahr-trigger-icon">${ico(event?'zap':'clock')}</span><div><b>${event?esc(a.eventSource+' · '+a.eventType):'定时运行'}</b><p>${esc(event?'满足事件过滤条件后执行':scheduleDescription(a))}</p><small>${event?'触发状态':'下次运行'}：${esc(next)}</small></div><button class="as2-switch" data-a="automation-toggle" data-v="${esc(a.id)}" role="switch" aria-checked="${a.enabled}" aria-label="${a.enabled?'暂停':'启用'}此规则"><i></i></button><button class="iconbtn" data-a="automation-edit" data-v="${esc(a.id)}" title="编辑触发配置" aria-label="编辑触发配置">${ico('edit')}</button></div></section><section class="ahr-section"><header class="ahr-records-heading"><h2>执行记录 <span>${rows.length}</span></h2><select data-ahr-filter aria-label="筛选执行状态">${[['all','全部状态'],['running','运行中'],['review','待验收'],['done','已完成'],['failed','失败'],['skipped','已跳过']].map(([v,l])=>`<option value="${v}" ${filter===v?'selected':''}>${l}</option>`).join('')}</select></header><div class="ahr-records">${shown.map(r=>ahrRow(r,a)).join('')||`<div class="ahr-empty">${ico('clock')}<h3>${rows.length?'没有匹配的执行记录':'还没有执行记录'}</h3><p>${rows.length?'切换状态查看其他记录。':event?'匹配事件后，执行记录会显示在这里。':'按计划触发或点击「立即运行」后，执行记录会显示在这里。'}</p></div>`}</div></section></main><aside class="ahr-info"><h2>基础信息</h2><dl>${info(a.executorType==='workflow'?'Workflow':'Agent',a.executor)}${info('责任人',a.owner)}${info('归属',a.project)}${info('创建者',a.createdBy)}${info('创建时间',a.created)}${info(event?'触发状态':'下次运行',next)}${info('上次运行',last?ahrState(last.status)[0]+' · '+(last.stamp?ahrTime(last.stamp,a.zone||'Asia/Shanghai'):last.time):'暂无执行')}</dl></aside></div></section>`;
+}
+const ahrBaseBoard=renderTaskBoard,ahrBaseAction=action,ahrBaseTrigger=triggerAutomation;
+renderTaskBoard=function(){const a=ahrRule();return a?ahrRender(a):ahrBaseBoard();};
+action=function(a,v){
+  if(a==='automation-instances'){
+    const rule=s.automations.find(x=>x.id===v);if(!rule)return;
+    if(isMyBoard()?!personallyRelatedRule(rule):rule.project!==s.project)return;
+    s.automationDetail=v;s.automationRunFilter='all';s.newTask=null;s.taskDetail=null;closeExtMenu();render();save();return;
+  }
+  if(a==='ahr-back'){s.automationDetail=null;closeExtMenu();render();return;}
+  if(a==='automation-save'&&s.automationDetail){const context={view:s.view,page:s.page,project:s.project,personalBoard:abCopy(s.personalBoard),projectBoard:abCopy(s.projectBoard)},result=ahrBaseAction(a,v);if(!document.querySelector('#autoName')){Object.assign(s,context);save();render();}return result;}
+  if(['mode','nav-personal','channel','project','task-board','studio','extensions','evolution','messages','open-bench','project-tab','project-assets','nt-open'].includes(a))s.automationDetail=null;
+  return ahrBaseAction(a,v);
+};
+triggerAutomation=function(id,event){
+  const inDetail=s.automationDetail===id,context=inDetail?{view:s.view,page:s.page,project:s.project,personalBoard:abCopy(s.personalBoard),projectBoard:abCopy(s.projectBoard)}:null;
+  const task=ahrBaseTrigger(id,event);if(!task)return task;
+  task.runStartedAt=Date.now();task.runOrigin=event?'event':'manual';if(context)Object.assign(s,context);save();if(inDetail)render();return task;
+};
+document.addEventListener('change',e=>{if(e.target.matches('[data-ahr-filter]')){s.automationRunFilter=e.target.value;render();}});
+document.addEventListener('toggle',e=>{if(!e.target.matches?.('[data-ahr-run]'))return;const id=e.target.dataset.ahrRun;if(e.target.open)ahrExpanded.add(id);else ahrExpanded.delete(id);},true);
+
+/* AS2 AUTOMATION HISTORY js END */
+
 /* AS2 NAVIGATION js START */
 // Keep page history separate from task, asset and preference data.
 const anhEntries=[];
 let anhIndex=-1,anhRestoring=false;
 function anhRoute(){
-  const keys=['view','page','newTask','taskDetail'],groups={personal:['personalPage','personalTab','personalSpaceId','spaceTab','selectedBench','benchTab'],team:['teamPage','project','channel','projectTab','channelTab','threadOpen','threadKey','threadTab','assetTab'],messages:['messageTab','activeConversation'],settings:['settingsSection'],extensions:['extensionPage','extensionType'],studio:['studioPage']};
+  const keys=['view','page','newTask','taskDetail','automationDetail'],groups={personal:['personalPage','personalTab','personalSpaceId','spaceTab','selectedBench','benchTab'],team:['teamPage','project','channel','projectTab','channelTab','threadOpen','threadKey','threadTab','assetTab'],messages:['messageTab','activeConversation'],settings:['settingsSection'],extensions:['extensionPage','extensionType'],studio:['studioPage']};
   const route=Object.fromEntries([...keys,...(groups[s.view]||[])].map(k=>[k,s[k]]));
   if(s.view==='studio')route.buildEditor=abEnsure().editor;
   return route;

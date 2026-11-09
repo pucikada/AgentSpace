@@ -6,7 +6,7 @@ HERE = Path(__file__).resolve().parent
 
 
 def sync_build(html):
-    for stem, marker in (('as2-build', 'AS2 BUILD V36'), ('as2-user-menu', 'AS2 USER MENU'), ('as2-spaces', 'AS2 SPACES'), ('as2-task-config', 'AS2 TASK CONFIG'), ('as2-settings-content', 'AS2 SETTINGS CONTENT'), ('as2-navigation', 'AS2 NAVIGATION')):
+    for stem, marker in (('as2-build', 'AS2 BUILD V36'), ('as2-user-menu', 'AS2 USER MENU'), ('as2-spaces', 'AS2 SPACES'), ('as2-task-config', 'AS2 TASK CONFIG'), ('as2-settings-content', 'AS2 SETTINGS CONTENT'), ('as2-automation-history', 'AS2 AUTOMATION HISTORY'), ('as2-navigation', 'AS2 NAVIGATION')):
         for kind in ('css', 'js'):
             start, end = f'/* {marker} {kind} START */', f'/* {marker} {kind} END */'
             html = re.sub(r'\n?' + re.escape(start) + r'.*?' + re.escape(end) + r'\n?', '', html, flags=re.S)
