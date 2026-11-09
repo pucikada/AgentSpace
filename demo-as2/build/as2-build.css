@@ -89,7 +89,7 @@ html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell
 #demo .bench-card-actions>:is(.btn:not(.primary),.iconbtn){background:var(--as-card);color:var(--as-text);border:1px solid var(--as-border-soft);height:32px;min-height:32px}
 #demo .bench-card-actions>.iconbtn{width:32px}
 .bench-preview-card:hover .bench-card-actions,.bench-preview-card:focus-within .bench-card-actions,.bench-preview-card:has([data-a="bench-card-menu"][aria-expanded="true"]) .bench-card-actions{opacity:1;visibility:visible;transform:none}
-#demo .bench-preview-title>.star.on{color:var(--as-brand)!important}
+#demo .bench-preview-title>.star.on{color:#e9ac13!important}
 #demo .bench-preview-title>.star.on .icon{fill:currentColor!important}
 .bench-card-menu [disabled]{opacity:.4;cursor:not-allowed}
 @media(hover:none){.bench-card-actions{opacity:1;visibility:visible;transform:none}}
@@ -97,8 +97,27 @@ html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell
 
 #demo .bench-card-actions>.btn.primary{height:32px;min-height:32px}
 
-/* Card actions keep their space and reveal together on hover or keyboard focus. */
+/* Card actions reveal together on hover or keyboard focus. */
 @media(hover:hover){
   #demo :is(.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card) :is(.btn,.iconbtn,.star,.as2-switch,.ext-more,.asset-card-acts,.tk-actions,.ext-item-actions,.co-ev-actions){opacity:0!important;pointer-events:none!important;transition:opacity .15s ease}
   #demo :is(.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):is(:hover,:focus-within,:has([aria-expanded="true"])) :is(.btn,.iconbtn,.star,.as2-switch,.ext-more,.asset-card-acts,.tk-actions,.ext-item-actions,.co-ev-actions){opacity:1!important;pointer-events:auto!important}
 }
+
+/* Action-only groups float; metadata footers retain their normal layout. */
+#demo :is(.extension-card,.catalog-card,.wfcard,.project-agent-card,.bx2-card){position:relative}
+#demo :is(.extension-card>.ext-item-actions,.catalog-card>footer,.wfcard>.wf-actions,.project-agent-card>.asset-card-foot){position:absolute;z-index:3;right:12px;bottom:12px;top:auto;margin:0;padding:6px;border:1px solid var(--as-border-soft);border-radius:999px;background:var(--as-card)}
+#demo .extension-card>.ext-item-actions{opacity:0;pointer-events:none}
+#demo .extension-card:is(:hover,:focus-within,:has([aria-expanded="true"]))>.ext-item-actions{opacity:1;pointer-events:auto}
+html:root body #demo.slack-shell .bench-card-actions>.iconbtn{background:var(--as-muted-bg,var(--as-bg))!important;border:1px solid var(--as-border-soft)!important;border-radius:999px;color:var(--as-text)!important}
+html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-expanded="true"]){background:var(--as-hover)!important}
+.side-bench-icon{display:grid;place-items:center;width:18px;height:18px;flex:none;font-style:normal}
+.side-bench-icon[data-bench-tone="default"]{--bench-icon:#5688ff}
+.side-bench-icon[data-bench-tone="quality"]{--bench-icon:#25a998}
+.side-bench-icon[data-bench-tone="repo"]{--bench-icon:#a57bea}
+.side-bench-icon[data-bench-tone="fleet"]{--bench-icon:#dca735}
+#demo .demoside .sidenav .side-bench-icon .icon{color:var(--bench-icon)!important;opacity:1}
+@media(hover:none){#demo .extension-card>.ext-item-actions{opacity:1;pointer-events:auto}}
+
+#demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card)>:is(footer,.wf-actions,.asset-card-foot){opacity:0;pointer-events:none;transition:opacity .15s ease}
+#demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card):is(:hover,:focus-within,:has([aria-expanded="true"]))>:is(footer,.wf-actions,.asset-card-foot){opacity:1;pointer-events:auto}
+@media(hover:none){#demo :is(.catalog-card,.wfcard,.project-agent-card,.bx2-card)>:is(footer,.wf-actions,.asset-card-foot){opacity:1;pointer-events:auto}}

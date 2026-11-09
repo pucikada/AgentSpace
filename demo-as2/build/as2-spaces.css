@@ -4,14 +4,16 @@
 .spx-page>.asset-tabs{margin-bottom:20px}
 .spx-page .asset-subtabs{width:max-content;max-width:100%;margin:16px 0 20px}
 .spx-page .asset-grid{margin-top:18px}
-.spx-page .spx-resource{display:flex;flex-direction:column;gap:12px}
+.spx-page .spx-resource{position:relative;display:flex;flex-direction:column;gap:12px}
 .spx-resource h3{font-size:17px;line-height:26px;margin:0}
 .spx-resource>p{font-size:13px;line-height:22px;margin:0}
 .spx-facts{display:grid;gap:10px;font-size:13px;margin:8px 0}
 .spx-facts>div{display:grid;grid-template-columns:85px minmax(0,1fr);gap:12px}
 .spx-facts dt{color:var(--as-text-muted)}
 .spx-facts dd{margin:0;overflow-wrap:anywhere;color:var(--as-text)}
-.spx-resource footer{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:14px;border-top:1px solid var(--as-border-soft)}
+.spx-resource footer{position:absolute;z-index:3;right:12px;bottom:12px;display:flex;gap:8px;margin:0;padding:6px;border:1px solid var(--as-border-soft);border-radius:999px;background:var(--as-card);opacity:0;pointer-events:none;transition:opacity .15s ease}
+.spx-resource:is(:hover,:focus-within,:has([aria-expanded="true"])) footer{opacity:1;pointer-events:auto}
+@media(hover:none){.spx-resource footer{opacity:1;pointer-events:auto}}
 .spx-links{display:flex;flex-wrap:wrap;gap:6px;font-size:12px}
 .spx-list-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0}
 .spx-list-tools select{max-width:280px}
@@ -23,6 +25,6 @@
 .spx-artifacts{margin-top:28px}
 .spx-variables{padding:64px 24px;display:grid;justify-items:center;gap:12px}
 .spx-variables>.icon{width:32px;height:32px}
-.spx-page .knowledge-space-card{display:flex;flex-direction:column;gap:14px}
-.spx-page .knowledge-space-card>.btn{align-self:flex-start;margin-top:auto}
+.spx-page .knowledge-space-card{position:relative;display:flex;flex-direction:column;gap:14px}
+.spx-page .knowledge-space-card>.btn{position:absolute;right:12px;bottom:12px;margin:0}
 @media(max-width:760px){.spx-section{align-items:flex-start;flex-direction:column}.spx-list-tools{align-items:flex-start;flex-direction:column}.spx-page .demotable{min-width:680px}}

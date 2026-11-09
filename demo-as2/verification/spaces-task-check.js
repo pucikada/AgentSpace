@@ -39,9 +39,19 @@
     check('串联不覆盖模板',abGet(series.id).stages[0].steps[0].name==='步骤 1');
     action('nt-open');ntcSelect('custom');const invalid=abCopy(ntcEnsure());invalid.config.agentType='zero';invalid.config.environmentOverride={...abDefaults(),location:'本地'};
     check('本地不兼容校验',ntcValidate(invalid).some(e=>e.includes('codeagent')));
-    s.newTask=null;action('nav-personal','benches');homeBenchAction('bench-card-menu',s.benches.find(b=>!b.isDefault).id);
+    s.newTask=null;s.personalTab='overview';s.benchList=false;action('nav-personal','benches');homeBenchAction('bench-card-menu',s.benches.find(b=>!b.isDefault).id);
     check('工作台菜单去重',document.querySelectorAll('.bench-card-menu [role=menuitem]').length===3);closeExtMenu();
     check('打开工作台主按钮',document.querySelector('.bench-card-actions>.btn').classList.contains('primary'));
+    const more=document.querySelector('.bench-card-actions>.iconbtn');
+    check('更多按钮有底色',getComputedStyle(more).backgroundColor!=='rgba(0, 0, 0, 0)');
+    check('收藏黄色填充',getComputedStyle(document.querySelector('.star.on svg')).fill==='rgb(233, 172, 19)');
+    check('侧栏工作台图标',!!document.querySelector('.side-bench-icon svg'));
+    action('bench-view-set','list');check('图标 Tab 切换列表',!!document.querySelector('#benchResults table')&&document.querySelector('[data-a="bench-view-set"][data-v="list"]').getAttribute('aria-selected')==='true');
+    action('bench-view-set','card');check('图标 Tab 切换卡片',!!document.querySelector('.bench-preview-card'));
+    action('nav-personal','spaces');assetAction('spx-tab','templates');assetAction('spx-kind','task');
+    const card=document.querySelector('.spx-resource'),footer=card.querySelector('footer'),height=card.getBoundingClientRect().height;
+    check('操作区不占排版空间',getComputedStyle(footer).position==='absolute');
+    footer.querySelector('button').focus();check('聚焦不改变卡片高度',card.getBoundingClientRect().height===height);
     return {passed:checks.length,checks};
   }finally{closeExtMenu();ntcClose();Object.keys(s).forEach(k=>delete s[k]);Object.assign(s,backup);save();render();}
 })()
