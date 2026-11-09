@@ -20,7 +20,7 @@
 @media(prefers-reduced-motion:reduce){.ab-side-card{transition:none;transform:none!important}}
 
 /* Type colors remain stable in both default and selected cards. */
-.ab-side-card[data-asset-type="task"]{--ab-icon:#3478f6}.ab-side-card[data-asset-type="workflow"]{--ab-icon:#8b5bd6}.ab-side-card[data-asset-type="env"]{--ab-icon:#168d84}.ab-side-card[data-asset-type="instance"]{--ab-icon:#b5791c}
+:is(.ab-side-card,.ab-menu-type)[data-asset-type="task"]{--ab-icon:#3478f6}:is(.ab-side-card,.ab-menu-type)[data-asset-type="workflow"]{--ab-icon:#8b5bd6}:is(.ab-side-card,.ab-menu-type)[data-asset-type="env"]{--ab-icon:#168d84}:is(.ab-side-card,.ab-menu-type)[data-asset-type="instance"]{--ab-icon:#b5791c}
 .ab-side-card .ab-side-mark{color:var(--ab-icon);background:color-mix(in srgb,var(--ab-icon) 9%,var(--as-card));border-color:color-mix(in srgb,var(--ab-icon) 16%,var(--as-border-soft))}
 :root[data-theme="dark"] .ab-side-card .ab-side-mark{color:color-mix(in srgb,var(--ab-icon) 75%,white);background:color-mix(in srgb,var(--ab-icon) 16%,var(--as-card))}
 
@@ -45,3 +45,11 @@ html:root body[data-view="studio"] #demo.slack-shell.slack-shell[data-build-mode
 .ab-create-menu>button:hover,.ab-create-menu>button:focus-visible{background:var(--as-hover);outline:none}
 
 .ab-stage-actions .ab-stage-add{display:grid;place-items:center;width:24px;height:24px;padding:0;color:var(--as-brand)}.ab-stage-add .icon{width:14px;height:14px}.ab-stage-track .ab-stage header b{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Popovers need stronger occlusion than the glass workspace behind them. */
+.ab-menu-type{color:var(--ab-icon);background:color-mix(in srgb,var(--ab-icon) 10%,var(--as-card));border:1px solid color-mix(in srgb,var(--ab-icon) 18%,var(--as-border-soft))}
+:root[data-theme="dark"] .ab-menu-type{color:color-mix(in srgb,var(--ab-icon) 75%,white);background:color-mix(in srgb,var(--ab-icon) 16%,var(--as-card))}
+:root[data-appearance-style="liquid"] .ab-create-menu{--as-card:#fff;--as-text:#1d232d;--as-text-2:#404852;--as-text-muted:#626c78;--as-hover:rgba(28,42,64,.06);background:rgba(250,252,255,.98)!important;color:var(--as-text);border-color:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(28px) saturate(1.15);backdrop-filter:blur(28px) saturate(1.15);box-shadow:0 16px 48px -12px rgba(22,38,68,.24),0 0 0 1px rgba(30,45,70,.08)}
+
+/* Aurora action buttons are flat; cards and popovers keep their depth. */
+html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell.slack-shell,#modalHost) :is(.btn,.iconbtn,.wc-send,.ab-head-new,.as2-side-toggle){box-shadow:none!important}
