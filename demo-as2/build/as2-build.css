@@ -53,3 +53,35 @@ html:root body[data-view="studio"] #demo.slack-shell.slack-shell[data-build-mode
 
 /* Aurora action buttons are flat; cards and popovers keep their depth. */
 html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell.slack-shell,#modalHost) :is(.btn,.iconbtn,.wc-send,.ab-head-new,.as2-side-toggle){box-shadow:none!important}
+
+/* Keep home navigation and workbench filters together above scrolling cards. */
+#demo.slack-shell .personal-home-sticky>.dtoolbar{margin:16px 0 0;padding-bottom:16px}
+
+/* Workbench covers reuse the adopted layout rather than aggregate live metrics. */
+#demo.slack-shell .bench-preview-card{padding:10px;overflow:hidden}
+#demo.slack-shell .bench-thumbnail{display:block;position:relative;width:100%;aspect-ratio:16/9;padding:0;overflow:hidden;border:1px solid var(--as-border-soft);border-radius:14px;background:var(--as-bg);text-align:left;cursor:pointer;color:var(--as-text)}
+.bench-preview-canvas{position:absolute;left:0;top:0;width:333.333%;height:333.333%;transform:scale(.3);transform-origin:top left;pointer-events:none;overflow:hidden;user-select:none}
+#demo .bench-preview-canvas .wb-dashboard{padding:28px;min-height:100%;background:var(--as-card)}
+#demo .bench-preview-canvas .wb-dash-header{margin-bottom:22px}
+#demo .bench-preview-canvas .wb-dash-kicker,#demo .bench-preview-canvas .wb-dash-info{display:none}
+#demo .bench-preview-canvas .wb-dash-header h2{font-size:30px;line-height:1.4}
+.bench-personal-preview{padding:28px;background:var(--as-card);min-height:100%}
+#demo .bench-personal-preview>h2{font-size:30px;margin-bottom:24px}
+.bench-personal-preview .bn-grid{gap:16px}
+.bench-personal-preview section{background:var(--as-bg);border:1px solid var(--as-border-soft);border-radius:16px;padding:20px;overflow:hidden}
+.bench-personal-preview section>b{font-size:20px}
+.bench-personal-preview section>svg{display:block;width:100%;height:130px;color:var(--as-brand)}
+.bench-preview-open{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:var(--as-card);color:var(--as-text);font-size:12px;opacity:0;transform:translateY(4px);transition:opacity .18s,transform .18s}
+.bench-thumbnail:hover .bench-preview-open,.bench-thumbnail:focus-visible .bench-preview-open{opacity:1;transform:none}
+.bench-preview-info{padding:16px 10px 6px}
+.bench-preview-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#demo .bench-preview-title h3{display:flex;align-items:center;min-width:0;margin:0;font-size:17px;line-height:26px}
+.bench-preview-title h3>button{padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+#demo .bench-preview-title>.star{position:static;flex-shrink:0;width:28px;height:28px;padding:4px;border:0;background:none;box-shadow:none}
+#demo .bench-preview-info>p{margin:4px 0 14px;font-size:13px;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bench-preview-meta{display:flex;align-items:center;gap:8px;min-height:30px;font-size:12px;color:var(--as-text-muted)}
+.bench-preview-version{white-space:nowrap}
+.bench-preview-updated{display:flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap}
+.bench-preview-updated .icon{width:13px;height:13px}
+.bench-preview-meta>.iconbtn{width:28px;height:28px;min-height:28px;flex-shrink:0}
+@media(prefers-reduced-motion:reduce){.bench-preview-open{transition:none}}
