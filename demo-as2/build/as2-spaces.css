@@ -29,9 +29,24 @@
 .spx-page .knowledge-space-card>.btn{position:absolute;right:12px;bottom:12px;margin:0}
 @media(max-width:760px){.spx-section{align-items:flex-start;flex-direction:column}.spx-list-tools{align-items:flex-start;flex-direction:column}.spx-page .demotable{min-width:680px}}
 
-.spx-env-card .spx-facts>div{grid-template-columns:130px minmax(0,1fr)}
 
-.spx-env-card .spx-facts dd{white-space:pre-wrap}
 
 #demo .spx-env-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 @media(max-width:1000px){#demo .spx-env-grid{grid-template-columns:minmax(0,1fr)!important}}
+
+#demo .spx-env-card{padding:18px!important;gap:14px!important;min-height:0;cursor:pointer}
+.spx-env-card-head{display:flex;align-items:center;gap:12px;min-width:0}
+#demo .spx-env-card-head>.asset-ic{width:36px;height:36px;min-width:36px;flex:none;margin:0}
+.spx-env-card-head>div{flex:1;min-width:0}
+#demo .spx-env-card-head h3{font-size:15px;line-height:22px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spx-env-card-head p{font-size:12px;line-height:20px;color:var(--as-text-muted);margin:3px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spx-env-card-head>.tag{flex:none;align-self:flex-start;font-size:11px}
+.spx-env-summary{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--as-text-muted);min-width:0}
+.spx-env-summary>span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.spx-env-summary>span:last-child{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.spx-env-summary .icon{width:13px;height:13px;flex:none}
+.spx-env-counts{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--as-text-subtle);min-height:22px}
+.spx-env-counts>button{padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.spx-env-counts>button:hover{color:var(--as-brand)}
+#demo .spx-env-card:hover .spx-env-card-head h3{color:var(--as-brand)}
+#demo .spx-env-card:focus-visible{outline:2px solid var(--as-brand);outline-offset:3px}

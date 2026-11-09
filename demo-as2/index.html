@@ -12782,12 +12782,27 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 .spx-page .knowledge-space-card>.btn{position:absolute;right:12px;bottom:12px;margin:0}
 @media(max-width:760px){.spx-section{align-items:flex-start;flex-direction:column}.spx-list-tools{align-items:flex-start;flex-direction:column}.spx-page .demotable{min-width:680px}}
 
-.spx-env-card .spx-facts>div{grid-template-columns:130px minmax(0,1fr)}
 
-.spx-env-card .spx-facts dd{white-space:pre-wrap}
 
 #demo .spx-env-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 @media(max-width:1000px){#demo .spx-env-grid{grid-template-columns:minmax(0,1fr)!important}}
+
+#demo .spx-env-card{padding:18px!important;gap:14px!important;min-height:0;cursor:pointer}
+.spx-env-card-head{display:flex;align-items:center;gap:12px;min-width:0}
+#demo .spx-env-card-head>.asset-ic{width:36px;height:36px;min-width:36px;flex:none;margin:0}
+.spx-env-card-head>div{flex:1;min-width:0}
+#demo .spx-env-card-head h3{font-size:15px;line-height:22px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spx-env-card-head p{font-size:12px;line-height:20px;color:var(--as-text-muted);margin:3px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spx-env-card-head>.tag{flex:none;align-self:flex-start;font-size:11px}
+.spx-env-summary{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--as-text-muted);min-width:0}
+.spx-env-summary>span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.spx-env-summary>span:last-child{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.spx-env-summary .icon{width:13px;height:13px;flex:none}
+.spx-env-counts{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--as-text-subtle);min-height:22px}
+.spx-env-counts>button{padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.spx-env-counts>button:hover{color:var(--as-brand)}
+#demo .spx-env-card:hover .spx-env-card-head h3{color:var(--as-brand)}
+#demo .spx-env-card:focus-visible{outline:2px solid var(--as-brand);outline-offset:3px}
 
 /* AS2 SPACES css END */
 
@@ -18334,7 +18349,7 @@ function spxEnvironment(){
     const rows=instances.filter(i=>!st.source||(st.source==='__direct'?!i.templateId:i.templateId===st.source));
     return head+tabs+`<div class="spx-list-tools"><select data-spx-source aria-label="来源运行环境模板"><option value="">全部来源</option><option value="__direct" ${st.source==='__direct'?'selected':''}>直接创建 · 无来源模板</option>${envs.map(e=>`<option value="${esc(e.id)}" ${st.source===e.id?'selected':''}>${esc(e.name)}</option>`).join('')}</select><small>${rows.length} 个可见实例 · 不含任务临时运行环境</small></div><div class="tablewrap"><table class="demotable"><thead><tr><th>运行环境实例</th><th>来源</th><th>共享类型</th><th>关联统计</th><th>操作</th></tr></thead><tbody>${rows.map(i=>`<tr><td><b>${esc(i.name)}</b><small>${esc(i.workingDirectory||'')}</small><small>${esc(scope)}</small></td><td>${esc(i.templateId?(abGet(i.templateId,scope)?.name||'来源模板已删除')+' · V'+i.templateVersion:'直接创建 · 无来源模板')}</td><td>${abShared(i)?'公开':'私密'}<small>${esc(i.owner||i.templateOwner||'我')}</small></td><td>${abStats(i)}</td><td><div class="row wrap">${spxBtn('查看详情','detail',i.id)}${abOwn(i)&&!abShared(i)?spxBtn('发布为公开','share',i.id):''}</div></td></tr>`).join('')||'<tr><td colspan="5"><div class="empty">暂无符合条件的运行环境实例</div></td></tr>'}</tbody></table></div>`;
   }
-  return head+tabs+`<div class="asset-grid spx-env-grid">${envs.map(e=>{const c=e.config,refs=abReferences(e).task.length,n=instances.filter(i=>i.templateId===e.id).length;return `<article class="asset-card spx-resource spx-env-card"><div class="row between"><span class="asset-ic">${ico(c.location==='本地'?'monitor':'cloud')}</span>${tag('V'+e.version,'gray')}</div><h3>${esc(e.name)}</h3><p>${esc(e.description||c.location+' · '+c.zone)}</p>${spxFacts([['运行位置 / 安全区域',c.location+' / '+c.zone],[c.location==='本地'?'本地运行时':'镜像',c.location==='本地'?'任务创建时按责任人选择':c.image||'平台默认镜像'],...(c.location==='本地'?[]:[['工具集',(c.toolsets||[]).join('、')||'未选择'],['工具',(c.tools||[]).join('、')||'未选择']]),['代码仓 / 分支',(c.repos||[]).map(r=>(r.name||spxState().repos.find(x=>x.id===r)?.name||r)+' @ '+(r.branch||'main')).join('、')||'无'],['工作目录',c.location==='本地'?'本地运行时默认路径下新建':'每次创建独立目录'],['启动路径',c.path||'默认工作目录'],['初始化命令',c.init||'未配置']])}<div class="spx-links">${spxBtn(refs+' 个原子任务模板引用','env-tasks',e.id,'link sm')}${spxBtn(n+' 个可见实例 →','env-instances',e.id,'link sm')}</div><footer>${spxBtn('查看详情','detail',e.id)}${spxBtn('编辑','edit',e.id)}</footer></article>`;}).join('')||'<div class="empty">还没有运行环境模板，可前往构建创建。</div>'}</div>`;
+  return head+tabs+`<div class="asset-grid spx-env-grid">${envs.map(e=>{const c=e.config,refs=abReferences(e).task.length,n=instances.filter(i=>i.templateId===e.id).length,runtime=c.location==='本地'?'按责任人选择运行时':c.image||'平台默认镜像';return `<article class="asset-card spx-resource spx-env-card" data-a="spx-detail" data-v="${esc(e.id)}" role="button" tabindex="0" aria-label="查看 ${esc(e.name)} 的环境详情"><div class="spx-env-card-head"><span class="asset-ic">${ico(c.location==='本地'?'monitor':'cloud')}</span><div><h3 title="${esc(e.name)}">${esc(e.name)}</h3><p title="${esc(e.description||'')}">${esc(e.description||'可复用的运行环境配置')}</p></div>${tag('V'+e.version,'gray')}</div><div class="spx-env-summary"><span>${ico(c.location==='本地'?'monitor':'cloud')}${esc(c.location)}</span><span>${ico('shield')}${esc(c.zone)}</span><span title="${esc(runtime)}">${esc(runtime)}</span></div><div class="spx-env-counts"><button data-a="spx-env-tasks" data-v="${esc(e.id)}">${refs} 个原子模板引用</button><span>·</span><button data-a="spx-env-instances" data-v="${esc(e.id)}">${n} 个可见实例</button></div><footer>${spxBtn(ico('edit')+'编辑','edit',e.id)}</footer></article>`;}).join('')||'<div class="empty">还没有运行环境模板，可前往构建创建。</div>'}</div>`;
 }
 function spxTemplates(){
   const st=spxState(),scope=spxScope(),type=st.kind||'task';
@@ -18379,6 +18394,8 @@ assetAction=function(a,v){
   save();render();return true;
 };
 document.addEventListener('change',e=>{if(e.target.matches('[data-spx-source]')){spxState().source=e.target.value;save();render();}});
+
+document.addEventListener('keydown',e=>{if(e.target.matches?.('.spx-env-card')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();e.target.click();}});
 
 /* AS2 SPACES js END */
 

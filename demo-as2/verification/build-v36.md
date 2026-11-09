@@ -192,3 +192,9 @@
 - Environment template cards expose location/zone, image or local-runtime selection policy, cloud toolsets/tools, repository branches, working-directory policy, startup path and initialization command. Configured values use the underlying environment data. Cards use at most two columns.
 - Removed the shared build button from personal/project space page headers; environment/template tab-level build links remain and include right arrows.
 - Verified 34 space/task regression checks, both spaces' tab/header controls, configured image/tool/repository/path/init values, and preview icons/border styling across five themes. Checked inline syntax and diff hygiene; inspected preview and environment screenshots at 1600px.
+
+### 2026-11-09 Compact environment template cards
+
+- Reduced environment cards to a compact icon/name/version header, one-line description, location/zone/runtime summary, and reference/instance counts. Advanced fields remain in the existing full-detail dialog.
+- Clicking the card or pressing Enter/Space opens details. Reference and instance buttons keep their own filter actions; edit remains a floating hover action without reserved space.
+- Verified roughly 123px card height at 1600/1024px, no grid overflow, cloud/local full detail fields, independent reference filtering, keyboard activation, 34 space/task checks, inline syntax and diff checks.
