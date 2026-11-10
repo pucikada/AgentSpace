@@ -167,26 +167,32 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 
 /* Browsing grids share the automation card's responsive width and gutters. */
 html body #demo.slack-shell :is(.ab-overview-grid,.extension-grid.ext-list,.ac-grid,.benchgrid,.spx-env-grid){grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))!important;gap:12px!important}
-#demo.slack-shell .bench-feature-card{position:relative;display:block;min-height:230px;padding:24px!important;isolation:isolate}
-.bench-feature-card .bench-preview-info{position:relative;z-index:1;width:63%;padding:0;pointer-events:none}
+/* Workbench cover: generous text area, warm wash and offset page previews. */
+#demo.slack-shell .bench-feature-card{position:relative;display:block;min-height:270px;padding:24px!important;isolation:isolate;background:radial-gradient(ellipse at 92% 58%,rgba(255,201,139,.23),transparent 61%),var(--as-card)!important}
+.bench-feature-card .bench-preview-info{position:relative;z-index:1;width:60%;padding:0;pointer-events:none}
 .bench-feature-card .bench-preview-info button{pointer-events:auto}
-.bench-feature-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--as-brand-soft);margin-bottom:24px}
-.bench-feature-icon .side-bench-icon,.bench-feature-icon .icon{width:22px;height:22px}
-#demo .bench-feature-card .bench-preview-title h3{white-space:normal;flex-wrap:wrap;font-size:17px;line-height:24px}
-#demo .bench-feature-card .bench-preview-title h3>button{white-space:normal}
-#demo .bench-feature-card .bench-preview-title>.star{position:absolute;top:0;right:0;transform:translateX(0)}
-.bench-feature-card .bench-preview-title{padding-right:8px}
-#demo .bench-feature-card .bench-preview-info>p{margin:8px 0 18px;white-space:normal;font-size:12px;line-height:19px}
-.bench-feature-card .bench-preview-meta{flex-wrap:wrap;gap:6px;font-size:11px}
-.bench-feature-card .bench-preview-updated{margin-left:0;width:100%}
-.bench-feature-card .bench-cover-wrap{position:absolute;z-index:0;inset:0;overflow:hidden;border-radius:inherit}
-#demo .bench-feature-card .bench-thumbnail{position:absolute;width:64%;height:85%;aspect-ratio:auto;right:-22%;top:30%;transform:rotate(-14deg);transform-origin:center;border-radius:12px;opacity:.65}
-.bench-feature-card:hover .bench-thumbnail{opacity:.9}
-.bench-feature-card .bench-card-actions{right:14px;bottom:14px;z-index:3}
-
+.bench-feature-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--bench-icon,#5688ff) 10%,transparent);margin-bottom:58px}
+.bench-feature-icon .side-bench-icon,.bench-feature-icon .icon{width:23px;height:23px}
+#demo .bench-feature-card .bench-preview-title h3{display:block;min-width:0;margin:0;font-size:16px;line-height:24px}
+#demo .bench-feature-card .bench-preview-title h3>button{max-width:100%;white-space:nowrap;vertical-align:middle}
+#demo .bench-feature-card .bench-default{margin-left:5px;padding:2px 5px;font-size:10px;vertical-align:middle}
+.bench-feature-card .bench-preview-title{display:block;padding:0}
+#demo .bench-feature-card .bench-preview-info>p{margin:7px 0 21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;line-height:19px}
+.bench-feature-card .bench-preview-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:11px;line-height:18px}
+.bench-feature-card .bench-preview-updated{margin-left:0;width:100%;font-size:10px;line-height:17px}
+.bench-feature-card .bench-preview-meta .wbh-card-draft{font-size:10px}
+.bench-feature-card .bench-cover-wrap{background:radial-gradient(ellipse at 88% 63%,rgba(255,200,135,.3),transparent 66%);position:absolute;z-index:0;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.bench-feature-card .bench-cover-wrap::before{content:none;position:absolute;width:45%;height:90%;right:0;top:46%;border:1px solid var(--as-border-soft);border-radius:13px;background:var(--as-card);transform:rotate(-13deg);box-shadow:0 2px 6px rgba(30,25,15,.04)}
+#demo .bench-feature-card .bench-thumbnail{position:absolute;width:49%;height:108%;aspect-ratio:auto;right:-17%;top:23%;padding:9px;border:1px solid var(--as-border-soft);border-radius:13px;background:var(--as-card);transform:rotate(-13deg);transform-origin:center;opacity:1;box-shadow:0 3px 12px rgba(30,25,15,.05);pointer-events:auto}
+.bench-feature-card .bench-thumbnail::before{content:none}
+.bench-feature-card .bench-preview-canvas{top:9px;left:9px;width:calc(333.333% - 60px);height:calc(333.333% - 60px)}
+#demo .bench-feature-card .bench-preview-canvas :is(.wb-dashboard,.bench-personal-preview){background:var(--as-card)}
+.bench-feature-card .bench-card-actions{right:14px;bottom:14px;z-index:3;pointer-events:auto}
 #demo .bench-feature-card>.bench-feature-favorite{position:absolute;z-index:3;top:20px;right:20px;width:28px;height:28px;padding:4px;background:transparent;border:0;box-shadow:none;opacity:1!important;pointer-events:auto!important}
 #demo .bench-feature-card>.bench-feature-favorite.on{color:#e9ac13!important}
 #demo .bench-feature-card>.bench-feature-favorite.on .icon{fill:currentColor!important}
-#demo .bench-feature-card .bench-thumbnail{padding-top:18px;border:1px solid var(--as-border-strong);background:var(--as-muted-bg);opacity:.85}
-.bench-feature-card .bench-thumbnail::before{content:"•••";position:absolute;z-index:1;top:0;left:0;right:0;height:18px;padding-left:9px;background:var(--as-muted-bg);border-bottom:1px solid var(--as-border-soft);color:var(--as-text-muted);font-size:12px;letter-spacing:2px;line-height:16px}
-.bench-feature-card .bench-preview-canvas{top:18px;height:calc(333.333% - 60px)}
+:root[data-theme="dark"] #demo.slack-shell .bench-feature-card{background:radial-gradient(ellipse at 92% 58%,rgba(151,104,62,.14),transparent 61%),var(--as-card)!important}
+
+#demo .bench-feature-card .bench-page-back{width:45%;height:94%;right:0;top:46%;z-index:0;pointer-events:none}
+#demo .bench-feature-card button.bench-thumbnail{z-index:1}
+:root[data-theme="dark"] .bench-feature-card .bench-cover-wrap{background:radial-gradient(ellipse at 88% 63%,rgba(173,115,59,.16),transparent 66%)}

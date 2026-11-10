@@ -232,3 +232,8 @@
 - Appearance settings use graphical family/mode previews and labeled accent swatches. Environment details use grouped read-only configuration and version history; editing routes to Build.
 - Verification: 74 theme checks, 16 environment checks, 34 space/task checks, 28 project settings/sticky-header checks, 16 archive checks, 38 task-action checks, 8 focused visual-refinement checks and 10 build domain tests passed. Inline script syntax and git whitespace checks passed.
 - User explicitly authorized push after completion.
+
+### 2026-11-09 Card composition and quiet navigation follow-up
+- Workbench covers use a warm gradient behind two offset page previews of the existing snapshot. Names, scope and version/update metadata have more spacing; long scope labels truncate with full text available on hover.
+- Removed light aurora rail/sidebar selected rings while preserving selected fills and keyboard focus. Channel counts use neutral gray and header utility labels use weight 450.
+- New-task shortcuts are six pill tags; each fills its corresponding task description. Verified all six actions, both selected navigation shadows, neutral count colors, eight visual-refinement checks, sixteen archive checks, screenshots and inline-script syntax.
