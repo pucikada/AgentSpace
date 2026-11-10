@@ -191,3 +191,39 @@ html body #demo.slack-shell :is(.ab-overview-grid,.extension-grid.ext-list,.ac-g
 #demo .bench-feature-card>.bench-feature-favorite{position:absolute;z-index:3;top:20px;right:20px;width:28px;height:28px;padding:4px;background:transparent;border:0;box-shadow:none;opacity:1!important;pointer-events:auto!important}
 #demo .bench-feature-card>.bench-feature-favorite.on{color:#e9ac13!important}
 #demo .bench-feature-card>.bench-feature-favorite.on .icon{fill:currentColor!important}
+
+/* Build navigation shares the personal/project shell; the catalog stays in the content panel. */
+html:root body[data-view="studio"] #demo.slack-shell.slack-shell.slack-shell>.demoside{display:flex!important;flex-direction:column}
+.ab-navigation{display:flex;flex-direction:column;gap:5px;padding:0}
+.ab-page{max-width:none;margin:0}
+.ab-catalog-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;min-width:0}
+@media(max-width:900px){.ab-catalog-actions{width:100%;flex-wrap:wrap}.ab-catalog-actions .ab-side-search{flex:1;min-width:160px}}
+.ab-start-grid{margin-top:28px}
+.ab-start-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-height:164px;padding:20px;border:1px solid var(--as-border-soft);border-radius:20px;background:var(--as-card);color:var(--as-text);text-align:left;cursor:pointer;transition:box-shadow .18s}
+.ab-start-card h2{font-size:14px;font-weight:600;line-height:21px;margin:0}.ab-start-card p{margin:0;color:var(--as-text-muted);font-size:13px;line-height:1.6}.ab-start-card>span:last-child{position:absolute;right:16px;bottom:14px;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:999px;background:var(--as-card);box-shadow:0 4px 12px rgba(18,24,43,.12),0 1px 3px rgba(18,24,43,.06);font-size:12px;opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .16s,transform .16s}.ab-start-card:hover>span:last-child,.ab-start-card:focus-visible>span:last-child{opacity:1;transform:translateY(0)}.ab-start-card:hover{border-color:var(--as-border-soft);box-shadow:0 8px 24px -12px rgba(18,24,43,.22),0 2px 6px rgba(18,24,43,.06)}
+.ab-side-card[data-asset-type="graph"] .ab-side-mark,.ab-start-card[data-asset-type="graph"] .ab-side-mark{color:#9266d9;background:rgba(146,102,217,.1)}
+html:root body #demo.slack-shell .nt-mode>button[aria-selected="false"]{width:auto;padding:0 8px}
+html:root body #demo.slack-shell .nt-mode>button{white-space:nowrap}
+.nt-create-options{align-self:start;display:flex;align-items:flex-start;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:20px}
+.nt-create-options>button{width:232px;max-width:100%;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:12px 16px;min-height:0;height:auto;border:1px solid var(--as-border-soft);border-radius:14px;background:transparent;color:var(--as-text);text-align:left;cursor:pointer}
+.nt-create-options>button:hover{background:var(--as-hover)}.nt-create-options b{display:block;font-size:14px;font-weight:500}.nt-create-options small{display:block;margin-top:5px;color:var(--as-text-muted);font-size:12px}.nt-create-options>button>.icon{width:20px;height:20px}
+@media(max-width:800px){html:root body #demo.slack-shell .nt-mode>button span{font-size:11px}.nt-create-options{gap:8px}.nt-create-options>button{padding:12px}}
+
+html body #demo.slack-shell .ab-overview-grid.ab-start-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))!important}
+@media(hover:none){.ab-start-card>span:last-child{opacity:1;transform:none}}
+
+/* Stable colors identify the five construction types across entry and asset cards. */
+:is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="task"]{--ab-icon:#3478F6}
+:is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="workflow"]{--ab-icon:#8B5BD6}
+:is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="graph"]{--ab-icon:#C65496}
+:is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="env"]{--ab-icon:#168D84}
+:is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="instance"]{--ab-icon:#B5791C}
+:is(.ab-start-card,.ab-side-card) .ab-side-mark,.ab-menu-type{color:var(--ab-icon)!important;background:color-mix(in srgb,var(--ab-icon) 9%,var(--as-card))!important;border-color:color-mix(in srgb,var(--ab-icon) 16%,var(--as-border-soft))!important}
+:root[data-theme="dark"] :is(.ab-start-card,.ab-side-card) .ab-side-mark{color:color-mix(in srgb,var(--ab-icon) 75%,white)!important;background:color-mix(in srgb,var(--ab-icon) 16%,var(--as-card))!important}
+.nt-mode [data-v="graph"]>.icon{color:inherit}
+html body #demo.slack-shell .ab-start-card h2{font-size:14px!important;font-weight:600!important;line-height:21px!important}
+
+.nt-create-options [data-v="schedule"]>.icon{color:#3478F6}
+.nt-create-options [data-v="event"]>.icon{color:#D68622}
+
+:is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="agentPreset"]{--ab-icon:#5D71C9}

@@ -51,13 +51,17 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:#3D3D43!important;color:#F4F4F5!important;border-color:#29292D!important}
 
 /* The product canvas owns color; the complete outer shell is frosted. */
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{--au-frame:rgba(245,247,252,.68);--au-content-bg:#FFFFFF}
-html:root[data-appearance-family="aurora"][data-au-mode="mixed"]{--au-frame:rgba(11,16,32,.78)}
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{--au-frame:rgba(245,247,252,.46);--au-content-bg:#FFFFFF}
+html:root[data-appearance-family="aurora"][data-au-mode="mixed"]{
+  --au-mixed-gradient:radial-gradient(ellipse 420px 210px at 18% 0%,color-mix(in srgb,var(--au) 22%,transparent),transparent 76%),radial-gradient(ellipse 280px 160px at 100% 100%,color-mix(in srgb,var(--au) 10%,transparent),transparent 78%),linear-gradient(180deg,rgba(17,20,32,.97),rgba(9,12,21,.98));
+  --au-frame:var(--au-mixed-gradient);
+}
+html:root[data-appearance-family="aurora"][data-au-mode="mixed"] body #demo.slack-shell.slack-shell .demorail.demorail button.active{background:var(--au-mixed-gradient)!important}
 html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-frame:rgba(27,27,30,.72);--au-content-bg:#151517}
 html:root[data-appearance-family="aurora"][data-au-mode] body{
-  background-image:radial-gradient(ellipse 300px 220px at 28% 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 80%),radial-gradient(ellipse 240px 200px at 92% 100%,color-mix(in srgb,var(--au) 8%,transparent),transparent 80%),radial-gradient(ellipse 280px 240px at 0 100%,color-mix(in srgb,var(--au) 10%,transparent),transparent 80%)!important;
+  background-image:radial-gradient(ellipse 270px 240px at -30px -25px,color-mix(in srgb,var(--au) var(--au-canvas-corner,0%),transparent),transparent 80%),radial-gradient(ellipse 390px 260px at 28% 70px,color-mix(in srgb,var(--au) var(--au-canvas-top,12%),transparent),transparent 80%),radial-gradient(ellipse 310px 250px at 96% 104%,color-mix(in srgb,var(--au) var(--au-canvas-right,8%),transparent),transparent 80%),radial-gradient(ellipse 330px 290px at -30px 103%,color-mix(in srgb,var(--au) var(--au-canvas-left,10%),transparent),transparent 80%)!important;
 }
-html:root[data-appearance-family="aurora"][data-au-mode="light"] body{background-color:#F1F3F8!important}
+html:root[data-appearance-family="aurora"][data-au-mode="light"] body{background-color:#F1F3F7!important}
 html:root[data-appearance-family="aurora"] #demo.slack-shell::before{-webkit-backdrop-filter:blur(18px) saturate(110%);backdrop-filter:blur(18px) saturate(110%)}
 
 /* Elevate the complete half-enclosed shell; inset panels remain flat. */
@@ -71,4 +75,23 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell>.d
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .ms-list-pane{
   background:transparent!important;
   -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+
+/* Let localized canvas color show through the complete light/mixed frame. */
+html:root[data-appearance-family="aurora"]:is([data-au-mode="light"],[data-au-mode="mixed"]){--au-canvas-top:13%;--au-canvas-right:12%;--au-canvas-left:19%;--au-canvas-corner:17%}
+html:root[data-appearance-family="aurora"]:is([data-au-mode="light"],[data-au-mode="mixed"]) #demo.slack-shell::before{-webkit-backdrop-filter:blur(24px) saturate(125%);backdrop-filter:blur(24px) saturate(125%)}
+/* The header shares the continuous product canvas instead of masking it. */
+html:root[data-appearance-family="aurora"]:is([data-au-mode="light"],[data-au-mode="mixed"]) body .appbar:not(#au-header){background:transparent!important}
+
+/* One fine gradient rim around the complete half-enclosed shell. */
+html:root[data-appearance-family="aurora"] #demo.slack-shell::after{
+  content:"";position:absolute;z-index:3;pointer-events:none;
+  top:0;bottom:var(--au-gap-b);right:var(--au-gap-r);left:var(--as-rail-w,60px);
+  padding:1px;border-radius:22px;
+  background:linear-gradient(140deg,rgba(255,255,255,.8),color-mix(in srgb,var(--au) 22%,transparent) 32%,rgba(120,132,155,.12) 62%,color-mix(in srgb,var(--au) 17%,transparent));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+}
+html:root[data-appearance-family="aurora"]:is([data-au-mode="mixed"],[data-au-mode="dark"]) #demo.slack-shell::after{
+  background:linear-gradient(140deg,rgba(255,255,255,.2),color-mix(in srgb,var(--au) 30%,transparent) 32%,rgba(255,255,255,.06) 62%,color-mix(in srgb,var(--au) 22%,transparent));
 }

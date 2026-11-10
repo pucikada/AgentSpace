@@ -255,3 +255,13 @@
 - Light navigation selected containers use solid white rather than gradients.
 - Verified personal and project template edit destinations, 22px padding/18px card gaps, one shared shell blur with transparent navigation layers, 74 theme checks, 34 space/task checks, 10 build domain tests, inline syntax and whitespace checks.
 - User approved push.
+
+## 2026-11-10：构建分类、任务创建与侧栏筛选
+
+- 构建默认显示侧栏，提供开始构建、已构建资产；侧栏尺寸与个人页一致。
+- 六类入口与资产 Tab：原子任务、链式任务、图任务、运行环境模板、运行环境实例、Agent 预设模板（最后）。各分类提供独立新建入口。
+- 图任务模板保留节点依赖与配置快照，并验证失效/逆序依赖；当前原型按合法依赖顺序模拟执行。
+- 新建任务增加定时/事件入口；个人、项目看板提供三类创建菜单。定时/事件沿用现有弹窗，保存后回到对应任务列表。
+- 个人及项目各任务分区支持状态筛选、待办优先/更新时间排序；右侧级联面板显示勾选态，按项目默认勾选全部项目。
+- 优化入口图标、卡片比例、悬浮操作、幻彩底板渐变、磨砂外框与细渐变边框；深浅映衬采用墨色底与局部主题光晕。
+- 验证：构建数据单测 10 项、创建/构建交互 31 项、侧栏/Agent 预设 18 项、空间/任务回归 34 项、幻彩回归 74 项，共 167 项通过；内联 JavaScript 语法及 diff 检查通过。

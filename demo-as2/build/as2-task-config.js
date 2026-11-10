@@ -1,14 +1,15 @@
 // Per-task configuration snapshots: editing here never writes back to a template.
 let ntcEditing=null,ntcHoverTimer=null;
-const ntcType=d=>d.executorType==='workflow'?'workflow':'task';
-const ntcTemplates=d=>abItems(ntcType(d),d.project).filter(x=>!x.draft&&abUsable(x));
-function ntcCustom(type,scope){return {type,scope,name:'自定义配置',visibility:'private',version:0,config:abConfig(),stages:[{id:abId('stage'),name:'阶段 1',steps:[{...abStep(),name:'步骤 1',source:'inline'}]}]};}
+const ntcType=d=>['workflow','graph'].includes(d.executorType)?'workflow':'task';
+const ntcShape=d=>d.executorType==='graph'?'graph':'chain';
+const ntcTemplates=d=>abItems(ntcType(d),d.project).filter(x=>!x.draft&&abUsable(x)&&(x.type!=='workflow'||(x.taskShape==='graph')===(d.executorType==='graph')));
+function ntcCustom(type,scope){return {type,taskShape:newTaskDraft()?.executorType==='graph'?'graph':undefined,scope,name:'自定义配置',visibility:'private',version:0,config:abConfig(),stages:[{id:abId('stage'),name:'阶段 1',steps:[{...abStep(),name:'步骤 1',source:'inline'}]}]};}
 function ntcEnsure(){
   const d=newTaskDraft();if(!d)return null;
   const type=ntcType(d);d.ntcCache=d.ntcCache||{};
-  if(!d.ntc||d.ntc.type!==type||d.ntc.scope!==d.project){
-    d.ntc=d.ntcCache[d.project+'|'+type]||ntcCustom(type,d.project);
-    d.ntcCache[d.project+'|'+type]=d.ntc;
+  if(!d.ntc||d.ntc.type!==type||d.ntc.scope!==d.project||(d.ntc.taskShape==='graph')!==(d.executorType==='graph')){
+    d.ntc=d.ntcCache[d.project+'|'+type+'|'+ntcShape(d)]||ntcCustom(type,d.project);
+    d.ntcCache[d.project+'|'+type+'|'+ntcShape(d)]=d.ntc;
   }
   return d.ntc;
 }
@@ -25,9 +26,9 @@ renderNewTaskPage=function(){
   const x=ntcEnsure(),d=newTaskDraft();if(!x)return ntcPreviousRenderNewTask();
   const name=x.id?x.name:'自定义配置';d.executor=name;
   let html=ntcPreviousRenderNewTask();d.executor=name;
-  const label=(x.type==='workflow'?'串联任务 · ':'原子任务 · ')+name;
-  const pill=`<button class="nt-pill" data-a="nt-pick" data-v="executor" aria-haspopup="menu">${ico(x.type==='workflow'?'workflow':'task')}<span>${esc(label)}</span>${ico('down')}</button>${ntcBtn(ico('settings')+'配置'+(x.modified?' · 已修改':''),'edit','','nt-pill')}`;
-  return html.replace(/<button class="nt-pill" data-a="nt-pick" data-v="executor"[\s\S]*?<\/button>/,pill).replace(/系列任务/g,'串联任务');
+  const label=(x.taskShape==='graph'?'图任务 · ':x.type==='workflow'?'链式任务 · ':'原子任务 · ')+name;
+  const pill=`<button class="nt-pill" data-a="nt-pick" data-v="executor" aria-haspopup="menu">${ico(abIcon(abAssetType(x)))}<span>${esc(label)}</span>${ico('down')}</button>`;
+  return html.replace(/<button class="nt-pill" data-a="nt-pick" data-v="executor"[\s\S]*?<\/button>/,pill).replace(/系列任务/g,'链式任务');
 };
 const ntcPreviousMenu=newTaskMenu;
 newTaskMenu=function(key){
@@ -36,19 +37,19 @@ newTaskMenu=function(key){
   const same=document.querySelector('.ntc-menu');closeExtMenu();if(same)return;
   const trigger=document.querySelector('.nt-tray [data-v="executor"]');if(!trigger)return;
   const r=trigger.getBoundingClientRect(),rows=ntcTemplates(d);
-  document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu ntc-menu" role="menu" data-for="nt" aria-label="选择任务模板"><div class="as2-menu-label">${abLabels[ntcType(d)]}</div><div class="ntc-template-options">${rows.map(t=>`<button class="ntc-template-option" role="menuitem" data-selected="${x.id===t.id}" data-a="ntc-select" data-v="${esc(t.id)}" data-ntc-preview="${esc(t.id)}">${ico(abIcon(t.type))}<span>${esc(t.name)}</span>${x.id===t.id?ico('check').replace('class="icon lucide"','class="icon lucide ntc-selected-icon"'):''}<small>V${t.version}</small></button>`).join('')||'<div class="ntc-menu-empty">当前范围暂无可用模板</div>'}</div><div class="as2-menu-sep"></div><button class="ntc-custom-option" role="menuitem" data-selected="${!x.id}" data-a="ntc-custom" data-ntc-preview="custom">${ico('settings')}<span><strong>自定义配置</strong><small>不使用模板，按本次任务配置</small></span></button></div>`);
+  document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu ntc-menu" role="menu" data-for="nt" aria-label="选择任务模板"><div class="as2-menu-label">${d.executorType==='graph'?abLabels.graph:abLabels[ntcType(d)]}</div><div class="ntc-template-options">${rows.map(t=>`<button class="ntc-template-option" role="menuitem" data-selected="${x.id===t.id}" data-a="ntc-select" data-v="${esc(t.id)}" data-ntc-preview="${esc(t.id)}">${ico(abIcon(abAssetType(t)))}<span>${esc(t.name)}</span>${x.id===t.id?ico('check').replace('class="icon lucide"','class="icon lucide ntc-selected-icon"'):''}<small>V${t.version}</small></button>`).join('')||'<div class="ntc-menu-empty">当前范围暂无可用模板</div>'}</div><div class="as2-menu-sep"></div><button class="ntc-custom-option" role="menuitem" data-selected="${!x.id}" data-a="ntc-custom" data-ntc-preview="custom">${ico('settings')}<span><strong>自定义配置</strong><small>不使用模板，按本次任务配置</small></span></button></div>`);
   const menu=document.querySelector('.ntc-menu');menu.style.left=Math.max(8,Math.min(r.left,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,r.bottom+menu.offsetHeight+6>innerHeight?r.top-menu.offsetHeight-6:r.bottom+6)+'px';
 };
 function ntcPreview(id){
   const menu=document.querySelector('.ntc-menu');if(!menu)return;
   const current=ntcEnsure(),x=id==='custom'?(current.id?ntcCustom(ntcType(newTaskDraft()),newTaskDraft().project):current):current.id===id?current:abGet(id,newTaskDraft().project);if(!x)return;
   menu.querySelector('.ntc-template-preview')?.remove();
-  menu.insertAdjacentHTML('beforeend',`<aside class="ntc-template-preview" aria-label="${esc(x.name)}的配置预览"><header><b>${ico(x.id?abIcon(x.type):'settings')}<span>${esc(x.name)}</span></b><small>${x.id?'V'+x.version:'从空白开始'}</small></header><div class="ntc-template-preview-body">${ntcSummary(x)}</div><footer>${ntcBtn(ico('edit')+'编辑本次配置','edit',id,'primary sm')}</footer></aside>`);
+  menu.insertAdjacentHTML('beforeend',`<aside class="ntc-template-preview" aria-label="${esc(x.name)}的配置预览"><header><b>${ico(x.id?abIcon(abAssetType(x)):'settings')}<span>${esc(x.name)}</span></b><small>${x.id?'V'+x.version:'从空白开始'}</small></header><div class="ntc-template-preview-body">${ntcSummary(x)}</div><footer>${ntcBtn(ico('edit')+'编辑本次配置','edit',id,'primary sm')}</footer></aside>`);
   const p=menu.querySelector('aside'),r=menu.getBoundingClientRect(),w=Math.min(380,innerWidth-24);p.style.width=w+'px';p.style.left=Math.max(8-r.left,r.right+w+8>innerWidth?-w-8:r.width+8)+'px';p.style.top=Math.max(8-r.top,Math.min(0,innerHeight-r.top-p.offsetHeight-8))+'px';
 }
 function ntcSelect(id){
   const d=newTaskDraft(),x=id==='custom'?ntcCustom(ntcType(d),d.project):abGet(id,d.project);if(!x||x.draft||!abUsable(x))return;
-  d.ntc=abCopy(x);d.ntcCache[d.project+'|'+ntcType(d)]=d.ntc;d.executor=x.id?x.name:'自定义配置';
+  d.ntc=abCopy(x);d.ntcCache[d.project+'|'+ntcType(d)+'|'+ntcShape(d)]=d.ntc;d.executor=x.id?x.name:'自定义配置';
   if(!d.goal.trim()&&x.type==='task')d.goal=x.config.inputPromptTemplate||'';
   closeExtMenu();render();
 }
@@ -59,7 +60,7 @@ function ntcFields(c,prefix,scope){
   return html.replace(/data-ab-/g,'data-ntc-').replace(/data-a="ab-/g,'data-a="ntc-');
 }
 function ntcEnvironmentFields(c,p,scope){
-  const b=c.environment,r=abEnvironment(b,scope),envs=abItems('env',scope),ins=abItems('instance',scope).filter(abUsable);
+  const b=c.environment,r=abEnvironment(b,scope),envs=abItems('env',scope).filter(x=>x.type==='env'),ins=abItems('instance',scope).filter(abUsable);
   if(b.mode!=='instance'&&!c.environmentOverride)c.environmentOverride=abCopy(r.config||abDefaults());
   let html=`<section class="ab-section"><h2>运行环境</h2>${abField('运行环境来源',p+'.environment.mode',b.mode,{options:[['default','系统默认 · 云端 / 绿区'],['template','运行环境模板'],['instance','复用运行环境实例']]})}`;
   if(b.mode==='template')html+=abField('运行环境模板 *',p+'.environment.templateId',b.templateId,{options:[['','请选择模板'],...envs.map(e=>[e.id,e.name+' · V'+e.version])]})+(b.templateId?abField('模板版本',p+'.environment.version',b.version,{options:(abGet(b.templateId,scope)?.history||[]).map(h=>[h.version,'V'+h.version])}):'');
@@ -83,10 +84,10 @@ function ntcRenderDrawer(){
   const series=x.type==='workflow';
   const steps=series?`<section class="ntc-series"><label class="ab-field">总体目标 · 可选<textarea data-ntc-field="goal">${esc(x.goal||'')}</textarea></label>${x.stages.map((g,gi)=>`<div class="ntc-stage"><div class="row"><input aria-label="阶段名称" data-ntc-field="stages.${gi}.name" value="${esc(g.name)}">${ntcBtn(ico('plus'),'step-add',g.id,'iconbtn')}</div><nav>${g.steps.map((s,i)=>`<button class="${s.id===st?.id?'active':''}" data-a="ntc-step" data-v="${s.id}">${gi+1}.${i+1} ${esc(s.name||'未命名步骤')}</button>`).join('')}</nav></div>`).join('')}${ntcBtn('添加阶段','stage-add')}</section>`:'';
   const prefix=series?'step.config':'config';
-  const input=series&&st?`${abField('步骤名称 *','step.name',st.name)}${abField('步骤来源','step.source',st.source,{options:[['inline','自定义配置'],['template','引用原子任务模板']]})}${st.source==='template'?abField('原子任务模板 *','step.atomicId',st.atomicId,{options:[['','请选择模板'],...abItems('task',x.scope).filter(a=>!a.draft&&abUsable(a)).map(a=>[a.id,a.name+' · V'+a.version])]}):''}${abField('步骤输入 *','step.input',st.input,{textarea:true})}${abCheck('完成后需要人工确认','step.manualConfirm',st.manualConfirm)}${abField('最大重试次数','step.maxRetries',st.maxRetries,{type:'number'})}${abField('复用前序步骤环境','step.reuseStepId',st.reuseStepId||'',{options:[['','不复用'],...abReuseOptions(x,st).map(s=>[s.id,s.name])]})}<div class="row">${ntcBtn('前移','step-move',st.id+'|-1','link sm')}${ntcBtn('后移','step-move',st.id+'|1','link sm')}${abAllSteps(x).length>1?ntcBtn('删除步骤','step-remove',st.id,'link sm'):''}</div>`:'';
+  const input=series&&st?`${abField('步骤名称 *','step.name',st.name)}${abField('步骤来源','step.source',st.source,{options:[['inline','自定义配置'],['template','引用原子任务模板']]})}${st.source==='template'?abField('原子任务模板 *','step.atomicId',st.atomicId,{options:[['','请选择模板'],...abItems('task',x.scope).filter(a=>!a.draft&&abUsable(a)).map(a=>[a.id,a.name+' · V'+a.version])]}):''}${abField('步骤输入 *','step.input',st.input,{textarea:true})}${x.taskShape==='graph'?abField('前置节点','step.dependsOn',st.dependsOn?.[0]||'',{options:[['','无 · 起点'],...abAllSteps(x).slice(0,abAllSteps(x).indexOf(st)).map(n=>[n.id,n.name||'未命名节点'])]}):''}${abCheck('完成后需要人工确认','step.manualConfirm',st.manualConfirm)}${abField('最大重试次数','step.maxRetries',st.maxRetries,{type:'number'})}${abField('复用前序步骤环境','step.reuseStepId',st.reuseStepId||'',{options:[['','不复用'],...abReuseOptions(x,st).map(s=>[s.id,s.name])]})}<div class="row">${ntcBtn('前移','step-move',st.id+'|-1','link sm')}${ntcBtn('后移','step-move',st.id+'|1','link sm')}${abAllSteps(x).length>1?ntcBtn('删除步骤','step-remove',st.id,'link sm'):''}</div>`:'';
   const fields=series?(st?input+ntcFields(st.config,prefix,x.scope):'<div class="empty">添加步骤开始配置。</div>'):ntcFields(x.config,prefix,x.scope);
   const replaced=fields.replace(/data-ab-/g,'data-ntc-');
-  host.innerHTML=`<section class="ntc-drawer" role="dialog" aria-modal="true" aria-labelledby="ntcDrawerTitle"><header><div><h2 id="ntcDrawerTitle">${series?'串联任务':'原子任务'}配置</h2><p>${esc(x.id?x.name+' · V'+x.version:'自定义配置')} · 仅对当前任务生效</p></div>${ntcBtn(ico('close'),'cancel','','iconbtn')}</header><div class="ntc-drawer-body"><p class="ab-note">本次配置以独立快照保存，原模板保持不变。</p>${ntcEditing.errors.length?`<div class="ab-error" role="alert">${ntcEditing.errors.map(e=>`<p>${esc(e)}</p>`).join('')}</div>`:''}${steps}${replaced}</div><footer>${ntcBtn('取消','cancel')}${ntcBtn('应用本次配置','apply','','primary sm')}</footer></section>`;
+  host.innerHTML=`<section class="ntc-drawer" role="dialog" aria-modal="true" aria-labelledby="ntcDrawerTitle"><header><div><h2 id="ntcDrawerTitle">${x.taskShape==='graph'?'图任务':series?'链式任务':'原子任务'}配置</h2><p>${esc(x.id?x.name+' · V'+x.version:'自定义配置')} · 仅对当前任务生效</p></div>${ntcBtn(ico('close'),'cancel','','iconbtn')}</header><div class="ntc-drawer-body"><p class="ab-note">本次配置以独立快照保存，原模板保持不变。</p>${ntcEditing.errors.length?`<div class="ab-error" role="alert">${ntcEditing.errors.map(e=>`<p>${esc(e)}</p>`).join('')}</div>`:''}${steps}${replaced}</div><footer>${ntcBtn('取消','cancel')}${ntcBtn('应用本次配置','apply','','primary sm')}</footer></section>`;
   if(!host.dataset.focused){host.dataset.focused='true';requestAnimationFrame(()=>host.querySelector('[data-a="ntc-cancel"]')?.focus({preventScroll:true}));}
 }
 function ntcPath(path){const x=ntcEditing?.snapshot;if(!x)return null;return path.startsWith('step.')?{root:abAllSteps(x).find(s=>s.id===ntcEditing.selectedStep),path:path.slice(5)}:{root:x,path};}
@@ -99,6 +100,7 @@ function ntcChange(e){
   let value=t.type==='checkbox'?t.checked:t.type==='number'?Number(t.value):t.value;
   if(t.dataset.ntcSet){const list=abAt(loc.root,loc.path)||[],isRepos=key.endsWith('.repos'),has=isRepos?list.some(r=>(r.name||r)===t.value):list.includes(t.value);value=has?list.filter(r=>(isRepos?r.name||r:r)!==t.value):[...list,isRepos?{name:t.value,branch:'main'}:t.value];}
   if(key.endsWith('.version'))value=Number(value);
+  if(key.endsWith('.dependsOn'))value=value?[value]:[];
   abSet(loc.root,loc.path,value);ntcEditing.errors=[];
   if(key.endsWith('.atomicId')){const st=loc.root,a=abGet(value,ntcEditing.snapshot.scope);if(a){st.atomicVersion=a.version;st.atomicSnapshot=abCopy(a);st.config=abCopy(a.config);st.name=a.name;if(!st.input)st.input=a.config.inputPromptTemplate||'';}}
   if(/\.environment\.(mode|templateId|version|instanceId)$/.test(key)){
@@ -112,7 +114,7 @@ document.addEventListener('input',ntcChange);document.addEventListener('change',
 function ntcValidate(x){
   const validation=abCopy(x),configs=validation.type==='workflow'?abAllSteps(validation).map(st=>st.config):[validation.config];
   for(const c of configs)if(c.environmentOverride&&c.environment.mode!=='instance')c.environment={mode:'default'};
-  const errors=x.type==='workflow'?abValidate({...validation,name:x.name||'自定义串联任务',visibility:'private'}):abValidateConfig(validation.config,x.scope,'private');
+  const errors=x.type==='workflow'?abValidate({...validation,name:x.name||'自定义链式任务',visibility:'private'}):abValidateConfig(validation.config,x.scope,'private');
   const steps=x.type==='workflow'?abAllSteps(x):[{config:x.config}];
   for(const st of steps){const c=st.config,r=abEnvironment(c.environment,x.scope),env=c.environment.mode==='instance'?r.config:c.environmentOverride||r.config;
     if(!r.ok)errors.push(r.message);
@@ -124,6 +126,18 @@ function ntcValidate(x){
 }
 const ntcPreviousAction=newTaskAction;
 newTaskAction=function(a,v){
+  if(a==='task-create-menu'){
+    const button=document.querySelector('[data-a="task-create-menu"]'),wasOpen=document.querySelector('.task-create-menu');closeExtMenu();if(wasOpen)return true;
+    const r=button.getBoundingClientRect();document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu task-create-menu" role="menu">${[['temporary','task','临时任务'],['schedule','clock','定时任务'],['event','zap','事件任务']].map(([v,icon,label])=>`<button role="menuitem" data-a="task-create-rule" data-v="${v}">${ico(icon)}<span>新建${label}</span></button>`).join('')}</div>`);
+    const menu=document.querySelector('.task-create-menu');menu.style.left=Math.max(8,r.right-menu.offsetWidth)+'px';menu.style.top=r.bottom+6+'px';return true;
+  }
+  if(a==='task-create-rule'){
+    closeExtMenu();if(v==='temporary'){newTaskOpen();return true;}
+    const draft=newTaskDraft();openAutomation(v);
+    if(!draft&&isMyBoard()){const scope=boardState().project;automationDraft.project=joinedProjects().includes(scope)?scope:'个人';automationDraft.spaceIds=defaultTaskKnowledge(automationDraft.project);renderAutomationForm();}
+    if(draft){automationDraft.project=draft.project;automationDraft.owner=draft.owner;automationDraft.prompt=draft.goal;automationDraft.spaceIds=[...draft.spaceIds];renderAutomationForm();}
+    return true;
+  }
   if(!a.startsWith('ntc-')){if(a==='nt-mode'&&newTaskDraft())ntcClose();if(a==='nt-set'&&String(v).startsWith('project|')&&newTaskDraft())ntcClose();return ntcPreviousAction(a,v);}
   const d=newTaskDraft();if(!d)return true;const x=ntcEditing?.snapshot,st=x?.type==='workflow'?abAllSteps(x).find(s=>s.id===ntcEditing.selectedStep):null;
   switch(a.slice(4)){
@@ -131,7 +145,7 @@ newTaskAction=function(a,v){
     case 'custom':ntcSelect('custom');ntcOpen();return true;
     case 'edit':ntcOpen(v);return true;
     case 'cancel':ntcClose();return true;
-    case 'apply':{const errors=ntcValidate(x);if(errors.length){ntcEditing.errors=errors;ntcRenderDrawer();document.querySelector('.ntc-drawer-body').scrollTop=0;return true;}x.modified=true;d.ntc=abCopy(x);d.ntcCache[d.project+'|'+ntcType(d)]=d.ntc;d.executor=x.id?x.name:'自定义配置';if(!d.goal.trim()&&x.type==='task')d.goal=x.config.inputPromptTemplate||'';ntcClose();save();render();return true;}
+    case 'apply':{const errors=ntcValidate(x);if(errors.length){ntcEditing.errors=errors;ntcRenderDrawer();document.querySelector('.ntc-drawer-body').scrollTop=0;return true;}x.modified=true;d.ntc=abCopy(x);d.ntcCache[d.project+'|'+ntcType(d)+'|'+ntcShape(d)]=d.ntc;d.executor=x.id?x.name:'自定义配置';if(!d.goal.trim()&&x.type==='task')d.goal=x.config.inputPromptTemplate||'';ntcClose();save();render();return true;}
     case 'step':ntcEditing.selectedStep=v;break;
     case 'stage-add':{const step={...abStep(),name:'步骤 1',source:'inline'};x.stages.push({id:abId('stage'),name:'阶段 '+(x.stages.length+1),steps:[step]});ntcEditing.selectedStep=step.id;break;}
     case 'step-add':{const g=x.stages.find(g=>g.id===v),step={...abStep(),name:'步骤 '+(g.steps.length+1),source:'inline'};g.steps.push(step);ntcEditing.selectedStep=step.id;break;}
@@ -161,7 +175,7 @@ newTaskCreate=function(){
     else{const config=abCopy(c.environmentOverride||r.config),id=abId('runenv'),runtime=config.location==='本地'?(config.runtimeId?abRuntimes(x.scope,owner,config.zone).find(r=>r.id===config.runtimeId):abRuntimes(x.scope,owner,config.zone)[0]):null;env={id,type:'instance',scope:x.scope,owner,temporary:true,visibility:'private',config,templateId:c.environment.templateId||'',templateVersion:c.environment.version||0,workingDirectory:runtime?runtime.defaultPath+'/'+id:'/workspace/'+id,runtimeSnapshot:runtime?abCopy(runtime):null};instances.push(env);}
     if(!env){notify('前序复用来源不可用，请检查步骤顺序。');return;}byStep.set(step.id,env);step.environmentInstanceId=env.id;step.resolvedOwner=owner;step.finalPrompt=[c.presetPrompt,step.input].filter(v=>v?.trim()).join('\n\n---\n\n');
   }
-  const task={id:nextTaskId(),title,scope:d.project,project:d.project==='个人'?'':d.project,type:'temp',trigger:'manual',status:'pending',source:x.id?'任务模板 / '+x.name:'自定义配置 / 临时任务',owner:steps[0].resolvedOwner,triggeredBy:abUser(),rev:1,run:0,kind:'board',goal,executor:x.type==='workflow'?(x.id?x.name:'自定义串联任务'):x.config.agentType,executorType:x.type==='workflow'?'workflow':'agent',spaceIds:[...d.spaceIds],knowledgeSnapshot:contextSnapshot(d.spaceIds),configVersion:3,config:x.type==='task'?abCopy(x.config):undefined,seriesDefinition:x.type==='workflow'?abCopy(x):undefined,build36Snapshot:x,templateId:x.id||'',templateName:x.id?x.name:'',templateVersion:x.version||0,environmentIds:steps.map(s=>s.environmentInstanceId),environments:abCopy([...new Map([...byStep.values()].map(i=>[i.id,i])).values()]),finalPrompt:x.type==='task'?steps[0].finalPrompt:undefined,created:new Date().toISOString()};
+  const task={id:nextTaskId(),title,scope:d.project,project:d.project==='个人'?'':d.project,type:'temp',trigger:'manual',status:'pending',source:x.id?'任务模板 / '+x.name:'自定义配置 / 临时任务',owner:steps[0].resolvedOwner,triggeredBy:abUser(),rev:1,run:0,kind:'board',goal,executor:x.type==='workflow'?(x.id?x.name:x.taskShape==='graph'?'自定义图任务':'自定义链式任务'):x.config.agentType,taskShape:x.taskShape,executorType:x.type==='workflow'?'workflow':'agent',spaceIds:[...d.spaceIds],knowledgeSnapshot:contextSnapshot(d.spaceIds),configVersion:3,config:x.type==='task'?abCopy(x.config):undefined,seriesDefinition:x.type==='workflow'?abCopy(x):undefined,build36Snapshot:x,templateId:x.id||'',templateName:x.id?x.name:'',templateVersion:x.version||0,environmentIds:steps.map(s=>s.environmentInstanceId),environments:abCopy([...new Map([...byStep.values()].map(i=>[i.id,i])).values()]),finalPrompt:x.type==='task'?steps[0].finalPrompt:undefined,created:new Date().toISOString()};
   abEnsure().assets.push(...instances);s.tasks.push(task);s.newTask=null;
   if(d.personal){s.view='personal';s.page='tasks';s.personalBoard=newBoardState(true);}else{s.view='team';s.page='board';s.project=d.project;s.projectBoard=newBoardState();}
   closeExtMenu();ntcClose();save();render();notify('任务已加入看板，本次配置快照已保存。');

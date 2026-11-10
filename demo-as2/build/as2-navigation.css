@@ -30,3 +30,7 @@
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--as-text)!important;font-weight:600!important}
 
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--as-text)!important}
+
+.side-task-scope-menu button>small{color:var(--as-text-muted);font-size:12px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-task-scope-menu button[aria-expanded="true"]{background:var(--as-hover)}
+.side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--as-text-muted)}

@@ -1,6 +1,6 @@
 // Build V3.6: configuration-only prototype, persisted with the existing app state.
-const abTypes=['task','workflow','env','instance'];
-const abLabels={task:'原子任务模板',workflow:'串联任务模板',env:'运行环境模板',instance:'运行环境实例'};
+const abTypes=['task','workflow','graph','env','instance','agentPreset'];
+const abLabels={agentPreset:'Agent 预设模板',task:'原子任务模板',workflow:'链式任务模板',graph:'图任务模板',env:'运行环境模板',instance:'运行环境实例'};
 const abCopy=x=>JSON.parse(JSON.stringify(x));
 const abId=p=>p+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
 const abUser=()=>s.prototypeUser?.name||'我';
@@ -10,7 +10,9 @@ const abShared=x=>['team','public'].includes(x.visibility);
 const abOwn=x=>(x.templateOwner||x.owner||x.createdBy||'我')===abUser();
 const abVisible=x=>x.type==='env'||abOwn(x)||abShared(x)||x.type!=='instance'&&abAdmin(x.scope);
 const abUsable=x=>x&&(x.type==='env'||abOwn(x)||abShared(x));
-const abIcon=t=>t==='workflow'?'workflow':t==='task'?'task':'cloud';
+const abIcon=t=>t==='agentPreset'?'agent':t==='instance'?'terminal':t==='graph'?'graph':t==='workflow'?'workflow':t==='task'?'task':'cloud';
+const abAssetType=x=>x.taskShape==='graph'?'graph':x.type;
+const abAssetLabel=x=>abLabels[abAssetType(x)];
 function abDefaults(){return {location:'云端',zone:'绿区',image:'',toolsets:[],tools:[],repos:[],path:'',init:''};}
 function abConfig(){return {agentType:'codeagent',presetPrompt:'',inputPromptTemplate:'',model:'',extensions:[],gates:[],ownerMode:'follow',owner:'',environment:{mode:'default',templateId:'',version:0,instanceId:''}};}
 function abStep(){return {id:abId('step'),name:'',source:'template',atomicId:'',atomicVersion:0,atomicSnapshot:null,input:'',config:abConfig(),reuseStepId:'',manualConfirm:false,maxRetries:2};}
@@ -31,13 +33,14 @@ function abEnsure(){
         const id=String(st.atomic||'').replace(/^(task|role):/,''),a=assets.find(x=>x.type==='task'&&x.id===id&&x.scope===scope);
         return {...abStep(),...st,source:'template',atomicId:id,atomicVersion:a?.version||0,atomicSnapshot:a?abCopy(a):null,config:a?abCopy(a.config):abConfig(),manualConfirm:!!st.manualConfirm};
       })}));
-      assets.push({id:w.id||abId('series'),type:'workflow',scope,name:w.label||series?.name||'未命名串联模板',description:'',goal:series?.goal||'',stages,version:0,visibility:abAdmin(scope)?'public':'private',templateOwner:abUser(),createdBy:abUser(),history:[],draft:true,legacyGraph:abCopy(w.nodes||[])});
+      assets.push({id:w.id||abId('series'),type:'workflow',scope,name:w.label||series?.name||'未命名链式模板',description:'',goal:series?.goal||'',stages,version:0,visibility:abAdmin(scope)?'public':'private',templateOwner:abUser(),createdBy:abUser(),history:[],draft:true,legacyGraph:abCopy(w.nodes||[])});
     }
     s.build36={schema:1,assets,type:'task',query:'',editor:null};
   }
   return s.build36;
 }
-function abItems(type,scope=abScope()){return abEnsure().assets.filter(x=>x.type===type&&(scope==='all'||x.scope===scope)&&!x.deleted&&!x.temporary&&abVisible(x));}
+function abItems(type,scope=abScope()){return abEnsure().assets.filter(x=>(type==='graph'?x.type==='workflow'&&x.taskShape==='graph':type==='workflow'?x.type==='workflow'&&x.taskShape!=='graph':x.type===type)&&(scope==='all'||x.scope===scope)&&!x.deleted&&!x.temporary&&abVisible(x));}
+function abCatalogItems(type){return abItems(type);}
 function abGet(id,scope){return abEnsure().assets.find(x=>x.id===id&&!x.deleted&&(!scope||x.scope===scope));}
 function abRuntimes(scope,owner=abUser(),zone='绿区'){
   const rows=Array.isArray(s.localRuntimes)?s.localRuntimes:[{id:'rt-mac',name:'开发工作站 · 示例',owner:abUser(),zone:'绿区',status:'online',defaultPath:'/Users/me/AgentSpace'},{id:'rt-linux',name:'联调工作站 · 示例',owner:abUser(),zone:'绿区',status:'online',defaultPath:'/home/me/AgentSpace'},{id:'rt-win',name:'黄区开发机 · 示例',owner:abUser(),zone:'黄区',status:'offline',defaultPath:'C:/AgentSpace'}];
@@ -72,10 +75,10 @@ function abEnvFields(c,prefix='config',instance=false){
   return `<div class="ab-two">${abField('安全区域',prefix+'.zone',c.zone,{options:['绿区','黄区']})}${abField('运行位置',prefix+'.location',c.location,{options:['云端','本地']})}</div>${local?`${instance?abField('本地运行时 *',prefix+'.runtimeId',c.runtimeId||'',{options:[['','使用本人当前安全区域首个运行时'],...abRuntimes(d.scope,abUser(),c.zone).map(r=>[r.id,r.name+' · '+(r.status==='online'?'在线':'离线')])],hint:'不会跳过首个离线设备；设备不可用时阻止创建。'}):'<div class="ab-note">模板不绑定设备。创建任务时按责任人及安全区域选择本地运行时。</div>'}${instance&&d.sourceMode!=='template'?abField('本地目录方式','folderMode',d.folderMode||'new',{options:[['new','新建工作目录'],['existing','使用已有文件夹']]}):''}`:`${abField('镜像 · 可选',prefix+'.image',c.image,{options:[['','平台默认镜像'],...['node:20','node:20 · pnpm 9','node:20 · 只读凭证','python:3.11',...(c.image&&!['node:20','node:20 · pnpm 9','node:20 · 只读凭证','python:3.11'].includes(c.image)?[c.image]:[])] ]})}${abSetFields('工具集 · 可选',prefix+'.toolsets',c.toolsets,['基础开发','数据分析','容器工具'])}${abSetFields('工具 · 可选',prefix+'.tools',c.tools,['Git','Python','Node.js','kubectl','Playwright'])}`}
     ${existing?abField('已有文件夹路径 *','existingFolder',d.existingFolder||'',{hint:'填写所选设备上已存在的绝对路径；本原型只演示路径校验，不读取真实目录。'}):`${abSetFields('代码仓 · 可选',prefix+'.repos',c.repos.map(r=>typeof r==='string'?r:r.name),repos.map(r=>r.name))}${c.repos.map((r,i)=>abField('分支 · '+esc(r.name),prefix+'.repos.'+i+'.branch',r.branch||'main')).join('')}${abField('启动路径 · 可选',prefix+'.path',c.path,{hint:local?'在运行时默认路径下创建唯一文件夹；启动路径在工作目录内解析。':'留空由运行环境解析默认工作目录。'})}`}${abField('初始化命令 · 可选',prefix+'.init',c.init,{textarea:true,hint:'留空不执行；仅归运行环境，不拼入任务提示词。'})}`;
 }
-function abSetFields(label,key,values=[],options=[]){return `<div class="ab-field">${label}</div><div class="ab-checks">${options.map(v=>`<label><input type="checkbox" data-ab-set="${key}" value="${esc(v)}" ${values.includes(v)?'checked':''}>${esc(v)}</label>`).join('')||'<small>当前范围没有可选项。</small>'}</div>`;}
+function abSetFields(label,key,values=[],options=[]){return `<div class="ab-field">${label}</div><div class="ab-checks">${options.map(v=>`<label><input type="checkbox" data-ab-set="${key}" value="${esc(v)}" ${values.includes(v)?'checked':''}>${esc(key.endsWith('.dependsOn')?(abAllSteps(abEnsure().editor).find(x=>x.id===v)?.name||'未命名节点'):key==='config.extensions'?(asset(v)?.name||v):v)}</label>`).join('')||'<small>当前范围没有可选项。</small>'}</div>`;}
 function abReadonly(c,a){return `<div class="ab-readonly">${[['运行位置 / 安全区域',c.location+' / '+c.zone],['镜像',c.location==='本地'?'本地运行时':c.image||'平台默认'],['工具集 / 工具',[...(c.toolsets||[]),...(c.tools||[])].join('、')||'无额外工具'],['代码仓',(c.repos||[]).map(r=>(r.name||r)+' @ '+(r.branch||'main')).join('、')||'无'],['工作目录 / 启动路径',a?.workingDirectory||c.path||'创建时解析'],['初始化命令',c.init||'空 · 不执行'],...(c.location==='本地'?[['本地运行时',a?.runtimeSnapshot?.name||c.runtimeId||'任务创建时按责任人选择']]:[])].map(([k,v])=>`<div><small>${k}</small><b>${esc(v)}</b></div>`).join('')}</div>`;}
 function abBindingFields(c,prefix,scope,visibility){
-  const b=c.environment||{mode:'default'},r=abEnvironment(b,scope),shared=visibility==='public',envs=abItems('env',scope),instances=abItems('instance',scope).filter(i=>abUsable(i)&&(!shared||abShared(i)));
+  const b=c.environment||{mode:'default'},r=abEnvironment(b,scope),shared=visibility==='public',envs=abItems('env',scope).filter(x=>x.type==='env'),instances=abItems('instance',scope).filter(i=>abUsable(i)&&(!shared||abShared(i)));
   const options=[['default','平台默认 · 每次新建工作目录'],['template','运行环境模板 · 按版本新建实例'],['instance','已有运行环境实例 · 复用工作目录']];
   return `<section class="ab-section"><h2>运行环境</h2>${abField('环境绑定',prefix+'.environment.mode',b.mode,{options})}${b.mode==='template'?`${abField('运行环境模板 *',prefix+'.environment.templateId',b.templateId,{options:[['','请选择模板'],...envs.map(e=>[e.id,e.name+' · V'+e.version])]})}${b.templateId?abField('固定版本',prefix+'.environment.version',b.version,{options:(abGet(b.templateId,scope)?.history||[]).map(h=>[h.version,'V'+h.version])}):''}`:b.mode==='instance'?abField('已有运行环境实例 *',prefix+'.environment.instanceId',b.instanceId,{options:[['','请选择实例'],...instances.map(i=>[i.id,i.name+' · '+i.workingDirectory])],hint:shared?'公开模板仅可绑定公开实例。':'候选仅包含当前用户有权使用的实例。'}):''}${!r.ok?`<div class="ab-error">${esc(r.message)}</div>`:b.mode==='instance'&&shared&&!abShared(r.asset)?'<div class="ab-error">公开模板不能绑定私密运行环境实例，请修正绑定。</div>':abReadonly(r.config,r.asset)}<div class="ab-note">${b.mode==='instance'?'复用实例的全部运行配置只读。需要更改时，请在构建中新建实例。':'配置保留模板 ID、版本和快照；任务启动时创建独立工作目录。'}</div></section>`;
 }
@@ -86,18 +89,19 @@ function abAtomicFields(c,prefix,scope,visibility){
 }
 function abRevealSidebar(){if(typeof sidebarState==='function'&&typeof sidebarApplyCollapsed==='function'){sidebarState().collapsed=false;sidebarApplyCollapsed();}}
 function abNew(type){
+  const graph=type==='graph';if(graph)type='workflow';
   abRevealSidebar();
   const scope=abScope()==='all'?'个人':abScope();
-  abEnsure().editor={type,scope,name:'',description:'',visibility:type==='env'?'public':type==='instance'?'private':abAdmin(scope)?'public':'private',templateOwner:abUser(),createdBy:abUser(),version:0,history:[],config:type==='task'?abConfig():abDefaults(),sourceMode:'direct',folderMode:'new',goal:'',stages:type==='workflow'?[{id:abId('stage'),name:'初始阶段',steps:[abStep()]}]:[],errors:[]};
+  abEnsure().editor={type,taskShape:graph?'graph':undefined,scope,name:'',description:'',visibility:type==='env'?'public':type==='instance'?'private':abAdmin(scope)?'public':'private',templateOwner:abUser(),createdBy:abUser(),version:0,history:[],config:['task','agentPreset'].includes(type)?abConfig():abDefaults(),sourceMode:'direct',folderMode:'new',goal:'',stages:type==='workflow'?[{id:abId('stage'),name:'初始阶段',steps:[abStep()]}]:[],errors:[]};
   const d=abEnsure().editor;if(type==='workflow')d.selectedStep=d.stages[0].steps[0].id;
-  s.view='studio';s.newTask=null;s.taskDetail=null;s.buildSel=null;s.studioPage='';abEnsure().type=type;abRender(true,true);
+  s.view='studio';s.newTask=null;s.taskDetail=null;s.buildSel=null;s.studioPage='';abEnsure().type=graph?'graph':type;abRender(true,true);
 }
-function abOpen(id){const x=abGet(id);if(!x||!abVisible(x))return;abRevealSidebar();abEnsure().editor={...abCopy(x),errors:[],readOnly:x.type==='instance'||!abOwn(x)&&!(abAdmin(x.scope)&&abShared(x))};if(x.type==='workflow')abEnsure().editor.selectedStep=x.stages[0]?.steps[0]?.id;s.view='studio';abEnsure().type=x.type;abRender(true,true,x.id);}
+function abOpen(id){const x=abGet(id);if(!x||!abVisible(x))return;abRevealSidebar();abEnsure().editor={...abCopy(x),errors:[],readOnly:x.type==='instance'||!abOwn(x)&&!(abAdmin(x.scope)&&abShared(x))};if(x.type==='workflow')abEnsure().editor.selectedStep=x.stages[0]?.steps[0]?.id;s.view='studio';abEnsure().type=abAssetType(x);abRender(true,true,x.id);}
 function abRender(reset=false,animate=false,assetId=abEnsure().editor?.id){
   abCloseCreateMenu();abEndMorph();
   const source=animate&&assetId?document.querySelector(`.ab-side-card[data-v="${CSS.escape(assetId)}"]`):null,from=source?{node:source.cloneNode(true),rect:source.getBoundingClientRect()}:null;
   const old=document.querySelector('.ab-page'),top=reset?0:old?.scrollTop||0,sideTop=document.querySelector('[data-ab-sidebar]')?.scrollTop||0,trackLeft=reset?0:document.querySelector('.ab-stage-track')?.scrollLeft||0,active=document.activeElement,key=reset?null:active?.dataset?.abField,pos=active?.selectionStart;
-  render();const root=document.getElementById('demo');if(root&&s.view==='studio'){root.toggleAttribute('data-solo',!abEnsure().editor);root.dataset.buildMode=abEnsure().editor?'editor':'overview';}
+  render();const root=document.getElementById('demo');if(root&&s.view==='studio'){root.removeAttribute('data-solo');root.dataset.buildMode=abEnsure().editor?'editor':'overview';}
   const next=document.querySelector('.ab-page');if(next)next.scrollTop=top;
   const side=document.querySelector('[data-ab-sidebar]');if(side){side.scrollTop=sideTop;const chosen=side.querySelector('.ab-side-card.active');if(chosen){const a=chosen.getBoundingClientRect(),b=side.getBoundingClientRect();if(a.bottom>b.bottom)side.scrollTop+=a.bottom-b.bottom+12;else if(a.top<b.top)side.scrollTop-=b.top-a.top+12;}}
   if(animate)abAnimateWorkspace(from,assetId);
@@ -107,18 +111,18 @@ function abRender(reset=false,animate=false,assetId=abEnsure().editor?.id){
 function abHeading(title,subtitle,actions=''){return `<header class="demohead ab-heading"><div><h1>${title}</h1><p>${subtitle}</p></div><div class="ab-actions">${actions}</div></header>`;}
 function abScopeControls(){const scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';return `<nav class="dtabs ab-scope-tabs" role="tablist" data-ab-tablist aria-label="应用范围">${[['all','全部'],['personal','个人'],['project','项目']].map(([v,l])=>`<button role="tab" data-a="ab-scope" data-v="${v}" class="${mode===v?'active':''}" aria-selected="${mode===v}" tabindex="${mode===v?0:-1}">${l}</button>`).join('')}</nav>${mode==='project'?`<label class="ab-field">当前项目<select data-ab-project>${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select></label>`:''}`;}
 function abSidebar(){
-  const state=abEnsure();if(!state.editor)return '';const type=abTypes.includes(state.type)?state.type:'task',query=state.query.trim().toLowerCase(),rows=abItems(type).filter(x=>(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(query));
-  const tabs=`<nav class="bd-seg as2-seg ab-type-tabs" role="tablist" data-ab-tablist aria-label="构建资产类型">${abTypes.map(t=>`<button id="ab-tab-${t}" title="${abLabels[t]}" aria-label="${abLabels[t]}" role="tab" data-a="ab-type" data-v="${t}" class="${type===t?'active':''}" aria-selected="${type===t}" aria-controls="ab-asset-panel" tabindex="${type===t?0:-1}">${{task:"原子模板",workflow:"串联模板",env:"环境模板",instance:"环境实例"}[t]}<small>${abItems(t).length}</small></button>`).join('')}</nav>`;
-  return `<div class="sidehead"><h3>构建</h3><p>把工作能力，构建成可复用资产</p><button class="ab-head-new" data-a="ab-create-menu" title="创建资产" aria-label="创建资产" aria-haspopup="menu" aria-expanded="false">${ico("plus")}</button></div><div class="sidebody bd-body ab-sidebody" data-ab-sidebar>${abScopeControls()}${tabs}<label class="ab-side-search bd-search">${ico('search')}<input data-ab-search value="${esc(state.query)}" placeholder="搜索当前分类资产" aria-label="搜索构建资产" type="search" autocomplete="off"></label><div class="ab-side-list bd-list" id="ab-asset-panel" role="tabpanel" aria-labelledby="ab-tab-${type}">${rows.map(abSideCard).join('')||`<div class="ab-side-empty">${query?'没有匹配的资产':'暂无'+abLabels[type]}</div>`}</div></div>`;
+  const state=abEnsure(),assets=state.section==='assets';
+  return `<div class="sidehead"><h3>构建</h3></div><div class="sidebody"><nav class="ab-navigation">${[['start','plus','开始构建'],['assets','layers','已构建资产']].map(([v,icon,label])=>`<button class="sidenav ${!state.editor&&(assets?v==='assets':v==='start')?'active':''}" data-a="ab-section" data-v="${v}">${ico(icon)}<span>${label}</span></button>`).join('')}</nav></div>`;
 }
+function abStart(){return `<div class="demopage ab-page ab-start">${abHeading('开始构建','选择要构建的内容，沉淀可复用的任务能力与运行环境。')}<div class="ab-overview-grid ab-start-grid">${abTypes.map(type=>`<button class="ab-start-card" data-a="ab-new" data-v="${type}" data-asset-type="${type}"><span class="ab-side-mark">${ico(abIcon(type))}</span><h2>${abLabels[type]}</h2><p>${{agentPreset:'预设 Agent、模型、提示词与扩展能力',task:'配置 Agent、提示词与准出规则',workflow:'按顺序编排阶段和步骤',graph:'通过节点依赖编排分支与汇聚',env:'保存可复用的通用运行配置',instance:'创建独立工作目录，保留任务关联'}[type]}</p><span>开始构建 ${ico('arrow')}</span></button>`).join('')}</div></div>`;}
 function abAssetCardContent(x,scope=abScope()){
-  const version=x.draft?'草稿':'V'+x.version,description=x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${abAllSteps(x).length} 个步骤`:x.type==='instance'?(x.templateId?'基于 '+(abGet(x.templateId)?.name||'已删除模板')+' · V'+x.templateVersion:'直接创建 · 无来源模板'):'可复用的运行环境配置');
-  const detail=x.type==='task'?x.config.agentType:x.type==='workflow'?'按步骤配置环境':x.config.location+' / '+x.config.zone;
-  return `<span class="ab-side-top"><span class="ab-side-mark">${ico(x.type==='instance'?'terminal':abIcon(x.type))}</span><span class="ab-side-title"><strong>${esc(x.name)}</strong><small>${abLabels[x.type]}</small></span><span class="ab-side-version">${version}</span></span><span class="ab-side-description">${esc(description)}</span><span class="ab-side-meta"><span>${ico(x.type==='task'?'agent':x.type==='workflow'?'workflow':x.config.location==='本地'?'monitor':'cloud')}${esc(scope==='all'?x.scope:detail)}</span><span>${ico(abShared(x)?'team':'shield')}${abShared(x)?'公开':'私密'}</span></span>`;
+  const version=x.draft?'草稿':'V'+x.version,description=x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${abAllSteps(x).length} 个步骤`:x.type==='instance'?(x.templateId?'基于 '+(abGet(x.templateId)?.name||'已删除模板')+' · V'+x.templateVersion:'直接创建 · 无来源模板'):x.type==='agentPreset'?'可复用的 Agent 默认配置':'可复用的运行环境配置');
+  const detail=['task','agentPreset'].includes(x.type)?x.config.agentType:x.type==='workflow'?'按步骤配置环境':x.config.location+' / '+x.config.zone;
+  return `<span class="ab-side-top"><span class="ab-side-mark">${ico(x.type==='instance'?'terminal':abIcon(abAssetType(x)))}</span><span class="ab-side-title"><strong>${esc(x.name)}</strong><small>${abAssetLabel(x)}</small></span><span class="ab-side-version">${version}</span></span><span class="ab-side-description">${esc(description)}</span><span class="ab-side-meta"><span>${ico(['task','agentPreset'].includes(x.type)?'agent':x.type==='workflow'?abIcon(abAssetType(x)):x.config.location==='本地'?'monitor':'cloud')}${esc(scope==='all'?x.scope:detail)}</span><span>${ico(abShared(x)?'team':'shield')}${abShared(x)?'公开':'私密'}</span></span>`;
 }
 function abSideCard(x){
   const selected=abEnsure().editor?.id===x.id;
-  return `<button data-asset-type="${x.type}" class="ab-side-card ${selected?'active':''}" data-a="ab-open" data-v="${esc(x.id)}" aria-pressed="${selected}">${abAssetCardContent(x)}</button>`;
+  return `<button data-asset-type="${abAssetType(x)}" class="ab-side-card ${selected?'active':''}" data-a="ab-open" data-v="${esc(x.id)}" aria-pressed="${selected}">${abAssetCardContent(x)}</button>`;
 }
 function abReferences(asset){
   const rows={task:[],workflow:[],total:[],running:[]},seen=new Set(),target=asset.id;
@@ -135,24 +139,24 @@ function abReferences(asset){
   }
   return rows;
 }
-function abStats(x){const refs=abReferences(x);return `<div class="ab-stats">${[['task','原子模板'],['workflow','串联模板'],['total','总任务'],['running','运行中任务']].map(([k,l])=>`<button data-a="ab-refs" data-v="${esc(x.id+'|'+k)}"><strong>${refs[k].length}</strong><small>${l}</small></button>`).join('')}</div>`;}
+function abStats(x){const refs=abReferences(x);return `<div class="ab-stats">${[['task','原子模板'],['workflow','链式模板'],['total','总任务'],['running','运行中任务']].map(([k,l])=>`<button data-a="ab-refs" data-v="${esc(x.id+'|'+k)}"><strong>${refs[k].length}</strong><small>${l}</small></button>`).join('')}</div>`;}
 function abCard(x){
-  return `<article class="ab-asset"><div class="ab-cardtop">${ico(abIcon(x.type))}<span class="ab-badge">${x.draft?'草稿 · 不可执行':'V'+x.version+' · '+(abShared(x)?'公开':'私密')}</span></div><h3>${esc(x.name)}</h3><div class="ab-meta">${esc(x.scope)} · 归属 ${esc(x.templateOwner||x.owner)}</div><p>${esc(x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${x.stages.reduce((n,g)=>n+g.steps.length,0)} 个步骤`:x.type==='instance'?'独立工作目录，可在任务中复用。':'可在当前应用范围内复用。'))}</p>${x.type==='env'?`<div class="ab-meta">${esc(x.config.location)} / ${esc(x.config.zone)} · ${esc(x.config.location==='本地'?'按责任人选择设备':x.config.image||'平台默认镜像')}</div>${abStats(x)}`:x.type==='instance'?`<div class="ab-meta">${esc(x.templateId?'来源：'+(abGet(x.templateId)?.name||'来源模板已删除')+' · V'+x.templateVersion:'直接创建 · 无来源模板')}<br>${esc(x.workingDirectory)}</div>${abStats(x)}`:x.type==='task'?`<div class="ab-meta">${esc(x.config.agentType)} · ${esc(abEnvLabel(x.config.environment,x.scope))}${x.legacy?'<br>由 1.0 角色迁移，保留原 ID 与提示词。':''}</div>`:`<div class="ab-meta">${esc(x.goal||'总体目标未预设')}<br>逐步配置环境与责任人</div>`}<footer>${abButton(x.type==='instance'?'查看详情':!abOwn(x)&&!abShared(x)?'管理详情':'详情 / 编辑','open',x.id)}${['task','workflow'].includes(x.type)&&!x.draft&&abUsable(x)?abButton('使用模板','use',x.id,'primary sm'):''}${x.type==='instance'&&abOwn(x)&&!abShared(x)?abButton('发布为公开','instance-public',x.id):''}${!abOwn(x)&&abAdmin(x.scope)&&!abShared(x)&&['task','workflow'].includes(x.type)?abButton('提升为公开','promote',x.id):''}</footer></article>`;
+  return `<article class="ab-asset"><div class="ab-cardtop">${ico(abIcon(abAssetType(x)))}<span class="ab-badge">${x.draft?'草稿 · 不可执行':'V'+x.version+' · '+(abShared(x)?'公开':'私密')}</span></div><h3>${esc(x.name)}</h3><div class="ab-meta">${esc(x.scope)} · 归属 ${esc(x.templateOwner||x.owner)}</div><p>${esc(x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${x.stages.reduce((n,g)=>n+g.steps.length,0)} 个步骤`:x.type==='instance'?'独立工作目录，可在任务中复用。':'可在当前应用范围内复用。'))}</p>${x.type==='env'?`<div class="ab-meta">${esc(x.config.location)} / ${esc(x.config.zone)} · ${esc(x.config.location==='本地'?'按责任人选择设备':x.config.image||'平台默认镜像')}</div>${abStats(x)}`:x.type==='instance'?`<div class="ab-meta">${esc(x.templateId?'来源：'+(abGet(x.templateId)?.name||'来源模板已删除')+' · V'+x.templateVersion:'直接创建 · 无来源模板')}<br>${esc(x.workingDirectory)}</div>${abStats(x)}`:x.type==='task'?`<div class="ab-meta">${esc(x.config.agentType)} · ${esc(abEnvLabel(x.config.environment,x.scope))}${x.legacy?'<br>由 1.0 角色迁移，保留原 ID 与提示词。':''}</div>`:`<div class="ab-meta">${esc(x.goal||'总体目标未预设')}<br>逐步配置环境与责任人</div>`}<footer>${abButton(x.type==='instance'?'查看详情':!abOwn(x)&&!abShared(x)?'管理详情':'详情 / 编辑','open',x.id)}${['task','workflow'].includes(x.type)&&!x.draft&&abUsable(x)?abButton('使用模板','use',x.id,'primary sm'):''}${x.type==='instance'&&abOwn(x)&&!abShared(x)?abButton('发布为公开','instance-public',x.id):''}${!abOwn(x)&&abAdmin(x.scope)&&!abShared(x)&&['task','workflow'].includes(x.type)?abButton('提升为公开','promote',x.id):''}</footer></article>`;
 }
 function abHome(){
   const state=abEnsure();if(!abTypes.includes(state.overviewType))state.overviewType='task';
-  const type=state.overviewType,q=state.query.trim().toLowerCase(),rows=abItems(type).filter(x=>!q||(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(q)),scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';
-  const create=`<button class="btn primary ab-create-trigger" data-a="ab-create-menu" aria-haspopup="menu" aria-expanded="false">${ico('plus')}创建${ico('down')}</button>`;
-  const types=`<nav class="dtabs ab-overview-types" role="tablist" data-ab-tablist aria-label="构建资产类型">${abTypes.map(t=>`<button role="tab" aria-selected="${type===t}" tabindex="${type===t?0:-1}" class="${type===t?'active':''}" data-a="ab-overview-type" data-v="${t}">${abLabels[t]}<small>${abItems(t).length}</small></button>`).join('')}</nav>`;
+  const type=state.overviewType,q=state.query.trim().toLowerCase(),rows=abCatalogItems(type).filter(x=>!q||(x.name+' '+x.description+' '+x.scope).toLowerCase().includes(q)),scope=abScope(),mode=scope==='all'?'all':scope==='个人'?'personal':'project';
+  const create=abButton(ico('plus')+'新建'+abLabels[type],'new',type,'primary sm');
+  const types=`<nav class="dtabs ab-overview-types" role="tablist" data-ab-tablist aria-label="构建资产类型">${abTypes.map(t=>`<button role="tab" aria-selected="${type===t}" tabindex="${type===t?0:-1}" class="${type===t?'active':''}" data-a="ab-overview-type" data-v="${t}">${abLabels[t]}<small>${abCatalogItems(t).length}</small></button>`).join('')}</nav>`;
   const scopes=`<nav class="ms-filter-tabs" role="tablist" data-ab-tablist aria-label="应用范围">${[['all','全部'],['personal','个人'],['project','项目']].map(([v,label])=>`<button role="tab" class="${mode===v?'active':''}" aria-selected="${mode===v}" tabindex="${mode===v?0:-1}" data-a="ab-scope" data-v="${v}">${label}</button>`).join('')}</nav>`;
-  return `<div class="demopage ab-page ab-overview">${abHeading('构建','管理可复用的任务模板与运行环境。',create)}${types}<div class="ab-overview-toolbar"><div class="ab-overview-scopes">${scopes}${mode==='project'?`<select data-ab-project aria-label="当前项目">${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select>`:''}</div><label class="ab-side-search bd-search">${ico('search')}<input data-ab-search type="search" aria-label="搜索构建资产" placeholder="搜索资产名称或用途" value="${esc(state.query)}"></label></div><div class="ab-overview-grid">${rows.map(abSideCard).join('')||`<div class="ab-overview-empty">${ico(abIcon(type))}<h2>${q?'没有匹配的资产':'还没有'+abLabels[type]}</h2><p>${q?'调整关键词或范围继续查找。':'从任务模板或运行环境开始构建。'}</p>${q?'':abButton('新建'+abLabels[type],'new',type,'primary sm')}</div>`}</div></div>`;
+  return `<div class="demopage ab-page ab-overview">${abHeading('已构建资产','管理可复用的任务模板与运行环境。')}${types}<div class="ab-overview-toolbar"><div class="ab-overview-scopes">${scopes}${mode==='project'?`<select data-ab-project aria-label="当前项目">${projectNames.map(p=>`<option ${p===scope?'selected':''}>${esc(p)}</option>`).join('')}</select>`:''}</div><div class="ab-catalog-actions"><label class="ab-side-search bd-search">${ico('search')}<input data-ab-search type="search" aria-label="搜索构建资产" placeholder="搜索资产名称或用途" value="${esc(state.query)}"></label>${create}</div></div><div class="ab-overview-grid">${rows.map(abSideCard).join('')||`<div class="ab-overview-empty">${ico(abIcon(type))}<h2>${q?'没有匹配的资产':'还没有'+abLabels[type]}</h2><p>${q?'调整关键词或范围继续查找。':'从任务模板或运行环境开始构建。'}</p>${q?'':abButton('新建'+abLabels[type],'new',type,'primary sm')}</div>`}</div></div>`;
 }
 function abCloseCreateMenu(){document.querySelector('.ab-create-menu')?.remove();document.querySelectorAll('[data-a="ab-create-menu"]').forEach(b=>b.setAttribute('aria-expanded','false'));}
 function abCreateMenu(){
   const existing=document.querySelector('.ab-create-menu');if(existing){abCloseCreateMenu();return;}
   const trigger=document.querySelector('.ab-create-trigger')||document.querySelector('.ab-head-new')||document.querySelector('[data-a="ab-create-menu"]');if(!trigger)return;
   const r=trigger.getBoundingClientRect();trigger.setAttribute('aria-expanded','true');
-  document.body.insertAdjacentHTML('beforeend',`<div class="ab-create-menu" role="menu" aria-label="创建构建资产">${abTypes.map(type=>`<button role="menuitem" data-a="ab-new" data-v="${type}"><span class="ab-menu-type" data-asset-type="${type}">${ico(type==='instance'?'terminal':abIcon(type))}</span><span><b>新建${abLabels[type]}</b><small>${{task:'预设一次任务的执行配置',workflow:'编排阶段与步骤',env:'保存通用运行配置',instance:'创建独立工作目录'}[type]}</small></span></button>`).join('')}</div>`);
+  document.body.insertAdjacentHTML('beforeend',`<div class="ab-create-menu" role="menu" aria-label="创建构建资产">${abTypes.map(type=>`<button role="menuitem" data-a="ab-new" data-v="${type}"><span class="ab-menu-type" data-asset-type="${type}">${ico(type==='instance'?'terminal':abIcon(type))}</span><span><b>新建${abLabels[type]}</b><small>${{agentPreset:'保存可复用的 Agent 默认配置',task:'预设一次任务的执行配置',workflow:'编排阶段与步骤',graph:'编排节点与依赖关系',env:'保存通用运行配置',instance:'创建独立工作目录'}[type]}</small></span></button>`).join('')}</div>`);
   const menu=document.querySelector('.ab-create-menu');menu.style.left=Math.max(8,Math.min(r.right-menu.offsetWidth,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,Math.min(r.bottom+8,innerHeight-menu.offsetHeight-8))+'px';
 }
 let abMorphCleanup=null;
@@ -172,13 +176,17 @@ function abAnimateWorkspace(from,id){
 }
 function abErrors(d){return d.errors?.length?`<div class="ab-error" role="alert">${d.errors.map(e=>`<p>${esc(e)}</p>`).join('')}</div>`:'';}
 function abTemplateUseAction(d){return d.id&&!d.draft&&['task','workflow'].includes(d.type)&&abUsable(abGet(d.id))?abButton('使用模板','use',d.id,'sm'):'';}
+function abPresetFields(c,scope){
+  const extensions=abExts(scope);
+  return `${abField('Agent 类型','config.agentType',c.agentType,{options:['codeagent','zero']})}${abField('推荐模型 · 可选','config.model',c.model,{hint:'留空时使用平台默认模型。'})}${abField('预置提示词 · 可选','config.presetPrompt',c.presetPrompt,{textarea:true,hint:'保存 Agent 的默认指引与行为约束。'})}<section class="ab-section"><h2>扩展能力 · 可选</h2>${abSetFields('已安装的扩展','config.extensions',c.extensions,extensions.map(i=>i.assetId))}<p class="ab-note">仅展示当前应用范围已安装并启用的扩展。</p></section>`;
+}
 function abEditor(){
-  const d=abEnsure().editor;if(d.type==='workflow')return abSeriesEditor(d);
+  const d=abEnsure().editor;if(d.type==='workflow'){const html=abSeriesEditor(d);return d.taskShape==='graph'?html.replaceAll('阶段与步骤','节点与依赖').replaceAll('阶段名称','节点组名称').replaceAll('添加阶段','添加节点组').replace('从左到右依次执行，选择步骤查看下方配置。','节点可引用多个前置节点，形成分支与汇聚。'):html;}
   const instance=d.type==='instance',read=d.readOnly;
   const actions=abTemplateUseAction(d)+(d.id?abButton('历史版本','history',d.id)+abButton('引用与统计','inspect',d.id):'')+(d.id&&abOwn(d)?abButton('删除','delete',d.id,'link sm'):'')+(!read?abButton(instance?'创建实例':'保存'+abLabels[d.type],'save','','primary sm'):instance&&abOwn(d)?abButton(abShared(d)?'改为私密':'发布为公开','instance-share',d.id,'primary sm'):'');
   const body=read?`<h2 class="ab-detail-name">${esc(d.name)}</h2><p class="ab-meta">${esc(d.scope)} · ${abShared(d)?'公开':'私密'} · 归属 ${esc(d.templateOwner||d.owner)}</p>${instance?`<div class="ab-note">${esc(d.templateId?'来源：'+(abGet(d.templateId)?.name||'来源模板已删除')+' · '+d.templateId+' · V'+d.templateVersion:'直接创建 · 无来源模板')}<br>实例 ID：${esc(d.id)}<br>工作目录：${esc(d.workingDirectory)}</div>${abReadonly(d.config,d)}${abStats(d)}`:`<div class="ab-note">${esc(d.description)}</div>${abReadonly(abEnvironment(d.config.environment,d.scope).config||abDefaults())}<pre>${esc(JSON.stringify(d.config,null,2))}</pre>`}`:
-    `${abScopeField(d)}${abField((instance?'实例名称':'模板名称')+' *','name',d.name)}${!instance?abField('描述 · 可选','description',d.description,{hint:'供人识别用途，不自动作为执行提示词。'}):''}${abVisibility(d)}${d.type==='task'?abAtomicFields(d.config,'config',d.scope,d.visibility):`${instance?`${abField('创建方式','sourceMode',d.sourceMode,{options:[['direct','直接创建'],['template','基于运行环境模板创建']]})}${d.sourceMode==='template'?abField('来源模板及版本 *','templateId',d.templateId||'',{options:[['','请选择运行环境模板'],...abItems('env',d.scope).map(e=>[e.id,e.name+' · V'+e.version])]}):''}${d.sourceMode==='template'&&d.templateId?abField('来源版本','templateVersion',d.templateVersion,{options:(abGet(d.templateId,d.scope)?.history||[]).map(h=>[h.version,'V'+h.version])}):''}`:''}${abEnvFields(d.config,'config',instance)}${instance&&d.visibility==='public'&&d.config.location==='本地'?`<div class="ab-note">公开本地实例后，当前范围成员可通过所选本地运行时访问工作目录，并按该实例的权限操作目录内容。</div>${abCheck('我已了解本地运行时与工作目录的访问范围','publicConfirmed',d.publicConfirmed)}`:''}`}`;
-  return `<div class="demopage ab-page">${abHeading(read?'查看'+abLabels[d.type]:d.id?'编辑'+abLabels[d.type]:'新建'+abLabels[d.type],d.id?'版本 V'+d.version+' · 原有实例与任务保留各自快照。':'配置保存在本地浏览器，可保存后继续编辑。',actions)}<div class="ab-form">${abErrors(d)}${body}</div></div>`;
+    `${abScopeField(d)}${abField((instance?'实例名称':'模板名称')+' *','name',d.name)}${!instance?abField('描述 · 可选','description',d.description,{hint:'供人识别用途，不自动作为执行提示词。'}):''}${abVisibility(d)}${d.type==='agentPreset'?abPresetFields(d.config,d.scope):d.type==='task'?abAtomicFields(d.config,'config',d.scope,d.visibility):`${instance?`${abField('创建方式','sourceMode',d.sourceMode,{options:[['direct','直接创建'],['template','基于运行环境模板创建']]})}${d.sourceMode==='template'?abField('来源模板及版本 *','templateId',d.templateId||'',{options:[['','请选择运行环境模板'],...abItems('env',d.scope).filter(x=>x.type==='env').map(e=>[e.id,e.name+' · V'+e.version])]}):''}${d.sourceMode==='template'&&d.templateId?abField('来源版本','templateVersion',d.templateVersion,{options:(abGet(d.templateId,d.scope)?.history||[]).map(h=>[h.version,'V'+h.version])}):''}`:''}${abEnvFields(d.config,'config',instance)}${instance&&d.visibility==='public'&&d.config.location==='本地'?`<div class="ab-note">公开本地实例后，当前范围成员可通过所选本地运行时访问工作目录，并按该实例的权限操作目录内容。</div>${abCheck('我已了解本地运行时与工作目录的访问范围','publicConfirmed',d.publicConfirmed)}`:''}`}`;
+  return `<div class="demopage ab-page">${abHeading(read?'查看'+abLabels[d.type]:d.id?'编辑'+abAssetLabel(d):'新建'+abLabels[d.type],d.id?'版本 V'+d.version+' · 原有实例与任务保留各自快照。':'配置保存在本地浏览器，可保存后继续编辑。',actions)}<div class="ab-form">${abErrors(d)}${body}</div></div>`;
 }
 function abAllSteps(d){return d.stages.flatMap(g=>g.steps);}
 function abStepAt(d,id){for(let gi=0;gi<d.stages.length;gi++){const g=d.stages[gi],i=g.steps.findIndex(st=>st.id===id);if(i>=0)return {g,gi,i,step:g.steps[i],prefix:`stages.${gi}.steps.${i}`};}return null;}
@@ -189,7 +197,7 @@ function abReuseOptions(d,st){
 }
 function abSeriesEditor(d){
   const all=abAllSteps(d),found=abStepAt(d,d.selectedStep)||abStepAt(d,all[0]?.id),st=found?.step,p=found?.prefix,atoms=abItems('task',d.scope).filter(abUsable),read=d.readOnly;
-  return `<div class="demopage ab-page">${abHeading(d.id?'编辑串联任务模板':'新建串联任务模板','阶段与步骤依次执行，每步保留固定配置与版本快照。',abTemplateUseAction(d)+(d.id?abButton('历史版本','history',d.id)+abButton('引用与统计','inspect',d.id)+abButton('删除','delete',d.id,'link sm'):'')+(read?'':abButton('保存草稿','draft')+abButton('发布版本','publish','','primary sm')))}${abErrors(d)}<div class="ab-panel ab-series-basics"><div class="ab-two">${abField('模板名称 *','name',d.name,{disabled:read})}${abScopeField(d)}${abVisibility(d)}${abField('总体目标 · 可选','goal',d.goal,{textarea:true,disabled:read,hint:'作为各步骤共有上下文传递，每步仍保留各自实际输入。'})}</div></div><div class="ab-series-layout"><section class="ab-orchestration"><header class="ab-orchestration-head"><div><h2>阶段与步骤</h2><p>从左到右依次执行，选择步骤查看下方配置。</p></div>${!read?abButton("＋ 添加阶段","stage-add","","sm"):""}</header><div class="ab-stage-track">${d.stages.map((g,gi)=>`<section class="ab-stage"><header><b>${gi+1}. ${esc(g.name||'未命名阶段')}</b><div class="ab-stage-actions">${!read?`<button class="ab-stage-add" data-a="ab-step-add" data-v="${g.id}" title="添加步骤" aria-label="添加步骤">${ico("plus")}</button><button data-a="ab-stage-move" data-v="${g.id}|-1" ${gi===0?'disabled':''} aria-label="阶段前移">←</button><button data-a="ab-stage-move" data-v="${g.id}|1" ${gi===d.stages.length-1?'disabled':''} aria-label="阶段后移">→</button><button data-a="ab-stage-remove" data-v="${g.id}" ${d.stages.length===1?'disabled':''} aria-label="删除阶段">×</button>`:''}</div></header><div class="ab-stage-steps">${g.steps.map((x,i)=>`<button class="ab-step ${st?.id===x.id?'active':''}" data-a="ab-step-select" data-v="${x.id}"><b>${gi+1}.${i+1} ${esc(x.name||'未命名步骤')}</b><small>${esc(x.source==='inline'?'现场配置':x.atomicSnapshot?x.atomicSnapshot.name+' · V'+x.atomicVersion:'请选择原子模板')}<br>${esc(abEnvLabel(x.config.environment,d.scope))}${x.manualConfirm?'<br>需要人工确认准出':''}</small></button>`).join('')}</div></section>`).join('<span class="ab-stage-connector" aria-hidden="true">→</span>')}</div></section><div class="ab-panel">${st?`${read?'<div class="ab-note">仅管理查看，无法使用他人的私密模板。</div>':''}<div class="ab-inline" style="justify-content:space-between;margin-bottom:20px"><h2>步骤配置 · ${found.gi+1}.${found.i+1}</h2>${!read?`<div>${abButton('前移','step-move',st.id+'|-1','link sm')}${abButton('后移','step-move',st.id+'|1','link sm')}${abButton('删除','step-remove',st.id,'link sm')}</div>`:''}</div>${abField('阶段名称 *',`stages.${found.gi}.name`,found.g.name,{disabled:read})}${abField('步骤名称 *',p+'.name',st.name,{disabled:read})}${abField('步骤来源',p+'.source',st.source,{options:[['template','引用原子任务模板'],['inline','现场配置']],disabled:read})}${st.source==='template'?`${abField('原子任务模板 *',p+'.atomicId',st.atomicId,{options:[['','请选择原子任务模板'],...atoms.map(a=>[a.id,a.name+' · V'+a.version])],disabled:read})}${st.atomicSnapshot?`<div class="ab-note">固定引用 ${esc(st.atomicSnapshot.name)} · V${st.atomicVersion}。修改源模板不会改变本步骤。${!read?abButton('恢复模板配置','restore-step',st.id,'link sm'):''}</div>`:''}`:''}${abField('步骤输入 *',p+'.input',st.input,{textarea:true,disabled:read,hint:'仅从原子模板的“输入提示词模板”预填。不会从描述或预置提示词补回。'})}${!read?abAtomicFields(st.config,p+'.config',d.scope,d.visibility):`<pre>${esc(JSON.stringify(st.config,null,2))}</pre>`}${abField('复用前序步骤的新实例 · 可选',p+'.reuseStepId',st.reuseStepId,{options:[['','每步创建独立实例'],...abReuseOptions(d,st).map(x=>[x.id,x.name||'未命名步骤']),...(st.reuseStepId&&!abReuseOptions(d,st).some(x=>x.id===st.reuseStepId)?[[st.reuseStepId,'失效的来源步骤 · 请修正']]:[])],disabled:read,hint:'仅能复用前序直接基于相同模板版本、有效配置及责任人设备创建的实例。'})}${abCheck('人工确认准出 · 自动规则全部通过后等待确认',p+'.manualConfirm',st.manualConfirm,read)}${abField('失败后最大重试次数',p+'.maxRetries',st.maxRetries,{type:'number',disabled:read,hint:'耗尽后停止自动推进并提醒人工介入。'})}`:'<div class="ab-empty">选择或添加一个步骤。</div>'}</div></div></div>`;
+  return `<div class="demopage ab-page">${abHeading((d.id?'编辑':'新建')+(d.taskShape==='graph'?'图任务模板':'链式任务模板'),d.taskShape==='graph'?'按节点依赖描述分支与汇聚；原型按依赖顺序模拟执行。':'阶段与步骤依次执行，每步保留固定配置与版本快照。',abTemplateUseAction(d)+(d.id?abButton('历史版本','history',d.id)+abButton('引用与统计','inspect',d.id)+abButton('删除','delete',d.id,'link sm'):'')+(read?'':abButton('保存草稿','draft')+abButton('发布版本','publish','','primary sm')))}${abErrors(d)}<div class="ab-panel ab-series-basics"><div class="ab-two">${abField('模板名称 *','name',d.name,{disabled:read})}${abScopeField(d)}${abVisibility(d)}${abField('总体目标 · 可选','goal',d.goal,{textarea:true,disabled:read,hint:'作为各步骤共有上下文传递，每步仍保留各自实际输入。'})}</div></div><div class="ab-series-layout"><section class="ab-orchestration"><header class="ab-orchestration-head"><div><h2>阶段与步骤</h2><p>从左到右依次执行，选择步骤查看下方配置。</p></div>${!read?abButton("＋ 添加阶段","stage-add","","sm"):""}</header><div class="ab-stage-track">${d.stages.map((g,gi)=>`<section class="ab-stage"><header><b>${gi+1}. ${esc(g.name||'未命名阶段')}</b><div class="ab-stage-actions">${!read?`<button class="ab-stage-add" data-a="ab-step-add" data-v="${g.id}" title="添加步骤" aria-label="添加步骤">${ico("plus")}</button><button data-a="ab-stage-move" data-v="${g.id}|-1" ${gi===0?'disabled':''} aria-label="阶段前移">←</button><button data-a="ab-stage-move" data-v="${g.id}|1" ${gi===d.stages.length-1?'disabled':''} aria-label="阶段后移">→</button><button data-a="ab-stage-remove" data-v="${g.id}" ${d.stages.length===1?'disabled':''} aria-label="删除阶段">×</button>`:''}</div></header><div class="ab-stage-steps">${g.steps.map((x,i)=>`<button class="ab-step ${st?.id===x.id?'active':''}" data-a="ab-step-select" data-v="${x.id}"><b>${gi+1}.${i+1} ${esc(x.name||'未命名步骤')}</b><small>${esc(x.source==='inline'?'现场配置':x.atomicSnapshot?x.atomicSnapshot.name+' · V'+x.atomicVersion:'请选择原子模板')}<br>${esc(abEnvLabel(x.config.environment,d.scope))}${x.manualConfirm?'<br>需要人工确认准出':''}</small></button>`).join('')}</div></section>`).join('<span class="ab-stage-connector" aria-hidden="true">→</span>')}</div></section><div class="ab-panel">${st?`${read?'<div class="ab-note">仅管理查看，无法使用他人的私密模板。</div>':''}<div class="ab-inline" style="justify-content:space-between;margin-bottom:20px"><h2>步骤配置 · ${found.gi+1}.${found.i+1}</h2>${!read?`<div>${abButton('前移','step-move',st.id+'|-1','link sm')}${abButton('后移','step-move',st.id+'|1','link sm')}${abButton('删除','step-remove',st.id,'link sm')}</div>`:''}</div>${abField('阶段名称 *',`stages.${found.gi}.name`,found.g.name,{disabled:read})}${abField('步骤名称 *',p+'.name',st.name,{disabled:read})}${d.taskShape==='graph'?abSetFields('前置节点 · 可多选；留空为起点',p+'.dependsOn',st.dependsOn||[],abAllSteps(d).slice(0,abAllSteps(d).indexOf(st)).map(x=>x.id)):""}${abField('步骤来源',p+'.source',st.source,{options:[['template','引用原子任务模板'],['inline','现场配置']],disabled:read})}${st.source==='template'?`${abField('原子任务模板 *',p+'.atomicId',st.atomicId,{options:[['','请选择原子任务模板'],...atoms.map(a=>[a.id,a.name+' · V'+a.version])],disabled:read})}${st.atomicSnapshot?`<div class="ab-note">固定引用 ${esc(st.atomicSnapshot.name)} · V${st.atomicVersion}。修改源模板不会改变本步骤。${!read?abButton('恢复模板配置','restore-step',st.id,'link sm'):''}</div>`:''}`:''}${abField('步骤输入 *',p+'.input',st.input,{textarea:true,disabled:read,hint:'仅从原子模板的“输入提示词模板”预填。不会从描述或预置提示词补回。'})}${!read?abAtomicFields(st.config,p+'.config',d.scope,d.visibility):`<pre>${esc(JSON.stringify(st.config,null,2))}</pre>`}${abField('复用前序步骤的新实例 · 可选',p+'.reuseStepId',st.reuseStepId,{options:[['','每步创建独立实例'],...abReuseOptions(d,st).map(x=>[x.id,x.name||'未命名步骤']),...(st.reuseStepId&&!abReuseOptions(d,st).some(x=>x.id===st.reuseStepId)?[[st.reuseStepId,'失效的来源步骤 · 请修正']]:[])],disabled:read,hint:'仅能复用前序直接基于相同模板版本、有效配置及责任人设备创建的实例。'})}${abCheck('人工确认准出 · 自动规则全部通过后等待确认',p+'.manualConfirm',st.manualConfirm,read)}${abField('失败后最大重试次数',p+'.maxRetries',st.maxRetries,{type:'number',disabled:read,hint:'耗尽后停止自动推进并提醒人工介入。'})}`:'<div class="ab-empty">选择或添加一个步骤。</div>'}</div></div></div>`;
 }
 function abValidateConfig(c,scope,visibility){
   const errors=[],r=abEnvironment(c.environment,scope);
@@ -205,16 +213,18 @@ function abValidateConfig(c,scope,visibility){
 function abValidate(d,publish=true){
   const errors=[];if(!d.name.trim())errors.push('请填写非空名称。');
   if(!['个人',...projectNames].includes(d.scope))errors.push('请选择有效应用范围。');
-  if(['task','workflow'].includes(d.type)&&!abAdmin(d.scope)&&d.visibility!=='private')errors.push('普通项目成员只能创建私密任务模板。');
+  if(['task','workflow','agentPreset'].includes(d.type)&&!abAdmin(d.scope)&&d.visibility!=='private')errors.push('普通项目成员只能创建私密任务模板。');
+  if(d.type==='agentPreset'&&!['codeagent','zero'].includes(d.config.agentType))errors.push('请选择有效的 Agent 类型。');
   if(d.type==='task')errors.push(...abValidateConfig(d.config,d.scope,d.visibility));
   if(d.type==='workflow'&&publish){
     if(!d.stages.length)errors.push('至少需要一个阶段。');
     d.stages.forEach((g,gi)=>{if(!g.name.trim()||!g.steps.length)errors.push(`阶段 ${gi+1} 须填写名称并包含可执行步骤。`);g.steps.forEach((st,i)=>{
       const label=`步骤 ${gi+1}.${i+1}：`;
+      if(d.taskShape==='graph'){const before=abAllSteps(d).slice(0,abAllSteps(d).indexOf(st));if((st.dependsOn||[]).some(id=>!before.some(n=>n.id===id)))errors.push(label+'依赖节点已删除或顺序不合法，请重新选择前置节点。');}
       if(!st.name.trim()||!st.input.trim())errors.push(label+'名称与步骤输入必填。');
       if(st.source==='template'){
         const atom=abGet(st.atomicId,d.scope);if(!atom||!abUsable(atom)||!st.atomicSnapshot||!st.atomicVersion)errors.push(label+'原子模板或固定版本不可用。');
-        if(d.visibility==='public'&&atom&&!abShared(atom))errors.push(label+'公开串联模板不能引用私密原子模板。');
+        if(d.visibility==='public'&&atom&&!abShared(atom))errors.push(label+'公开链式模板不能引用私密原子模板。');
       }
       errors.push(...abValidateConfig(st.config,d.scope,d.visibility).map(e=>label+e));
       if(st.reuseStepId&&!abReuseOptions(d,st).some(x=>x.id===st.reuseStepId))errors.push(label+'前序复用来源失效，请修正顺序、环境或责任人配置。');
@@ -222,7 +232,7 @@ function abValidate(d,publish=true){
     });});
   }
   if(['env','instance'].includes(d.type)){
-    if(d.type==='env'&&abItems('env',d.scope).some(x=>x.id!==d.id&&x.name===d.name.trim()))errors.push('当前应用范围已存在同名运行环境模板。');
+    if(d.type==='env'&&abItems('env',d.scope).filter(x=>x.type==='env').some(x=>x.id!==d.id&&x.name===d.name.trim()))errors.push('当前应用范围已存在同名运行环境模板。');
     if(!['云端','本地'].includes(d.config.location)||!['绿区','黄区'].includes(d.config.zone))errors.push('运行位置或安全区域无效。');
     if(d.type==='instance'){
       if(d.sourceMode==='template'&&!abSnapshot(abGet(d.templateId,d.scope),d.templateVersion))errors.push('请选择有效来源模板与版本。');
@@ -256,7 +266,7 @@ function abStore(d,{draft=false}={}){
   x.history=old?.history?abCopy(old.history):[];
   if(!draft){const snap=abCopy(x);delete snap.history;x.history.push({version:x.version,at:x.updatedAt,snapshot:snap});}
   if(old)state.assets[state.assets.indexOf(old)]=x;else state.assets.push(x);
-  abSyncLegacy(x);state.editor=null;state.query='';state.type=x.type;state.overviewType=x.type;save();notify(draft?'草稿已保存，发布前仍需完整校验。':'已保存「'+x.name+'」'+(x.type==='instance'?'':' · V'+x.version));abRender(true,true,x.id);return true;
+  abSyncLegacy(x);state.editor=null;state.query='';state.type=abAssetType(x);state.overviewType=abAssetType(x);state.section='assets';save();notify(draft?'草稿已保存，发布前仍需完整校验。':'已保存「'+x.name+'」'+(x.type==='instance'?'':' · V'+x.version));abRender(true,true,x.id);return true;
 }
 function abSyncLegacy(x){
   if(!['env','task'].includes(x.type))return;
@@ -300,11 +310,11 @@ function abInspect(x){
   const configs=x.type==='task'?[x.config]:x.type==='workflow'?abAllSteps(x).map(st=>st.config):[];
   for(const c of configs){const r=abEnvironment(c.environment,x.scope);dependencies.push({label:abEnvLabel(c.environment,x.scope),valid:r.ok});for(const id of c.extensions||[])dependencies.push({label:'扩展 · '+(asset(id)?.name||id),valid:abExts(x.scope).some(i=>i.assetId===id)});}
   if(x.type==='workflow')for(const st of abAllSteps(x))if(st.source==='template')dependencies.push({label:'原子模板 · '+(st.atomicSnapshot?.name||st.atomicId)+' · V'+st.atomicVersion,valid:abUsable(abGet(st.atomicId,x.scope))});
-  modal('引用与统计 · '+esc(x.name),`<h4>配置依赖</h4>${dependencies.map(r=>`<p>${esc(r.label)} · ${r.valid?'有效':'已失效 / 无权使用'}</p>`).join('')||'<p>没有额外依赖。</p>'}<h4>当前可见关联</h4><p>${refs.task.length} 个原子模板 · ${refs.workflow.length} 个串联模板 · ${refs.total.length} 个总任务 · ${refs.running.length} 个运行中任务</p>${[...refs.task,...refs.workflow,...refs.total].map(r=>`<p>${esc(r.name||r.title||r.id)}</p>`).join('')}`,abButton('关闭','close'));
+  modal('引用与统计 · '+esc(x.name),`<h4>配置依赖</h4>${dependencies.map(r=>`<p>${esc(r.label)} · ${r.valid?'有效':'已失效 / 无权使用'}</p>`).join('')||'<p>没有额外依赖。</p>'}<h4>当前可见关联</h4><p>${refs.task.length} 个原子模板 · ${refs.workflow.length} 个链式模板 · ${refs.total.length} 个总任务 · ${refs.running.length} 个运行中任务</p>${[...refs.task,...refs.workflow,...refs.total].map(r=>`<p>${esc(r.name||r.title||r.id)}</p>`).join('')}`,abButton('关闭','close'));
 }
 function abDelete(x){
   if(!abOwn(x)&&!abAdmin(x.scope))return;const refs=abReferences(x),templateTasks=(s.tasks||[]).filter(t=>t.build36Snapshot?.id===x.id),unfinished=[...refs.total,...templateTasks].filter(t=>!['done','completed','已完成','已取消','cancelled','failed','失败','已归档'].includes(t.status));
-  const body=`<p>当前引用：${refs.task.length} 个原子模板、${refs.workflow.length} 个串联模板、${refs.total.length} 个关联任务。</p><p>删除保留历史配置快照；非运行引用将显示失效依赖，后续执行前须修正。</p>${unfinished.length?'<div class="ab-error">存在尚未结束的关联任务（含待验收 / 待确认），无法删除。</div>':''}`;
+  const body=`<p>当前引用：${refs.task.length} 个原子模板、${refs.workflow.length} 个链式模板、${refs.total.length} 个关联任务。</p><p>删除保留历史配置快照；非运行引用将显示失效依赖，后续执行前须修正。</p>${unfinished.length?'<div class="ab-error">存在尚未结束的关联任务（含待验收 / 待确认），无法删除。</div>':''}`;
   modal('删除「'+esc(x.name)+'」',body,abButton('取消','close')+(unfinished.length?'':abButton('确认删除','delete-confirm',x.id,'primary sm')));
 }
 function abPromote(x){const d={...abCopy(x),visibility:'public'},errors=abValidate(d);if(errors.length){modal('公开前请修正依赖',`<div class="ab-error">${errors.map(e=>`<p>${esc(e)}</p>`).join('')}</div>`,abButton('关闭','close'));return;}const state=abEnsure();state.editor=d;abStore(d);}
@@ -318,6 +328,7 @@ function abAction(a,v){
   const state=abEnsure(),d=state.editor;
   switch(a.slice(3)){
     case 'close':closeModal();return true;
+    case 'section':state.section=v;state.editor=null;state.query='';break;
     case 'home':state.editor=null;s.buildSel=null;state.query='';s.studioPage='';break;
     case 'extension-scope':s.extensionScope=v==='project'?s.abExtensionLastProject||s.project||projectNames[0]:v;save();render();return true;
     case 'scope':s.bxScope=v==='personal'?'个人':v==='all'?'all':s.bx2LastProject||s.project||projectNames[0];state.editor=null;state.query='';break;
@@ -397,7 +408,7 @@ bfAction=function(a,v){
   return abPreviousBfAction(a,v);
 };
 studioSidebar=abSidebar;
-renderStudioMain=function(){return abEnsure().editor?abEditor():abHome();};
+renderStudioMain=function(){return abEnsure().editor?abEditor():abEnsure().section==='assets'?abHome():abStart();};
 // Extensions uses the same all / personal / project filter behavior as the build catalog.
 if(typeof extFilterToolbar==='function'){
   const previousToolbar=extFilterToolbar;
@@ -412,7 +423,7 @@ if(typeof extFilterToolbar==='function'){
 // Project/personal spaces browse the same assets and link back to Build for creation.
 if(typeof assetTabs==='function'){
   const previousTabs=assetTabs;
-  assetTabs=function(...args){return previousTabs(...args).filter(t=>t[0]!=='role').map(t=>t[0]==='env'?['env','运行环境','cloud']:t[0]==='workflow'?['workflow','串联任务模板','workflow']:t[0]==='templates'?['templates','原子任务模板','task']:t);};
+  assetTabs=function(...args){return previousTabs(...args).filter(t=>t[0]!=='role').map(t=>t[0]==='env'?['env','运行环境','cloud']:t[0]==='workflow'?['workflow','链式任务模板','workflow']:t[0]==='templates'?['templates','原子任务模板','task']:t);};
   const previousBody=assetTabBody;
   assetTabBody=function(tab,data){
     if(!['env','workflow','templates','role'].includes(tab))return previousBody(tab,data);
@@ -431,6 +442,7 @@ document.addEventListener('input',e=>{
   if(t.matches('[data-ab-search]')){const pos=t.selectionStart;abEnsure().query=t.value;abRender();const field=document.querySelector('[data-ab-search]');field?.focus();field?.setSelectionRange(pos,pos);}
 });
 document.addEventListener('change',e=>{
+
   const t=e.target;
   if(t.matches('[data-ab-field]')&&(t.tagName==='SELECT'||t.type==='checkbox'))abChange(t);
   if(t.matches('[data-ab-extension-project]')){s.extensionScope=t.value;s.abExtensionLastProject=t.value;save();render();}
