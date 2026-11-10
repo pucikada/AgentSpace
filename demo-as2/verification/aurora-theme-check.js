@@ -45,7 +45,7 @@
   check('深色外层与顶栏统一',['body','.appbar'].every(q=>getComputedStyle(document.querySelector(q)).backgroundColor==='rgb(16, 16, 18)'));
   check('深色右侧底板与吸顶头部统一',['.demoarea','.proj-sticky'].every(q=>getComputedStyle(document.querySelector(q)).backgroundColor==='rgb(21, 21, 23)'));
   check('深色底板与外框有明度区分',getComputedStyle(document.querySelector('.demoarea')).backgroundColor!==getComputedStyle(document.querySelector('#demo'),'::before').backgroundColor);
-  check('深色侧栏沿用中性外框',getComputedStyle(document.querySelector('.demoside')).backgroundColor==='rgba(0, 0, 0, 0)'&&getComputedStyle(document.querySelector('#demo'),'::before').backgroundColor==='rgb(27, 27, 30)');
+  check('深色整体外框半透明磨砂且侧栏无重复玻璃层',getComputedStyle(document.querySelector('.demoside')).backgroundColor==='rgba(0, 0, 0, 0)'&&getComputedStyle(document.querySelector('.demoside')).backdropFilter==='none'&&getComputedStyle(document.querySelector('#demo'),'::before').backdropFilter.includes('blur(18px)')&&getComputedStyle(document.querySelector('#demo'),'::before').backgroundColor==='rgba(27, 27, 30, 0.72)');
   check('深色侧栏不使用彩色渐变',getComputedStyle(document.querySelector('.demoside')).backgroundImage==='none');
   for(const mode of ['light','mixed','dark']){
    userColorApply('aurora|mode:'+mode);s.projectTab='overview';render();await pause();

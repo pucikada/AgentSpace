@@ -50,24 +50,25 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 :root[data-theme="dark"]{--as-segment-selected:#424248;--as-count-bg:#3D3D43}
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:#3D3D43!important;color:#F4F4F5!important;border-color:#29292D!important}
 
-/* Accent washes belong to the outer frame, not the inset content canvas. */
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{
-  --au-frame:radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 78%),radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 100%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),radial-gradient(ellipse 150px 220px at 100% 55%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),linear-gradient(180deg,#F3F5FC,#ECEFF9);
-  --au-content-bg:#FFFFFF;
+/* The product canvas owns color; the complete outer shell is frosted. */
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{--au-frame:rgba(245,247,252,.68);--au-content-bg:#FFFFFF}
+html:root[data-appearance-family="aurora"][data-au-mode="mixed"]{--au-frame:rgba(11,16,32,.78)}
+html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-frame:rgba(27,27,30,.72);--au-content-bg:#151517}
+html:root[data-appearance-family="aurora"][data-au-mode] body{
+  background-image:radial-gradient(ellipse 300px 220px at 28% 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 80%),radial-gradient(ellipse 240px 200px at 92% 100%,color-mix(in srgb,var(--au) 8%,transparent),transparent 80%)!important;
 }
-html:root[data-appearance-family="aurora"][data-au-mode="dark"]{
-  --au-frame:radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 78%),radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 100%,color-mix(in srgb,var(--au) 7%,transparent),transparent 78%),radial-gradient(ellipse 150px 220px at 100% 55%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),#1B1B1E;
-  --au-content-bg:#151517;
-}
-
-/* Keep the page canvas neutral; frame accents carry the subtle color instead. */
-html:root[data-appearance-family="aurora"][data-au-mode="light"] body{
-  background-color:#F1F3F8!important;
-  background-image:radial-gradient(ellipse 340px 240px at 0 0,color-mix(in srgb,var(--au) 4%,transparent),transparent 80%),radial-gradient(ellipse 240px 200px at 100% 100%,color-mix(in srgb,var(--au) 2%,transparent),transparent 80%)!important;
-}
+html:root[data-appearance-family="aurora"][data-au-mode="light"] body{background-color:#F1F3F8!important}
+html:root[data-appearance-family="aurora"] #demo.slack-shell::before{-webkit-backdrop-filter:blur(18px) saturate(110%);backdrop-filter:blur(18px) saturate(110%)}
 
 /* Elevate the complete half-enclosed shell; inset panels remain flat. */
 :root[data-appearance-family="aurora"]{--au-shell-shadow:0 8px 24px -16px rgba(18,22,34,.2),0 1px 5px rgba(18,22,34,.06)}
 :root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-shell-shadow:0 8px 24px -16px rgba(0,0,0,.5),0 1px 5px rgba(0,0,0,.25)}
 
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(--as-text)}
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(--as-text);--rail-tile:#FFFFFF}
+
+/* Navigation is transparent within the shared shell, with no extra glass sheet. */
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell>.demoside,
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .ms-list-pane{
+  background:transparent!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}

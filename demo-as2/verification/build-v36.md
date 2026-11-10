@@ -248,3 +248,10 @@
 - Selected rail and sidebar icons/text use neutral primary ink; selected sidebar labels use weight 600. Message wrappers have no rectangular shadow around their rounded frame.
 - Repository lists are flat, transparent rows with subtle separators, distinct name/address typography, and a working text Edit action.
 - Verification before push: 74 theme checks, 34 space/task checks, 10 build domain tests, inline JavaScript syntax and whitespace checks passed. User explicitly approved push.
+
+### 2026-11-09 Approved shared template cards and frosted-shell release
+- Personal/project task template cards reuse the Build overview's content renderer, icon tones, dimensions and metadata; existing edit/use actions remain available.
+- Small accent gradients live on the product canvas. The complete half-enclosed shell is translucent and frosted; sidebar/message list surfaces are transparent without an additional glass layer. Content panels remain opaque.
+- Light navigation selected containers use solid white rather than gradients.
+- Verified personal and project template edit destinations, 22px padding/18px card gaps, one shared shell blur with transparent navigation layers, 74 theme checks, 34 space/task checks, 10 build domain tests, inline syntax and whitespace checks.
+- User approved push.

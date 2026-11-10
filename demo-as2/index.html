@@ -12406,7 +12406,7 @@ html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .as2-nav-hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: color-mix(in srgb, var(--au) 9%, transparent) !important; box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .projectswitch, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidehead--switch .projectswitch:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: rgba(255,255,255,.65) !important; border-color: rgba(22,33,62,.12) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidehead--switch .projectswitch:hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: #FFFFFF !important; border-color: color-mix(in srgb, var(--au) 30%, transparent) !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: linear-gradient(180deg, #FFFFFF, color-mix(in srgb, var(--au) 9%, #FFFFFF)) !important; color: var(--as-text) !important; border: 0 !important; box-shadow: none !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: #FFFFFF !important; color: var(--as-text) !important; border: 0 !important; box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active :is(svg.icon.lucide, span:not(.rail-unread), small):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: transparent !important; color: var(--as-text) !important; box-shadow: none !important; border: 0 !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active .rail-unread:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { border-color: #FFFFFF !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell :is(.ms-list-pane, .demoside) :is(.as2-seg, .asset-subtabs, .asset-knowledge .dtabs, .dtoolbar .dtabs, .co-members-filters, .wc-extension-filters, .wb-preview-tabs, .wb-mobile-switch, .wbh-mobile-tabs, .import-method-tabs, .ms-filter-tabs):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: rgba(22,33,62,.06) !important; box-shadow: none !important; }
@@ -12832,27 +12832,28 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 :root[data-theme="dark"]{--as-segment-selected:#424248;--as-count-bg:#3D3D43}
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:#3D3D43!important;color:#F4F4F5!important;border-color:#29292D!important}
 
-/* Accent washes belong to the outer frame, not the inset content canvas. */
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{
-  --au-frame:radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 78%),radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 100%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),radial-gradient(ellipse 150px 220px at 100% 55%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),linear-gradient(180deg,#F3F5FC,#ECEFF9);
-  --au-content-bg:#FFFFFF;
+/* The product canvas owns color; the complete outer shell is frosted. */
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{--au-frame:rgba(245,247,252,.68);--au-content-bg:#FFFFFF}
+html:root[data-appearance-family="aurora"][data-au-mode="mixed"]{--au-frame:rgba(11,16,32,.78)}
+html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-frame:rgba(27,27,30,.72);--au-content-bg:#151517}
+html:root[data-appearance-family="aurora"][data-au-mode] body{
+  background-image:radial-gradient(ellipse 300px 220px at 28% 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 80%),radial-gradient(ellipse 240px 200px at 92% 100%,color-mix(in srgb,var(--au) 8%,transparent),transparent 80%)!important;
 }
-html:root[data-appearance-family="aurora"][data-au-mode="dark"]{
-  --au-frame:radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 78%),radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 100%,color-mix(in srgb,var(--au) 7%,transparent),transparent 78%),radial-gradient(ellipse 150px 220px at 100% 55%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),#1B1B1E;
-  --au-content-bg:#151517;
-}
-
-/* Keep the page canvas neutral; frame accents carry the subtle color instead. */
-html:root[data-appearance-family="aurora"][data-au-mode="light"] body{
-  background-color:#F1F3F8!important;
-  background-image:radial-gradient(ellipse 340px 240px at 0 0,color-mix(in srgb,var(--au) 4%,transparent),transparent 80%),radial-gradient(ellipse 240px 200px at 100% 100%,color-mix(in srgb,var(--au) 2%,transparent),transparent 80%)!important;
-}
+html:root[data-appearance-family="aurora"][data-au-mode="light"] body{background-color:#F1F3F8!important}
+html:root[data-appearance-family="aurora"] #demo.slack-shell::before{-webkit-backdrop-filter:blur(18px) saturate(110%);backdrop-filter:blur(18px) saturate(110%)}
 
 /* Elevate the complete half-enclosed shell; inset panels remain flat. */
 :root[data-appearance-family="aurora"]{--au-shell-shadow:0 8px 24px -16px rgba(18,22,34,.2),0 1px 5px rgba(18,22,34,.06)}
 :root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-shell-shadow:0 8px 24px -16px rgba(0,0,0,.5),0 1px 5px rgba(0,0,0,.25)}
 
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(--as-text)}
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(--as-text);--rail-tile:#FFFFFF}
+
+/* Navigation is transparent within the shared shell, with no extra glass sheet. */
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell>.demoside,
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .ms-list-pane{
+  background:transparent!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
 
 /* AS2 USER MENU css END */
 
@@ -12943,6 +12944,10 @@ html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(
 #demo .spx-page .spx-repo-list .demotable td small{display:block;max-width:min(42vw,520px);margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:var(--as-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #demo .spx-page .spx-repo-list .demotable :is(th,td):last-child{text-align:right;white-space:nowrap}
 #demo .spx-page .spx-repo-list .demotable .btn.link{padding:0;min-height:28px;border:0;box-shadow:none;background:transparent}
+
+/* Space templates share the Build overview card content and dimensions. */
+.spx-template-grid{margin-top:18px}
+.spx-page .spx-template-grid>.spx-template-card{gap:18px;cursor:default}
 
 /* AS2 SPACES css END */
 
@@ -18135,10 +18140,14 @@ function abSidebar(){
   const tabs=`<nav class="bd-seg as2-seg ab-type-tabs" role="tablist" data-ab-tablist aria-label="构建资产类型">${abTypes.map(t=>`<button id="ab-tab-${t}" title="${abLabels[t]}" aria-label="${abLabels[t]}" role="tab" data-a="ab-type" data-v="${t}" class="${type===t?'active':''}" aria-selected="${type===t}" aria-controls="ab-asset-panel" tabindex="${type===t?0:-1}">${{task:"原子模板",workflow:"串联模板",env:"环境模板",instance:"环境实例"}[t]}<small>${abItems(t).length}</small></button>`).join('')}</nav>`;
   return `<div class="sidehead"><h3>构建</h3><p>把工作能力，构建成可复用资产</p><button class="ab-head-new" data-a="ab-create-menu" title="创建资产" aria-label="创建资产" aria-haspopup="menu" aria-expanded="false">${ico("plus")}</button></div><div class="sidebody bd-body ab-sidebody" data-ab-sidebar>${abScopeControls()}${tabs}<label class="ab-side-search bd-search">${ico('search')}<input data-ab-search value="${esc(state.query)}" placeholder="搜索当前分类资产" aria-label="搜索构建资产" type="search" autocomplete="off"></label><div class="ab-side-list bd-list" id="ab-asset-panel" role="tabpanel" aria-labelledby="ab-tab-${type}">${rows.map(abSideCard).join('')||`<div class="ab-side-empty">${query?'没有匹配的资产':'暂无'+abLabels[type]}</div>`}</div></div>`;
 }
-function abSideCard(x){
-  const selected=abEnsure().editor?.id===x.id,version=x.draft?'草稿':'V'+x.version,description=x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${abAllSteps(x).length} 个步骤`:x.type==='instance'?(x.templateId?'基于 '+(abGet(x.templateId)?.name||'已删除模板')+' · V'+x.templateVersion:'直接创建 · 无来源模板'):'可复用的运行环境配置');
+function abAssetCardContent(x,scope=abScope()){
+  const version=x.draft?'草稿':'V'+x.version,description=x.description||(x.type==='workflow'?`${x.stages.length} 个阶段 · ${abAllSteps(x).length} 个步骤`:x.type==='instance'?(x.templateId?'基于 '+(abGet(x.templateId)?.name||'已删除模板')+' · V'+x.templateVersion:'直接创建 · 无来源模板'):'可复用的运行环境配置');
   const detail=x.type==='task'?x.config.agentType:x.type==='workflow'?'按步骤配置环境':x.config.location+' / '+x.config.zone;
-  return `<button data-asset-type="${x.type}" class="ab-side-card ${selected?'active':''}" data-a="ab-open" data-v="${esc(x.id)}" aria-pressed="${selected}"><span class="ab-side-top"><span class="ab-side-mark">${ico(x.type==='instance'?'terminal':abIcon(x.type))}</span><span class="ab-side-title"><strong>${esc(x.name)}</strong><small>${abLabels[x.type]}</small></span><span class="ab-side-version">${version}</span></span><span class="ab-side-description">${esc(description)}</span><span class="ab-side-meta"><span>${ico(x.type==='task'?'agent':x.type==='workflow'?'workflow':x.config.location==='本地'?'monitor':'cloud')}${esc(abScope()==='all'?x.scope:detail)}</span><span>${ico(abShared(x)?'team':'shield')}${abShared(x)?'公开':'私密'}</span></span></button>`;
+  return `<span class="ab-side-top"><span class="ab-side-mark">${ico(x.type==='instance'?'terminal':abIcon(x.type))}</span><span class="ab-side-title"><strong>${esc(x.name)}</strong><small>${abLabels[x.type]}</small></span><span class="ab-side-version">${version}</span></span><span class="ab-side-description">${esc(description)}</span><span class="ab-side-meta"><span>${ico(x.type==='task'?'agent':x.type==='workflow'?'workflow':x.config.location==='本地'?'monitor':'cloud')}${esc(scope==='all'?x.scope:detail)}</span><span>${ico(abShared(x)?'team':'shield')}${abShared(x)?'公开':'私密'}</span></span>`;
+}
+function abSideCard(x){
+  const selected=abEnsure().editor?.id===x.id;
+  return `<button data-asset-type="${x.type}" class="ab-side-card ${selected?'active':''}" data-a="ab-open" data-v="${esc(x.id)}" aria-pressed="${selected}">${abAssetCardContent(x)}</button>`;
 }
 function abReferences(asset){
   const rows={task:[],workflow:[],total:[],running:[]},seen=new Set(),target=asset.id;
@@ -18580,7 +18589,7 @@ function spxTemplates(){
   const st=spxState(),scope=spxScope(),type=st.kind||'task';
   const all=abItems(type,scope),items=all.filter(x=>!st.filter||x.config?.environment?.templateId===st.filter);
   const tabs=`<div class="dtabs asset-subtabs">${['task','workflow'].map(t=>`<button class="${type===t?'active':''}" data-a="spx-kind" data-v="${t}">${abLabels[t]} <span>${abItems(t,scope).length}</span></button>`).join('')}</div>`;
-  return spxSection('任务模板','汇集本空间的原子任务与串联任务模板，按需选择和复用。',spxBtn('前往构建 '+ico('arrow'),'build',type,'primary sm'))+tabs+`<p class="spx-caption">${type==='task'?'原子任务模板：组合环境、扩展与 Agent 类型，可独立使用，也可串联为串联任务。':'串联任务模板：按顺序串联多个原子任务，每个步骤沿用各自的环境配置。'}</p>${st.filter?`<div class="note">已筛选关联环境：${esc(abGet(st.filter)?.name||'已删除模板')}${spxBtn('查看全部','clear-filter','','link sm')}</div>`:''}<div class="asset-grid">${items.map(x=>{const env=x.type==='task'?abEnvironment(x.config.environment,scope):null;return `<article class="asset-card spx-resource"><div class="row between"><span class="asset-ic">${ico(abIcon(type))}</span>${tag(x.draft?'草稿':'V'+x.version,'gray')}</div><h3>${esc(x.name)}</h3><p>${esc(x.description||x.goal||'')}</p>${spxFacts(type==='task'?[['环境',abEnvLabel(x.config.environment,scope)],['Agent类型',x.config.agentType],['代码与路径',(env?.config?.repos?.length?'已关联代码仓':'无代码仓')+' · '+(env?.config?.path||'默认目录')]]:[['阶段',(x.stages||[]).length+' 个'],['原子任务',abAllSteps(x).length+' 个'],['状态',x.draft?'草稿':'已发布 / 可编辑']])}<footer>${spxBtn('查看 / 编辑','edit',x.id)}${!x.draft&&abUsable(x)?spxBtn('使用模板','use',x.id,'primary sm'):''}</footer></article>`;}).join('')||'<div class="empty">本空间暂无此类任务模板，可前往构建创建。</div>'}</div>`;
+  return spxSection('任务模板','汇集本空间的原子任务与串联任务模板，按需选择和复用。',spxBtn('前往构建 '+ico('arrow'),'build',type,'primary sm'))+tabs+`<p class="spx-caption">${type==='task'?'原子任务模板：组合环境、扩展与 Agent 类型，可独立使用，也可串联为串联任务。':'串联任务模板：按顺序串联多个原子任务，每个步骤沿用各自的环境配置。'}</p>${st.filter?`<div class="note">已筛选关联环境：${esc(abGet(st.filter)?.name||'已删除模板')}${spxBtn('查看全部','clear-filter','','link sm')}</div>`:''}<div class="ab-overview-grid spx-template-grid">${items.map(x=>`<article class="ab-side-card spx-resource spx-template-card" data-asset-type="${x.type}">${abAssetCardContent(x,scope)}<footer>${spxBtn('查看 / 编辑','edit',x.id)}${!x.draft&&abUsable(x)?spxBtn('使用模板','use',x.id,'primary sm'):''}</footer></article>`).join('')||'<div class="empty">本空间暂无此类任务模板，可前往构建创建。</div>'}</div>`;
 }
 function spxRepos(){
   const scope=spxScope(),envs=abItems('env',scope);
