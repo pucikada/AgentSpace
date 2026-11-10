@@ -29,8 +29,25 @@ function anhGo(delta){
   anhRestoring=true;
   try{closeModal();closeExtMenu();if(typeof ntcClose==='function')ntcClose();Object.assign(s,route);if(s.view==='studio'){abEnsure().editor=buildEditor||null;if(buildEditor)abRevealSidebar();abRender();}else render();}finally{anhRestoring=false;}
 }
+// Keep each page's title, tabs and filters in one sticky region.
+function anhStickyHeaders(){
+ document.querySelectorAll('.demoarea .demopage,.sps-settings-content').forEach(page=>{
+  const surface=page.querySelector(':scope>.spx-page')||page;
+  if(surface.querySelector(':scope>.as-page-header'))return;
+  const nodes=[...surface.children];let first=nodes.findIndex(n=>n.matches('.demohead,.proj-sticky,.ab-heading'));
+  if(first<0)return;
+  const group=[];
+  for(let i=first;i<nodes.length;i++){
+   const n=nodes[i];if(i!==first&&!n.matches('.dtabs,.dtoolbar,.aggregate-filters,.ab-overview-types,.ab-overview-toolbar, .spx-tabs,.spx-toolbar,.spx-section,.spx-list-tools'))break;
+   group.push(n);
+  }
+  const header=document.createElement('div');header.className='as-page-header';group[0].before(header);group.forEach(n=>header.appendChild(n));
+  const style=getComputedStyle(page);header.style.setProperty('--page-inset-x',style.paddingLeft);header.style.setProperty('--page-inset-y',style.paddingTop);
+  let backdrop=page;while(backdrop){const color=getComputedStyle(backdrop).backgroundColor;if(color!=='transparent'&&color!=='rgba(0, 0, 0, 0)'){header.style.setProperty('--page-header-bg',color);break;}backdrop=backdrop.parentElement;}
+ });
+}
 const anhPreviousRender=render,anhPreviousAction=action;
-render=function(){const result=anhPreviousRender();anhRecord();return result;};
+render=function(){const result=anhPreviousRender();anhStickyHeaders();anhRecord();return result;};
 action=function(a,v){if(a==='anh-back'||a==='anh-forward'){anhGo(a==='anh-back'?-1:1);return;}return anhPreviousAction(a,v);};
 // Apply the newly requested default once; later theme choices remain saved.
 if(!s.auroraLightBlueDefault){s.appearance={...appearanceConfig(),style:'aurora',color:'blue'};Object.assign(settingsConfig(),{auroraMode:'light',auroraAccent:'#3F6BFF'});s.auroraLightBlueDefault=true;save();}

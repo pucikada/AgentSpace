@@ -30,11 +30,10 @@
   action('ab-catalog-group','dependencies');check('任务依赖展示三类',document.querySelectorAll('.ab-overview-types button').length===3&&document.querySelector('.ab-heading h1').textContent==='任务依赖');action('ab-overview-type','env');check('运行环境模板独立列表',document.querySelectorAll('.ab-overview-grid>.ab-side-card').length===abItems('env').length);
   action('ab-overview-type','instance');check('运行环境实例独立列表',document.querySelectorAll('.ab-overview-grid>.ab-side-card').length===abItems('instance').length);check('实例分类对应新建入口',document.querySelector('.ab-catalog-actions button').dataset.v==='instance');
   action('ab-new','env');check('新建运行环境模板',document.querySelector('.ab-heading h1').textContent==='新建运行环境模板');action('ab-new','instance');check('新建运行环境实例',document.querySelector('.ab-heading h1').textContent==='新建运行环境实例');
-  action('ab-new','graph');const d=abEnsure().editor;d.name='依赖检查';const a=d.stages[0].steps[0];Object.assign(a,{name:'入口',source:'inline',input:'读取资料'});
-  const b={...abStep(),name:'汇总',source:'inline',input:'生成结果',dependsOn:[a.id]};d.stages[0].steps.push(b);
-  check('合法图依赖可发布',abValidate(d).length===0);
-  b.dependsOn=['deleted-node'];check('删除依赖后阻止发布',abValidate(d).some(e=>e.includes('依赖节点')));b.dependsOn=[a.id];
-  abStore(d,{draft:true});check('图模板独立归类',abItems('graph').some(x=>x.name==='依赖检查')&&!abItems('workflow').some(x=>x.name==='依赖检查'));
+  action('ab-new','graph');const d=abEnsure().editor;d.name='资源池检查';const atom=abItems('task',d.scope).find(a=>!a.draft);abGraphToggle(d,atom.id,true);
+  check('图任务资源池可发布',abValidate(d).length===0);
+  const ref=d.resources[0];ref.id='deleted-template';check('图资源失效阻止发布',abValidate(d).some(e=>e.includes('不可用')));ref.id=atom.id;
+  abStore(d,{draft:true});check('图模板独立归类',abItems('graph').some(x=>x.name==='资源池检查')&&!abItems('workflow').some(x=>x.name==='资源池检查'));
   s.view='team';s.page='channel';s.channel='IM能力构建';s.newTask=null;render();check('频道头部移除创建频道按钮',!document.querySelector('.co-heading-people [data-a="project-channel-new"]'));
   return {passed:checks.length,checks};
  }finally{ntcClose();closeModal();closeExtMenu();Object.keys(s).forEach(k=>delete s[k]);Object.assign(s,backup);save();render();}

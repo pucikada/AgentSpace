@@ -104,3 +104,10 @@
 .sps-family-art[data-family="liquid"]{--mode-side:#FFFFFF88;--mode-main:#FFFFFFBB;--mode-line:#B7C3D7;background:linear-gradient(135deg,#87B4F4,#F4E1D1)}
 .sps-family-art[data-family="pixel"]{border-radius:0;background:repeating-linear-gradient(90deg,#DEDEE0 0 14px,#C9C9CD 14px 15px);--mode-side:#E7E7E7;--mode-main:#F5F5F5;--mode-line:#999999}
 .sps-family-art[data-family="pixel"] :is(.sps-mode-side,.sps-mode-main,.sps-mode-main>em){border-radius:0}
+
+/* Keep appearance choices inset inside their visible section surfaces. */
+html:root:not([data-appearance-style="pixel"]) #demo .sps-appearance-visual .settings-card{padding:20px!important;border-radius:18px!important;overflow:hidden}
+@media(max-width:600px){html:root:not([data-appearance-style="pixel"]) #demo .sps-appearance-visual .settings-card{padding:14px!important}}
+
+html:root[data-appearance-style="pixel"] #demo .sps-appearance-visual .settings-card{padding:20px!important}
+@media(max-width:600px){html:root[data-appearance-style="pixel"] #demo .sps-appearance-visual .settings-card{padding:14px!important}}

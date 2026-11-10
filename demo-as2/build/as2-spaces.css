@@ -88,3 +88,12 @@
 /* Space templates share the Build overview card content and dimensions. */
 .spx-template-grid{margin-top:18px}
 .spx-page .spx-template-grid>.spx-template-card{gap:18px;cursor:default}
+
+#demo .spx-page .asset-subtabs button{display:inline-flex;align-items:center;gap:7px}
+#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:rgba(0,0,0,.055)!important;color:var(--as-text-muted)!important;font-size:11px;font-weight:500;line-height:20px}
+:root[data-theme="dark"] #demo .spx-page .asset-subtabs .spx-count{background:rgba(255,255,255,.1)!important;color:var(--as-text)!important}
+#demo .spx-list-tools{justify-content:flex-start;gap:12px;flex-wrap:wrap;margin:16px 0}
+#demo .spx-list-tools select{flex:0 1 auto;width:200px;max-width:100%}
+#demo .spx-list-tools [data-spx-instance-status]{width:124px}
+#demo .spx-list-tools>small{margin-left:auto;color:var(--as-text-muted)}
+@media(max-width:760px){#demo .spx-list-tools{flex-direction:row;align-items:center}#demo .spx-list-tools>small{flex-basis:100%;margin-left:0}}

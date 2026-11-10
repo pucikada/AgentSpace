@@ -2,8 +2,8 @@
 let ntcEditing=null,ntcHoverTimer=null;
 const ntcType=d=>['workflow','graph'].includes(d.executorType)?'workflow':'task';
 const ntcShape=d=>d.executorType==='graph'?'graph':'chain';
-const ntcTemplates=d=>abItems(ntcType(d),d.project).filter(x=>!x.draft&&abUsable(x)&&(x.type!=='workflow'||(x.taskShape==='graph')===(d.executorType==='graph')));
-function ntcCustom(type,scope){return {type,taskShape:newTaskDraft()?.executorType==='graph'?'graph':undefined,scope,name:'自定义配置',visibility:'private',version:0,config:abConfig(),stages:[{id:abId('stage'),name:'阶段 1',steps:[{...abStep(),name:'步骤 1',source:'inline'}]}]};}
+const ntcTemplates=d=>abItems(d.executorType==='graph'?'graph':ntcType(d),d.project).filter(x=>!x.draft&&abUsable(x)&&(x.type!=='workflow'||(x.taskShape==='graph')===(d.executorType==='graph')));
+function ntcCustom(type,scope){return {type,taskShape:newTaskDraft()?.executorType==='graph'?'graph':undefined,scope,name:'自定义配置',visibility:'private',version:0,config:abConfig(),resources:[],stages:[{id:abId('stage'),name:'阶段 1',steps:[{...abStep(),name:'步骤 1',source:'inline'}]}]};}
 function ntcEnsure(){
   const d=newTaskDraft();if(!d)return null;
   const type=ntcType(d);d.ntcCache=d.ntcCache||{};
@@ -15,6 +15,7 @@ function ntcEnsure(){
 }
 function ntcBtn(label,a,v='',cls='sm'){return btn(label,'ntc-'+a,v,cls);}
 function ntcSummary(x){
+  if(x.taskShape==='graph')return `<div class="ab-note">执行者：Master Agent<br>运行时根据目标指派原子任务，派发与回传形成运行图。</div>${abGraphFields(x,'ntc',true)}`;
   if(x.type==='workflow')return `<div class="ntc-preview-steps">${(x.stages||[]).map((g,i)=>`<section><b>${i+1}. ${esc(g.name)}</b>${g.steps.map((st,j)=>`<div><strong>${i+1}.${j+1} ${esc(st.name)}</strong><p>${esc(st.input||'尚未填写步骤输入')}</p><small>${st.manualConfirm?'人工确认':'自动流转'} · 最大重试 ${st.maxRetries} 次</small>${ntcSummary({type:'task',scope:x.scope,config:st.config})}</div>`).join('')}</section>`).join('')}</div>`;
   const c=x.config;
   const environment=abEnvironment(c.environment,x.scope);
@@ -75,17 +76,17 @@ function ntcEnvironmentFields(c,p,scope){
 }
 function ntcOpen(id=''){
   const current=ntcEnsure(),d=newTaskDraft();if(!current)return;
-  const x=id==='custom'?(current.id?ntcCustom(ntcType(d),d.project):current):id&&id!==current.id?abGet(id,d.project):current;if(!x)return;
+  const x=id==='custom'?ntcCustom(ntcType(d),d.project):id&&id!==current.id?abGet(id,d.project):current;if(!x)return;
   closeExtMenu();ntcEditing={snapshot:abCopy(x),selectedStep:x.type==='workflow'?abAllSteps(x)[0]?.id:null,errors:[]};ntcRenderDrawer();
 }
 function ntcRenderDrawer(){
   if(!ntcEditing)return;const x=ntcEditing.snapshot,st=x.type==='workflow'?abAllSteps(x).find(s=>s.id===ntcEditing.selectedStep):null;
   let host=document.getElementById('ntcDrawer');if(!host){document.body.insertAdjacentHTML('beforeend','<div id="ntcDrawer" class="ntc-drawer-backdrop"></div>');host=document.getElementById('ntcDrawer');}
-  const series=x.type==='workflow';
+  const series=x.type==='workflow'&&x.taskShape!=='graph';
   const steps=series?`<section class="ntc-series"><label class="ab-field">总体目标 · 可选<textarea data-ntc-field="goal">${esc(x.goal||'')}</textarea></label>${x.stages.map((g,gi)=>`<div class="ntc-stage"><div class="row"><input aria-label="阶段名称" data-ntc-field="stages.${gi}.name" value="${esc(g.name)}">${ntcBtn(ico('plus'),'step-add',g.id,'iconbtn')}</div><nav>${g.steps.map((s,i)=>`<button class="${s.id===st?.id?'active':''}" data-a="ntc-step" data-v="${s.id}">${gi+1}.${i+1} ${esc(s.name||'未命名步骤')}</button>`).join('')}</nav></div>`).join('')}${ntcBtn('添加阶段','stage-add')}</section>`:'';
   const prefix=series?'step.config':'config';
   const input=series&&st?`${abField('步骤名称 *','step.name',st.name)}${abField('步骤来源','step.source',st.source,{options:[['inline','自定义配置'],['template','引用原子任务模板']]})}${st.source==='template'?abField('原子任务模板 *','step.atomicId',st.atomicId,{options:[['','请选择模板'],...abItems('task',x.scope).filter(a=>!a.draft&&abUsable(a)).map(a=>[a.id,a.name+' · V'+a.version])]}):''}${abField('步骤输入 *','step.input',st.input,{textarea:true})}${x.taskShape==='graph'?abField('前置节点','step.dependsOn',st.dependsOn?.[0]||'',{options:[['','无 · 起点'],...abAllSteps(x).slice(0,abAllSteps(x).indexOf(st)).map(n=>[n.id,n.name||'未命名节点'])]}):''}${abCheck('完成后需要人工确认','step.manualConfirm',st.manualConfirm)}${abField('最大重试次数','step.maxRetries',st.maxRetries,{type:'number'})}${abField('复用前序步骤环境','step.reuseStepId',st.reuseStepId||'',{options:[['','不复用'],...abReuseOptions(x,st).map(s=>[s.id,s.name])]})}<div class="row">${ntcBtn('前移','step-move',st.id+'|-1','link sm')}${ntcBtn('后移','step-move',st.id+'|1','link sm')}${abAllSteps(x).length>1?ntcBtn('删除步骤','step-remove',st.id,'link sm'):''}</div>`:'';
-  const fields=series?(st?input+ntcFields(st.config,prefix,x.scope):'<div class="empty">添加步骤开始配置。</div>'):ntcFields(x.config,prefix,x.scope);
+  const fields=x.taskShape==='graph'?abGraphFields(x,'ntc'):series?(st?input+ntcFields(st.config,prefix,x.scope):'<div class="empty">添加步骤开始配置。</div>'):ntcFields(x.config,prefix,x.scope);
   const replaced=fields.replace(/data-ab-/g,'data-ntc-');
   host.innerHTML=`<section class="ntc-drawer" role="dialog" aria-modal="true" aria-labelledby="ntcDrawerTitle"><header><div><h2 id="ntcDrawerTitle">${x.taskShape==='graph'?'图任务':series?'链式任务':'原子任务'}配置</h2><p>${esc(x.id?x.name+' · V'+x.version:'自定义配置')} · 仅对当前任务生效</p></div>${ntcBtn(ico('close'),'cancel','','iconbtn')}</header><div class="ntc-drawer-body"><p class="ab-note">本次配置以独立快照保存，原模板保持不变。</p>${ntcEditing.errors.length?`<div class="ab-error" role="alert">${ntcEditing.errors.map(e=>`<p>${esc(e)}</p>`).join('')}</div>`:''}${steps}${replaced}</div><footer>${ntcBtn('取消','cancel')}${ntcBtn('应用本次配置','apply','','primary sm')}</footer></section>`;
   if(!host.dataset.focused){host.dataset.focused='true';requestAnimationFrame(()=>host.querySelector('[data-a="ntc-cancel"]')?.focus({preventScroll:true}));}
@@ -95,6 +96,7 @@ function ntcChange(e){
   const t=e.target;if(!ntcEditing||!t.closest('#ntcDrawer'))return;
   if(e.type==='input'&&(t.type==='checkbox'||t.tagName==='SELECT'))return;
   if(e.type==='change'&&t.type!=='checkbox'&&t.tagName!=='SELECT')return;
+  if(t.dataset.ntcGraphResource){abGraphToggle(ntcEditing.snapshot,t.dataset.ntcGraphResource,t.checked);ntcEditing.errors=[];ntcRenderDrawer();return;}
   const key=t.dataset.ntcField||t.dataset.ntcSet;if(!key)return;
   const loc=ntcPath(key);if(!loc?.root)return;
   let value=t.type==='checkbox'?t.checked:t.type==='number'?Number(t.value):t.value;
@@ -112,6 +114,7 @@ function ntcChange(e){
 }
 document.addEventListener('input',ntcChange);document.addEventListener('change',ntcChange);
 function ntcValidate(x){
+  if(x.taskShape==='graph')return abValidate({...abCopy(x),name:x.name||'自定义图任务',visibility:'private'});
   const validation=abCopy(x),configs=validation.type==='workflow'?abAllSteps(validation).map(st=>st.config):[validation.config];
   for(const c of configs)if(c.environmentOverride&&c.environment.mode!=='instance')c.environment={mode:'default'};
   const errors=x.type==='workflow'?abValidate({...validation,name:x.name||'自定义链式任务',visibility:'private'}):abValidateConfig(validation.config,x.scope,'private');
@@ -168,6 +171,7 @@ newTaskCreate=function(){
   const goal=d.goal.trim(),errors=ntcValidate(x);if(!goal)errors.unshift('请先写清楚任务目标与验收。');
   if(x.id&&!abUsable(abGet(x.id,x.scope)))errors.push('来源模板已失效或无权使用。');
   if(errors.length){ntcOpen();ntcEditing.errors=[...new Set(errors)];ntcRenderDrawer();return;}
+  if(x.taskShape==='graph'){abCreateGraphRequest(x,d);return;}
   const title=(d.title.trim()||goal.split(/[\n。；;]/).find(Boolean)||'未命名任务').slice(0,50),steps=x.type==='workflow'?abAllSteps(x):[{id:'atomic',config:x.config,input:goal}],instances=[],byStep=new Map();
   for(const step of steps){const c=step.config,owner=c.ownerMode==='fixed'?c.owner:d.owner,r=abEnvironment(c.environment,x.scope);let env;
     if(step.reuseStepId)env=byStep.get(step.reuseStepId);
@@ -180,3 +184,9 @@ newTaskCreate=function(){
   if(d.personal){s.view='personal';s.page='tasks';s.personalBoard=newBoardState(true);}else{s.view='team';s.page='board';s.project=d.project;s.projectBoard=newBoardState();}
   closeExtMenu();ntcClose();save();render();notify('任务已加入看板，本次配置快照已保存。');
 };
+
+function abCreateGraphRequest(x,d){
+ const task={id:nextTaskId(),title:(d.title.trim()||d.goal.trim().split(/[\n。；;]/).find(Boolean)||'图任务').slice(0,50),goal:d.goal.trim(),scope:d.project,project:d.project==='个人'?'':d.project,type:'temp',trigger:'manual',status:'pending',kind:'board',owner:d.owner||abUser(),triggeredBy:abUser(),executor:'Master Agent',executorType:'graph',taskShape:'graph',source:x.id?'图任务模板 / '+x.name:'自定义图任务',rev:1,run:0,spaceIds:[...(d.spaceIds||[])],knowledgeSnapshot:contextSnapshot(d.spaceIds||[]),templateId:x.id||'',templateName:x.id?x.name:'',templateVersion:x.version||0,build36Snapshot:abCopy(x),seriesDefinition:{kind:'graph',schemaVersion:2,resources:abCopy(abGraphResources(x))},graphRun:{status:'pending',dispatches:[],returns:[]},environmentIds:[],environments:[],created:new Date().toISOString()};
+ s.tasks.push(task);s.newTask=null;ntcClose();closeModal();
+ if(d.project==='个人'){s.view='personal';s.page='tasks';s.personalBoard=newBoardState(true);}else{s.view='team';s.page='board';s.project=d.project;s.projectBoard=newBoardState();}save();render();notify('图任务已创建，等待 Master Agent 调配原子任务。');return task;
+}

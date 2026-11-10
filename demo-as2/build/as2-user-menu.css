@@ -95,3 +95,6 @@ html:root[data-appearance-family="aurora"] #demo.slack-shell::after{
 html:root[data-appearance-family="aurora"]:is([data-au-mode="mixed"],[data-au-mode="dark"]) #demo.slack-shell::after{
   background:linear-gradient(140deg,rgba(255,255,255,.2),color-mix(in srgb,var(--au) 30%,transparent) 32%,rgba(255,255,255,.06) 62%,color-mix(in srgb,var(--au) 22%,transparent));
 }
+
+html:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell::after{background:rgba(255,255,255,.09)}
+html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-frame:rgba(40,40,45,.48)}
