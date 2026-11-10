@@ -198,3 +198,8 @@
 - Reduced environment cards to a compact icon/name/version header, one-line description, location/zone/runtime summary, and reference/instance counts. Advanced fields remain in the existing full-detail dialog.
 - Clicking the card or pressing Enter/Space opens details. Reference and instance buttons keep their own filter actions; edit remains a floating hover action without reserved space.
 - Verified roughly 123px card height at 1600/1024px, no grid overflow, cloud/local full detail fields, independent reference filtering, keyboard activation, 34 space/task checks, inline syntax and diff checks.
+
+### 2026-11-09 Wider default navigation rail
+
+- Increased the labeled navigation rail from 60px to 72px while retaining 48px entry tiles and the existing 52px icon-only option.
+- Verified rail/sidebar alignment in personal, project, extension, build overview/editor views, no horizontal overflow at 1024px, and a 1600px screenshot.
