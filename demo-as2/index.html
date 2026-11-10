@@ -13168,6 +13168,9 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 :root[data-appearance-family="aurora"]{--as-side-head-h:calc(var(--as-head-h) + 4px);--as-side-head-offset:4px}
 :root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--as-side-head-offset)!important}
 
+/* One neutral hover overlay for both levels of aurora's light navigation. */
+:root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--as-hover:rgba(0,0,0,.04)!important}
+
 /* AS2 NAVIGATION css END */
 </style></head><body class="as-root">
 <header class="appbar"><div class="appbrand"><button class="iconbtn navtoggle" onclick="toggleSidebar()" aria-label="打开导航"><svg class="icon lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg></button><span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28.000000" height="28.000000" fill="none">

@@ -21,3 +21,6 @@
 /* The inset content starts 4px lower; sidebar headers share its divider baseline. */
 :root[data-appearance-family="aurora"]{--as-side-head-h:calc(var(--as-head-h) + 4px);--as-side-head-offset:4px}
 :root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--as-side-head-offset)!important}
+
+/* One neutral hover overlay for both levels of aurora's light navigation. */
+:root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--as-hover:rgba(0,0,0,.04)!important}
