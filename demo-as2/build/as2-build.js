@@ -39,6 +39,7 @@ function abEnsure(){
   }
   if(!s.build36.samplesV6){abSeedV6(s.build36);s.build36.samplesV6=true;}
   if(!s.build36.graphExamplesV2){abSeedGraphExamples(s.build36);s.build36.graphExamplesV2=true;}
+  if(!s.build36.chainExamplesV1){abSeedChainExamples(s.build36);s.build36.chainExamplesV1=true;}
   return s.build36;
 }
 function abSeedV6(state){
@@ -63,6 +64,27 @@ function abSeedGraphExamples(state){
    if(state.assets.some(a=>a.scope===scope&&a.taskShape==='graph'&&a.name===name))continue;
    const x={id:abId('graph-demo'),type:'workflow',taskShape:'graph',scope,name,description,stages:[],resources:atoms.slice(0,3).map(a=>({id:a.id,name:a.name,scope,version:a.version,snapshot:abCopy(a)})),visibility:'public',templateOwner:abUser(),createdBy:abUser(),version:1,history:[],example:true};x.history=[{version:1,at:'示例版本',snapshot:abCopy({...x,history:undefined})}];state.assets.push(x);
   }
+ }
+}
+function abSeedChainExamples(state){
+ const samples=[
+  ['需求澄清与交付','从需求讨论到可评审的交付方案。',[
+   ['澄清需求','梳理本次任务目标、用户场景、范围和约束，列出需要确认的问题。'],
+   ['形成方案','基于已澄清的需求，给出方案、实现步骤与验收标准。'],
+   ['交付检查','核对方案是否覆盖任务目标与验收标准，汇总交付清单和待确认事项。']]],
+  ['问题排查与验证','按复现、定位、验证的顺序排查问题。',[
+   ['复现与收集证据','结合本次任务描述整理复现步骤、预期和实际结果，收集相关日志与环境信息。'],
+   ['定位与修复建议','基于复现证据分析根因，输出有依据的修复建议及影响范围。'],
+   ['验证与回归','对照问题目标制定验证与回归清单，区分已验证结果和待验证事项。']]],
+  ['代码检视与回归','检视变更风险并整理回归验证结果。',[
+   ['代码检视','围绕本次变更检查正确性、边界条件和测试缺口，附文件位置与证据。'],
+   ['回归验证','根据检视结果核对相关用例，整理通过、失败和未验证项。'],
+   ['汇总结论','汇总变更风险、验证证据与后续行动，不自动提交或合入代码。']]]
+ ];
+ for(const scope of ['个人',...projectNames])for(const [name,description,steps]of samples){
+  if(state.assets.some(a=>a.type==='workflow'&&a.taskShape!=='graph'&&a.scope===scope&&a.name===name))continue;
+  const x={id:abId('chain-demo'),type:'workflow',taskShape:'chain',scope,name,description,goal:'',stages:[{id:abId('stage'),name:'执行与交付',steps:steps.map(([name,input])=>({...abStep(),name,input,source:'inline',config:{...abConfig(),presetPrompt:'根据本次任务目标和前序步骤结果执行；缺少必要资料时先提出问题，不编造结论。'}}))}],visibility:'public',templateOwner:abUser(),createdBy:abUser(),version:1,history:[],example:true};
+  x.history=[{version:1,at:'内置示例版本',snapshot:abCopy({...x,history:undefined})}];state.assets.push(x);
  }
 }
 function abItems(type,scope=abScope()){return abEnsure().assets.filter(x=>(type==='graph'?x.type==='workflow'&&x.taskShape==='graph':type==='workflow'?x.type==='workflow'&&x.taskShape!=='graph':x.type===type)&&(scope==='all'||x.scope===scope)&&!x.deleted&&!x.temporary&&abVisible(x));}

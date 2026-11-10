@@ -51,4 +51,7 @@ render=function(){const result=anhPreviousRender();anhStickyHeaders();anhRecord(
 action=function(a,v){if(a==='anh-back'||a==='anh-forward'){anhGo(a==='anh-back'?-1:1);return;}return anhPreviousAction(a,v);};
 // Apply the newly requested default once; later theme choices remain saved.
 if(!s.auroraLightBlueDefault){s.appearance={...appearanceConfig(),style:'aurora',color:'blue'};Object.assign(settingsConfig(),{auroraMode:'light',auroraAccent:'#3F6BFF'});s.auroraLightBlueDefault=true;save();}
+// Each visit starts at My Home; navigation within the session remains unchanged.
+Object.assign(s,{view:'personal',page:'benches',personalPage:'benches',newTask:null,taskDetail:null,automationDetail:null});
+
 render();
