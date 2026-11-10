@@ -12696,10 +12696,10 @@ html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell
 html:root body #demo.slack-shell .bench-card-actions>.iconbtn{background:var(--as-muted-bg,var(--as-bg))!important;border:1px solid var(--as-border-soft)!important;border-radius:999px;color:var(--as-text)!important}
 html:root body #demo.slack-shell .bench-card-actions>.iconbtn:is(:hover,[aria-expanded="true"]){background:var(--as-hover)!important}
 .side-bench-icon{display:grid;place-items:center;width:18px;height:18px;flex:none;font-style:normal}
-.side-bench-icon[data-bench-tone="default"]{--bench-icon:#5688ff}
-.side-bench-icon[data-bench-tone="quality"]{--bench-icon:#25a998}
-.side-bench-icon[data-bench-tone="repo"]{--bench-icon:#a57bea}
-.side-bench-icon[data-bench-tone="fleet"]{--bench-icon:#dca735}
+.side-bench-icon[data-bench-tone="default"],.bench-feature-card[data-bench-tone="default"]{--bench-icon:#5688ff}
+.side-bench-icon[data-bench-tone="quality"],.bench-feature-card[data-bench-tone="quality"]{--bench-icon:#25a998}
+.side-bench-icon[data-bench-tone="repo"],.bench-feature-card[data-bench-tone="repo"]{--bench-icon:#a57bea}
+.side-bench-icon[data-bench-tone="fleet"],.bench-feature-card[data-bench-tone="fleet"]{--bench-icon:#dca735}
 #demo .demoside .sidenav .side-bench-icon .icon{color:var(--bench-icon)!important;opacity:1}
 @media(hover:none){#demo .extension-card>.ext-item-actions{opacity:1;pointer-events:auto}}
 
@@ -12752,23 +12752,23 @@ html:root body #demo.slack-shell :is(.as2-card-actions,.ac-hover,.ac-card-action
 
 /* Browsing grids share the automation card's responsive width and gutters. */
 html body #demo.slack-shell :is(.ab-overview-grid,.extension-grid.ext-list,.ac-grid,.benchgrid,.spx-env-grid){grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))!important;gap:12px!important}
-/* Workbench cover: generous text area, warm wash and offset page previews. */
-#demo.slack-shell .bench-feature-card{position:relative;display:block;min-height:270px;padding:24px!important;isolation:isolate;background:radial-gradient(ellipse at 92% 58%,rgba(255,201,139,.23),transparent 61%),var(--as-card)!important}
+/* Workbench cover: compact metadata and one page with a local icon-colored glow. */
+#demo.slack-shell .bench-feature-card{position:relative;display:block;min-height:230px;padding:24px!important;isolation:isolate;background:var(--as-card)!important}
 .bench-feature-card .bench-preview-info{position:relative;z-index:1;width:60%;padding:0;pointer-events:none}
 .bench-feature-card .bench-preview-info button{pointer-events:auto}
-.bench-feature-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--bench-icon,#5688ff) 10%,transparent);margin-bottom:58px}
+.bench-feature-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--bench-icon,#5688ff) 10%,transparent);margin-bottom:30px}
 .bench-feature-icon .side-bench-icon,.bench-feature-icon .icon{width:23px;height:23px}
 #demo .bench-feature-card .bench-preview-title h3{display:block;min-width:0;margin:0;font-size:16px;line-height:24px}
 #demo .bench-feature-card .bench-preview-title h3>button{max-width:100%;white-space:nowrap;vertical-align:middle}
 #demo .bench-feature-card .bench-default{margin-left:5px;padding:2px 5px;font-size:10px;vertical-align:middle}
 .bench-feature-card .bench-preview-title{display:block;padding:0}
-#demo .bench-feature-card .bench-preview-info>p{margin:7px 0 21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;line-height:19px}
+#demo .bench-feature-card .bench-preview-info>p{margin:7px 0 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;line-height:19px}
 .bench-feature-card .bench-preview-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:11px;line-height:18px}
 .bench-feature-card .bench-preview-updated{margin-left:0;width:100%;font-size:10px;line-height:17px}
 .bench-feature-card .bench-preview-meta .wbh-card-draft{font-size:10px}
-.bench-feature-card .bench-cover-wrap{background:radial-gradient(ellipse at 88% 63%,rgba(255,200,135,.3),transparent 66%);position:absolute;z-index:0;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
-.bench-feature-card .bench-cover-wrap::before{content:none;position:absolute;width:45%;height:90%;right:0;top:46%;border:1px solid var(--as-border-soft);border-radius:13px;background:var(--as-card);transform:rotate(-13deg);box-shadow:0 2px 6px rgba(30,25,15,.04)}
-#demo .bench-feature-card .bench-thumbnail{position:absolute;width:49%;height:108%;aspect-ratio:auto;right:-17%;top:23%;padding:9px;border:1px solid var(--as-border-soft);border-radius:13px;background:var(--as-card);transform:rotate(-13deg);transform-origin:center;opacity:1;box-shadow:0 3px 12px rgba(30,25,15,.05);pointer-events:auto}
+.bench-feature-card .bench-cover-wrap{position:absolute;z-index:0;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.bench-feature-card .bench-cover-wrap::before{content:"";position:absolute;width:58%;height:80%;right:-12%;bottom:-8%;background:radial-gradient(ellipse closest-side,color-mix(in srgb,var(--bench-icon) 22%,transparent),transparent);pointer-events:none}
+#demo .bench-feature-card .bench-thumbnail{position:absolute;width:49%;height:108%;aspect-ratio:auto;right:-12%;top:24%;padding:9px;border:1px solid var(--as-border-soft);border-radius:13px;background:var(--as-card);transform:rotate(-13deg);transform-origin:center;opacity:1;box-shadow:0 3px 12px rgba(30,25,15,.05);pointer-events:auto}
 .bench-feature-card .bench-thumbnail::before{content:none}
 .bench-feature-card .bench-preview-canvas{top:9px;left:9px;width:calc(333.333% - 60px);height:calc(333.333% - 60px)}
 #demo .bench-feature-card .bench-preview-canvas :is(.wb-dashboard,.bench-personal-preview){background:var(--as-card)}
@@ -12776,11 +12776,6 @@ html body #demo.slack-shell :is(.ab-overview-grid,.extension-grid.ext-list,.ac-g
 #demo .bench-feature-card>.bench-feature-favorite{position:absolute;z-index:3;top:20px;right:20px;width:28px;height:28px;padding:4px;background:transparent;border:0;box-shadow:none;opacity:1!important;pointer-events:auto!important}
 #demo .bench-feature-card>.bench-feature-favorite.on{color:#e9ac13!important}
 #demo .bench-feature-card>.bench-feature-favorite.on .icon{fill:currentColor!important}
-:root[data-theme="dark"] #demo.slack-shell .bench-feature-card{background:radial-gradient(ellipse at 92% 58%,rgba(151,104,62,.14),transparent 61%),var(--as-card)!important}
-
-#demo .bench-feature-card .bench-page-back{width:45%;height:94%;right:0;top:46%;z-index:0;pointer-events:none}
-#demo .bench-feature-card button.bench-thumbnail{z-index:1}
-:root[data-theme="dark"] .bench-feature-card .bench-cover-wrap{background:radial-gradient(ellipse at 88% 63%,rgba(173,115,59,.16),transparent 66%)}
 
 /* AS2 BUILD V36 css END */
 
@@ -13945,16 +13940,16 @@ return `<div class="sidehead"><h3>构建</h3><p>聚焦 Workflow 的编排、调�
 function crumb(label,extra=''){return `<div class="democrumb"><b>${s.view==='personal'?'个人空间':esc(s.project)}</b>${ico('chevron')}<span>${label}</span><span class="spacer"></span>${extra||`<span>${s.view==='personal'?'仅自己可见':'按项目权限可见'}</span>`}</div>`;}
 function render(){appearanceApply();wbhCapture();wbhSeed();captureMessengerViewport();captureCollaborationViewport();save();document.body.dataset.view=s.view;document.body.dataset.page=s.page;document.body.toggleAttribute('data-taskdetail',!!taskPageTask());document.body.toggleAttribute('data-newtask',!!newTaskDraft());if($('#viewName'))$('#viewName').textContent=s.view==='team'?'项目':s.view==='messages'?'消息':s.view==='studio'?'Workflow Studio':s.view==='extensions'?'扩展':s.view==='evolution'?'进化中心':'个人空间';$('#demo').innerHTML=`<button class="sideScrim" onclick="toggleSidebar()" aria-label="关闭导航"></button>${railHtml()}<aside class="demoside">${FULL_PAGE_VIEWS.includes(s.view)?'':renderSide()}</aside><div class="demoarea">${newTaskDraft()?renderNewTaskPage():taskPageTask()?renderTaskPage():s.view==='studio'?renderStudioMain():s.view==='extensions'?renderExtensions():s.view==='evolution'?renderEvolution():s.view==='team'?renderTeam():s.view==='messages'?renderMessages():renderPersonal()}</div>`;if(s.view==='studio'&&$('#nodeMethod')?.tagName==='SELECT'&&s.nodes[s.selectedNode]?.method&&[...$('#nodeMethod').options].some(o=>o.value===s.nodes[s.selectedNode].method))$('#nodeMethod').value=s.nodes[s.selectedNode].method;afterMessengerRender();afterCollaborationRender();wb2PositionPopover();wbhAfterRender();}
 function legacyRenderPersonal(){return (['assistant','tasks'].includes(s.page)?'':crumb(s.page==='tasks'?'我的任务':s.page==='discover'?'发现与订阅':s.page==='assistant'?'个人助理':'我的主页'))+`<div class="demopage">${s.page==='tasks'?renderTasks():s.page==='discover'?renderDiscover():s.page==='assistant'?renderAssistant():s.page==='benchdetail'?renderBenchDetail():renderBenches()}</div>`;}
-function benchThumbnail(b,back=false){
+function benchThumbnail(b){
   wbEnsureBench(b);
   const v=b.history.find(v=>v.version===b.version)||b.history[0];
   const preview=b.isDefault?`<div class="bench-personal-preview"><h2>${esc(b.title)}</h2><div class="bn-grid">${bnLayout().map(c=>{const d=bnDef(c.id);return d?`<section style="grid-column:span ${c.w};grid-row:span ${c.h}"><b>${esc(d.title)}</b>${bnThumb(c.id)}</section>`:'';}).join('')}</div></div>`:wbDashboardBase(v);
-  if(back)return `<div class="bench-thumbnail bench-page-back" inert aria-hidden="true"><div class="bench-preview-canvas">${preview.replace(/\sid="[^"]*"/g,'')}</div></div>`;
   return `<button class="bench-thumbnail" data-a="open-bench" data-v="${esc(b.id)}" aria-label="打开 ${esc(b.title)}"><div class="bench-preview-canvas" inert aria-hidden="true">${preview}</div></button>`;
 }
-function sideBenchIcon(b){const tone=b.isDefault?'default':(b.sources||[]).includes('repo')?'repo':(b.sources||[]).includes('assets')?'fleet':'quality';return `<i class="side-bench-icon" data-bench-tone="${tone}">${ico('bench').replace('<svg','<svg style="color:var(--bench-icon)!important"')}</i>`;}
+function benchIconTone(b){return b.isDefault?'default':(b.sources||[]).includes('repo')?'repo':(b.sources||[]).includes('assets')?'fleet':'quality';}
+function sideBenchIcon(b){const tone=benchIconTone(b);return `<i class="side-bench-icon" data-bench-tone="${tone}">${ico('bench').replace('<svg','<svg style="color:var(--bench-icon)!important"')}</i>`;}
 function benchViewToggle(){return `<div class="tk-layout-tabs" role="tablist" aria-label="工作台视图"><button role="tab" aria-selected="${!s.benchList}" data-a="bench-view-set" data-v="card" aria-label="卡片视图" title="卡片视图">${ico('grid')}</button><button role="tab" aria-selected="${!!s.benchList}" data-a="bench-view-set" data-v="list" aria-label="列表视图" title="列表视图">${ico('list')}</button></div>`;}
-function benchCard(b){return `<article class="benchcard bench-preview-card bench-feature-card${b.isDefault?' is-default':''}"><div class="bench-cover-wrap">${benchThumbnail(b,true)}${benchThumbnail(b)}<div class="bench-card-actions"><button class="btn primary sm" data-a="open-bench" data-v="${esc(b.id)}">打开工作台${ico('arrow')}</button><button class="iconbtn" data-a="bench-card-menu" data-v="${esc(b.id)}" aria-label="${esc(b.title)}的更多操作" aria-haspopup="menu" aria-expanded="false">${ico('more')}</button></div></div><div class="bench-preview-info"><div class="bench-feature-icon">${sideBenchIcon(b)}</div><div class="bench-preview-title"><h3><button data-a="open-bench" data-v="${esc(b.id)}" title="${esc(b.title)}">${esc(b.title)}</button>${b.isDefault?'<em class="bench-default">默认</em>':''}</h3></div><p title="${esc(b.range)}">${esc(b.range)}</p><div class="bench-preview-meta"><span class="bench-preview-version">V${b.version} · 已采用</span>${wbhCardDraft(b)}<span class="bench-preview-updated">${ico('clock')}${esc(b.updated)}</span></div></div><button class="bench-feature-favorite star ${b.favorite?'on':''}" data-a="favorite" data-v="${esc(b.id)}" aria-pressed="${!!b.favorite}" aria-label="${b.favorite?'取消收藏':'收藏'} ${esc(b.title)}">${ico('star')}</button></article>`;}
+function benchCard(b){return `<article class="benchcard bench-preview-card bench-feature-card${b.isDefault?' is-default':''}" data-bench-tone="${benchIconTone(b)}"><div class="bench-cover-wrap">${benchThumbnail(b)}<div class="bench-card-actions"><button class="btn primary sm" data-a="open-bench" data-v="${esc(b.id)}">打开工作台${ico('arrow')}</button><button class="iconbtn" data-a="bench-card-menu" data-v="${esc(b.id)}" aria-label="${esc(b.title)}的更多操作" aria-haspopup="menu" aria-expanded="false">${ico('more')}</button></div></div><div class="bench-preview-info"><div class="bench-feature-icon">${sideBenchIcon(b)}</div><div class="bench-preview-title"><h3><button data-a="open-bench" data-v="${esc(b.id)}" title="${esc(b.title)}">${esc(b.title)}</button>${b.isDefault?'<em class="bench-default">默认</em>':''}</h3></div><p title="${esc(b.range)}">${esc(b.range)}</p><div class="bench-preview-meta"><span class="bench-preview-version">V${b.version} · 已采用</span>${wbhCardDraft(b)}<span class="bench-preview-updated">${ico('clock')}${esc(b.updated)}</span></div></div><button class="bench-feature-favorite star ${b.favorite?'on':''}" data-a="favorite" data-v="${esc(b.id)}" aria-pressed="${!!b.favorite}" aria-label="${b.favorite?'取消收藏':'收藏'} ${esc(b.title)}">${ico('star')}</button></article>`;}
 function benchOperations(b,menu=false){
   const items=b.archived?[['取消归档','bench-card-archive','archive'],['删除','bench-card-delete','close']]:[['编辑','wbh-continue','edit'],[b.favorite?'取消收藏':'收藏','favorite','star'],['归档','bench-card-archive','archive']];
   return items.map(([label,a,icon])=>`<button ${menu?'role="menuitem"':''} class="${menu?(a==='bench-card-delete'?'is-danger':''):'btn link sm'}" data-a="${a}" data-v="${esc(b.id)}">${menu?ico(icon):''}${menu?'<span>'+label+'</span>':label}</button>`).join('');

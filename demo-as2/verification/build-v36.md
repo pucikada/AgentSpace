@@ -237,3 +237,8 @@
 - Workbench covers use a warm gradient behind two offset page previews of the existing snapshot. Names, scope and version/update metadata have more spacing; long scope labels truncate with full text available on hover.
 - Removed light aurora rail/sidebar selected rings while preserving selected fills and keyboard focus. Channel counts use neutral gray and header utility labels use weight 450.
 - New-task shortcuts are six pill tags; each fills its corresponding task description. Verified all six actions, both selected navigation shadows, neutral count colors, eight visual-refinement checks, sixteen archive checks, screenshots and inline-script syntax.
+
+### 2026-11-09 Compact single-page workbench covers
+- Each workbench uses its sidebar icon tone for the icon container and a localized lower-right gradient. Removed the duplicate backing-page preview and its unused rendering branch.
+- Reduced minimum card height from 270px to 230px and icon/title spacing from 58px to 30px. Measured 230–235px cards in the 1280px preview.
+- Verified all four icon/gradient tone pairs, one snapshot per card, light screenshot, eight visual-refinement checks, sixteen archive checks and whitespace checks.
