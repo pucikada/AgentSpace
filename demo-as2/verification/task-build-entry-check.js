@@ -20,14 +20,14 @@
   const project=newTaskDraft().project;action('task-create-rule','schedule');check('输入页可打开定时弹窗并保留归属',automationDraft.project===project&&!!document.querySelector('#autoFrequency'));closeModal();
   s.newTask=null;action('studio','@home');action('ab-section','start');
   check('构建默认侧栏可见',getComputedStyle(document.querySelector('.demoside')).display!=='none'&&!document.querySelector('#demo').hasAttribute('data-solo'));
-  check('侧栏两个菜单',document.querySelectorAll('.ab-navigation button').length===2);
+  check('侧栏包含开始构建和两个资产子菜单',document.querySelectorAll('.ab-navigation button').length===3&&!!document.querySelector('.ab-assets-children'));
   const buildWidth=document.querySelector('.demoside').offsetWidth;action('nav-personal','benches');check('构建侧栏与个人页同宽',document.querySelector('.demoside').offsetWidth===buildWidth);action('studio','@home');action('ab-section','start');
   check('开始构建六个入口',document.querySelectorAll('.ab-start-card').length===6);
-  action('ab-section','assets');check('资产一级六类',document.querySelectorAll('.ab-overview-types button').length===6);
+  action('ab-section','assets');action('ab-catalog-group','templates');check('任务模板展示三类',document.querySelectorAll('.ab-overview-types button').length===3&&document.querySelector('.ab-heading h1').textContent==='任务模板');
   check('去掉顶部统一创建',!document.querySelector('.ab-heading [data-a="ab-create-menu"]'));
   check('各分类有对应创建入口',document.querySelector('.ab-catalog-actions button').dataset.v===abEnsure().overviewType);
   check('资产二级范围保留',document.querySelectorAll('.ab-overview-scopes [role="tab"]').length===3);
-  action('ab-overview-type','env');check('运行环境模板独立列表',document.querySelectorAll('.ab-overview-grid>.ab-side-card').length===abItems('env').length);
+  action('ab-catalog-group','dependencies');check('任务依赖展示三类',document.querySelectorAll('.ab-overview-types button').length===3&&document.querySelector('.ab-heading h1').textContent==='任务依赖');action('ab-overview-type','env');check('运行环境模板独立列表',document.querySelectorAll('.ab-overview-grid>.ab-side-card').length===abItems('env').length);
   action('ab-overview-type','instance');check('运行环境实例独立列表',document.querySelectorAll('.ab-overview-grid>.ab-side-card').length===abItems('instance').length);check('实例分类对应新建入口',document.querySelector('.ab-catalog-actions button').dataset.v==='instance');
   action('ab-new','env');check('新建运行环境模板',document.querySelector('.ab-heading h1').textContent==='新建运行环境模板');action('ab-new','instance');check('新建运行环境实例',document.querySelector('.ab-heading h1').textContent==='新建运行环境实例');
   action('ab-new','graph');const d=abEnsure().editor;d.name='依赖检查';const a=d.stages[0].steps[0];Object.assign(a,{name:'入口',source:'inline',input:'读取资料'});

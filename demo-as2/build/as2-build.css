@@ -227,3 +227,14 @@ html body #demo.slack-shell .ab-start-card h2{font-size:14px!important;font-weig
 .nt-create-options [data-v="event"]>.icon{color:#D68622}
 
 :is(.ab-start-card,.ab-side-card,.ab-menu-type)[data-asset-type="agentPreset"]{--ab-icon:#5D71C9}
+
+.ab-navigation .ab-assets-label{margin-top:0;pointer-events:none}
+.ab-assets-label .ico{flex-shrink:0}
+.ab-assets-children{display:flex;flex-direction:column;gap:4px;margin:0 0 0 18px;padding-left:8px;border-left:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.ab-assets-children .sidenav{padding-left:12px}
+
+.ab-start-section{margin-top:28px}
+.ab-start-section+.ab-start-section{margin-top:32px}
+html body #demo.slack-shell .ab-start-section-heading h2{margin:0;font-size:16px;font-weight:600;line-height:24px;color:var(--as-text)}
+.ab-start-section-heading p{margin:6px 0 0;font-size:13px;line-height:20px;color:var(--as-text-muted)}
+.ab-start-section .ab-start-grid{margin-top:16px}
