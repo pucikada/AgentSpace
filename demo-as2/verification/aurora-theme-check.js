@@ -18,7 +18,7 @@
   for(const mode of ['light','mixed','dark'])for(const density of ['comfortable','compact']){
    settingsConfig().density=density;userColorApply('aurora|mode:'+mode);action('mode','messages');await pause();
    check(mode+' '+density+'消息头部分割线水平对齐',Math.abs(document.querySelector('.ms-list-head').getBoundingClientRect().bottom-document.querySelector('.ms-chat-head').getBoundingClientRect().bottom)<.5);
-   check(mode+' '+density+'消息半包围无矩形外层描边',getComputedStyle(document.querySelector('.demoarea')).outlineStyle==='none');
+   check(mode+' '+density+'消息半包围无矩形外层描边',getComputedStyle(document.querySelector('.demoarea')).outlineStyle==='none'&&getComputedStyle(document.querySelector('.demoarea')).boxShadow==='none');
   }
   settingsConfig().density='comfortable';s.view='team';s.page='board';s.teamPage='board';render();
   for(const style of ['classic','dark','liquid','bento','pixel']){appearanceSelect('style',style);await pause();check(style+'侧栏头部分割线保留',getComputedStyle(document.querySelector('.sidehead')).borderBottomColor!=='rgba(0, 0, 0, 0)'&&getComputedStyle(document.querySelector('.sidehead')).borderBottomWidth!=='0px');}

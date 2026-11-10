@@ -40,7 +40,7 @@ function spxTemplates(){
 }
 function spxRepos(){
   const scope=spxScope(),envs=abItems('env',scope);
-  return spxSection('代码仓','关联项目工程资产，供运行环境模板选择使用。',spxBtn(ico('plus')+'关联代码仓','repo-edit','','primary sm'))+`<div class="tablewrap"><table class="demotable"><thead><tr><th>代码仓</th><th>默认分支</th><th>访问状态</th><th>关联环境</th><th></th></tr></thead><tbody>${spxState().repos.map(r=>`<tr><td><b>${esc(r.name)}</b><small>${esc(r.url)}</small></td><td>${esc(r.branch)}</td><td>${tag(r.status,r.status==='已授权'?'green':'gold')}</td><td>${envs.filter(e=>(e.config.repos||[]).some(x=>x===r.id||x.name===r.name||x.url===r.url)).length} 个模板</td><td>${spxBtn('详情 / 编辑','repo-edit',r.id)}</td></tr>`).join('')||'<tr><td colspan="5"><div class="empty">尚未关联代码仓。</div></td></tr>'}</tbody></table></div>`;
+  return spxSection('代码仓','关联项目工程资产，供运行环境模板选择使用。',spxBtn(ico('plus')+'关联代码仓','repo-edit','','primary sm'))+`<div class="spx-repo-list"><table class="demotable"><thead><tr><th>代码仓</th><th>默认分支</th><th>访问状态</th><th>关联环境</th><th>操作</th></tr></thead><tbody>${spxState().repos.map(r=>`<tr><td><b>${esc(r.name)}</b><small>${esc(r.url)}</small></td><td>${esc(r.branch)}</td><td>${tag(r.status,r.status==='已授权'?'green':'gold')}</td><td>${envs.filter(e=>(e.config.repos||[]).some(x=>x===r.id||x.name===r.name||x.url===r.url)).length} 个模板</td><td>${spxBtn('编辑','repo-edit',r.id,'link sm')}</td></tr>`).join('')||'<tr><td colspan="5"><div class="empty">尚未关联代码仓。</div></td></tr>'}</tbody></table></div>`;
 }
 function spxPage(personal){
   const st=spxState(),tabs=spxTabs(personal);if(!tabs.some(([k])=>k===st.tab))st.tab='knowledge';

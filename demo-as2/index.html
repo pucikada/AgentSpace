@@ -10445,7 +10445,7 @@ html:root body #demo.slack-shell .projecticon[data-pcolor], html:root body .as2-
 :root[data-appearance-family="aurora"] #demo.slack-shell { position: relative; }
 :root[data-appearance-family="aurora"] #demo.slack-shell::before {
   content: ""; position: absolute; z-index: 0; pointer-events: none; top: 0; bottom: var(--au-gap-b); right: var(--au-gap-r); left: var(--as-rail-w, 60px);
-  border-radius: 22px; background: var(--au-frame); box-shadow: none; }
+  border-radius: 22px; background: var(--au-frame); box-shadow: var(--au-shell-shadow); }
 :root[data-appearance-family="aurora"] #demo.slack-shell > * { position: relative; z-index: 1; }
 :root[data-appearance-family="aurora"] #demo.slack-shell > .demoarea,
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell > .demoarea,
@@ -11084,7 +11084,7 @@ html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) .tk-empty:n
 /* ===== 全局：侧栏导航项（新建任务 / 主页 / 看板 / 资产 / 频道 / 任务行）统一用主文本色，字重 500，选中 600 ===== */
 html:root body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g) { color: var(--as-text) !important; font-weight: 400 !important; }
 html:root body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g) svg.icon, html:root body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g) .icon { color: var(--as-text) !important; }
-html:root body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g) { font-weight: 500 !important; }
+html:root body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g) { font-weight: var(--as-nav-selected-weight,500) !important; }
 html:root body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g) > span:not([style]):not(.side-done-at):not(.side-task-status):not([class*="status"]) { color: inherit; }
 
 /* ===== 全局：标签页选中项加粗（700），未选中保持 500，选中状态更明显 ===== */
@@ -12391,14 +12391,14 @@ html:root body #demo.slack-shell.slack-shell .bf-page:not(#_a):not(#_b):not(#_c)
 
 /* ================= 极光浅色：浅色网格渐变外框 + 浅色侧栏（深色选中改为白底卡片 + 强调色描边） ================= */
 html:root[data-appearance-style="aurora"][data-au-mode="light"] { --au-frame: radial-gradient(85% 42% at 0% 0%, color-mix(in srgb, var(--au) 30%, transparent), transparent 68%), radial-gradient(75% 40% at 100% 100%, color-mix(in srgb, var(--au) 18%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in srgb, var(--au) 9%, #F3F6FF), color-mix(in srgb, var(--au) 14%, #E4EAFA)); --rail-tile: color-mix(in srgb, var(--au) 10%, #FFFFFF); --rail-ink: var(--au-ink); }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] #demo.slack-shell::before { box-shadow: inset 0 0 0 1px rgba(22,33,62,.06) !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] #demo.slack-shell::before { box-shadow: var(--au-shell-shadow) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] #demo.slack-shell > .demoside, html:root[data-appearance-style="aurora"][data-au-mode="light"] #demo.slack-shell .ms-list-pane { --as-text: #16213E; --as-text-2: rgba(22,33,62,.84); --as-text-3: rgba(22,33,62,.66); --as-text-muted: rgba(22,33,62,.68); --as-text-subtle: rgba(22,33,62,.52); --as-border: rgba(22,33,62,.1); --as-border-soft: rgba(22,33,62,.06); --as-border-strong: rgba(22,33,62,.2); --as-hover: rgba(22,22,26,.06); --as-card: rgba(255,255,255,.72); --as-input: rgba(255,255,255,.7); color: #16213E; }
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell > .demoside :is(.sidehead, .sidehead.sidehead--switch):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { border-bottom-color: var(--as-border) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidenav:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: var(--as-text-2) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidenav:hover, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav:hover:not(.active):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: var(--as-hover) !important; color: var(--as-text) !important; box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav:hover:not(.active) :is(span, small, .icon):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: inherit !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active:hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: #FFFFFF !important; color: var(--au-ink) !important; font-weight: 600 !important; box-shadow: none !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidenav.active :is(span, small, .icon), html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidenav.active .icon:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: var(--au-ink) !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active:hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: #FFFFFF !important; color: var(--as-text) !important; font-weight: 600 !important; box-shadow: none !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidenav.active :is(span, small, .icon), html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidenav.active .icon:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: var(--as-text) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidenav.active > span[style]:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: var(--as-text-subtle) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav small, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidenav small:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: rgba(0,0,0,.06) !important; color: #62626A !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside :is(.side-sec-toggle, .side-sec-add, .side-sec-more, .side-sec-extra):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: var(--as-text-muted) !important; }
@@ -12406,8 +12406,8 @@ html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .as2-nav-hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: color-mix(in srgb, var(--au) 9%, transparent) !important; box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .projectswitch, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidehead--switch .projectswitch:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: rgba(255,255,255,.65) !important; border-color: rgba(22,33,62,.12) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoside .sidehead--switch .projectswitch:hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: #FFFFFF !important; border-color: color-mix(in srgb, var(--au) 30%, transparent) !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: linear-gradient(180deg, #FFFFFF, color-mix(in srgb, var(--au) 9%, #FFFFFF)) !important; color: var(--au-ink) !important; border: 0 !important; box-shadow: none !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active :is(svg.icon.lucide, span:not(.rail-unread), small):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: transparent !important; color: var(--au-ink) !important; box-shadow: none !important; border: 0 !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: linear-gradient(180deg, #FFFFFF, color-mix(in srgb, var(--au) 9%, #FFFFFF)) !important; color: var(--as-text) !important; border: 0 !important; box-shadow: none !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active :is(svg.icon.lucide, span:not(.rail-unread), small):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: transparent !important; color: var(--as-text) !important; box-shadow: none !important; border: 0 !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active .rail-unread:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { border-color: #FFFFFF !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell :is(.ms-list-pane, .demoside) :is(.as2-seg, .asset-subtabs, .asset-knowledge .dtabs, .dtoolbar .dtabs, .co-members-filters, .wc-extension-filters, .wb-preview-tabs, .wb-mobile-switch, .wbh-mobile-tabs, .import-method-tabs, .ms-filter-tabs):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: rgba(22,33,62,.06) !important; box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell :is(.ms-list-pane, .demoside) :is(.as2-seg, .asset-subtabs, .asset-knowledge .dtabs, .dtoolbar .dtabs, .co-members-filters, .wc-extension-filters, .wb-preview-tabs, .wb-mobile-switch, .wbh-mobile-tabs, .import-method-tabs, .ms-filter-tabs) > button:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: rgba(22,33,62,.66) !important; }
@@ -12445,7 +12445,7 @@ html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .bx2-tree-kids:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { border-left-color: rgba(22,33,62,.14) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .bx2-hint:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { background: rgba(22,33,62,.04) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .bx2-body .bd-card .bd-meta-line:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p) { color: rgba(22,33,62,.66) !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoarea { box-shadow: 0 0 0 1px rgba(22,33,62,.07), 0 14px 34px -18px color-mix(in srgb, var(--au) 40%, rgba(22,33,62,.4)) !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoarea { box-shadow: none !important; }
 #modalHost .ap-art2.ap-art--aurora-light { background: radial-gradient(60% 70% at 0% 0%, color-mix(in srgb, var(--au) 24%, transparent), transparent 70%), radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--au) 14%, transparent), transparent 70%), #EEF2FB; }
 #modalHost .ap-art2.ap-art--aurora-light .ap2-side { background: linear-gradient(180deg, color-mix(in srgb, var(--au) 10%, #F6F8FF), color-mix(in srgb, var(--au) 16%, #E6ECFB)); }
 #modalHost .ap-art2.ap-art--aurora-light .ap2-main { background: #FFFFFF; }
@@ -12493,8 +12493,8 @@ html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack
 #modalHost .ap-art2.ap-art--aurora-light .ap2-btn { background: linear-gradient(180deg, #2C344C, #161B2C); box-shadow: 0 4px 10px -3px rgba(12,16,32,.6); }
 
 /* 极光浅色：阴影减淡，文字对比度提升 */
-html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoarea:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: 0 0 0 1px rgba(22,33,62,.06), 0 4px 14px -10px rgba(22,33,62,.18) !important; }
-html:root[data-appearance-style="aurora"][data-au-mode="light"] #demo.slack-shell::before:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: none !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell > .demoarea:not(:has(.messenger-shell)):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: none !important; }
+html:root[data-appearance-style="aurora"][data-au-mode="light"] #demo.slack-shell::before:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: var(--au-shell-shadow) !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active:hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: none !important; }
 html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .bd-body .bd-card.active, html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack-shell.slack-shell .demoside .bd-body .bd-card.active:hover:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h):not(#_i):not(#_j):not(#_k):not(#_l):not(#_m):not(#_n):not(#_o):not(#_p):not(#_q):not(#_r):not(#_s):not(#_t) { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--au) 48%, transparent), 0 2px 6px -3px rgba(22,33,62,.14) !important; }
@@ -12805,7 +12805,7 @@ html body #demo.slack-shell :is(.ab-overview-grid,.extension-grid.ext-list,.ac-g
 :root[data-appearance-family="aurora"][data-au-mode="dark"] body{background:var(--as-bg)!important}
 :root[data-appearance-family="aurora"][data-au-mode="dark"] .appbar{background:var(--as-bg)!important}
 :root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell>.demoside{background:transparent!important;border:0!important;box-shadow:none!important}
-:root[data-appearance-family="aurora"][data-au-mode="dark"] .demorail button.active{--rail-tile:var(--as-brand-soft);--rail-ink:var(--as-brand)}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] .demorail button.active{--rail-tile:var(--as-brand-soft);--rail-ink:var(--as-text)}
 
 /* Flat cards in all three aurora themes; floating surfaces keep their elevation. */
 :root[data-appearance-family="aurora"]{--as-shadow-card:none!important;--as-shadow-tile:none!important;--as-shadow-panel:none!important;--as-btn-shadow:none!important}
@@ -12831,6 +12831,28 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 /* Dark segmented controls and overflow counts use distinct neutral surfaces. */
 :root[data-theme="dark"]{--as-segment-selected:#424248;--as-count-bg:#3D3D43}
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:#3D3D43!important;color:#F4F4F5!important;border-color:#29292D!important}
+
+/* Accent washes belong to the outer frame, not the inset content canvas. */
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{
+  --au-frame:radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 78%),radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 100%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),radial-gradient(ellipse 150px 220px at 100% 55%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),linear-gradient(180deg,#F3F5FC,#ECEFF9);
+  --au-content-bg:#FFFFFF;
+}
+html:root[data-appearance-family="aurora"][data-au-mode="dark"]{
+  --au-frame:radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 0,color-mix(in srgb,var(--au) 12%,transparent),transparent 78%),radial-gradient(ellipse 230px 150px at calc(var(--as-side-w,240px) + 80px) 100%,color-mix(in srgb,var(--au) 7%,transparent),transparent 78%),radial-gradient(ellipse 150px 220px at 100% 55%,color-mix(in srgb,var(--au) 8%,transparent),transparent 78%),#1B1B1E;
+  --au-content-bg:#151517;
+}
+
+/* Keep the page canvas neutral; frame accents carry the subtle color instead. */
+html:root[data-appearance-family="aurora"][data-au-mode="light"] body{
+  background-color:#F1F3F8!important;
+  background-image:radial-gradient(ellipse 340px 240px at 0 0,color-mix(in srgb,var(--au) 4%,transparent),transparent 80%),radial-gradient(ellipse 240px 200px at 100% 100%,color-mix(in srgb,var(--au) 2%,transparent),transparent 80%)!important;
+}
+
+/* Elevate the complete half-enclosed shell; inset panels remain flat. */
+:root[data-appearance-family="aurora"]{--au-shell-shadow:0 8px 24px -16px rgba(18,22,34,.2),0 1px 5px rgba(18,22,34,.06)}
+:root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-shell-shadow:0 8px 24px -16px rgba(0,0,0,.5),0 1px 5px rgba(0,0,0,.25)}
+
+html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(--as-text)}
 
 /* AS2 USER MENU css END */
 
@@ -12908,6 +12930,19 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 .spx-detail-versions{display:flex;gap:8px;flex-wrap:wrap}
 #modalHost .spx-env-detail-modal .modalfoot{padding:16px 24px;gap:10px;border-top:1px solid var(--as-border-soft)}
 @media(max-width:600px){.spx-env-detail-modal .ab-readonly{grid-template-columns:1fr}}
+
+/* Repository rows sit directly on the space canvas, with no zebra card surface. */
+.spx-repo-list{width:100%;overflow-x:auto}
+#demo .spx-page .spx-repo-list .demotable{width:100%;border-collapse:collapse;min-width:680px}
+#demo .spx-page .spx-repo-list .demotable :is(thead,tbody,tr,th,td){background:transparent!important;box-shadow:none!important}
+#demo .spx-page .spx-repo-list .demotable :is(th,td){padding:14px 16px;border:0;border-bottom:1px solid var(--as-border-soft)!important;text-align:left;vertical-align:middle}
+#demo .spx-page .spx-repo-list .demotable th{font-size:12px!important;font-weight:400!important;color:var(--as-text-muted)!important;padding-top:10px;padding-bottom:10px}
+#demo .spx-page .spx-repo-list .demotable td{font-size:13px;color:var(--as-text-2)!important;font-weight:400}
+#demo .spx-page .spx-repo-list .demotable td:first-child{width:50%;font-weight:400}
+#demo .spx-page .spx-repo-list .demotable td:first-child>b{font-size:13px;font-weight:600;color:var(--as-text)}
+#demo .spx-page .spx-repo-list .demotable td small{display:block;max-width:min(42vw,520px);margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:var(--as-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#demo .spx-page .spx-repo-list .demotable :is(th,td):last-child{text-align:right;white-space:nowrap}
+#demo .spx-page .spx-repo-list .demotable .btn.link{padding:0;min-height:28px;border:0;box-shadow:none;background:transparent}
 
 /* AS2 SPACES css END */
 
@@ -13171,6 +13206,12 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 
 /* One neutral hover overlay for both levels of aurora's light navigation. */
 :root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--as-hover:rgba(0,0,0,.04)!important}
+
+/* Selected navigation labels and icons share the primary neutral ink. */
+:root[data-appearance-family="aurora"]{--as-nav-selected-weight:600}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--as-text)!important;font-weight:600!important}
+
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--as-text)!important}
 
 /* AS2 NAVIGATION css END */
 </style></head><body class="as-root">
@@ -18543,7 +18584,7 @@ function spxTemplates(){
 }
 function spxRepos(){
   const scope=spxScope(),envs=abItems('env',scope);
-  return spxSection('代码仓','关联项目工程资产，供运行环境模板选择使用。',spxBtn(ico('plus')+'关联代码仓','repo-edit','','primary sm'))+`<div class="tablewrap"><table class="demotable"><thead><tr><th>代码仓</th><th>默认分支</th><th>访问状态</th><th>关联环境</th><th></th></tr></thead><tbody>${spxState().repos.map(r=>`<tr><td><b>${esc(r.name)}</b><small>${esc(r.url)}</small></td><td>${esc(r.branch)}</td><td>${tag(r.status,r.status==='已授权'?'green':'gold')}</td><td>${envs.filter(e=>(e.config.repos||[]).some(x=>x===r.id||x.name===r.name||x.url===r.url)).length} 个模板</td><td>${spxBtn('详情 / 编辑','repo-edit',r.id)}</td></tr>`).join('')||'<tr><td colspan="5"><div class="empty">尚未关联代码仓。</div></td></tr>'}</tbody></table></div>`;
+  return spxSection('代码仓','关联项目工程资产，供运行环境模板选择使用。',spxBtn(ico('plus')+'关联代码仓','repo-edit','','primary sm'))+`<div class="spx-repo-list"><table class="demotable"><thead><tr><th>代码仓</th><th>默认分支</th><th>访问状态</th><th>关联环境</th><th>操作</th></tr></thead><tbody>${spxState().repos.map(r=>`<tr><td><b>${esc(r.name)}</b><small>${esc(r.url)}</small></td><td>${esc(r.branch)}</td><td>${tag(r.status,r.status==='已授权'?'green':'gold')}</td><td>${envs.filter(e=>(e.config.repos||[]).some(x=>x===r.id||x.name===r.name||x.url===r.url)).length} 个模板</td><td>${spxBtn('编辑','repo-edit',r.id,'link sm')}</td></tr>`).join('')||'<tr><td colspan="5"><div class="empty">尚未关联代码仓。</div></td></tr>'}</tbody></table></div>`;
 }
 function spxPage(personal){
   const st=spxState(),tabs=spxTabs(personal);if(!tabs.some(([k])=>k===st.tab))st.tab='knowledge';

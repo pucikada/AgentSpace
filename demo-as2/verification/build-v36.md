@@ -242,3 +242,9 @@
 - Each workbench uses its sidebar icon tone for the icon container and a localized lower-right gradient. Removed the duplicate backing-page preview and its unused rendering branch.
 - Reduced minimum card height from 270px to 230px and icon/title spacing from 58px to 30px. Measured 230–235px cards in the 1280px preview.
 - Verified all four icon/gradient tone pairs, one snapshot per card, light screenshot, eight visual-refinement checks, sixteen archive checks and whitespace checks.
+
+### 2026-11-09 Approved shell and repository-list release
+- Final shell treatment: neutral page canvas, localized theme-color washes around the inset content perimeter, shadow on the complete outer shell, and flat inset panels. Light-mode content panels are white; dark panels retain their neutral dark fill.
+- Selected rail and sidebar icons/text use neutral primary ink; selected sidebar labels use weight 600. Message wrappers have no rectangular shadow around their rounded frame.
+- Repository lists are flat, transparent rows with subtle separators, distinct name/address typography, and a working text Edit action.
+- Verification before push: 74 theme checks, 34 space/task checks, 10 build domain tests, inline JavaScript syntax and whitespace checks passed. User explicitly approved push.

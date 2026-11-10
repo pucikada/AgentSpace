@@ -24,3 +24,9 @@
 
 /* One neutral hover overlay for both levels of aurora's light navigation. */
 :root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--as-hover:rgba(0,0,0,.04)!important}
+
+/* Selected navigation labels and icons share the primary neutral ink. */
+:root[data-appearance-family="aurora"]{--as-nav-selected-weight:600}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--as-text)!important;font-weight:600!important}
+
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--as-text)!important}
