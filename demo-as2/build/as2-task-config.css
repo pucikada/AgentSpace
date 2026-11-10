@@ -5,7 +5,7 @@
 .ntc-template-option>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
 .ntc-menu .ntc-template-option>.icon,.ntc-menu>.ntc-custom-option>.icon{width:16px;height:16px;flex:0 0 16px}
 .ntc-menu .ntc-template-option>small{margin-left:auto;flex:none;padding:1px 6px;border-radius:5px;background:var(--as-muted-bg);color:var(--as-text-muted);font-size:11px;line-height:18px;font-weight:400}
-.ntc-menu :is(.ntc-template-option,.ntc-custom-option):is(:hover,:focus-visible,[data-selected="true"]){background:var(--as-hover);outline:none}
+.ntc-menu :is(.ntc-template-option,.ntc-custom-option):is(:hover,:focus-visible),.ntc-menu .ntc-template-option[data-selected="true"]{background:var(--as-hover);outline:none}
 .ntc-template-option[data-selected="true"]>.icon{color:var(--as-brand)}
 .ntc-menu>.as2-menu-sep{margin:7px 8px;background:var(--as-border-soft);flex:none}
 .ntc-menu>.ntc-custom-option{min-height:56px}
@@ -58,3 +58,9 @@
 
 .ntc-facts dt{display:flex;align-items:center;gap:6px}
 .ntc-facts dt>.icon{width:14px;height:14px;flex:none;opacity:.8}
+
+.nt-shortcuts{align-self:start;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:22px;width:100%}
+.nt-shortcut{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:0;border-radius:999px;background:transparent;color:var(--as-text-muted);font:inherit;font-size:13px;line-height:20px;cursor:pointer;box-shadow:none}
+.nt-shortcut>.icon{width:16px;height:16px;flex:none}
+.nt-shortcut:hover{background:var(--as-hover);color:var(--as-text)}
+.nt-shortcut:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}

@@ -3,3 +3,49 @@
 .user-menu.um-managed [data-um-open]>.um-fly{display:block!important}
 
 .user-menu.um-managed .um-fly{animation:none!important}
+
+/* Aurora full dark shares the dark surface system and retains its own accent. */
+:root[data-appearance-family="aurora"][data-au-mode="dark"]{
+  color-scheme:dark;
+  --au-gap-r:8px;--au-gap-b:8px;--au-frame:#1B1B1E;--au-content-bg:#151517;
+  --au-column-bg:#1A1A1D;--au-column-line:rgba(255,255,255,.07);
+  --as-brand:color-mix(in srgb,var(--au) 76%,#fff);
+  --as-brand-hover:color-mix(in srgb,var(--au) 64%,#fff);
+  --as-brand-soft:color-mix(in srgb,var(--au) 12%,#242427);
+  --as-brand-line:color-mix(in srgb,var(--au) 40%,transparent);
+  --as-focus-ring:var(--as-brand);--as-selected:var(--as-brand-soft);--as-selected-ink:var(--as-brand);
+  --as-run:var(--as-brand);--as-run-bg:var(--as-brand-soft);--as-run-line:var(--as-brand-line);
+  --as-bg:#101012;--as-stage:#151517;--as-panel:#151517;--as-card:#232326;--as-sunken:#101012;
+  --as-muted-bg:#2B2B2F;--as-text:#F4F4F5;--as-text-2:#D4D4D8;--as-text-muted:#A1A1AA;--as-text-subtle:#92929A;
+  --as-border:rgba(255,255,255,.12);--as-border-soft:rgba(255,255,255,.07);--as-border-strong:rgba(255,255,255,.24);
+  --as-input:#28282B;--as-hover:rgba(255,255,255,.06);
+}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] body{background:var(--as-bg)!important}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] .appbar{background:var(--as-bg)!important}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell>.demoside{background:transparent!important;border:0!important;box-shadow:none!important}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] .demorail button.active{--rail-tile:var(--as-brand-soft);--rail-ink:var(--as-brand)}
+
+/* Flat cards in all three aurora themes; floating surfaces keep their elevation. */
+:root[data-appearance-family="aurora"]{--as-shadow-card:none!important;--as-shadow-tile:none!important;--as-shadow-panel:none!important;--as-btn-shadow:none!important}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :is(.card,.benchcard,.wfcard,.runcard,.extension-card,.automation-card,.collaboration-task-card,.knowledge-space-card,.project-channel-card,.project-agent-card,.kanban-card,.evo-panel,.evo-stage,.evo-memory-card,.as2-stat,.tablewrap,.project-overview-metrics>button,.wb-dash-panel,.threadlink,.co-thread-entry,.co-decision,.wc-plan,.as-tasklist,.as-tool-group,.tk-card,.bn-card,.pc-card,.ac-card,.ca-book,.ab-side-card,.ab-asset-card,.ab-create-card,.sps-env-card){box-shadow:none!important;transform:none!important}
+:root[data-appearance-family="aurora"] .ap-art--aurora[data-tone="dark"]{background:#101012!important}
+:root[data-appearance-family="aurora"] .ap-art--aurora[data-tone="dark"] .ap2-main{background:#151517!important}
+
+/* Keep aurora's frame and component geometry in full dark. */
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell :is(.aggregate-filters,.board-controls,.projecttabs,.project-thread-toolbar){background:transparent!important}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell :is(.kanban-card,.card,.benchcard,.automation-card,.extension-card,.wb-dash-panel){border:1px solid var(--as-border-soft)!important;border-radius:18px!important}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell :is(.composer,.ms-composer,.wc-composer-card){background:var(--nt-composer-field,var(--as-card))!important;border-color:var(--as-border)!important}
+
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell .ms-list-pane{background:transparent!important;border:0!important;box-shadow:none!important}
+
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell .co-message-actions{background:transparent!important}
+
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell .kanban-card{background:#242427!important;border-color:rgba(255,255,255,.09)!important}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell .kanban-card:hover{background:#2B2B2F!important;border-color:rgba(255,255,255,.18)!important}
+
+:root[data-appearance-family="aurora"][data-au-mode="dark"] .nt-start{--nt-composer-field:#1D1D20;--nt-composer-tray:#101012}
+:root[data-appearance-family="aurora"][data-au-mode="dark"] .nt-start .wc-composer-wrap{outline:1px solid rgba(255,255,255,.08);outline-offset:-1px}
+
+/* Dark segmented controls and overflow counts use distinct neutral surfaces. */
+:root[data-theme="dark"]{--as-segment-selected:#424248;--as-count-bg:#3D3D43}
+:root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:#3D3D43!important;color:#F4F4F5!important;border-color:#29292D!important}

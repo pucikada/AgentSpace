@@ -51,7 +51,7 @@ function spsWeLinkPreview(){
   modal('WeLink 消息预览',`<label class="field">通知类型<select data-sps-preview>${spsWeLinkEvents.map(([id,title])=>`<option value="${id}" ${id===event[0]?'selected':''}>${title}</option>`).join('')}</select></label><div class="sps-welink-message"><header><span>W</span><div><b>AgentSpace</b><small>任务通知 · 消息预览</small></div></header><h3>${event[1]}</h3><p><b>${esc(task?.title||'任务名称')}</b></p><p>${event[0]==='failed'?'执行失败：运行环境连接超时，请检查运行时状态后重试。':event[0]==='completed'?'任务执行已完成，任务输出与产物已准备就绪。':event[2]}</p><small>${esc(task?.scope||s.project)} · ${esc(task?.id||'TASK-ID')}</small><p class="sps-preview-link">${event[0]==='pendingStart'?'确认并启动任务':'查看并处理任务'} ↗</p></div><p class="settings-note">预览不会发送真实 WeLink 消息。</p>`,btn('关闭','close-modal','','sm'));
 }
 const spsPreviousSettingsPane=settingsPane;
-settingsPane=function(sec){return sec==='runtime'?spsRuntimePane():sec==='welink'?spsWeLinkPane():spsPreviousSettingsPane(sec);};
+settingsPane=function(sec){return sec==='appearance'?spsAppearancePane():sec==='runtime'?spsRuntimePane():sec==='welink'?spsWeLinkPane():spsPreviousSettingsPane(sec);};
 function spsNavItems(){
   const q=(s.spsSettingsQuery||'').trim().toLowerCase(),keywords={runtime:'运行时 设备 网络 安全区域 工作路径 部署',welink:'welink 通知 消息 提醒 排队 失败 完成'};
   return SETTINGS_GROUPS.map(([group,ids])=>{const rows=ids.map(id=>SETTINGS_SECTIONS.find(x=>x[0]===id)).filter(Boolean).filter(([id,label])=>!q||(label+' '+(keywords[id]||'')).toLowerCase().includes(q));return rows.length?`<div class="sps-nav-group">${group}</div>${rows.map(([id,label,icon])=>`<button class="sidenav ${s.settingsSection===id?'active':''}" data-a="settings-section" data-v="${id}" ${s.settingsSection===id?'aria-current="page"':''}>${ico(icon)}<span>${label}</span></button>`).join('')}`:'';}).join('')||'<p class="sps-search-empty">没有匹配的设置分类</p>';
@@ -102,3 +102,31 @@ document.addEventListener('dragstart',e=>{const r=e.target.closest('[data-sps-ru
 document.addEventListener('dragover',e=>{if(spsRuntimeDrag&&e.target.closest('[data-sps-runtime-id]'))e.preventDefault();});
 document.addEventListener('drop',e=>{const row=e.target.closest('[data-sps-runtime-id]');if(!row||!spsRuntimeDrag)return;e.preventDefault();const own=spsRuntimes(),a=own.find(r=>r.id===spsRuntimeDrag),b=own.find(r=>r.id===row.dataset.spsRuntimeId);if(a&&b&&a!==b&&a.zone===b.zone){s.localRuntimes.splice(s.localRuntimes.indexOf(a),1);s.localRuntimes.splice(s.localRuntimes.indexOf(b),0,a);save();openSettings();}spsRuntimeDrag='';});
 document.addEventListener('dragend',()=>{spsRuntimeDrag='';});
+
+// Visual theme choices reuse the existing immediate-apply settings actions.
+function spsAppearancePane(){
+  const view=document.createElement('div');view.className='sps-appearance-visual';view.innerHTML=spsPreviousSettingsPane('appearance');
+  for(const group of view.querySelectorAll('.as-seg')){
+    const buttons=[...group.querySelectorAll('button')],first=buttons[0];if(!first)continue;
+    const key=first.dataset.v?.split('|')[0],action=first.dataset.a;
+    if(!['auroraMode','pixelMode'].includes(key)&&action!=='appearance-tone')continue;
+    group.className='sps-mode-options';group.setAttribute('aria-label','主题明暗');
+    for(const button of buttons){
+      const value=button.dataset.v.split('|').pop(),label=button.textContent;
+      button.className='sps-mode-option';button.dataset.tone=value;
+      button.innerHTML=`<span class="sps-mode-art" aria-hidden="true"><i class="sps-mode-rail"></i><i class="sps-mode-side"><b></b><b></b><b></b></i><i class="sps-mode-main"><b></b><em></em><em></em></i><i class="sps-mode-check">${ico('check')}</i></span><span>${esc(label)}</span>`;
+    }
+    group.closest('.settings-row')?.classList.add('sps-mode-row');
+  }
+  for(const art of view.querySelectorAll('.ap-style .ap-art')){
+    const family=art.closest('.ap-style').dataset.v,tone=art.dataset.tone;
+    art.className='sps-family-art sps-mode-art';art.dataset.family=family;art.dataset.tone=tone;art.removeAttribute('style');
+    art.innerHTML='<i class="sps-mode-rail"></i><i class="sps-mode-side"><b></b><b></b><b></b></i><i class="sps-mode-main"><b></b><em></em><em></em></i>';
+  }
+  for(const swatch of view.querySelectorAll('.ap-swatch')){
+    const value=swatch.dataset.v?.split('|').pop();
+    if(/^#[0-9a-f]{6}$/i.test(value))swatch.querySelector('i').style.background=value;
+  }
+  const intro=document.createElement('p');intro.className='sps-appearance-intro';intro.textContent='选择界面风格、明暗与主题色，调整即时生效。';view.prepend(intro);
+  return view.outerHTML;
+}

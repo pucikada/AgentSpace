@@ -5,7 +5,7 @@
   try{
     closeExtMenu();s.newTask=null;s.personalTab='overview';s.benchFilter='all';s.benchList=false;action('nav-personal','benches');
     const b={...abCopy(s.benches.find(b=>!b.isDefault)),id:'qa-bench-archive',title:'归档联调工作台',favorite:false,archived:false};s.benches.push(b);render();
-    check('空心与实心收藏均常显',[...document.querySelectorAll('.bench-preview-title>.star')].every(e=>getComputedStyle(e).opacity==='1'));
+    check('空心与实心收藏均常显',[...document.querySelectorAll('.bench-feature-card>.star')].every(e=>getComputedStyle(e).opacity==='1'));
     homeBenchAction('bench-card-menu',b.id);
     check('未归档菜单无删除',!document.querySelector('.bench-card-menu [data-a="bench-card-delete"]'));
     check('未归档菜单含归档',!!document.querySelector('.bench-card-menu [data-a="bench-card-archive"]'));

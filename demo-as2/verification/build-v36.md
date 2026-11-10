@@ -203,3 +203,32 @@
 
 - Increased the labeled navigation rail from 60px to 72px while retaining 48px entry tiles and the existing 52px icon-only option.
 - Verified rail/sidebar alignment in personal, project, extension, build overview/editor views, no horizontal overflow at 1024px, and a 1600px screenshot.
+
+### Local preview: aurora theme and navigation refinement
+- Added aurora light, full dark, and mixed (深浅映衬) themes with independent mode selection and shared accent controls; existing mixed dark preference migrates without changing its appearance.
+- Full dark reuses the complete dark surface system, with aurora accents; sticky headers refresh their surface when changing themes.
+- Sidebar default text uses primary ink, with 36px main rows, 32px compact rows and clearer group spacing. Workspace icon colors and task status colors remain.
+- Removed card elevation across aurora modes; retained floating menu/dialog elevation.
+- Verified 74 theme browser checks, 16 environment card checks, 34 space/task checks, 12 header navigation checks, 10 build domain tests, inline JavaScript syntax and 1024px settings layout without horizontal overflow.
+- Pending user visual review in the built-in browser. No commit or push for this batch.
+
+- Preview feedback: full dark uses one neutral #18181B canvas across header/sidebar/content, without colored gradients; liquid theme entry selects blue-orange gradient wallpaper, and unread number badges retain white text.
+
+- Follow-up: aurora frame geometry is now shared across light/mixed/full dark, including personal/project boards, messages and build overview; neutral dark column surfaces no longer inherit the classic dark status stripe or opaque filter toolbar.
+- Sidebar header divider is hidden only for the aurora family. Regression checks retain dividers in classic, classic dark, liquid, bento and pixel. Compared theme geometry and inspected 12 page/dialog states; 1024px viewport has no document overflow.
+
+- Preview refinement: neutral dark depth now separates outer canvas (#141416), frame/sidebar (#19191C), content canvas (#1F1F22), and cards (#28282B), while retaining identical aurora frame geometry. Channel/thread message actions no longer inherit the generic dark card background across the whole row. Verified with channel screenshots and the 61-check browser regression.
+
+- Latest preview feedback: restored aurora sidebar dividers and aligned them with inset content headers (all three modes, both density options); removed the rectangular outline around the messenger outer wrapper.
+- Environment cards now own their spacing rather than inheriting compact generic asset styles, use a single-column layout below 1200px, and expose only View details on hover. The read-only detail offers an explicit link to edit the matching template in Build. Verified personal and project scopes.
+- Full dark kanban columns use a deeper neutral base with lighter task cards, matching the provided layer reference without shadows. No push; pending visual approval.
+
+### 2026-11-09 Final visual refinement and release
+- Supersedes the intermediate palette/divider notes above: full dark uses #101012 outer canvas, #1B1B1E frame, #151517 content, and #242427 kanban cards. Aurora sidebar dividers are restored and aligned with content headers; kanban columns have no outline.
+- Workbench cards pair sidebar-matched colored icons and key metadata with a tilted snapshot in a page container. Favorites stay visible at the outer top-right; open/more actions remain hover/focus-only.
+- Browsing grids share the automation cards' 320px minimum responsive tracks and 12px gutters. Scheduled/event card footers use spacing instead of dashed dividers.
+- Dark overflow counts use #3D3D43 with light text; selected secondary tabs use #424248. Custom configuration has no default selected fill.
+- New-task shortcuts are lightweight and sit 22px below the composer. Dark composer uses #1D1D20 with a deeper tray.
+- Appearance settings use graphical family/mode previews and labeled accent swatches. Environment details use grouped read-only configuration and version history; editing routes to Build.
+- Verification: 74 theme checks, 16 environment checks, 34 space/task checks, 28 project settings/sticky-header checks, 16 archive checks, 38 task-action checks, 8 focused visual-refinement checks and 10 build domain tests passed. Inline script syntax and git whitespace checks passed.
+- User explicitly authorized push after completion.

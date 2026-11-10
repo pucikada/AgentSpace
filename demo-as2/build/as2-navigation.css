@@ -8,3 +8,16 @@
 .anh-history .icon{width:16px;height:16px}
 .anh-history [data-a="anh-forward"]>.icon{transform:rotate(180deg)}
 @media(max-width:900px){.appbar .anh-search-group{gap:6px}}
+
+/* Navigation hierarchy uses spacing and weight, with primary ink at rest. */
+#demo.slack-shell>.demoside{--as-text-2:var(--as-text)!important;--as-text-muted:var(--as-text)!important;--as-text-subtle:var(--as-text)!important}
+#demo.slack-shell>.demorail{--as-text-muted:var(--as-text)!important;--as-text-subtle:var(--as-text)!important}
+#demo.slack-shell .side-sec-toggle{margin-bottom:4px;line-height:20px}
+#demo.slack-shell .side-sec-toggle em{font-size:11px;font-weight:400}
+#demo.slack-shell .side-sec.side-sec{margin-top:20px}
+#demo.slack-shell .side-sec.side-sec--main{margin-top:0!important}
+#demo.slack-shell .sidehead h3{font-weight:600;line-height:22px}
+
+/* The inset content starts 4px lower; sidebar headers share its divider baseline. */
+:root[data-appearance-family="aurora"]{--as-side-head-h:calc(var(--as-head-h) + 4px);--as-side-head-offset:4px}
+:root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--as-side-head-offset)!important}
