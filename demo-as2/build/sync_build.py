@@ -6,6 +6,18 @@ HERE = Path(__file__).resolve().parent
 
 
 def sync_build(html):
+    for filename, marker, tag in (
+        ('palette.css', 'AS2 PALETTE', 'style'),
+        ('semantic-colors.css', 'AS2 SEMANTIC COLORS', 'style'),
+        ('color-runtime.js', 'AS2 COLOR RUNTIME', 'script'),
+    ):
+        start, end = f'/* {marker} START */', f'/* {marker} END */'
+        chunk = f'{start}\n{(HERE / "design-system" / filename).read_text()}{end}'
+        pattern = re.escape(start) + r'.*?' + re.escape(end)
+        if start in html:
+            html = re.sub(pattern, lambda _: chunk, html, count=1, flags=re.S)
+        else:
+            html = html.replace(f'<{tag}>', f'<{tag}>\n{chunk}\n', 1)
     for stem, marker in (('as2-build', 'AS2 BUILD V36'), ('as2-user-menu', 'AS2 USER MENU'), ('as2-spaces', 'AS2 SPACES'), ('as2-task-config', 'AS2 TASK CONFIG'), ('as2-settings-content', 'AS2 SETTINGS CONTENT'), ('as2-automation-history', 'AS2 AUTOMATION HISTORY'), ('as2-navigation', 'AS2 NAVIGATION')):
         for kind in ('css', 'js'):
             start, end = f'/* {marker} {kind} START */', f'/* {marker} {kind} END */'

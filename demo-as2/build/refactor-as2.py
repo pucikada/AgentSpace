@@ -14,10 +14,18 @@ Run: python3 refactor-as2.py
 """
 from pathlib import Path
 import colorsys, re
+import sys
 
 HERE = Path(__file__).resolve().parent
 SRC = HERE / 'backups/agentspace2.0_mvp.before-affectui.html'
 OUT = HERE / 'agentspace2.0_mvp.as2.html'
+# The current single-file demo contains newer appearance/UI work than the MVP
+# backup. Preserve it by default; the original importer is archival only.
+if '--legacy-mvp' not in sys.argv:
+    from sync_build import sync_build
+    OUT.write_text(sync_build((HERE.parent / 'index.html').read_text()))
+    print(f'Updated {OUT.name} from current index.html (all appearance modes preserved)')
+    raise SystemExit(0)
 # Design system: a vendored copy next to this script wins (repo builds); else the local skill.
 DS = HERE / 'design-system' if (HERE / 'design-system/tokens.css').exists() else Path.home() / '.claude/skills/agentspace2-design-system/references'
 BRIDGE = HERE / 'as2-bridge.css'

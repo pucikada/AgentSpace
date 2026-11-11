@@ -18,13 +18,13 @@ function messageAction(a,v){
 function composerModels(){return [
   ['auto','Auto','spark','','0.5×'],
   ['fast','快速','zap','','0.8×'],
-  ['qwen-max','Qwen3.8-Max',['Q','#615CED'],'','0.5×'],
-  ['qwen-flash','Qwen3.8-Flash',['Q','#615CED'],'Free','0×','0.1×'],
-  ['ds-pro','DeepSeek-V4-Pro',['D','#4D6BFE'],'','0.5×'],
-  ['ds-flash','DeepSeek-Flash',['D','#4D6BFE'],'','0.1×'],
-  ['glm','GLM-5.3',['Z','#1F1F1F'],'','0.8×'],
-  ['glm-flash','GLM-5.3-Flash',['Z','#1F1F1F'],'','0.1×'],
-  ['pangu','盘古 5.5',['盘','#C7000B'],'','0.6×']];}
+  ['qwen-max','Qwen3.8-Max',['Q',asColor('--as-color-615ced')],'','0.5×'],
+  ['qwen-flash','Qwen3.8-Flash',['Q',asColor('--as-color-615ced')],'Free','0×','0.1×'],
+  ['ds-pro','DeepSeek-V4-Pro',['D',asColor('--as-color-4d6bfe')],'','0.5×'],
+  ['ds-flash','DeepSeek-Flash',['D',asColor('--as-color-4d6bfe')],'','0.1×'],
+  ['glm','GLM-5.3',['Z',asColor('--as-color-1f1f1f')],'','0.8×'],
+  ['glm-flash','GLM-5.3-Flash',['Z',asColor('--as-color-1f1f1f')],'','0.1×'],
+  ['pangu','盘古 5.5',['盘',asColor('--as-color-c7000b')],'','0.6×']];}
 function composerModel(){let id='auto';try{id=localStorage.getItem('as2-model-id')||'auto';}catch(e){}return composerModels().find(m=>m[0]===id)||composerModels()[0];}
 function modelLogo(m){return Array.isArray(m[2])?`<span class="as2-model-logo" style="--c:${m[2][1]}">${m[2][0]}</span>`:`<span class="as2-model-logo as2-model-logo--icon">${ico(m[2])}</span>`;}
 function composerTools(){const m=composerModel();return `<span class="as2-composer-tools"><button type="button" class="as2-model" data-a="composer-model" aria-haspopup="menu" aria-expanded="false" title="选择模型">${modelLogo(m)}<span class="as2-model-name">${esc(m[1])}</span>${ico('down')}</button><button type="button" class="co-icon as2-mic" data-a="composer-voice" aria-label="语音输入" title="语音输入">${ico('mic')}</button></span>`;}

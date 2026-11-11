@@ -46,12 +46,12 @@
 .spx-env-summary>span:last-child{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .spx-env-summary .icon{width:13px;height:13px;flex:none}
 .spx-env-counts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--as-text-subtle);min-height:22px}
-.spx-env-counts>button{padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.spx-env-counts>button{padding:0;border:0;background:var(--as-color-transparent);color:inherit;font:inherit;cursor:pointer}
 .spx-env-counts>button:hover{color:var(--as-brand)}
 #demo .spx-env-card:hover .spx-env-card-head h3{color:var(--as-brand)}
 #demo .spx-env-card:focus-visible{outline:2px solid var(--as-brand);outline-offset:3px}
 
-#demo .spx-env-card footer{right:16px;bottom:16px;padding:0;border:0;background:transparent}
+#demo .spx-env-card footer{right:16px;bottom:16px;padding:0;border:0;background:var(--as-color-transparent)}
 
 #modalHost .spx-env-detail-modal{width:min(760px,calc(100vw - 40px))}
 #modalHost .spx-env-detail-modal .modalhead{padding:22px 24px 18px}
@@ -75,7 +75,7 @@
 /* Repository rows sit directly on the space canvas, with no zebra card surface. */
 .spx-repo-list{width:100%;overflow-x:auto}
 #demo .spx-page .spx-repo-list .demotable{width:100%;border-collapse:collapse;min-width:680px}
-#demo .spx-page .spx-repo-list .demotable :is(thead,tbody,tr,th,td){background:transparent!important;box-shadow:none!important}
+#demo .spx-page .spx-repo-list .demotable :is(thead,tbody,tr,th,td){background:var(--as-color-transparent)!important;box-shadow:none!important}
 #demo .spx-page .spx-repo-list .demotable :is(th,td){padding:14px 16px;border:0;border-bottom:1px solid var(--as-border-soft)!important;text-align:left;vertical-align:middle}
 #demo .spx-page .spx-repo-list .demotable th{font-size:12px!important;font-weight:400!important;color:var(--as-text-muted)!important;padding-top:10px;padding-bottom:10px}
 #demo .spx-page .spx-repo-list .demotable td{font-size:13px;color:var(--as-text-2)!important;font-weight:400}
@@ -83,15 +83,15 @@
 #demo .spx-page .spx-repo-list .demotable td:first-child>b{font-size:13px;font-weight:600;color:var(--as-text)}
 #demo .spx-page .spx-repo-list .demotable td small{display:block;max-width:min(42vw,520px);margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:var(--as-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #demo .spx-page .spx-repo-list .demotable :is(th,td):last-child{text-align:right;white-space:nowrap}
-#demo .spx-page .spx-repo-list .demotable .btn.link{padding:0;min-height:28px;border:0;box-shadow:none;background:transparent}
+#demo .spx-page .spx-repo-list .demotable .btn.link{padding:0;min-height:28px;border:0;box-shadow:none;background:var(--as-color-transparent)}
 
 /* Space templates share the Build overview card content and dimensions. */
 .spx-template-grid{margin-top:18px}
 .spx-page .spx-template-grid>.spx-template-card{gap:18px;cursor:default}
 
 #demo .spx-page .asset-subtabs button{display:inline-flex;align-items:center;gap:7px}
-#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:rgba(0,0,0,.055)!important;color:var(--as-text-muted)!important;font-size:11px;font-weight:500;line-height:20px}
-:root[data-theme="dark"] #demo .spx-page .asset-subtabs .spx-count{background:rgba(255,255,255,.1)!important;color:var(--as-text)!important}
+#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:var(--as-color-rgba-0-0-0-p055)!important;color:var(--as-text-muted)!important;font-size:11px;font-weight:500;line-height:20px}
+:root[data-theme="dark"] #demo .spx-page .asset-subtabs .spx-count{background:var(--as-color-rgba-255-255-255-p1)!important;color:var(--as-text)!important}
 #demo .spx-list-tools{justify-content:flex-start;gap:12px;flex-wrap:wrap;margin:16px 0}
 #demo .spx-list-tools select{flex:0 1 auto;width:200px;max-width:100%}
 #demo .spx-list-tools [data-spx-instance-status]{width:124px}

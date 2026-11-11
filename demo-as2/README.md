@@ -8,7 +8,7 @@
 - **组件**：墨色胶囊主按钮、AS2 状态（执行中 / 需要你 / 待验收 / 已完成）、统一的输入类控件、Composer（参考 Kobra Chat Input / affectUI Chat Composer）。
 - **执行可见性**：执行中的任务实时显示当前活动、步骤进度、可展开的工具调用与停止按钮（示例数据）。
 - **设置**：通用 / 外观 / 通知 / Agent 与自主权 / 记忆与进化 / 扩展与权限 / 快捷键 / 数据与隐私。
-- **主题**：浅色、深色，以及两款个性化皮肤——「流光」（液态玻璃，6 套预设配色 + 自定义主色 / 辅色）与「像素」（开发者风：中性灰、等宽字体、像素标题、直角硬边）。
+- **外观**：极简（经典 / Bento，浅 / 深）、幻彩（浅 / 深浅映衬 / 深）、液态玻璃（9 组双色预设 + 自定义 / 壁纸材质）、像素（浅色蓝图 / 深色终端）。完整变量与切换协议见 [DESIGN.md](DESIGN.md)。
 - **侧栏**（参考 Kobra Sidebar）：选中线滑动、悬停高亮、可收起、可拖动调宽（200–360px），项目切换为锚定浮窗。
 - **头像**：Agent 使用 AgentSpace 吉祥物，成员使用 3D 人物形象（见 `build/assets/avatars/CREDITS.md`）。
 - **构建**：默认全屏平铺已构建资产，右上角「创建」下拉提供四类入口；点击资产 / 新建后进入左侧资产列表与右侧编辑页，支持卡片位置过渡与淡入动效。扩展、进化保留各自页内导航。
@@ -40,7 +40,7 @@ node --test demo-as2/build/build-v36.test.cjs
 
 ## 重新生成
 
-`index.html` 由 `build/` 下的脚本生成，原始 MVP 页面保持不动：
+当前 `index.html` 包含比原始 MVP 导入源更新的外观与产品逻辑。默认重建从当前单文件同步已模块化内容，保留这些更新；原始 MVP 页面保持不动：
 
 ```bash
 cd demo-as2/build
@@ -52,7 +52,7 @@ cp agentspace2.0_mvp.as2.html ../index.html
 |---|---|
 | `backups/agentspace2.0_mvp.before-affectui.html` | 原始 MVP 原型（输入，不修改） |
 | `design-system/tokens.css` · `components.css` | AS2 设计 token 与组件样式 |
-| `refactor-as2.py` | 构建脚本：内联设计系统，把遗留样式的颜色 / 圆角 / 阴影 / 字体收敛为 AS2 token，并对模板做必要修改 |
+| `refactor-as2.py` | 默认从当前 index 同步并输出完整副本；`--legacy-mvp` 仅用于历史导入，不可用来覆盖现有 demo |
 | `as2-bridge.css` | 把 demo 自有类名映射到 AS2 组件 |
 | `as2-settings.js` | 设置弹窗与全局偏好、输入方式（键盘才显示焦点环） |
 | `as2-run.js` | 执行过程组件：Thinking Loader、Task List、Tool Call、停止 |
@@ -63,6 +63,19 @@ cp agentspace2.0_mvp.as2.html ../index.html
 | `assets/avatars/` | 头像资源与来源说明（构建时内嵌） |
 | `assets/agentspace-logo.svg` | 品牌 logo（构建时内嵌） |
 | `lucide-extract.py` · `assets/lucide-icons.json` | 图标：从 lucide-react 按语义映射提取 Lucide 图标数据（修改映射后重新运行脚本） |
+
+## 颜色维护
+
+固定颜色只在 `build/design-system/palette.css` 定义。CSS、JS 色板与 inline SVG 使用变量；颜色输入、Canvas 等通过 `color-runtime.js` 读取色板。分类/文件/项目语义和兼容别名见 `semantic-colors.css`。
+
+```bash
+python3 demo-as2/build/sync_build.py
+python3 demo-as2/build/audit-colors.py
+python3 demo-as2/build/test-color-audit.py
+python3 demo-as2/build/update-design-tables.py --check
+```
+
+修改主题后，在隔离浏览器运行 `verification/theme-color-check.js`，更新 `build/design-system/theme-snapshots.json`，再运行 `update-design-tables.py`。静态检查不能替代主题级联与视觉检查；对比度风险和验证范围见 [颜色审校记录](verification/color-audit.md)。
 
 头像菜单的多级外观选择由 `build/as2-user-menu.js` / `.css` 管理跨面板指针通道、延迟关闭与面板定位；只在菜单打开时处理指针，不改变主题数据模型。
 

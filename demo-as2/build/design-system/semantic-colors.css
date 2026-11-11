@@ -1,0 +1,44 @@
+/* Product semantics and compatibility aliases. Raw values belong to palette.css. */
+:root {
+  --as-tone-blue: var(--as-color-2f5bea);
+  --as-tone-violet: var(--as-color-6a4de8);
+  --as-tone-amber: var(--as-color-c27a0a);
+  --as-tone-teal: var(--as-color-0e8f83);
+  --as-tone-slate: var(--as-color-475467);
+  --as-tone-orange: var(--as-color-d4571a);
+  --as-tone-green: var(--as-color-12874e);
+  --as-project-tone-0: var(--as-color-3e63dd);
+  --as-project-tone-1: var(--as-color-7c5cdb);
+  --as-project-tone-2: var(--as-color-1f9d63);
+  --as-project-tone-3: var(--as-color-d9822b);
+  --as-project-tone-4: var(--as-color-d6457a);
+  --as-project-tone-5: var(--as-color-0e9aa7);
+  --as-file-ts-bg: var(--as-color-e0ecff);
+  --as-file-ts-ink: var(--as-color-1d5fd1);
+  --as-file-md-bg: var(--as-color-e3f6ea);
+  --as-file-md-ink: var(--as-color-1a8c4e);
+  --as-muted: var(--as-text-muted);
+  --as-text-3: var(--as-text-muted);
+  --as-success: var(--as-done);
+  --as-selected-bg: var(--as-selected);
+  --as-card-bg: var(--as-card);
+  --as-shadow-float: var(--as-shadow-pop);
+  --as-side-w: var(--as-sidebar-w);
+  --as-thread-w: var(--as-reading-w);
+  --devui-brand: var(--as-brand);
+  --devui-ext-accent: var(--as-brand);
+  --devui-border-radius-full: var(--as-r-pill);
+  --devui-list-item-active-bg: var(--as-selected);
+  --devui-list-item-active-text: var(--as-selected-ink);
+}
+:root.dark, :root[data-theme="dark"] {
+  --as-tone-blue: var(--as-color-86a8ff);
+  --as-tone-violet: var(--as-color-b0a2ff);
+  --as-tone-amber: var(--as-color-f2ba52);
+  --as-tone-teal: var(--as-color-55d6ca);
+  --as-tone-slate: var(--as-color-b4bece);
+  --as-tone-orange: var(--as-color-ff9f72);
+  --as-tone-green: var(--as-color-62d79c);
+  --as-file-ts-bg: var(--as-run-bg); --as-file-ts-ink: var(--as-run);
+  --as-file-md-bg: var(--as-done-bg); --as-file-md-ink: var(--as-done);
+}

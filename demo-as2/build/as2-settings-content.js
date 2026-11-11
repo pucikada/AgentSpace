@@ -56,7 +56,7 @@ function spsNavItems(){
   const q=(s.spsSettingsQuery||'').trim().toLowerCase(),keywords={runtime:'运行时 设备 网络 安全区域 工作路径 部署',welink:'welink 通知 消息 提醒 排队 失败 完成'};
   return SETTINGS_GROUPS.map(([group,ids])=>{const rows=ids.map(id=>SETTINGS_SECTIONS.find(x=>x[0]===id)).filter(Boolean).filter(([id,label])=>!q||(label+' '+(keywords[id]||'')).toLowerCase().includes(q));return rows.length?`<div class="sps-nav-group">${group}</div>${rows.map(([id,label,icon])=>`<button class="sidenav ${s.settingsSection===id?'active':''}" data-a="settings-section" data-v="${id}" ${s.settingsSection===id?'aria-current="page"':''}>${ico(icon)}<span>${label}</span></button>`).join('')}`:'';}).join('')||'<p class="sps-search-empty">没有匹配的设置分类</p>';
 }
-function spsSidebar(){return `<div class="sidehead"><h3>设置</h3></div><div class="sidebody sps-sidebar"><label class="sps-settings-search">${ico('search')}<input data-sps-search aria-label="搜索设置" placeholder="搜索设置" value="${esc(s.spsSettingsQuery||'')}" style="background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important"></label><nav data-sps-nav aria-label="设置分类">${spsNavItems()}</nav></div>`;}
+function spsSidebar(){return `<div class="sidehead"><h3>设置</h3></div><div class="sidebody sps-sidebar"><label class="sps-settings-search">${ico('search')}<input data-sps-search aria-label="搜索设置" placeholder="搜索设置" value="${esc(s.spsSettingsQuery||'')}" style="background:var(--as-color-transparent)!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:0!important"></label><nav data-sps-nav aria-label="设置分类">${spsNavItems()}</nav></div>`;}
 function spsPage(){const sec=s.settingsSection||'general',label=SETTINGS_SECTIONS.find(x=>x[0]===sec)?.[1]||'通用';return `<div class="demopage sps-settings-page"><main class="sps-settings-content ${sec==='runtime'?'is-runtime':''}"><header class="demohead"><div><h1>${label}</h1></div></header>${settingsPane(sec)}</main></div>`;}
 const spsPreviousRenderSide=renderSide,spsPreviousRenderPersonal=renderPersonal;
 renderSide=function(){return s.view==='settings'?spsSidebar():spsPreviousRenderSide();};
@@ -127,6 +127,23 @@ function spsAppearancePane(){
     const value=swatch.dataset.v?.split('|').pop();
     if(/^#[0-9a-f]{6}$/i.test(value))swatch.querySelector('i').style.background=value;
   }
+  const [styleGroup,colorGroup]=view.querySelectorAll(':scope > .settings-group');
+  styleGroup.querySelector('h4').textContent='界面风格';
+  styleGroup.querySelector('h4').insertAdjacentHTML('afterend','<p class="sps-appearance-group-hint">选择界面的整体视觉语言。</p>');
+  const colorCard=colorGroup.querySelector('.settings-card');
+  const modeRows=[...colorCard.children].filter(el=>el.classList.contains('settings-row')&&!el.querySelector('.liquid-custom'));
+  if(modeRows.length){
+    const modeGroup=document.createElement('div');modeGroup.className='settings-group';
+    modeGroup.innerHTML='<h4>主题模式</h4><p class="sps-appearance-group-hint">设置布局与明暗，立即预览页面效果。</p><div class="settings-card"></div>';
+    modeRows.forEach(row=>modeGroup.querySelector('.settings-card').appendChild(row));
+    colorGroup.before(modeGroup);
+    for(const row of modeRows){const title=row.querySelector('.settings-row-copy>b');if(title?.textContent==='主题'||title?.textContent==='底色')title.textContent='明暗模式';}
+  }
+  if(colorCard.querySelector('.ap-swatches')){
+    colorGroup.querySelector('h4').textContent='主题色';
+    colorGroup.querySelector('h4').insertAdjacentHTML('afterend','<p class="sps-appearance-group-hint">选择强调色，背景与状态色随主题协调变化。</p>');
+  }else colorGroup.remove();
+  [...view.querySelectorAll(':scope > .settings-group')].filter(g=>['界面风格','主题模式','主题色'].includes(g.querySelector('h4')?.textContent)).forEach((g,i)=>{g.classList.add('sps-appearance-core');g.querySelector('h4').dataset.step=String(i+1).padStart(2,'0');});
   const intro=document.createElement('p');intro.className='sps-appearance-intro';intro.textContent='选择界面风格、明暗与主题色，调整即时生效。';view.prepend(intro);
   return view.outerHTML;
 }

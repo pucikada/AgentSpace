@@ -27,8 +27,8 @@
 .ahr-run[open]>summary>.icon{transform:rotate(90deg)}
 .ahr-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--as-text-muted);white-space:nowrap}
 .ahr-status>.icon{width:15px;height:15px}
-.ahr-status[data-status=done]{color:var(--as-success,#168452)}.ahr-status[data-status=failed]{color:var(--as-fail,#d74747)}
-.ahr-status[data-status=running]{color:var(--as-brand)}.ahr-status[data-status=review]{color:var(--as-review,#8060d0)}.ahr-status[data-status=wait]{color:var(--as-wait,#c38315)}
+.ahr-status[data-status=done]{color:var(--as-success,var(--as-color-168452))}.ahr-status[data-status=failed]{color:var(--as-fail,var(--as-color-d74747))}
+.ahr-status[data-status=running]{color:var(--as-brand)}.ahr-status[data-status=review]{color:var(--as-review,var(--as-color-8060d0))}.ahr-status[data-status=wait]{color:var(--as-wait,var(--as-color-c38315))}
 .ahr-run-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
 .ahr-run-copy>b{font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
 .ahr-run-copy b>small{font-size:10px;color:var(--as-text-subtle);font-weight:400;background:var(--as-muted-bg);padding:1px 5px;border-radius:4px}
