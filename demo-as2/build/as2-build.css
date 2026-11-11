@@ -209,7 +209,9 @@ html:root body #demo.slack-shell .nt-mode>button{white-space:nowrap}
 .nt-create-options>button:hover{background:var(--as-hover)}.nt-create-options b{display:block;font-size:14px;font-weight:500}.nt-create-options small{display:block;margin-top:5px;color:var(--as-text-muted);font-size:12px}.nt-create-options>button>.icon{width:20px;height:20px}
 @media(max-width:800px){html:root body #demo.slack-shell .nt-mode>button span{font-size:11px}.nt-create-options{gap:8px}.nt-create-options>button{padding:12px}}
 
-html body #demo.slack-shell .ab-overview-grid.ab-start-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))!important}
+html body #demo.slack-shell .ab-overview-grid.ab-start-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:1200px){html body #demo.slack-shell .ab-overview-grid.ab-start-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){html body #demo.slack-shell .ab-overview-grid.ab-start-grid{grid-template-columns:1fr!important}}
 @media(hover:none){.ab-start-card>span:last-child{opacity:1;transform:none}}
 
 /* Stable colors identify the five construction types across entry and asset cards. */

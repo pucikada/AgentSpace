@@ -62,7 +62,7 @@ function automationCard(a,kind){
     <div class="ac-foot"><span class="ac-chip" title="${esc(trigger)}">${ico(kind==='schedule'?'clock':'zap')}<span>${esc(trigger)}</span></span><span class="ac-meta">${ico(a.executorType==='workflow'?'workflow':'agent')}<span>${esc(a.executor)} · ${a.lastRun?'最近 '+esc(a.lastRun):'暂无执行'}</span></span></div>
   </article>`;
 }
-function renderAutomationCards(kind){const rules=boardRules(kind);return `<div class="board-rule-heading"><p class="small muted">${rules.length} 条${kind==='schedule'?'定时':'事件'}规则 · ${kind==='schedule'?'按计划生成实例，也可立即运行。':'按事件与过滤条件生成实例。'}</p></div><div class="automation-list ac-grid">${rules.map(a=>automationCard(a,kind)).join('')||'<div class="tk-empty">'+ico('archive')+'<span>当前筛选下暂无此类规则</span></div>'}</div>`;}
+function renderAutomationCards(kind){const rules=boardRules(kind);return `<div class="automation-list ac-grid">${rules.map(a=>automationCard(a,kind)).join('')||'<div class="tk-empty">'+ico('archive')+'<span>当前筛选下暂无此类规则</span></div>'}</div>`;}
 function collaborationCard(t){
   const ref=collaborationThreadRef(t),wf=collaborationMode(t)==='workflow';
   return `<article class="collaboration-task-card ac-card" data-collaboration-id="${t.id}">
