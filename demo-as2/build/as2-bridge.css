@@ -9,7 +9,7 @@ body { font-size: var(--devui-font-size); line-height: var(--agentspace-line-hei
 :focus-visible { outline: 2px solid var(--agentspace-focus-ring) !important; outline-offset: 2px; }
 .icon { stroke-width: 1.6; }
 kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--devui-border-radius); border: 0;
-  font: 500 var(--agentspace-font-size-micro)/1 var(--agentspace-font-family); color: var(--devui-aide-text); background: var(--agentspace-muted-bg); box-shadow: inset 0 0 0 .5px var(--agentspace-border-strong); }
+  font: 500 var(--devui-font-size-sm)/1 var(--agentspace-font-family); color: var(--devui-aide-text); background: var(--agentspace-muted-bg); box-shadow: inset 0 0 0 .5px var(--agentspace-border-strong); }
 :is(h1, h2, h3, h4) { letter-spacing: 0; font-weight: 600; text-wrap: balance; }
 #demo :is(.demohead h1, .nova-home-head h1, .channelhead h2, .evo-page-head h1) { font-size: var(--devui-font-size-h1-title); line-height: var(--agentspace-line-height-h1); letter-spacing: -.7px; }
 
@@ -22,7 +22,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 .appbar .appbrand .logo { flex: none; width: 28px !important; height: 28px !important; min-width: 28px; background: none !important; box-shadow: none !important; transform: none !important; }
 .appbar .appbrand .logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .appbar .appsearch { background: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-strong) !important; border-radius: var(--devui-border-radius-full) !important;
-  color: var(--agentspace-text-subtle) !important; box-shadow: none !important; font-size: var(--agentspace-font-size-ui); }
+  color: var(--agentspace-text-subtle) !important; box-shadow: none !important; font-size: var(--devui-font-size-md); }
 .appbar .appsearch:hover { border-color: var(--agentspace-text-subtle) !important; }
 .appbar .appactions .guidebtn { background: var(--devui-btn-common-bg) !important; border: 0 !important; color: var(--devui-text) !important; border-radius: var(--devui-border-radius-full) !important; font-weight: 500; }
 .appbar .appactions .guidebtn:hover { background: var(--devui-list-item-hover-bg) !important; }
@@ -34,7 +34,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 #demo.slack-shell .demorail .brandmark { background: var(--agentspace-agent-bg) !important; color: var(--agentspace-agent-color) !important; border-radius: 9px !important;
   box-shadow: inset 0 0 0 .5px var(--agentspace-status-review-line) !important; display: grid; place-items: center; font-size: var(--devui-font-size-card-title) !important; }
 #demo.slack-shell .demorail button { color: var(--devui-aide-text) !important; background: transparent !important; border: 0 !important; border-radius: var(--agentspace-radius-row) !important;
-  font-size: var(--agentspace-font-size-micro) !important; font-weight: 500; box-shadow: none !important; transition: background var(--devui-animation-duration-fast), color var(--devui-animation-duration-fast); }
+  font-size: var(--devui-font-size-sm) !important; font-weight: 500; box-shadow: none !important; transition: background var(--devui-animation-duration-fast), color var(--devui-animation-duration-fast); }
 #demo.slack-shell .demorail button:hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 #demo.slack-shell .demorail button.active { background: var(--devui-base-bg) !important; color: var(--devui-text) !important; box-shadow: var(--agentspace-shadow-tile) !important; }
 #demo.slack-shell .demorail button.active .icon { color: var(--devui-text) !important; }
@@ -45,26 +45,26 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 #demo.slack-shell .sidehead h3 { color: var(--devui-text) !important; font-size: var(--devui-font-size-card-title) !important; letter-spacing: -.2px; }
 #demo.slack-shell .sidehead p { color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-sm) !important; }
 #demo .side-spark { color: var(--agentspace-text-subtle) !important; }
-#demo.slack-shell .sidelabel { color: var(--agentspace-text-subtle) !important; font-size: var(--agentspace-font-size-micro) !important; font-weight: 500; letter-spacing: .4px; }
+#demo.slack-shell .sidelabel { color: var(--agentspace-text-subtle) !important; font-size: var(--devui-font-size-sm) !important; font-weight: 500; letter-spacing: .4px; }
 #demo.slack-shell .sidenav { height: 34px; min-height: 34px !important; padding: 0 10px !important; margin-bottom: 2px !important; gap: 10px !important; border-radius: var(--agentspace-radius-row) !important;
-  font-size: var(--agentspace-font-size-ui) !important; color: var(--devui-text-weak) !important; background: transparent !important; border: 0 !important; box-shadow: none !important; font-weight: 400; }
+  font-size: var(--devui-font-size-md) !important; color: var(--devui-text-weak) !important; background: transparent !important; border: 0 !important; box-shadow: none !important; font-weight: 400; }
 #demo.slack-shell .sidenav .icon { width: 16px; height: 16px; color: var(--devui-aide-text) !important; }
 #demo.slack-shell .sidenav:hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 #demo.slack-shell .sidenav.active { background: var(--devui-base-bg) !important; color: var(--devui-text) !important; font-weight: 500 !important; box-shadow: var(--agentspace-shadow-tile) !important; }
 #demo.slack-shell .sidenav.active .icon { color: var(--devui-text) !important; }
-#demo.slack-shell .sidenav small { background: transparent !important; color: var(--agentspace-text-subtle) !important; font-size: var(--agentspace-font-size-micro) !important; font-variant-numeric: tabular-nums; }
+#demo.slack-shell .sidenav small { background: transparent !important; color: var(--agentspace-text-subtle) !important; font-size: var(--devui-font-size-sm) !important; font-variant-numeric: tabular-nums; }
 #demo.slack-shell .sidenav.active small { color: var(--devui-aide-text) !important; }
-#demo.slack-shell .sidenav.compact { height: 30px; min-height: 30px !important; font-size: var(--agentspace-font-size-ui) !important; }
+#demo.slack-shell .sidenav.compact { height: 30px; min-height: 30px !important; font-size: var(--devui-font-size-md) !important; }
 #demo.slack-shell .projectswitch { background: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-soft) !important; border-radius: var(--agentspace-radius-card) !important; box-shadow: none !important; color: var(--devui-text) !important; }
 #demo.slack-shell .projecticon { background: var(--agentspace-agent-bg) !important; color: var(--agentspace-agent-color) !important; border-radius: var(--devui-border-radius-card) !important; box-shadow: none !important; }
 #demo.slack-shell .sidefoot, #demo.slack-shell .sidefoot > div[style] { color: var(--agentspace-text-subtle) !important; }
-#demo.slack-shell .capability-shortcuts button { color: var(--devui-aide-text) !important; background: transparent !important; border: 0 !important; border-radius: var(--agentspace-radius-row) !important; font-size: var(--agentspace-font-size-ui) !important; }
+#demo.slack-shell .capability-shortcuts button { color: var(--devui-aide-text) !important; background: transparent !important; border: 0 !important; border-radius: var(--agentspace-radius-row) !important; font-size: var(--devui-font-size-md) !important; }
 #demo.slack-shell .capability-shortcuts button:hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 
 #demo.slack-shell .demoarea, body[data-view] #demo.slack-shell .demoarea {
   background: var(--agentspace-panel-bg) !important; border: 1px solid var(--agentspace-panel-stroke) !important; border-radius: var(--agentspace-radius-panel) !important;
   box-shadow: var(--agentspace-shadow-panel) !important; margin: 0 var(--agentspace-frame-gap) var(--agentspace-frame-gap) 0; }
-#demo.slack-shell .democrumb { background: transparent !important; border-bottom: 1px solid var(--devui-line) !important; color: var(--devui-aide-text) !important; font-size: var(--agentspace-font-size-ui) !important; height: 48px; }
+#demo.slack-shell .democrumb { background: transparent !important; border-bottom: 1px solid var(--devui-line) !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; height: 48px; }
 #demo.slack-shell .democrumb b { color: var(--devui-aide-text) !important; font-weight: 400; }
 #demo.slack-shell .democrumb > span:not(.spacer) { color: var(--devui-text) !important; }
 #demo.slack-shell :is(h1, h2, h3, h4) { color: var(--devui-text) !important; }
@@ -74,7 +74,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 #demo .btn, #modalHost .btn, .toast .btn {
   position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   height: 32px; min-height: 32px !important; padding: 0 12px !important; border: 1px solid transparent !important; border-radius: var(--devui-border-radius-full) !important;
-  font-size: var(--agentspace-font-size-ui) !important; font-weight: 500 !important; white-space: nowrap; cursor: pointer;
+  font-size: var(--devui-font-size-md) !important; font-weight: 500 !important; white-space: nowrap; cursor: pointer;
   background: var(--devui-btn-common-bg) !important; color: var(--devui-btn-common-color-hover) !important; box-shadow: none !important;
   transition: background var(--devui-animation-duration-fast) var(--devui-animation-ease-out), transform var(--devui-animation-duration-fast) var(--agentspace-ease-raise); }
 #demo .btn:hover, #modalHost .btn:hover { background: var(--devui-list-item-hover-bg) !important; }
@@ -104,7 +104,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 /* ---------- Tag → Badge / Status（颜色 + 形状 + 文字） ---------- */
 #demo .tag, #modalHost .tag {
   display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px !important; border: 0 !important; border-radius: var(--devui-border-radius-full) !important;
-  font-size: var(--agentspace-font-size-micro) !important; font-weight: 500 !important; line-height: 1; white-space: nowrap;
+  font-size: var(--devui-font-size-sm) !important; font-weight: 500 !important; line-height: 1; white-space: nowrap;
   color: var(--devui-aide-text) !important; background: var(--agentspace-muted-bg) !important; box-shadow: inset 0 0 0 .5px var(--agentspace-border-soft) !important; }
 #demo .tag:is(.green, .teal, .status-done), #modalHost .tag:is(.green, .teal, .status-done) { color: var(--devui-success) !important; background: var(--devui-success-bg) !important; box-shadow: none !important; }
 #demo .tag:is(.gold, .status-pending), #modalHost .tag:is(.gold, .status-pending) { color: var(--devui-warning) !important; background: var(--devui-warning-bg) !important; box-shadow: none !important; }
@@ -134,7 +134,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 /* ---------- Tabs ---------- */
 #demo.slack-shell :is(.dtabs, .projecttabs, .board-main-tabs, .ms-primary-tabs, .evo-tabs) { border-color: var(--devui-line) !important; background: transparent !important; }
 #demo.slack-shell :is(.dtabs, .projecttabs, .board-main-tabs, .ms-primary-tabs, .evo-tabs) > button {
-  color: var(--devui-aide-text) !important; font-size: var(--agentspace-font-size-ui) !important; font-weight: 500; background: transparent !important; border-radius: 0 !important; box-shadow: none !important; }
+  color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; font-weight: 500; background: transparent !important; border-radius: 0 !important; box-shadow: none !important; }
 #demo.slack-shell :is(.dtabs, .projecttabs, .board-main-tabs, .ms-primary-tabs, .evo-tabs) > button:hover { color: var(--devui-text) !important; }
 #demo.slack-shell :is(.dtabs, .projecttabs, .board-main-tabs, .ms-primary-tabs, .evo-tabs) > button.active {
   color: var(--devui-text) !important; border-bottom: 2px solid var(--devui-text) !important; box-shadow: none !important; }
@@ -143,7 +143,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
   display: inline-flex; gap: 2px; padding: 2px !important; border: 0 !important; border-radius: var(--devui-border-radius-full) !important; background: var(--agentspace-muted-bg) !important; box-shadow: none !important; }
 #demo.slack-shell :is(.dtoolbar .dtabs, .ext-toolbar .dtabs, .board-status-summary, .co-members-filters, .wc-extension-filters, .wb-preview-tabs, .wb-mobile-switch, .wbh-mobile-tabs, .import-method-tabs, .ms-filter-tabs) > button {
   min-height: 26px; padding: 3px 10px !important; border: 0 !important; border-radius: var(--devui-border-radius-full) !important; background: transparent !important;
-  color: var(--devui-aide-text) !important; font-size: var(--agentspace-font-size-ui) !important; box-shadow: none !important; }
+  color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; box-shadow: none !important; }
 #demo.slack-shell :is(.dtoolbar .dtabs, .ext-toolbar .dtabs, .board-status-summary, .co-members-filters, .wc-extension-filters, .wb-preview-tabs, .wb-mobile-switch, .wbh-mobile-tabs, .import-method-tabs, .ms-filter-tabs) > button:is(.active, .selected, [aria-pressed="true"]) {
   background: var(--devui-base-bg) !important; color: var(--devui-text) !important; box-shadow: var(--agentspace-shadow-tile) !important; }
 
@@ -151,7 +151,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 #demo :is(input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea),
 #modalHost :is(input:not([type=checkbox]):not([type=radio]):not([type=range]), select, textarea) {
   background: var(--devui-base-bg); color: var(--devui-text); border: 1px solid var(--agentspace-border-strong); border-radius: var(--devui-border-radius-card);
-  font-size: var(--agentspace-font-size-ui); transition: border-color var(--devui-animation-duration-fast), box-shadow var(--devui-animation-duration-fast); }
+  font-size: var(--devui-font-size-md); transition: border-color var(--devui-animation-duration-fast), box-shadow var(--devui-animation-duration-fast); }
 #demo :is(input, select, textarea):focus, #modalHost :is(input, select, textarea):focus { border-color: var(--devui-brand) !important; box-shadow: 0 0 0 4px var(--devui-form-control-interactive-outline) !important; outline: none; }
 #demo :is(input, textarea)::placeholder, #modalHost :is(input, textarea)::placeholder { color: var(--agentspace-text-subtle); }
 input[type=checkbox], input[type=radio], input[type=range] { accent-color: var(--devui-brand); }
@@ -190,7 +190,7 @@ input[type=checkbox], input[type=radio], input[type=range] { accent-color: var(-
 /* ---------- Tables ---------- */
 #demo.slack-shell :is(.tablewrap, .evo-table-scroll) { background: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-soft) !important; border-radius: var(--agentspace-radius-card) !important; box-shadow: none !important; }
 #demo.slack-shell :is(.demotable, .evo-table-scroll table, .wb-dash-table) th { background: var(--agentspace-stage-bg) !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-sm) !important; font-weight: 500 !important; border-color: var(--devui-line) !important; }
-#demo.slack-shell :is(.demotable, .evo-table-scroll table, .wb-dash-table) td { border-color: var(--devui-line) !important; font-size: var(--agentspace-font-size-ui); }
+#demo.slack-shell :is(.demotable, .evo-table-scroll table, .wb-dash-table) td { border-color: var(--devui-line) !important; font-size: var(--devui-font-size-md); }
 #demo.slack-shell :is(.demotable, .evo-table-scroll table, .wb-dash-table) tbody tr:hover { background: var(--devui-list-item-hover-bg) !important; }
 
 /* ---------- Kanban ---------- */
@@ -211,7 +211,7 @@ input[type=checkbox], input[type=radio], input[type=range] { accent-color: var(-
 .modalfoot { border-color: var(--devui-line) !important; background: transparent !important; }
 .modal p { color: var(--devui-aide-text); }
 .toast { display: inline-flex; align-items: center; gap: 10px; background: var(--devui-base-bg) !important; color: var(--devui-text) !important; border: 0 !important;
-  border-radius: var(--agentspace-radius-card) !important; box-shadow: var(--agentspace-shadow-pop) !important; font-size: var(--agentspace-font-size-ui) !important; padding: 10px 16px !important; }
+  border-radius: var(--agentspace-radius-card) !important; box-shadow: var(--agentspace-shadow-pop) !important; font-size: var(--devui-font-size-md) !important; padding: 10px 16px !important; }
 :is(#demo, #modalHost, body) :is(.wc-popover, .searchresult-list, .ms-menu-list, .wc-quick-menu, .wc-file-popover) {
   background: var(--devui-base-bg) !important; border: 0 !important; border-radius: var(--agentspace-radius-card) !important; box-shadow: var(--agentspace-shadow-pop) !important; }
 .searchresult { border-radius: var(--agentspace-radius-row) !important; }
@@ -233,7 +233,7 @@ input[type=checkbox], input[type=radio], input[type=range] { accent-color: var(-
 /* ---------- Eyebrow / kicker：中性小标题（品牌蓝不做装饰） ---------- */
 #demo.slack-shell :is(.evo-eyebrow, .hero-eyebrow, .kicker, .nova-eyebrow, .wb-dash-kicker, .wb-eyebrow, .wc-kicker, .evo-stage-tag),
 #modalHost :is(.kicker, .wc-kicker) {
-  color: var(--devui-aide-text) !important; background: transparent !important; font-size: var(--agentspace-font-size-micro) !important; font-weight: 500 !important; letter-spacing: .4px; }
+  color: var(--devui-aide-text) !important; background: transparent !important; font-size: var(--devui-font-size-sm) !important; font-weight: 500 !important; letter-spacing: .4px; }
 #demo.slack-shell .nova-hero h1 span, #demo.slack-shell .nova-hero-copy :is(em, strong, span) { color: var(--devui-aide-text) !important; }
 
 /* ---------- Icon tiles：工具 / 对象图标统一为白色 tile ---------- */
@@ -294,7 +294,7 @@ input[type=checkbox], input[type=radio], input[type=range] { accent-color: var(-
 
 /* ---------- Agent 回复：身份 + 内容，无外框；内嵌任务卡 = 16px 决策卡 ---------- */
 #demo.slack-shell .chatbubble:not(.mine) { background: transparent !important; border: 0 !important; box-shadow: none !important; padding-left: 0 !important; padding-right: 0 !important; max-width: var(--agentspace-reading-width) !important; }
-#demo.slack-shell .chatbubble:not(.mine) > p { font-size: var(--agentspace-font-size-reading); line-height: var(--agentspace-line-height-reading); color: var(--devui-text) !important; }
+#demo.slack-shell .chatbubble:not(.mine) > p { font-size: var(--devui-font-size); line-height: var(--agentspace-line-height-reading); color: var(--devui-text) !important; }
 #demo.slack-shell .chatbubble .runcard { border-radius: var(--devui-border-radius-card-xl) !important; max-width: var(--agentspace-decision-width); }
 #demo.slack-shell .chatbubble.mine { padding: 8px 14px !important; border-end-end-radius: var(--devui-border-radius-card) !important; }
 
@@ -402,7 +402,7 @@ body[data-view="evolution"] #demo.slack-shell .demoarea { background: var(--agen
 .settings-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); height: 100%; min-height: 0; }
 .settings-nav { display: flex; flex-direction: column; gap: 2px; padding: 12px 8px; border-right: 1px solid var(--devui-line); background: var(--agentspace-stage-bg); overflow: auto; }
 .settings-nav-item { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border: 0; border-radius: var(--agentspace-radius-row); background: transparent;
-  color: var(--devui-text-weak); font-size: var(--agentspace-font-size-ui); text-align: start; cursor: pointer; transition: background var(--devui-animation-duration-fast); }
+  color: var(--devui-text-weak); font-size: var(--devui-font-size-md); text-align: start; cursor: pointer; transition: background var(--devui-animation-duration-fast); }
 .settings-nav-item .icon { width: 16px; height: 16px; color: var(--devui-aide-text); }
 .settings-nav-item:hover { background: var(--devui-list-item-hover-bg); color: var(--devui-text); }
 .settings-nav-item.active { background: var(--devui-base-bg); color: var(--devui-text); font-weight: 500; box-shadow: var(--agentspace-shadow-tile); }
@@ -415,14 +415,14 @@ body[data-view="evolution"] #demo.slack-shell .demoarea { background: var(--agen
 .settings-row { display: flex; align-items: center; gap: 16px; min-height: 56px; padding: 10px 0; }
 .settings-row + .settings-row { border-top: 1px solid var(--devui-line); }
 .settings-row-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.settings-row-copy b { font-size: var(--agentspace-font-size-ui); font-weight: 500; color: var(--devui-text); }
+.settings-row-copy b { font-size: var(--devui-font-size-md); font-weight: 500; color: var(--devui-text); }
 .settings-row-copy small { font-size: var(--devui-font-size-sm); line-height: var(--agentspace-line-height-meta); color: var(--devui-aide-text); }
 .settings-row-control { flex: none; display: flex; align-items: center; gap: 8px; }
-.settings-value { font-size: var(--agentspace-font-size-ui); color: var(--devui-aide-text); }
+.settings-value { font-size: var(--devui-font-size-md); color: var(--devui-aide-text); }
 .settings-note { margin: 8px 2px 0; font-size: var(--devui-font-size-sm); line-height: var(--agentspace-line-height-meta); color: var(--devui-aide-text); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-.settings-select { height: 32px; min-width: 200px; padding: 0 10px; border-radius: var(--devui-border-radius-card); border: 1px solid var(--agentspace-border-strong); background: var(--devui-base-bg); color: var(--devui-text); font-size: var(--agentspace-font-size-ui); }
+.settings-select { height: 32px; min-width: 200px; padding: 0 10px; border-radius: var(--devui-border-radius-card); border: 1px solid var(--agentspace-border-strong); background: var(--devui-base-bg); color: var(--devui-text); font-size: var(--devui-font-size-md); }
 .settings-keys { display: inline-flex; gap: 4px; }
-.settings-keys kbd { min-width: 24px; height: 22px; font-size: var(--agentspace-font-size-micro); }
+.settings-keys kbd { min-width: 24px; height: 22px; font-size: var(--devui-font-size-sm); }
 .settings-saved { margin-inline-end: auto; display: inline-flex; align-items: center; gap: 6px; font-size: var(--devui-font-size-sm); color: var(--devui-aide-text); }
 .settings-saved .icon { width: 14px; height: 14px; color: var(--devui-success); }
 .settings-theme-options { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 14px 0; }
@@ -506,7 +506,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 
 :is(#demo, #modalHost) :is(input:not([type]), input[type=text], input[type=search], input[type=number], input[type=email], input[type=url], input[type=date], input[type=time], select) {
   box-sizing: border-box; height: var(--agentspace-control-height) !important; min-height: 0 !important; padding: 0 12px !important; margin: 0;
-  font: 400 var(--agentspace-font-size-ui)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important;
+  font: 400 var(--devui-font-size-md)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important;
   background-color: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-strong) !important; border-radius: var(--devui-border-radius-card) !important; box-shadow: none !important; }
 /* :not([multiple]) lifts specificity to match the generic control rule above (:is() takes its highest argument). */
 :is(#demo, #modalHost) select:not([multiple]) {
@@ -514,7 +514,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
   background-image: var(--agentspace-chevron) !important; background-repeat: no-repeat !important; background-position: right 10px center !important; background-size: 16px 16px !important; }
 :is(#demo, #modalHost) :is(input, select):hover:not(:focus):not(:disabled) { border-color: var(--agentspace-text-subtle) !important; }
 :is(#demo, #modalHost) textarea:not(:is(.composer, .channelcomposer, .ms-composer, .wc-composer-card, .co-thread-compose, .wb-composer) textarea) {
-  box-sizing: border-box; min-height: 72px; padding: 8px 12px !important; font: 400 var(--agentspace-font-size-ui)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important;
+  box-sizing: border-box; min-height: 72px; padding: 8px 12px !important; font: 400 var(--devui-font-size-md)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important;
   background: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-strong) !important; border-radius: var(--devui-border-radius-card) !important; box-shadow: none !important; resize: vertical; }
 :is(#demo, #modalHost) :is(input, select, textarea):focus { border-color: var(--devui-brand) !important; box-shadow: 0 0 0 4px var(--devui-form-control-interactive-outline) !important; outline: none !important; }
 
@@ -552,7 +552,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
   border-color: var(--agentspace-border-strong) !important; box-shadow: 0 0 0 4px var(--devui-form-control-interactive-outline) !important; }
 #demo.slack-shell :is(.composer, .ms-composer, .wc-composer-card, .wb-composer) textarea {
   display: block; width: 100% !important; height: auto; min-height: 48px !important; max-height: 200px !important; padding: 6px 10px 4px !important; margin: 0 !important;
-  font: 400 var(--agentspace-font-size-reading)/24px var(--agentspace-font-family) !important; color: var(--devui-text) !important; resize: none !important; field-sizing: content;
+  font: 400 var(--devui-font-size)/24px var(--agentspace-font-family) !important; color: var(--devui-text) !important; resize: none !important; field-sizing: content;
   background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; outline: none !important; }
 #demo.slack-shell :is(.composer, .ms-composer, .wc-composer-card, .wb-composer) textarea::placeholder { color: var(--agentspace-text-subtle); }
 
@@ -564,7 +564,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
   flex: 1; min-width: 0; padding: 0 6px; font-size: var(--devui-font-size-sm) !important; color: var(--agentspace-text-subtle) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: none !important; }
 #demo.slack-shell :is(.composerfoot, .ms-compose-toolbar) .spacer + * , #demo.slack-shell .composerfoot > .spacer { flex: 1; }
 #demo.slack-shell .composerfoot:has(> .spacer) > .co-compose-hint { flex: 0 1 auto; }
-#demo.slack-shell :is(.composerfoot, .ms-compose-toolbar) kbd { height: 18px; min-width: 18px; padding: 0 5px; margin: 0 2px; font-size: var(--agentspace-font-size-micro); border: 0 !important;
+#demo.slack-shell :is(.composerfoot, .ms-compose-toolbar) kbd { height: 18px; min-width: 18px; padding: 0 5px; margin: 0 2px; font-size: var(--devui-font-size-sm); border: 0 !important;
   background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; box-shadow: inset 0 0 0 .5px var(--agentspace-border-strong) !important; border-radius: var(--devui-border-radius) !important; }
 #demo.slack-shell .ms-compose-toolbar i { font-style: normal; margin: 0 2px; }
 
@@ -577,7 +577,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 #demo.slack-shell :is(.composer, .wc-composer-card) :is(.composerfoot, .wc-compose-foot) :is(.co-icon, .wc-plus) .icon { width: 18px; height: 18px; }
 /* @Agent：执行者选择 = 范围按钮（AS2 composer__scope） */
 #demo.slack-shell .composerfoot .co-mention { height: 32px; padding: 0 10px !important; border: 0 !important; border-radius: var(--devui-border-radius-full) !important;
-  background: var(--devui-base-bg) !important; color: var(--devui-text) !important; box-shadow: var(--agentspace-shadow-tile) !important; font-size: var(--agentspace-font-size-ui) !important; font-weight: 500; }
+  background: var(--devui-base-bg) !important; color: var(--devui-text) !important; box-shadow: var(--agentspace-shadow-tile) !important; font-size: var(--devui-font-size-md) !important; font-weight: 500; }
 
 /* 发送：36px 墨色圆钮（文字保留为可访问名称） */
 #demo.slack-shell :is(.composerfoot, .ms-compose-toolbar) .btn.primary, #demo.slack-shell .wc-send {
@@ -613,11 +613,11 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 /* Message：身份 + 内容；人圆 / Agent 方；角色为中性徽标 */
 #demo.slack-shell :is(.co-message, .ms-message) { background: transparent !important; border: 0 !important; box-shadow: none !important; }
 #demo.slack-shell .co-message-meta, #demo.slack-shell .ms-message-meta { display: flex; align-items: baseline; gap: 8px; }
-#demo.slack-shell :is(.co-message-meta, .ms-message-meta) b { font-size: var(--agentspace-font-size-ui) !important; font-weight: 600 !important; color: var(--devui-text) !important; }
+#demo.slack-shell :is(.co-message-meta, .ms-message-meta) b { font-size: var(--devui-font-size-md) !important; font-weight: 600 !important; color: var(--devui-text) !important; }
 #demo.slack-shell :is(.co-message-meta, .ms-message-meta) time { font-size: var(--devui-font-size-sm) !important; color: var(--agentspace-text-subtle) !important; font-variant-numeric: tabular-nums; }
 #demo.slack-shell :is(.co-message-text, .ms-message-content > p) { font-size: var(--devui-font-size) !important; line-height: var(--agentspace-line-height-body) !important; color: var(--devui-text) !important; }
 #demo.slack-shell .co-role { display: inline-flex; align-items: center; height: 18px; padding: 0 6px !important; border-radius: var(--agentspace-radius-sm) !important; border: 0 !important;
-  background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; font-size: var(--agentspace-font-size-micro) !important; font-weight: 500; }
+  background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-sm) !important; font-weight: 500; }
 #demo.slack-shell .co-message:has(.co-avatar.agent) .co-role { background: var(--agentspace-agent-bg) !important; color: var(--agentspace-agent-color) !important; }
 #demo.slack-shell :is(.co-avatar.agent, .ms-avatar.agent) { border-radius: var(--devui-border-radius-card) !important; }
 #demo.slack-shell .co-message-actions button, #demo.slack-shell .co-reaction { border: 0 !important; background: transparent !important; color: var(--agentspace-text-subtle) !important; border-radius: var(--devui-border-radius-full) !important; }
@@ -628,7 +628,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 #demo.slack-shell .wb-message.me { margin-left: auto; max-width: 88%; padding: 8px 14px !important; background: var(--agentspace-sunken-bg) !important;
   border-radius: var(--agentspace-radius-panel) !important; border-end-end-radius: var(--devui-border-radius-card) !important; }
 #demo.slack-shell .wb-message:not(.me) { background: transparent !important; padding: 0 !important; }
-#demo.slack-shell .wb-message > header { color: var(--devui-text) !important; font-size: var(--agentspace-font-size-ui) !important; font-weight: 600 !important; gap: 8px !important; }
+#demo.slack-shell .wb-message > header { color: var(--devui-text) !important; font-size: var(--devui-font-size-md) !important; font-weight: 600 !important; gap: 8px !important; }
 #demo.slack-shell .wb-message > header small { color: var(--agentspace-text-subtle) !important; font-weight: 400 !important; }
 #demo.slack-shell .wb-message > p { font-size: var(--devui-font-size) !important; line-height: var(--agentspace-line-height-body) !important; color: var(--devui-text) !important; }
 #demo.slack-shell .wb-message-context { font-size: var(--devui-font-size-sm) !important; color: var(--devui-aide-text) !important; }
@@ -639,12 +639,12 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
   background: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-soft) !important; box-shadow: none !important; }
 #demo.slack-shell .wb-generated-card:hover { border-color: var(--agentspace-border-strong) !important; }
 #demo.slack-shell .wb-generated-card .icon:first-child { width: 32px; height: 32px; padding: 7px; border-radius: var(--devui-border-radius-card); background: var(--agentspace-stage-bg); box-shadow: inset 0 0 0 1px var(--agentspace-border-soft); color: var(--devui-aide-text); flex: none; }
-#demo.slack-shell .wb-generated-card b { color: var(--devui-text) !important; font-size: var(--agentspace-font-size-ui) !important; }
+#demo.slack-shell .wb-generated-card b { color: var(--devui-text) !important; font-size: var(--devui-font-size-md) !important; }
 #demo.slack-shell .wb-generated-card small { color: var(--devui-aide-text) !important; }
 
 /* 决策卡：Plan / 共识 / 任务确认 = 16px 有边界卡，标题正文色 */
 #demo.slack-shell :is(.co-decision, .wc-plan, .runcard) { padding: 16px !important; border-radius: var(--devui-border-radius-card-xl) !important; background: var(--devui-base-bg) !important;
-  border: 1px solid var(--agentspace-border-soft) !important; box-shadow: none !important; color: var(--devui-aide-text) !important; font-size: var(--agentspace-font-size-ui) !important; }
+  border: 1px solid var(--agentspace-border-soft) !important; box-shadow: none !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; }
 #demo.slack-shell .co-decision > strong, #demo.slack-shell .wc-plan > h2, #demo.slack-shell .runcard h4 {
   display: block; margin: 0 0 4px; font-size: var(--devui-font-size-card-title) !important; line-height: var(--agentspace-line-height-h3) !important; font-weight: 600 !important; color: var(--devui-text) !important; }
 #demo.slack-shell .co-decision > div { margin-top: 12px; display: flex; gap: 8px; justify-content: flex-end; }
@@ -656,7 +656,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 
 /* 话题 / 线程分隔：细线 + 居中弱文字 */
 #demo.slack-shell :is(.co-divider, .ms-day) { color: var(--agentspace-text-subtle) !important; font-size: var(--devui-font-size-sm) !important; }
-#demo.slack-shell .co-root-label { background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; border: 0 !important; border-radius: var(--agentspace-radius-sm) !important; font-size: var(--agentspace-font-size-micro) !important; }
+#demo.slack-shell .co-root-label { background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; border: 0 !important; border-radius: var(--agentspace-radius-sm) !important; font-size: var(--devui-font-size-sm) !important; }
 
 /* ===================== 执行可见性（Thinking Loader · Task List · Tool Call） ===================== */
 .as2-run { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 4px; }
@@ -665,7 +665,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 .as2-run-head .spacer { flex: 1; }
 .as2-run-meta { font-size: var(--devui-font-size-sm); color: var(--agentspace-text-subtle); }
 .as2-run[data-mode="compact"] .as-thinking { height: auto; padding: 0; background: none; box-shadow: none; }
-.as2-run .as-thinking { font-size: var(--agentspace-font-size-ui); }
+.as2-run .as-thinking { font-size: var(--devui-font-size-md); }
 .as2-run .as-progress { height: 4px; }
 .as2-run .as-tasklist { border-radius: var(--agentspace-radius-card); }
 .as2-run .as-tasklist__head { color: var(--devui-text); }
@@ -746,7 +746,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 #demo.slack-shell .sidenav.active .icon { stroke-width: 2.1; }
 /* 计数徽标：20px 胶囊、10% 底 */
 #demo.slack-shell .sidenav small { margin-left: auto; display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 6px;
-  border-radius: var(--devui-border-radius-full); background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; font-size: var(--agentspace-font-size-micro) !important; font-variant-numeric: tabular-nums; }
+  border-radius: var(--devui-border-radius-full); background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-sm) !important; font-variant-numeric: tabular-nums; }
 #demo.slack-shell .sidenav small:empty { display: none; }
 
 /* 选中线：2px，贴行左侧外 2px，切换时 300ms 滑动 */
@@ -772,8 +772,8 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 #demo.slack-shell .sidehead--switch .projectswitch:hover, #demo.slack-shell .sidehead--switch .projectswitch[aria-expanded="true"] { background: var(--devui-list-item-hover-bg) !important; }
 #demo.slack-shell .sidehead--switch .projectswitch:active { transform: scale(.98); }
 #demo.slack-shell .sidehead--switch .projecticon { width: 24px !important; height: 24px !important; font-size: 12px !important; border-radius: var(--agentspace-radius-sm) !important; flex: none; }
-#demo.slack-shell .sidehead--switch .projectswitch b { display: block; font-size: var(--agentspace-font-size-ui); font-weight: 600; color: var(--devui-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#demo.slack-shell .sidehead--switch .projectswitch small { display: block; font-size: var(--agentspace-font-size-micro); color: var(--devui-aide-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#demo.slack-shell .sidehead--switch .projectswitch b { display: block; font-size: var(--devui-font-size-md); font-weight: 600; color: var(--devui-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#demo.slack-shell .sidehead--switch .projectswitch small { display: block; font-size: var(--devui-font-size-sm); color: var(--devui-aide-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #demo.slack-shell .as2-updown { width: 14px; height: 14px; color: var(--agentspace-text-subtle); flex: none; }
 .as2-side-toggle { display: inline-grid; place-items: center; width: 28px; height: 28px; flex: none; padding: 0; border: 0; border-radius: var(--devui-border-radius-card);
   background: transparent; color: var(--devui-aide-text); cursor: pointer; transition: background 150ms, color 150ms, transform 150ms var(--agentspace-ease-raise); }
@@ -803,14 +803,14 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 .as2-switcher-search { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 8px 0 10px; margin-bottom: 4px; border-bottom: 1px solid var(--devui-line); }
 .as2-switcher-search .icon { width: 14px; height: 14px; color: var(--devui-aide-text); flex: none; }
 .as2-switcher-search input { flex: 1; min-width: 0; height: 100% !important; padding: 0 !important; border: 0 !important; background: transparent !important; box-shadow: none !important;
-  font: 400 var(--agentspace-font-size-ui)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important; outline: none !important; }
-.as2-switcher-search kbd { height: 20px; padding: 0 5px; font-size: var(--agentspace-font-size-micro); border-radius: var(--agentspace-radius-sm); }
+  font: 400 var(--devui-font-size-md)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important; outline: none !important; }
+.as2-switcher-search kbd { height: 20px; padding: 0 5px; font-size: var(--devui-font-size-sm); border-radius: var(--agentspace-radius-sm); }
 .as2-switcher-list { overflow: auto; display: flex; flex-direction: column; gap: 1px; }
 .as2-switcher-item { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 36px; padding: 6px 8px; border: 0; border-radius: var(--agentspace-radius-row);
-  background: transparent; color: var(--devui-text); font: 400 var(--agentspace-font-size-ui)/20px var(--agentspace-font-family); text-align: start; cursor: pointer; transition: background 120ms; }
+  background: transparent; color: var(--devui-text); font: 400 var(--devui-font-size-md)/20px var(--agentspace-font-family); text-align: start; cursor: pointer; transition: background 120ms; }
 .as2-switcher-item:hover, .as2-switcher-item:focus-visible { background: var(--devui-list-item-hover-bg); outline: none !important; }
 .as2-switcher-item .projecticon { width: 22px !important; height: 22px !important; display: grid; place-items: center; flex: none; border-radius: var(--agentspace-radius-sm);
-  background: var(--agentspace-agent-bg); color: var(--agentspace-agent-color); font-size: var(--agentspace-font-size-micro); font-weight: 600; }
+  background: var(--agentspace-agent-bg); color: var(--agentspace-agent-color); font-size: var(--devui-font-size-sm); font-weight: 600; }
 .as2-switcher-name { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .as2-switcher-item[aria-selected="true"] .as2-switcher-name { font-weight: 500; }
 .as2-switcher-check .icon { width: 16px; height: 16px; color: var(--devui-text); }
@@ -836,7 +836,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
   border-radius: 0 !important; background: transparent !important; box-shadow: none !important; }
 #demo.slack-shell :is(.projecttabs, .board-main-tabs, .channelhead .dtabs, .demohead + .dtabs) > button {
   height: auto !important; padding: 12px 1px !important; margin: 0 0 -1px !important; border: 0 !important; border-bottom: 2px solid transparent !important;
-  font-size: var(--agentspace-font-size-ui) !important; line-height: 20px; }
+  font-size: var(--devui-font-size-md) !important; line-height: 20px; }
 #demo.slack-shell :is(.projecttabs, .board-main-tabs, .channelhead .dtabs, .demohead + .dtabs, .ext-page-tabs, .evo-tabs) > button.active { border-bottom-color: var(--devui-text) !important; }
 
 /* 面板内不出现画布灰：联系人资料头与会话头一致（面板底 + 底部分隔）；编辑器画布容器用舞台色 */
@@ -962,7 +962,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
 /* 晴空配色选择 */
 .liquid-swatches { display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 0; }
 .liquid-swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 64px; padding: 6px 0; border: 0; border-radius: var(--agentspace-radius-row);
-  background: transparent; color: var(--devui-text-weak); font-size: var(--agentspace-font-size-micro); cursor: pointer; transition: background 150ms; }
+  background: transparent; color: var(--devui-text-weak); font-size: var(--devui-font-size-sm); cursor: pointer; transition: background 150ms; }
 .liquid-swatch:hover { background: var(--devui-list-item-hover-bg); }
 .liquid-swatch i { position: relative; width: 36px; height: 36px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.08);
   background: linear-gradient(135deg, var(--a) 0 50%, var(--b) 50% 100%); }
@@ -970,7 +970,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
 .liquid-swatch[aria-checked="true"] i::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; box-shadow: 0 0 0 2px var(--devui-text); }
 .liquid-swatch--custom i { background: conic-gradient(#F87171, #FBBF24, #34D399, #60A5FA, #A78BFA, #F472B6, #F87171); }
 .liquid-custom { display: flex; align-items: center; gap: 16px; }
-.liquid-color { display: inline-flex; align-items: center; gap: 8px; font-size: var(--agentspace-font-size-ui); color: var(--devui-text-weak); cursor: pointer; }
+.liquid-color { display: inline-flex; align-items: center; gap: 8px; font-size: var(--devui-font-size-md); color: var(--devui-text-weak); cursor: pointer; }
 .liquid-color input[type=color] { width: 32px !important; height: 32px !important; padding: 0 !important; border: 0 !important; border-radius: 50% !important;
   background: none !important; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1) !important; cursor: pointer; overflow: hidden; }
 .liquid-color input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
@@ -1198,7 +1198,7 @@ body:is([data-view="studio"], [data-view="extensions"], [data-view="evolution"])
 /* 下拉菜单 */
 .as2-menu { position: fixed; z-index: 210; min-width: 168px; padding: 4px; display: flex; flex-direction: column; background: var(--devui-base-bg); border-radius: var(--devui-border-radius-card); box-shadow: 0 0 0 1px var(--devui-line), 0 10px 24px -6px rgba(0,0,0,.16); animation: as2-menu-in .14s ease-out; }
 :root.dark .as2-menu, :root[data-theme="dark"] .as2-menu { box-shadow: 0 0 0 1px var(--agentspace-border-strong), 0 10px 24px -4px rgba(0,0,0,.5); }
-.as2-menu > button { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border: 0; border-radius: var(--agentspace-radius-sm); background: transparent; color: var(--devui-text); font: inherit; font-size: 13px; text-align: left; cursor: pointer; }
+.as2-menu > button { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px; border: 0; border-radius: var(--agentspace-radius-sm); background: transparent; color: var(--devui-text); font: inherit; font-size: var(--devui-font-size-md); text-align: left; cursor: pointer; }
 .as2-menu > button svg.icon { width: 15px; height: 15px; color: var(--devui-aide-text); }
 .as2-menu > button:is(:hover, :focus-visible) { background: var(--devui-list-item-hover-bg); outline: none; }
 .as2-menu > button.is-danger, .as2-menu > button.is-danger svg.icon { color: var(--agentspace-status-fail); }
@@ -1240,7 +1240,7 @@ html[data-appearance-style="liquid"] body #modalHost .modal { background: rgba(2
 /* ---- 消息列表头部：与个人 / 项目侧栏头部一致（48 高 · 14/700 标题 · 底部分割线） */
 #demo.slack-shell .messenger-shell .ms-list-pane .ms-list-head { display: flex !important; align-items: center !important; height: var(--agentspace-header-height, 48px) !important; min-height: 0 !important; padding: 0 8px 0 16px !important; margin: 0 0 12px !important; border-bottom: 1px solid var(--devui-line) !important; box-sizing: border-box; }
 #demo.slack-shell .messenger-shell .ms-list-head h1 { display: flex; align-items: center; gap: 6px; font-size: 14px !important; font-weight: 700 !important; line-height: 20px !important; letter-spacing: -0.2px !important; margin: 0 !important; }
-#demo.slack-shell .messenger-shell .ms-list-head h1 > span { font-size: 11px !important; line-height: 16px !important; padding: 0 5px !important; min-width: 18px; border-radius: var(--devui-border-radius) !important; text-align: center; }
+#demo.slack-shell .messenger-shell .ms-list-head h1 > span { font-size: var(--devui-font-size-sm) !important; line-height: 16px !important; padding: 0 5px !important; min-width: 18px; border-radius: var(--devui-border-radius) !important; text-align: center; }
 #demo.slack-shell .messenger-shell .ms-list-head-actions { margin-left: auto; }
 #demo.slack-shell .messenger-shell .ms-list-head .ms-compose-new { width: 28px !important; height: 28px !important; padding: 0 !important; display: grid !important; place-items: center; border-radius: var(--agentspace-radius-sm) !important; background: transparent !important; color: var(--devui-aide-text) !important; box-shadow: none !important; }
 #demo.slack-shell .messenger-shell .ms-list-head .ms-compose-new:hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
@@ -1264,7 +1264,7 @@ body[data-view="personal"][data-page="benchbuilder"] #demo.slack-shell.slack-she
 #demo.slack-shell .messenger-shell .ms-list-head h1 > span {
   display: inline-grid !important; place-items: center; box-sizing: border-box; min-width: 20px !important; height: 20px !important; padding: 0 6px !important; margin-left: 6px;
   border-radius: 999px !important; background: var(--agentspace-muted-bg) !important; color: var(--devui-aide-text) !important; box-shadow: none !important;
-  font-size: 11px !important; font-weight: 600 !important; line-height: 1 !important; font-variant-numeric: tabular-nums; letter-spacing: 0 !important; }
+  font-size: var(--devui-font-size-sm) !important; font-weight: 600 !important; line-height: 1 !important; font-variant-numeric: tabular-nums; letter-spacing: 0 !important; }
 #demo.slack-shell .sidenav > small { margin-left: auto; }
 #demo.slack-shell :is(.board-tab-count, .co-tab-count, .evo-count).active, #demo.slack-shell .active > :is(.board-tab-count, .co-tab-count, .evo-count, .as-num) { color: var(--devui-text) !important; }
 :root[data-appearance-style="pixel"] #demo.slack-shell :is(.sidenav > small, .board-tab-count, .co-tab-count, .co-members-toggle > b, .evo-count, .ms-list-head h1 > span, .ext-page-tabs .as-num, .hub-channel-count) { border-radius: 0 !important; }
@@ -1281,9 +1281,9 @@ html[data-appearance-style="liquid"] body :is(#demo, #modalHost, body) :is(.wc-p
   background: rgba(250, 251, 253, .97) !important; backdrop-filter: blur(24px) saturate(1.4) !important; -webkit-backdrop-filter: blur(24px) saturate(1.4) !important; }
 html:root[data-appearance-style="liquid"] body > :is(.as2-switcher, .as2-menu, .toast) { background: rgba(250, 251, 253, .97) !important; backdrop-filter: blur(24px) saturate(1.4) !important; -webkit-backdrop-filter: blur(24px) saturate(1.4) !important; }
 /* 新建工作台 + 菜单：文件 / 扩展 */
-#demo.slack-shell .wc-quick-menu > button { color: var(--devui-text) !important; font-size: 13px !important; }
+#demo.slack-shell .wc-quick-menu > button { color: var(--devui-text) !important; font-size: var(--devui-font-size-md) !important; }
 #demo.slack-shell .wc-quick-menu > button svg.icon { color: var(--devui-aide-text); }
-#demo.slack-shell .wc-quick-count { margin-left: auto; display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--agentspace-muted-bg); color: var(--devui-aide-text); font-size: 11px; font-weight: 600; }
+#demo.slack-shell .wc-quick-count { margin-left: auto; display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--agentspace-muted-bg); color: var(--devui-aide-text); font-size: var(--devui-font-size-sm); font-weight: 600; }
 #demo.slack-shell .wc-composer-card .wc-chips:empty { display: none !important; }
 #demo.slack-shell .wc-composer-card .wc-chips:not(:empty) { margin: 0 0 8px !important; }
 #demo.slack-shell .wc-composer-card #wbPrompt { padding-top: 4px !important; }
@@ -1343,7 +1343,7 @@ html body .appbar .brandcopy b small {
 html body .appbar .appactions .guidebtn.guidebtn.guidebtn {
   height: 32px !important; padding: 0 10px !important; gap: 6px !important; border: 0 !important; border-radius: var(--agentspace-radius-sm) !important;
   background: transparent !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
-  color: var(--devui-aide-text) !important; font-size: 13px !important; font-weight: 500 !important; }
+  color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; font-weight: 500 !important; }
 html body .appbar .appactions .guidebtn.guidebtn.guidebtn:hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 html body .appbar .appactions .guidebtn.guidebtn.guidebtn svg.icon { width: 15px !important; height: 15px !important; color: currentColor !important; }
 /* ---- 流光：侧栏 / 内容 / Thread 同一块玻璃底板，只用细分割线区分（避免多层玻璃叠出色差与接缝） */
@@ -1521,7 +1521,7 @@ html body #demo.slack-shell :is(.composer, .ms-composer, .wc-composer-card) :is(
 .as2-model-menu .as2-model-list > button:is(:hover, :focus-visible) { background: var(--devui-list-item-hover-bg); outline: none; }
 .as2-model-menu .as2-model-list > button[aria-checked="true"] { background: var(--agentspace-muted-bg); font-weight: 500; }
 .as2-model-row-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.as2-model-badge { flex: none; padding: 2px 6px; border-radius: 6px; background: var(--devui-success-bg); color: var(--devui-success); font-size: 11px; font-weight: 600; line-height: 14px; }
+.as2-model-badge { flex: none; padding: 2px 6px; border-radius: 6px; background: var(--devui-success-bg); color: var(--devui-success); font-size: var(--devui-font-size-sm); font-weight: 600; line-height: 14px; }
 .as2-model-cost { margin-left: auto; flex: none; display: inline-flex; gap: 6px; color: var(--agentspace-text-subtle); font-size: 13px; font-variant-numeric: tabular-nums; }
 .as2-model-cost s { color: var(--agentspace-text-subtle); opacity: .7; }
 .as2-model-menu .as2-menu-sep { margin: 6px 4px; }
@@ -1638,14 +1638,14 @@ html body #demo.slack-shell .kanban-column { background: var(--agentspace-muted-
 html body #demo.slack-shell .kanban-column > header { display: flex !important; align-items: center !important; gap: 8px !important; padding: 6px 6px 8px !important; margin: 0 !important; border: 0 !important; background: transparent !important; }
 html body #demo.slack-shell .kanban-column > header .dot { width: 6px !important; height: 6px !important; }
 html body #demo.slack-shell .kanban-column > header b { font-size: 12px !important; font-weight: 600 !important; letter-spacing: .6px !important; color: var(--devui-aide-text) !important; }
-html body #demo.slack-shell .kanban-column > header small { margin-left: auto !important; display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--devui-base-bg); color: var(--devui-aide-text) !important; font-size: 11px !important; font-weight: 600; box-shadow: var(--agentspace-shadow-tile); }
+html body #demo.slack-shell .kanban-column > header small { margin-left: auto !important; display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--devui-base-bg); color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-sm) !important; font-weight: 600; box-shadow: var(--agentspace-shadow-tile); }
 html body #demo.slack-shell .kanban-column .kanban-cards { display: flex !important; flex-direction: column !important; gap: 6px !important; padding: 0 !important; }
 html body #demo.slack-shell .kanban-card {
   position: relative; background: var(--devui-base-bg) !important; border: 0 !important; border-radius: 10px !important; padding: 10px 12px !important;
   box-shadow: var(--agentspace-shadow-tile) !important; display: flex !important; flex-direction: column !important; gap: 4px !important; transition: box-shadow var(--devui-animation-duration-fast) var(--devui-animation-ease-out), transform var(--devui-animation-duration-fast) var(--devui-animation-ease-out) !important; }
 html body #demo.slack-shell .kanban-card:hover { box-shadow: 0 0 0 1px var(--agentspace-border-soft), 0 6px 18px -6px rgba(0,0,0,.14) !important; transform: translateY(-1px); }
-html body #demo.slack-shell .kanban-card > .row .tag { font-size: 11px !important; padding: 1px 6px !important; }
-html body #demo.slack-shell .kanban-card .task-project-badge { align-self: flex-start; font-size: 11px !important; padding: 1px 6px !important; height: auto !important; }
+html body #demo.slack-shell .kanban-card > .row .tag { font-size: var(--devui-font-size-sm) !important; padding: 1px 6px !important; }
+html body #demo.slack-shell .kanban-card .task-project-badge { align-self: flex-start; font-size: var(--devui-font-size-sm) !important; padding: 1px 6px !important; height: auto !important; }
 html body #demo.slack-shell .kanban-card .kanban-title { font-size: 13.5px !important; line-height: 20px !important; font-weight: 600 !important; margin: 2px 0 0 !important; text-align: left; color: var(--devui-text) !important; }
 html body #demo.slack-shell .kanban-card > p { margin: 0 !important; font-size: 12px !important; line-height: 18px !important; color: var(--devui-aide-text) !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 html body #demo.slack-shell .kanban-card :is(.aggregate-task-people, .kanban-meta) { display: flex !important; flex-wrap: wrap; gap: 0 10px !important; margin: 2px 0 0 !important; padding: 0 !important; border: 0 !important; font-size: 11.5px !important; line-height: 16px !important; color: var(--agentspace-text-subtle) !important; }
@@ -1681,7 +1681,7 @@ html body #demo.slack-shell .tk-card { gap: 8px !important; padding: 12px !impor
 html body #demo.slack-shell .tk-title { display: block; text-align: left; padding: 0; border: 0; background: transparent; font-size: 13px; line-height: 20px; font-weight: 500; color: var(--devui-text); cursor: pointer; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
 html body #demo.slack-shell .tk-title:hover { color: var(--devui-list-item-active-text); }
 html body #demo.slack-shell .tk-cat { color: var(--devui-aide-text); font-weight: 400; }
-html body #demo.slack-shell .tk-title .tag { font-size: 11px !important; padding: 0 5px !important; vertical-align: 1px; }
+html body #demo.slack-shell .tk-title .tag { font-size: var(--devui-font-size-sm) !important; padding: 0 5px !important; vertical-align: 1px; }
 html body #demo.slack-shell .tk-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11.5px; line-height: 16px; color: var(--devui-aide-text); }
 html body #demo.slack-shell .tk-meta > span { display: inline-flex; align-items: center; gap: 4px; }
 html body #demo.slack-shell .tk-meta svg.icon { width: 13px !important; height: 13px !important; }
@@ -1764,7 +1764,7 @@ body[data-taskdetail] #demo.slack-shell .demoside { display: none !important; }
 #demo.slack-shell .tp-compose { flex: none; padding: 8px 12px 12px; }
 #demo.slack-shell .tp-tool { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 #demo.slack-shell .tp-tool-tabs { display: flex; align-items: center; gap: 4px; height: var(--agentspace-header-height, 48px); padding: 0 16px; border-bottom: 1px solid var(--devui-line); flex: none; }
-#demo.slack-shell .tp-tool-tabs > button { height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--devui-aide-text); font-size: 13px; cursor: pointer; }
+#demo.slack-shell .tp-tool-tabs > button { height: 30px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--devui-aide-text); font-size: var(--devui-font-size-md); cursor: pointer; }
 #demo.slack-shell .tp-tool-tabs > button:hover { background: var(--devui-list-item-hover-bg); color: var(--devui-text); }
 #demo.slack-shell .tp-tool-tabs > button.active { background: var(--agentspace-muted-bg); color: var(--devui-text); font-weight: 600; }
 #demo.slack-shell .tp-tool-body { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 24px; }
@@ -1800,7 +1800,7 @@ html body #demo.slack-shell .ac-card { position: relative; display: flex !import
 html body #demo.slack-shell .ac-card:hover { box-shadow: 0 10px 28px -12px rgba(0,0,0,.16) !important; }
 html body #demo.slack-shell .ac-top { display: flex; align-items: center; gap: 8px; min-height: 28px; margin-bottom: 12px; }
 html body #demo.slack-shell .ac-top > .as2-switch { margin-right: auto; }
-html body #demo.slack-shell .ac-top .tag { font-size: 11px !important; }
+html body #demo.slack-shell .ac-top .tag { font-size: var(--devui-font-size-sm) !important; }
 html body #demo.slack-shell .ac-more { width: 28px !important; height: 28px !important; border-radius: 8px !important; color: var(--devui-aide-text) !important; }
 html body #demo.slack-shell .ac-more:hover, html body #demo.slack-shell .ac-more[aria-expanded="true"] { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 html body #demo.slack-shell .ac-title { display: flex; align-items: baseline; gap: 8px; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; min-width: 0; }
@@ -1871,7 +1871,7 @@ html:root:not([data-appearance-style="pixel"]) body #demo.slack-shell.slack-shel
 
 /* 工作台筛选：胶囊 chip（选中为品牌浅底） */
 html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell .dtoolbar .dtabs { gap: 6px !important; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; }
-html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell .dtoolbar .dtabs > button { height: 30px !important; padding: 0 14px !important; border-radius: 999px !important; border: 1px solid var(--devui-line) !important; background: var(--devui-base-bg) !important; color: var(--devui-text-weak) !important; font-size: 13px !important; box-shadow: none !important; }
+html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell .dtoolbar .dtabs > button { height: 30px !important; padding: 0 14px !important; border-radius: 999px !important; border: 1px solid var(--devui-line) !important; background: var(--devui-base-bg) !important; color: var(--devui-text-weak) !important; font-size: var(--devui-font-size-md) !important; box-shadow: none !important; }
 html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell .dtoolbar .dtabs > button::after { display: none !important; }
 html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell .dtoolbar .dtabs > button:hover { border-color: var(--agentspace-border-strong) !important; }
 html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell .dtoolbar .dtabs > button.active { background: var(--devui-primary-bg) !important; border-color: var(--devui-primary-line) !important; color: var(--devui-brand) !important; font-weight: 500 !important; }
@@ -1945,7 +1945,7 @@ html:root body #demo.slack-shell.slack-shell .benchcard .benchfoot { left: auto 
   background: #fff !important; box-shadow: 0 0 0 1px var(--devui-line), 0 10px 24px -10px rgba(16,24,40,.28) !important; backdrop-filter: none !important; }
 :root[data-theme="dark"] body #demo.slack-shell.slack-shell .benchcard .benchfoot, :root.dark body #demo.slack-shell.slack-shell .benchcard .benchfoot { background: #26272B !important; }
 html:root body #demo.slack-shell.slack-shell .benchcard:is(:hover, :focus-within) .benchupdate { opacity: 0; }
-html:root body #demo.slack-shell.slack-shell .benchcard .benchfoot .btn { height: 30px !important; min-height: 30px !important; padding: 0 12px !important; border-radius: 999px !important; font-size: 13px !important; gap: 5px; box-shadow: none !important; }
+html:root body #demo.slack-shell.slack-shell .benchcard .benchfoot .btn { height: 30px !important; min-height: 30px !important; padding: 0 12px !important; border-radius: 999px !important; font-size: var(--devui-font-size-md) !important; gap: 5px; box-shadow: none !important; }
 html:root body #demo.slack-shell.slack-shell .benchcard .benchfoot .bf-edit { background: transparent !important; border: 0 !important; color: var(--devui-text-weak) !important; }
 html:root body #demo.slack-shell.slack-shell .benchcard .benchfoot .bf-edit:hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 html:root body #demo.slack-shell.slack-shell .benchcard .benchfoot .btn svg.icon { width: 14px !important; height: 14px !important; }
@@ -1967,7 +1967,7 @@ html:root body #demo.slack-shell.slack-shell .wc-start :is(.wc-no-bindings, .wc-
 html:root body #demo.slack-shell.slack-shell .wc-start .wc-composer-wrap { position: relative; padding: 0 0 4px !important; border-radius: 28px !important; background: var(--agentspace-muted-bg, var(--agentspace-stage-bg)) !important; border: 0 !important; box-shadow: none !important; }
 html:root body #demo.slack-shell.slack-shell .wc-start .wc-composer-card { position: relative; z-index: 1; margin: 0 !important; border-radius: 28px !important; background: var(--devui-base-bg) !important; border: 1px solid var(--devui-line) !important; box-shadow: 0 6px 20px -12px rgba(16,24,40,.18) !important; }
 html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar { display: flex !important; gap: 4px; padding: 8px 14px 6px !important; }
-html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar > button { height: 32px !important; padding: 0 10px !important; gap: 6px; border: 0 !important; border-radius: 999px !important; background: transparent !important; color: var(--devui-aide-text) !important; font-size: 13px !important; box-shadow: none !important; }
+html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar > button { height: 32px !important; padding: 0 10px !important; gap: 6px; border: 0 !important; border-radius: 999px !important; background: transparent !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; box-shadow: none !important; }
 html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar > button:hover, html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar > button.active { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar > button svg.icon { width: 16px !important; height: 16px !important; }
 html:root body #demo.slack-shell.slack-shell .wc-start .wc-attachbar > button svg.icon:last-child { width: 14px !important; height: 14px !important; margin-left: -2px; opacity: .7; }
@@ -2004,7 +2004,7 @@ html:root body #demo.slack-shell.slack-shell .as2-card-actions { position: absol
   background: #fff; box-shadow: 0 0 0 1px var(--devui-line), 0 10px 24px -10px rgba(16,24,40,.28); opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity var(--devui-animation-duration-fast) var(--devui-animation-ease-out), transform var(--devui-animation-duration-fast) var(--devui-animation-ease-out); }
 :root[data-theme="dark"] body #demo.slack-shell.slack-shell .as2-card-actions, :root.dark body #demo.slack-shell.slack-shell .as2-card-actions { background: #26272B; }
 html:root body #demo.slack-shell.slack-shell .has-card-actions:is(:hover, :focus-within) > .as2-card-actions { opacity: 1; transform: none; pointer-events: auto; }
-html:root body #demo.slack-shell.slack-shell .as2-card-actions .btn { height: 30px !important; min-height: 30px !important; margin: 0 !important; padding: 0 12px !important; border-radius: 999px !important; font-size: 13px !important; white-space: nowrap; box-shadow: none !important; }
+html:root body #demo.slack-shell.slack-shell .as2-card-actions .btn { height: 30px !important; min-height: 30px !important; margin: 0 !important; padding: 0 12px !important; border-radius: 999px !important; font-size: var(--devui-font-size-md) !important; white-space: nowrap; box-shadow: none !important; }
 html:root body #demo.slack-shell.slack-shell .as2-card-actions .btn:not(.primary) { background: transparent !important; border: 0 !important; color: var(--devui-text-weak) !important; }
 html:root body #demo.slack-shell.slack-shell .as2-card-actions .btn:not(.primary):hover { background: var(--devui-list-item-hover-bg) !important; color: var(--devui-text) !important; }
 html:root body #demo.slack-shell.slack-shell .as2-card-actions .btn.primary { background: linear-gradient(var(--agentspace-btn-top), var(--agentspace-btn-bottom)) !important; color: var(--agentspace-btn-ink) !important; border: 0 !important; }
@@ -2087,7 +2087,7 @@ html:root body #demo.slack-shell.slack-shell .nt-start .wc-attachbar { margin: 0
 html:root body #demo.slack-shell.slack-shell .nt-start .wc-attachbar > .nt-pill { padding: 0 9px !important; }
 /* 新建任务：+ 后的 Agent / Workflow 切换（选中显示图标 + 文字，未选中只显示图标） */
 html:root body #demo.slack-shell.slack-shell .nt-mode { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border-radius: 999px; background: var(--agentspace-muted-bg, var(--agentspace-stage-bg)); }
-html:root body #demo.slack-shell.slack-shell .nt-mode > button { height: 28px; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: var(--devui-aide-text); font-size: 13px; cursor: pointer; transition: background var(--devui-animation-duration-fast) var(--devui-animation-ease-out), color var(--devui-animation-duration-fast) var(--devui-animation-ease-out); }
+html:root body #demo.slack-shell.slack-shell .nt-mode > button { height: 28px; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; padding: 0 8px; border: 0; border-radius: 999px; background: transparent; color: var(--devui-aide-text); font-size: var(--devui-font-size-md); cursor: pointer; transition: background var(--devui-animation-duration-fast) var(--devui-animation-ease-out), color var(--devui-animation-duration-fast) var(--devui-animation-ease-out); }
 html:root body #demo.slack-shell.slack-shell .nt-mode > button[aria-selected="false"] { padding: 0; width: 28px; }
 html:root body #demo.slack-shell.slack-shell .nt-mode > button:hover { color: var(--devui-text); }
 html:root body #demo.slack-shell.slack-shell .nt-mode > button[aria-selected="true"] { background: var(--devui-base-bg); color: var(--devui-text); font-weight: 500; box-shadow: 0 0 0 1px var(--agentspace-border-soft), 0 1px 2px rgba(16,24,40,.08); }
@@ -2122,7 +2122,7 @@ html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty)
 html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) > .composer textarea { min-height: 84px !important; }
 html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) > .composer .composerfoot > span:not(.as2-composer-tools):not(.spacer) { visibility: hidden; }
 html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) .suggests { order: 3; display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0 !important; }
-html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) .suggests > button { display: flex; align-items: center; min-height: 64px; padding: 14px 16px !important; border-radius: 16px !important; border: 1px solid var(--devui-line) !important; background: var(--devui-base-bg) !important; box-shadow: none !important; text-align: left; white-space: normal; font-size: 13px !important; line-height: 20px; color: var(--devui-text-weak) !important; }
+html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) .suggests > button { display: flex; align-items: center; min-height: 64px; padding: 14px 16px !important; border-radius: 16px !important; border: 1px solid var(--devui-line) !important; background: var(--devui-base-bg) !important; box-shadow: none !important; text-align: left; white-space: normal; font-size: var(--devui-font-size-md) !important; line-height: 20px; color: var(--devui-text-weak) !important; }
 html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) .suggests > button:hover { border-color: var(--agentspace-border-strong) !important; color: var(--devui-text) !important; box-shadow: 0 8px 20px -12px rgba(16,24,40,.18) !important; }
 @media (max-width: 760px) { html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) .suggests { grid-template-columns: 1fr; } html:root body #demo.slack-shell.slack-shell .assistantwrap:has(.chatmsgs:empty) > .composer .as-hero { width: 120px; top: -52px; right: 16px; } }
 /* 会话流更紧凑：消息间距 25 → 12（hover 卡片自带 8px 内边距），同一人连续发言再收紧 */
@@ -2308,7 +2308,7 @@ html:root[data-appearance-style="pixel"] body #demo.slack-shell :is(.dtoolbar .d
 html:root[data-appearance-style="pixel"] body #demo.slack-shell :is(.dtabs, .ms-primary-tabs, .evo-tabs, .tp-tool-tabs):not(.dtoolbar .dtabs):not(.ext-toolbar .dtabs) > button:is(.active, [aria-selected="true"]) { border-bottom-color: var(--px-ink, #F2F2F2) !important; }
 .wf-ghost.wfp-card { background: #FFFFFF !important; }
 :root[data-theme="dark"] .wf-ghost.wfp-card { background: #1C1C1F !important; }
-html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell.slack-shell .dtoolbar .dtabs > button { height: 28px !important; padding: 0 12px !important; font-size: 13px !important; }
+html:root:not([data-appearance-style="pixel"]) body[data-page="benches"] #demo.slack-shell.slack-shell .dtoolbar .dtabs > button { height: 28px !important; padding: 0 12px !important; font-size: var(--devui-font-size-md) !important; }
 /* ---- Workflow 编辑器：精简页头 + 画布控制（缩放 / 平移 / 适应画布） */
 html:root body #demo.slack-shell.slack-shell .wfedithead.wfh { display: flex !important; align-items: center; gap: 10px; min-height: 0 !important; height: 52px; padding: 0 14px !important; border-bottom: 1px solid var(--devui-line) !important; background: transparent !important; }
 .wfh .spacer { flex: 1; }
@@ -2591,7 +2591,7 @@ html:root[data-appearance-style="pixel"] body #demo.slack-shell :is(.ca-viewer, 
 :root[data-appearance-style="pixel"][data-px-mode="light"] .settings-nav-item.active .icon { color: #FFFFFF !important; }
 :root[data-appearance-style="pixel"][data-px-mode="light"] #modalHost .modal.settings-modal { background: #E8E8E8 !important; }
 /* 状态 / 标签：描边小标签（卡片左上角式） */
-:root[data-appearance-style="pixel"][data-px-mode="light"] #demo :is(.as-status, .tag) { background: #F6F6F6 !important; box-shadow: inset 0 0 0 1px currentColor !important; text-transform: uppercase; letter-spacing: .02em; font-size: 11px !important; }
+:root[data-appearance-style="pixel"][data-px-mode="light"] #demo :is(.as-status, .tag) { background: #F6F6F6 !important; box-shadow: inset 0 0 0 1px currentColor !important; text-transform: uppercase; letter-spacing: .02em; font-size: var(--devui-font-size-sm) !important; }
 :root[data-appearance-style="pixel"][data-px-mode="light"] #demo .rail-unread, :root[data-appearance-style="pixel"][data-px-mode="light"] #demo .ms-unread { background: var(--px-hot) !important; color: #FFFFFF !important; }
 /* 进度 / 光标 / 头像 / 滚动条 */
 :root[data-appearance-style="pixel"][data-px-mode="light"] .as-progress { background: repeating-linear-gradient(90deg, #C6C6C6 0 6px, transparent 6px 8px); }

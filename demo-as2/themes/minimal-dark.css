@@ -85,22 +85,16 @@ color-scheme: light;
   --agentspace-font-family: "Inter", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --agentspace-font-family-mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
 
-  /* 字号阶梯：size / line-height */
-  --agentspace-font-size-display: 40px;  --agentspace-line-height-display: 44px;   /* 首页 / 空态大标题，500，-1.4px */
+  /* 字号阶梯：size / line-height。行高保持原值。 */
+  --agentspace-font-size-display: 48px;  --agentspace-line-height-display: 44px;   /* 展示档改为文档 48px；行高仍 44px */
   --devui-font-size-h1-title:      28px;  --agentspace-line-height-h1:      36px;   /* 页面标题，600，-0.7px */
-  --agentspace-font-size-h2:      20px;  --agentspace-line-height-h2:      28px;   /* 区块标题，600，-0.4px */
+  --devui-font-size-h3-title:      20px;  --agentspace-line-height-h2:      28px;   /* 区块标题走 h3-title，行高仍是 h2 的 28px */
   --devui-font-size-card-title:      16px;  --agentspace-line-height-h3:      24px;   /* 卡片标题，600 */
-  --agentspace-font-size-reading: 15px;  --agentspace-line-height-reading: 24px;   /* Agent 长回复 / 计划说明 */
-  --devui-font-size:    14px;  --agentspace-line-height-body:    22px;   /* 中文正文默认 */
-  --agentspace-font-size-ui:      13px;  --agentspace-line-height-ui:      20px;   /* 控件、导航、表格（affectUI 基线） */
-  --devui-font-size-sm:    12px;  --agentspace-line-height-meta:    18px;   /* 时间、来源、列头 */
-  --agentspace-font-size-micro:   11px;  --agentspace-line-height-micro:   16px;   /* 徽标、计数 */
-
-  /* ---------- 9. 间距（4px 基准 + 光学微调值） ---------- */
-  --agentspace-sp-0_5: 2px;  --agentspace-sp-1: 4px;   --agentspace-sp-1_5: 6px;  --agentspace-sp-2: 8px;
-  --agentspace-sp-2_5: 10px; --agentspace-sp-3: 12px;  --agentspace-sp-3_5: 14px; --agentspace-sp-4: 16px;
-  --agentspace-sp-5: 20px;   --agentspace-sp-6: 24px;  --agentspace-sp-7: 28px;   --agentspace-sp-8: 32px;
-  --agentspace-sp-10: 40px;  --agentspace-sp-12: 48px; --agentspace-sp-16: 64px;
+  --devui-font-size:               14px;  --agentspace-line-height-body:    22px;   /* 正文；长文阅读也改用这一档 */
+  --devui-font-size-md:            14px;  --agentspace-line-height-reading: 24px;   /* 控件默认字号；阅读行高仍 24px */
+  --devui-font-size-sm:            12px;  --agentspace-line-height-ui:      20px;   /* 辅助 / 徽标；控件行高仍 20px */
+  --agentspace-line-height-meta:   18px;   /* 时间、来源、列头 */
+  --agentspace-line-height-micro:  16px;   /* 徽标行高，字号改走 font-size-sm */
 
   /* ---------- 10. 圆角（按“对象层级”分工，嵌套时 内 = 外 − padding） ---------- */
   --devui-border-radius:     4px;    /* kbd */
@@ -146,7 +140,7 @@ color-scheme: light;
   --agentspace-nav2-hover-bg: rgba(0, 0, 0, .05);
   --agentspace-nav1-active-bg: var(--rail-tile);
   --agentspace-nav2-active-bg: #EDEEF1;
-  --agentspace-font-size-xs: 11px;
+  --agentspace-font-size-xs: 10px;
   --agentspace-font-size-xxl: 28px;
   --agentspace-font-size-hero: 40px;
   --devui-primary: var(--devui-brand);

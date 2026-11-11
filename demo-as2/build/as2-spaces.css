@@ -40,7 +40,7 @@
 .spx-env-card-head>div{flex:1;min-width:0}
 #demo .spx-env-card-head h3{font-size:15px;line-height:22px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .spx-env-card-head p{font-size:12px;line-height:20px;color:var(--devui-aide-text);margin:5px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.spx-env-card-head>.tag{flex:none;align-self:flex-start;font-size:11px}
+.spx-env-card-head>.tag{flex:none;align-self:flex-start;font-size: var(--devui-font-size-sm)}
 .spx-env-summary{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:12px;color:var(--devui-aide-text);min-width:0}
 .spx-env-summary>span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .spx-env-summary>span:last-child{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -78,9 +78,9 @@
 #demo .spx-page .spx-repo-list .demotable :is(thead,tbody,tr,th,td){background:transparent!important;box-shadow:none!important}
 #demo .spx-page .spx-repo-list .demotable :is(th,td){padding:14px 16px;border:0;border-bottom:1px solid var(--agentspace-border-soft)!important;text-align:left;vertical-align:middle}
 #demo .spx-page .spx-repo-list .demotable th{font-size:12px!important;font-weight:400!important;color:var(--devui-aide-text)!important;padding-top:10px;padding-bottom:10px}
-#demo .spx-page .spx-repo-list .demotable td{font-size:13px;color:var(--devui-text-weak)!important;font-weight:400}
+#demo .spx-page .spx-repo-list .demotable td{font-size: var(--devui-font-size-md);color:var(--devui-text-weak)!important;font-weight:400}
 #demo .spx-page .spx-repo-list .demotable td:first-child{width:50%;font-weight:400}
-#demo .spx-page .spx-repo-list .demotable td:first-child>b{font-size:13px;font-weight:600;color:var(--devui-text)}
+#demo .spx-page .spx-repo-list .demotable td:first-child>b{font-size: var(--devui-font-size-md);font-weight:600;color:var(--devui-text)}
 #demo .spx-page .spx-repo-list .demotable td small{display:block;max-width:min(42vw,520px);margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:var(--devui-aide-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #demo .spx-page .spx-repo-list .demotable :is(th,td):last-child{text-align:right;white-space:nowrap}
 #demo .spx-page .spx-repo-list .demotable .btn.link{padding:0;min-height:28px;border:0;box-shadow:none;background:transparent}
@@ -90,7 +90,7 @@
 .spx-page .spx-template-grid>.spx-template-card{gap:18px;cursor:default}
 
 #demo .spx-page .asset-subtabs button{display:inline-flex;align-items:center;gap:7px}
-#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:rgba(0,0,0,.055)!important;color:var(--devui-aide-text)!important;font-size:11px;font-weight:500;line-height:20px}
+#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:rgba(0,0,0,.055)!important;color:var(--devui-aide-text)!important;font-size: var(--devui-font-size-sm);font-weight:500;line-height:20px}
 :root[data-theme="dark"] #demo .spx-page .asset-subtabs .spx-count{background:rgba(255,255,255,.1)!important;color:var(--devui-text)!important}
 #demo .spx-list-tools{justify-content:flex-start;gap:12px;flex-wrap:wrap;margin:16px 0}
 #demo .spx-list-tools select{flex:0 1 auto;width:200px;max-width:100%}

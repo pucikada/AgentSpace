@@ -566,10 +566,6 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-ease-spring` | 弹性曲线 | — | — | — |
 | `--agentspace-focus-ring` | 焦点环颜色，原 --as-focus-ring | rgba(10, 89, 247, .45) | rgba(77, 141, 255, .55) | var(--devui-brand) |
 | `--agentspace-font-family-mono` | 等宽字体栈 | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace |
-| `--agentspace-font-size-h2` | 20px 区块标题 | 20px | 20px | 20px |
-| `--agentspace-font-size-micro` | 11px 徽标字号。不使用 10px 的 font-size-xs，避免把现有徽标缩小 | 11px | 11px | 11px |
-| `--agentspace-font-size-reading` | 15px 长文阅读字号 | 15px | 15px | 15px |
-| `--agentspace-font-size-ui` | 13px 控件 / 导航字号 | 13px | 13px | 13px |
 | `--agentspace-frame-gap` | 框架间距 | 8px | 8px | 8px |
 | `--agentspace-glass` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-header-height` | 页头高度 | — | — | — |
@@ -625,21 +621,6 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-side-width` | 侧栏运行时宽度（脚本写入） | — | — | — |
 | `--agentspace-sidebar-width` | 侧栏设计宽度 | 256px | 256px | 256px |
 | `--agentspace-sky` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
-| `--agentspace-sp-0_5` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 2px | 2px | 2px |
-| `--agentspace-sp-1` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 4px | 4px | 4px |
-| `--agentspace-sp-10` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 40px | 40px | 40px |
-| `--agentspace-sp-12` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 48px | 48px | 48px |
-| `--agentspace-sp-16` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 64px | 64px | 64px |
-| `--agentspace-sp-1_5` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 6px | 6px | 6px |
-| `--agentspace-sp-2` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 8px | 8px | 8px |
-| `--agentspace-sp-2_5` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 10px | 10px | 10px |
-| `--agentspace-sp-3` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 12px | 12px | 12px |
-| `--agentspace-sp-3_5` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 14px | 14px | 14px |
-| `--agentspace-sp-4` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 16px | 16px | 16px |
-| `--agentspace-sp-5` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 20px | 20px | 20px |
-| `--agentspace-sp-6` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 24px | 24px | 24px |
-| `--agentspace-sp-7` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 28px | 28px | 28px |
-| `--agentspace-sp-8` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 32px | 32px | 32px |
 | `--agentspace-stage-bg` | 卡片内舞台 / 代码区底，原 --as-stage | #FAFAFA | #1F1F21 | #151517 |
 | `--agentspace-status-fail` | 失败文字色。深色下与 --devui-danger 分开 | #D93A2B | #FF7B72 | #FF7B72 |
 | `--agentspace-status-idle` | 空闲文字色 | #737373 | #8F8F8F | #8F8F8F |
@@ -654,4 +635,4 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-text-tertiary` | 第三级文字，原 --as-text-3 | — | — | — |
 | `--agentspace-thread-width` | 线程栏运行时宽度（脚本写入） | — | — | — |
 
-共 134 个扩展变量。`--agentspace-font-size-xs` 仍按当前最小实字 11px 记录，但徽标继续用 `--agentspace-font-size-micro`，因此不会把 11px 收成文档里的 10px。`--agentspace-font-size-display` 与 `--agentspace-font-size-hero` 在本演示里都是当前的 40px，而不是文档默认的 48px / 56px。
+共 115 个扩展变量。字号按 DevUI / 文档档位使用：h1 28px 仍是 `--devui-font-size-h1-title`；区块标题 20px 改用 `--devui-font-size-h3-title`（已删除 `--agentspace-font-size-h2`）；控件、导航和表格从 13px 改为 `--devui-font-size-md`（14px）；长文从 15px 改为 `--devui-font-size`（14px）；徽标和计数从 11px 改为 `--devui-font-size-sm`（12px）。`--agentspace-font-size-display` 改为文档的 48px，目前没有元素引用它。`--agentspace-font-size-xs` 没有引用，改回文档的 10px。`--agentspace-font-size-hero` 仍是当前渲染的 40px，不是文档的 56px。行高扩展保持原值，不改成 1.5。间距不再单列变量，调用处写回原来的 px。

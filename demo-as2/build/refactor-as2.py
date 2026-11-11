@@ -212,8 +212,9 @@ def snap_radius(v):
         return 'var(--devui-border-radius-full)'
     return re.sub(r'(?<![\w.-])(\d+(?:\.\d+)?)px', one, v)
 
-FS = [(11.6, 'var(--agentspace-font-size-micro)'), (12.5, 'var(--devui-font-size-sm)'), (13.5, 'var(--agentspace-font-size-ui)'), (14.5, 'var(--devui-font-size)'),
-      (15.5, 'var(--agentspace-font-size-reading)'), (17.5, 'var(--devui-font-size-card-title)'), (19, '18px'), (23.5, 'var(--agentspace-font-size-h2)'), (31, 'var(--devui-font-size-h1-title)')]
+FS = [(12.5, 'var(--devui-font-size-sm)'), (13.5, 'var(--devui-font-size-md)'), (15.5, 'var(--devui-font-size)'),
+      (17.5, 'var(--devui-font-size-card-title)'), (19, '18px'), (23.5, 'var(--devui-font-size-h3-title)'), (31, 'var(--devui-font-size-h1-title)'),
+      (48.5, 'var(--agentspace-font-size-display)')]
 def snap_fs(px):
     for lim, tok in FS:
         if px <= lim: return tok
