@@ -47,3 +47,23 @@
 .ahr-empty h3{font-size:14px;margin:12px 0 6px}.ahr-empty p{font-size:12px;line-height:22px;margin:0}
 @media(max-width:1180px){.ahr-layout{grid-template-columns:minmax(0,1fr) 210px;gap:24px}.ahr-heading{flex-wrap:wrap;gap:14px}.ahr-info{padding-left:18px}.ahr-run>summary{grid-template-columns:12px 76px minmax(0,1fr);gap:9px}.ahr-run>summary>time{grid-column:3}}
 @media(max-width:800px){.ahr-layout{grid-template-columns:minmax(0,1fr)}.ahr-info{position:static;border-left:0;border-top:1px solid var(--as-border-soft);padding:24px 0 0}.ahr-info dl{display:grid;grid-template-columns:1fr 1fr;gap:20px}.ahr-heading h1{font-size:23px;line-height:32px}.ahr-heading-actions{flex-wrap:wrap}.ahr-run-body{padding-left:18px}.ahr-run-body dl{grid-template-columns:1fr}.ahr-trigger{gap:10px;padding:14px}.ahr-trigger>.iconbtn{display:none}}
+
+/* Compact, independently selectable extension tags. */
+.af-task-config{border-top:1px solid var(--as-border-soft);margin-top:8px;padding-top:20px;display:flex;flex-direction:column;gap:14px}
+.af-task-config h4{margin:0;font-size:13px;line-height:20px;font-weight:600}
+.af-task-config .af-hint{margin:0;font-size:12px;line-height:20px;color:var(--as-text-muted)}
+.af-environment-modes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.af-environment-mode{display:flex;align-items:center;gap:8px;border:1px solid var(--as-border-soft);border-radius:10px;padding:10px;font-size:12px}
+.af-environment-mode span{display:flex;flex-direction:column;gap:4px}.af-environment-mode small{color:var(--as-text-muted);line-height:18px}
+.af-environment-mode>.icon{width:16px;height:16px;flex-shrink:0}
+.af-extension-options{display:flex;flex-wrap:wrap;gap:8px}
+.af-extension-options>label{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--as-border-soft);border-radius:9px;background:var(--as-card-bg);font-size:12px;line-height:18px;max-width:100%;cursor:pointer}
+.af-extension-options>label:has(input:checked){background:var(--as-muted-bg)}
+.af-extension-options input{margin:0;width:14px;height:14px;flex-shrink:0}
+.af-extension-options label>span:last-child{display:flex;align-items:center;flex-wrap:wrap;gap:6px;overflow-wrap:anywhere}
+.af-extension-options small{font-size:11px;color:var(--as-text-muted);white-space:nowrap}
+.af-main .af-prompt{flex:initial}.af-main .af-prompt textarea{min-height:130px;height:130px}
+.af-template-summary{max-height:260px;overflow:auto;padding:12px;background:var(--as-muted-bg);border-radius:10px}
+@media(max-width:700px){.af-environment-modes{grid-template-columns:1fr}}
+
+.modalbody .af-main .af-prompt textarea{min-height:130px!important;height:130px!important;flex:initial}

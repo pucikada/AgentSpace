@@ -64,3 +64,9 @@
 .nt-shortcut>.icon{width:16px;height:16px;flex:none}
 .nt-shortcut:hover{background:color-mix(in srgb,var(--as-text) 9%,transparent);color:var(--as-text)}
 .nt-shortcut:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
+
+/* Keep the chosen template beside the execution tabs. */
+.nt-card .wc-compose-foot{flex-wrap:wrap;gap:8px}
+.nt-card .nt-template-picker{max-width:190px;min-width:0;padding:7px 10px;font-size:12px;background:transparent}
+.nt-template-picker>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nt-template-picker>.icon{width:14px;height:14px;flex-shrink:0}

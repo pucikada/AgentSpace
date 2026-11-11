@@ -244,3 +244,37 @@ html body #demo.slack-shell .ab-start-section-heading h2{margin:0;font-size:16px
 .ab-extension-icon{display:inline-flex;align-items:center;flex:none;color:#6574d9}
 .ab-extension-icon>.icon{width:16px;height:16px;color:inherit!important}
 .ab-extension-icon[data-extension-type="Skill"]{color:#9565d4}.ab-extension-icon[data-extension-type="Extension"]{color:#cf8a35}.ab-extension-icon[data-extension-type="MCP"]{color:#269e98}.ab-extension-icon[data-extension-type="CLI"]{color:#5186d7}
+
+/* Stack the two dependencies; keep version selectors compact. */
+.ab-composition{display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin-top:24px}
+.ab-composition>section{min-width:0;padding:24px 0;border-top:1px solid var(--as-border-soft)}
+html body #demo.slack-shell .ab-form .ab-composition>section>h2{display:flex;align-items:center;gap:10px;font-size:16px!important;line-height:24px;font-weight:600;margin:0 0 18px!important}
+.ab-composition h2>span{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;background:var(--as-muted-bg);font-size:12px;font-weight:500}
+.ab-composition .ab-two{grid-template-columns:minmax(0,1fr) 160px;gap:16px;max-width:720px}
+.ab-composition .ab-field{gap:8px;margin-bottom:12px;font-size:12px;font-weight:500;line-height:18px}
+.ab-composition .ab-field select{font-size:13px;line-height:20px;min-height:38px;padding:8px 12px}
+.ab-composition>section>.btn{margin:0;padding:4px 0;font-size:12px;line-height:20px;min-height:28px}
+.ab-composition-preview{padding-top:20px;border-top:1px solid var(--as-border-soft)}
+@media(max-width:600px){.ab-composition .ab-two{grid-template-columns:minmax(0,1fr)}.ab-composition>section{padding:20px 0}}
+
+/* A consistent rhythm for chain step configuration. */
+.ab-chain-config{max-width:1000px}
+html body #demo.slack-shell .ab-chain-config h2{font-size:16px!important;line-height:24px;margin:0!important}
+.ab-chain-config>.ab-field{margin-bottom:20px;gap:8px}
+.ab-chain-section{margin-top:24px;padding-top:24px;border-top:1px solid var(--as-border-soft)}
+html body #demo.slack-shell .ab-chain-section>h3{font-size:14px!important;font-weight:600;line-height:22px;margin:0 0 14px!important}
+.ab-chain-hint{font-size:12px;line-height:20px;color:var(--as-text-muted);margin:-6px 0 14px}
+.ab-chain-section .ab-readonly{padding:16px;gap:16px 24px;margin:0 0 18px}
+.ab-chain-section .ab-readonly small{font-size:12px;line-height:18px;margin-bottom:6px}
+.ab-chain-section .ab-readonly b{font-size:13px;line-height:20px}
+.ab-chain-section .ab-field{font-size:12px;line-height:18px;gap:8px;margin-bottom:0}
+.ab-chain-section .ab-field small{font-size:12px;line-height:20px}
+.ab-chain-section .ab-two{gap:20px}.ab-chain-section textarea{min-height:120px}
+.ab-chain-section>.ab-switch{margin:0 0 16px;padding:0;min-height:24px;font-size:13px}
+.ab-chain-section>.ab-section{border:0;padding:0;margin:0 0 20px}
+.ab-chain-section>.ab-section>h2{display:none}
+.ab-chain-section .ab-note{margin:0 0 14px;font-size:12px;line-height:20px;padding:10px 12px}
+.ab-chain-section .ab-rule{margin-bottom:12px;gap:12px}
+.ab-chain-confirm{display:grid;grid-template-columns:minmax(0,1fr) 220px;align-items:start;gap:20px;padding-top:18px;border-top:1px solid var(--as-border-soft)}
+.ab-chain-confirm>.ab-switch{margin:0;padding:8px 0;font-size:13px}
+@media(max-width:700px){.ab-chain-section .ab-two,.ab-chain-confirm{grid-template-columns:minmax(0,1fr)}}

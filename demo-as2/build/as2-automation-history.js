@@ -72,3 +72,76 @@ triggerAutomation=function(id,event){
 };
 document.addEventListener('change',e=>{if(e.target.matches('[data-ahr-filter]')){s.automationRunFilter=e.target.value;render();}});
 document.addEventListener('toggle',e=>{if(!e.target.matches?.('[data-ahr-run]'))return;const id=e.target.dataset.ahrRun;if(e.target.open)ahrExpanded.add(id);else ahrExpanded.delete(id);},true);
+
+// Rule configuration uses the same scoped, versioned assets as Build.
+function afTemplateOptions(a){return '<option value="">不引用任务模板</option>'+['task','workflow','graph'].map(type=>`<optgroup label="${abLabels[type]}">${abItems(type,a.project).filter(t=>!t.draft&&abUsable(t)).map(t=>`<option value="${esc(t.id)}" ${a.taskTemplateId===t.id?'selected':''}>${esc(t.name)} · V${t.version}</option>`).join('')}</optgroup>`).join('');}
+function afTaskFields(a){
+ const c=a.executionConfig||(a.executionConfig=abConfig()),binding=c.environment||{mode:'default'},series=a.taskTemplateSnapshot?.type==='workflow',reuse=binding.mode==='instance';
+ const envs=abItems('env',a.project),instances=abItems('instance',a.project).filter(i=>['运行中','已停止',undefined].includes(i.status));
+ const selected=abExts(a.project).filter(i=>['MCP','CLI','Skill'].includes(abExtType(asset(i.assetId))));
+ return `<section class="af-task-config"><header><h4>任务配置</h4><p class="af-hint">运行环境与 Agent 执行配置</p></header><label class="field">引用任务模板<select id="autoTaskTemplate">${afTemplateOptions(a)}</select></label>${a.taskTemplateSnapshot?`<p class="af-hint">已固定 ${esc(a.taskTemplateSnapshot.name)} · V${a.taskTemplateSnapshot.version}；本次配置不会修改源模板。</p>`:''}${series?`<div class="af-template-summary">${ntcSummary(a.taskTemplateSnapshot)}</div><p class="af-hint">${a.executorType==='graph'?'由 Master Agent 按目标调配资源池中的原子任务。':'按模板的阶段和步骤执行。'}运行环境与扩展分别沿用各原子任务的配置。</p>`:`<h4>运行环境</h4><div class="af-environment-modes" role="radiogroup" aria-label="运行环境使用方式">${[['new','plus','新建运行环境','每次运行创建独立实例'],['reuse','refresh','复用已有运行环境','继续使用现有目录与上下文']].map(([mode,icon,label,hint])=>`<label class="af-environment-mode"><input type="radio" name="autoEnvironmentMode" value="${mode}" ${(mode==='reuse')===reuse?'checked':''}>${ico(icon)}<span><b>${label}</b><small>${hint}</small></span></label>`).join('')}</div>${reuse?`<label class="field">选择现有运行环境实例 *<select id="autoEnvironmentInstance"><option value="">请选择运行环境实例</option>${instances.map(i=>`<option value="${esc(i.id)}" ${binding.instanceId===i.id?'selected':''}>${esc(i.name)} · ${esc(i.status||'运行中')}</option>`).join('')}</select></label>`:`<label class="field">选择运行环境模板<select id="autoEnvironmentTemplate" data-version="${binding.version||''}"><option value="">不使用运行环境</option>${envs.map(e=>`<option value="${esc(e.id)}" ${binding.templateId===e.id?'selected':''}>${esc(e.name)} · V${binding.templateId===e.id?binding.version||e.version:e.version} · ${e.config.location==='本地'?'本地':'云上'}</option>`).join('')}</select></label>`}<p class="af-hint">${reuse?'复用所选实例；已停止的实例在执行时恢复后复用。':'保存模板版本快照，执行时创建实例；也可不使用运行环境。'}</p><h4>扩展 · MCP / CLI / Skill</h4><div class="af-extension-options">${selected.map(i=>`<label><input name="autoTaskExtension" type="checkbox" value="${esc(i.assetId)}" ${(c.extensions||[]).includes(i.assetId)?'checked':''}>${abExtensionIcon(i.assetId)}<span>${esc(asset(i.assetId).name)}<small>${esc(abExtType(asset(i.assetId)))} · v${esc(i.version)}</small></span></label>`).join('')||'<p class="af-hint">当前范围暂无可用扩展，可到扩展页配置。</p>'}</div>`}</section>`;
+}
+const afBaseCapture=captureAutomation;
+captureAutomation=function(){
+ const a=afBaseCapture();if(!document.querySelector('.af-task-config'))return a;
+ if(!a.taskTemplateSnapshot||a.taskTemplateSnapshot.type==='task'){
+  const c=a.executionConfig||(a.executionConfig=abConfig()),template=$('#autoEnvironmentTemplate'),instance=$('#autoEnvironmentInstance');
+  if(instance){c.environment={mode:'instance',instanceId:instance.value};a.noEnvironment=false;}
+  else if(template){const x=abGet(template.value,a.project);a.noEnvironment=!template.value;c.environment=x?{mode:'template',templateId:x.id,version:Number(template.dataset.version)||x.version}:{mode:'default'};}
+  c.extensions=$$('input[name="autoTaskExtension"]:checked').map(e=>e.value);
+ }
+ return a;
+};
+function afRuleErrors(a){
+ const errors=[];const snap=a.taskTemplateSnapshot;
+ if(a.executorType==='graph'&&!snap)errors.push('请选择已发布的图任务模板。');
+ if(snap){const original=abGet(snap.id,a.project);if(!original||!abUsable(original)||original.draft)errors.push('来源模板已失效或无权使用。');if(snap.type==='workflow')errors.push(...abValidate({...abCopy(snap),visibility:'private'}));}
+ if(!snap||snap.type==='task'){
+  const c=a.executionConfig||abConfig();if(!a.noEnvironment){const env=abEnvironment(c.environment,a.project);if(!env.ok)errors.push(env.message);}
+  for(const id of c.extensions||[])if(!abExts(a.project).some(i=>i.assetId===id))errors.push('所选扩展在当前范围不可用。');
+ }
+ return [...new Set(errors)];
+}
+const afBaseSave=saveAutomation;
+saveAutomation=function(){const a=captureAutomation(),errors=afRuleErrors(a);if(errors.length){notify(errors.join('；'));return;}return afBaseSave();};
+document.addEventListener('change',e=>{
+ const t=e.target;if(!automationDraft||!t.closest('.af-split'))return;
+ if(!['autoTaskTemplate','autoProject','autoExecutorType','autoEnvironmentTemplate'].includes(t.id)&&t.name!=='autoEnvironmentMode')return;
+ e.stopImmediatePropagation();const a=captureAutomation();
+ if(t.id==='autoTaskTemplate'){
+  const x=abGet(t.value,a.project);a.taskTemplateId=x?.id||'';a.taskTemplateSnapshot=x?abCopy(x):null;
+  a.executionConfig=x?.type==='task'?abCopy(x.config):abConfig();a.noEnvironment=!x;
+  if(x){a.executorType=x.taskShape==='graph'?'graph':x.type==='workflow'?'workflow':'agent';a.executor=x.type==='task'?({codeagent:'CodeAgent',zero:'zero'}[x.config.agentType]||x.config.agentType):x.taskShape==='graph'?'Master Agent':x.name;}
+  else{a.executorType='agent';a.executor='CodeAgent';}
+ }else if(t.id==='autoProject'){
+  a.taskTemplateId='';a.taskTemplateSnapshot=null;a.executionConfig=abConfig();a.noEnvironment=true;a.executorType='agent';a.executor='CodeAgent';a.spaceIds=defaultTaskKnowledge(a.project);
+ }else if(t.id==='autoExecutorType'){
+  a.taskTemplateId='';a.taskTemplateSnapshot=null;a.executionConfig=abConfig();a.noEnvironment=true;a.executor=a.executorType==='graph'?'Master Agent':a.executorType==='workflow'?'SpecX · 需求到交付':'CodeAgent';
+ }else if(t.id==='autoEnvironmentTemplate'){
+  const x=abGet(t.value,a.project);a.executionConfig.environment=x?{mode:'template',templateId:x.id,version:x.version}:{mode:'default'};a.noEnvironment=!x;
+ }else{a.executionConfig.environment=t.value==='reuse'?{mode:'instance',instanceId:''}:{mode:'default'};a.noEnvironment=t.value!=='reuse';}
+ renderAutomationForm();
+},true);
+
+const afBaseTrigger=triggerAutomation;
+triggerAutomation=function(id,event){
+ const rule=s.automations.find(a=>a.id===id);if(rule?.executionConfig){const errors=afRuleErrors(rule);if(errors.length){notify(errors.join('；'));return;}}
+ const task=afBaseTrigger(id,event);if(!task||!rule)return task;
+ if(rule.executionConfig){task.executionConfig=abCopy(rule.executionConfig);task.noEnvironment=!!rule.noEnvironment;const binding=task.executionConfig.environment;if(!rule.noEnvironment)task.environmentSnapshot=abCopy(abEnvironment(binding,rule.project).config);}
+ if(rule.taskTemplateSnapshot)task.taskTemplateSnapshot=abCopy(rule.taskTemplateSnapshot);
+ save();return task;
+};
+
+// Field changes update an open rule dialog without replaying its entrance animation.
+function afUpdateModal(title,body,footer){
+ const dialog=document.querySelector('#modalHost .modal:has(.af-split)');
+ if(!dialog){modal(title,body,footer);return;}
+ const content=dialog.querySelector('.modalbody'),scrollTop=content.scrollTop,dialogScroll=dialog.scrollTop;
+ const focused=document.activeElement,focusId=dialog.contains(focused)?focused.id:'';
+ const expanded=[...content.querySelectorAll('details')].map(el=>el.open);
+ dialog.querySelector('#modalTitle').textContent=title;content.innerHTML=body;
+ dialog.querySelector('.modalfoot').innerHTML=footer;
+ content.querySelectorAll('details').forEach((el,i)=>el.open=expanded[i]||false);
+ if(focusId){const replacement=document.getElementById(focusId);if(replacement&&!replacement.disabled)replacement.focus({preventScroll:true});}
+ content.scrollTop=scrollTop;dialog.scrollTop=dialogScroll;
+}

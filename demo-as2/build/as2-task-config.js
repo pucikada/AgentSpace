@@ -8,7 +8,8 @@ function ntcEnsure(){
   const d=newTaskDraft();if(!d)return null;
   const type=ntcType(d);d.ntcCache=d.ntcCache||{};
   if(!d.ntc||d.ntc.type!==type||d.ntc.scope!==d.project||(d.ntc.taskShape==='graph')!==(d.executorType==='graph')){
-    d.ntc=d.ntcCache[d.project+'|'+type+'|'+ntcShape(d)]||ntcCustom(type,d.project);
+    const defaultTemplate=ntcTemplates(d)[0];
+    d.ntc=d.ntcCache[d.project+'|'+type+'|'+ntcShape(d)]||(defaultTemplate?abCopy(defaultTemplate):ntcCustom(type,d.project));
     d.ntcCache[d.project+'|'+type+'|'+ntcShape(d)]=d.ntc;
   }
   return d.ntc;
@@ -27,16 +28,16 @@ renderNewTaskPage=function(){
   const x=ntcEnsure(),d=newTaskDraft();if(!x)return ntcPreviousRenderNewTask();
   const name=x.id?x.name:'自定义配置';d.executor=name;
   let html=ntcPreviousRenderNewTask();d.executor=name;
-  const label=(x.taskShape==='graph'?'图任务 · ':x.type==='workflow'?'链式任务 · ':'原子任务 · ')+name;
-  const pill=`<button class="nt-pill" data-a="nt-pick" data-v="executor" aria-haspopup="menu">${ico(abIcon(abAssetType(x)))}<span>${esc(label)}</span>${ico('down')}</button>`;
-  return html.replace(/<button class="nt-pill" data-a="nt-pick" data-v="executor"[\s\S]*?<\/button>/,pill).replace(/系列任务/g,'链式任务');
+  const label=name;
+  const pill=`<button class="nt-pill nt-template-picker" data-a="nt-pick" data-v="executor" aria-label="选择任务模板" aria-haspopup="menu"><span>${esc(label)}</span>${ico('down')}</button>`;
+  return html.replace(/<button class="nt-pill" data-a="nt-pick" data-v="executor"[\s\S]*?<\/button>/,'').replace('<span class="spacer"></span>',pill+'<span class="spacer"></span>').replace(/系列任务/g,'链式任务');
 };
 const ntcPreviousMenu=newTaskMenu;
 newTaskMenu=function(key){
   if(key!=='executor')return ntcPreviousMenu(key);
   const d=newTaskDraft(),x=ntcEnsure();if(!d)return;
   const same=document.querySelector('.ntc-menu');closeExtMenu();if(same)return;
-  const trigger=document.querySelector('.nt-tray [data-v="executor"]');if(!trigger)return;
+  const trigger=document.querySelector('[data-a="nt-pick"][data-v="executor"]');if(!trigger)return;
   const r=trigger.getBoundingClientRect(),rows=ntcTemplates(d);
   document.body.insertAdjacentHTML('beforeend',`<div class="as2-menu ntc-menu" role="menu" data-for="nt" aria-label="选择任务模板"><div class="as2-menu-label">${d.executorType==='graph'?abLabels.graph:abLabels[ntcType(d)]}</div><div class="ntc-template-options">${rows.map(t=>`<button class="ntc-template-option" role="menuitem" data-selected="${x.id===t.id}" data-a="ntc-select" data-v="${esc(t.id)}" data-ntc-preview="${esc(t.id)}">${ico(abIcon(abAssetType(t)))}<span>${esc(t.name)}</span>${x.id===t.id?ico('check').replace('class="icon lucide"','class="icon lucide ntc-selected-icon"'):''}<small>V${t.version}</small></button>`).join('')||'<div class="ntc-menu-empty">当前范围暂无可用模板</div>'}</div><div class="as2-menu-sep"></div><button class="ntc-custom-option" role="menuitem" data-selected="${!x.id}" data-a="ntc-custom" data-ntc-preview="custom">${ico('settings')}<span><strong>自定义配置</strong><small>不使用模板，按本次任务配置</small></span></button></div>`);
   const menu=document.querySelector('.ntc-menu');menu.style.left=Math.max(8,Math.min(r.left,innerWidth-menu.offsetWidth-8))+'px';menu.style.top=Math.max(8,r.bottom+menu.offsetHeight+6>innerHeight?r.top-menu.offsetHeight-6:r.bottom+6)+'px';
@@ -138,7 +139,7 @@ newTaskAction=function(a,v){
     closeExtMenu();if(v==='temporary'){newTaskOpen();return true;}
     const draft=newTaskDraft();openAutomation(v);
     if(!draft&&isMyBoard()){const scope=boardState().project;automationDraft.project=joinedProjects().includes(scope)?scope:'个人';automationDraft.spaceIds=defaultTaskKnowledge(automationDraft.project);renderAutomationForm();}
-    if(draft){automationDraft.project=draft.project;automationDraft.owner=draft.owner;automationDraft.prompt=draft.goal;automationDraft.spaceIds=[...draft.spaceIds];renderAutomationForm();}
+    if(draft){automationDraft.project=draft.project;automationDraft.owner=draft.owner;automationDraft.prompt=draft.goal;automationDraft.spaceIds=[...draft.spaceIds];const selected=ntcEnsure();if(selected?.id){automationDraft.taskTemplateId=selected.id;automationDraft.taskTemplateSnapshot=abCopy(selected);automationDraft.executorType=selected.taskShape==='graph'?'graph':selected.type==='workflow'?'workflow':'agent';automationDraft.executor=selected.type==='task'?selected.config.agentUnit||selected.config.agentType:selected.taskShape==='graph'?'Master Agent':selected.name;}if(selected?.type==='task'){automationDraft.executionConfig=abCopy(selected.config);automationDraft.noEnvironment=false;}renderAutomationForm();}
     return true;
   }
   if(!a.startsWith('ntc-')){if(a==='nt-mode'&&newTaskDraft())ntcClose();if(a==='nt-set'&&String(v).startsWith('project|')&&newTaskDraft())ntcClose();return ntcPreviousAction(a,v);}
@@ -161,8 +162,8 @@ newTaskAction=function(a,v){
   ntcRenderDrawer();return true;
 };
 function ntcClose(){document.getElementById('ntcDrawer')?.remove();ntcEditing=null;document.querySelector('[data-a="ntc-edit"]')?.focus({preventScroll:true});}
-document.addEventListener('pointerover',e=>{const row=e.target.closest?.('[data-ntc-preview]');if(row&&row.closest('.ntc-menu')){if(!row.contains(e.relatedTarget))ntcPreview(row.dataset.ntcPreview);return;}const pill=e.target.closest?.('.nt-tray [data-v="executor"]');if(pill&&!pill.contains(e.relatedTarget)){clearTimeout(ntcHoverTimer);ntcHoverTimer=setTimeout(()=>{if(newTaskDraft()&&!document.querySelector('.as2-menu'))newTaskMenu('executor');},180);}});
-document.addEventListener('pointerout',e=>{if(e.target.closest?.('.nt-tray [data-v="executor"]'))clearTimeout(ntcHoverTimer);});
+document.addEventListener('pointerover',e=>{const row=e.target.closest?.('[data-ntc-preview]');if(row&&row.closest('.ntc-menu')){if(!row.contains(e.relatedTarget))ntcPreview(row.dataset.ntcPreview);return;}const pill=e.target.closest?.('[data-a="nt-pick"][data-v="executor"]');if(pill&&!pill.contains(e.relatedTarget)){clearTimeout(ntcHoverTimer);ntcHoverTimer=setTimeout(()=>{if(newTaskDraft()&&!document.querySelector('.as2-menu'))newTaskMenu('executor');},180);}});
+document.addEventListener('pointerout',e=>{if(e.target.closest?.('[data-a="nt-pick"][data-v="executor"]'))clearTimeout(ntcHoverTimer);});
 document.addEventListener('focusin',e=>{if(e.target.matches?.('[data-ntc-preview]'))ntcPreview(e.target.dataset.ntcPreview);});
 document.addEventListener('keydown',e=>{if(!ntcEditing)return;if(e.key==='Escape'){e.preventDefault();ntcClose();}else if(e.key==='Tab'){const items=[...document.querySelectorAll('#ntcDrawer button:not(:disabled),#ntcDrawer input:not(:disabled),#ntcDrawer textarea:not(:disabled),#ntcDrawer select:not(:disabled)')].filter(e=>e.getClientRects().length),first=items[0],last=items.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}});
 document.addEventListener('click',e=>{if(e.target.id==='ntcDrawer')ntcClose();});
