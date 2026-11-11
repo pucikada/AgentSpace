@@ -48,6 +48,7 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 
 /* Dark segmented controls and overflow counts use distinct neutral surfaces. */
 :root[data-theme="dark"]{--as-segment-selected:var(--as-color-424248);--as-count-bg:var(--as-color-3d3d43)}
+:root[data-appearance-family="aurora"][data-au-mode="dark"]{--as-segment-selected:color-mix(in srgb,var(--as-brand) 24%,var(--as-card))}
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:var(--as-color-3d3d43)!important;color:var(--as-color-f4f4f5)!important;border-color:var(--as-color-29292d)!important}
 
 /* The product canvas owns color; the complete outer shell is frosted. */

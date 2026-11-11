@@ -36,13 +36,16 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .d
 .side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--as-text-muted)}
 
 /* Opaque themed surfaces prevent scrolling content showing through the header. */
-html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 20px;padding:var(--page-inset-y) var(--page-inset-x) 12px;background:var(--page-header-bg,var(--as-bg,var(--as-color-white)));isolation:isolate}
+html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 12px;padding:var(--page-inset-y) var(--page-inset-x) 8px;background:var(--page-header-bg,var(--as-bg,var(--as-color-white)));isolation:isolate}
 html body #demo.slack-shell .as-page-header>.proj-sticky{position:static!important;top:auto!important;margin:0!important;padding:0!important;background:var(--as-color-transparent)!important;backdrop-filter:none!important}
 html body #demo.slack-shell .as-page-header>.demohead{position:static!important;background:var(--as-color-transparent)!important}
 html body #demo.slack-shell .as-page-header>:last-child{margin-bottom:0!important}
 :root[data-glass] body #demo.slack-shell .as-page-header{background:var(--as-color-rgba-248-250-253-p94);backdrop-filter:blur(20px)}
 :root[data-appearance-style="dark"][data-glass] body #demo.slack-shell .as-page-header{background:var(--as-color-rgba-24-26-30-p96)}
 :root[data-appearance-style="liquid"] body #demo.slack-shell .sps-settings-content>.as-page-header{background:color-mix(in srgb,var(--as-bg) 18%,var(--as-color-transparent));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+/* Secondary lists share the same neutral selection as the navigation panels. */
+#demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected){background:var(--as-border)!important;border-color:var(--as-color-transparent)!important;box-shadow:none!important}
+#demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected)::before{display:none!important}
 
 .sps-secondary-settings{margin-top:32px;padding-top:24px;border-top:1px solid var(--as-border-soft)}
 .sps-secondary-settings>h4{font-size:14px;color:var(--as-text);margin:0 0 8px}

@@ -1,8 +1,8 @@
 .spx-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:24px 0 18px}
 .spx-section h2{font-size:18px;line-height:28px;margin:0}
 .spx-section p,.spx-caption{font-size:13px;color:var(--as-text-muted);line-height:22px;margin-top:5px}
-.spx-page>.asset-tabs{margin-bottom:20px}
-.spx-page .asset-subtabs{width:max-content;max-width:100%;margin:16px 0 20px}
+.spx-page>.asset-tabs{margin-bottom:12px}
+.spx-page .asset-subtabs{width:max-content;max-width:100%;margin:12px 0 14px}
 .spx-page .asset-grid{margin-top:18px}
 .spx-page .spx-resource{position:relative;display:flex;flex-direction:column;gap:12px}
 .spx-resource h3{font-size:17px;line-height:26px;margin:0}

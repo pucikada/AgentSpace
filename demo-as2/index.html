@@ -13812,6 +13812,7 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 
 /* Dark segmented controls and overflow counts use distinct neutral surfaces. */
 :root[data-theme="dark"]{--as-segment-selected:var(--as-color-424248);--as-count-bg:var(--as-color-3d3d43)}
+:root[data-appearance-family="aurora"][data-au-mode="dark"]{--as-segment-selected:color-mix(in srgb,var(--as-brand) 24%,var(--as-card))}
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:var(--as-color-3d3d43)!important;color:var(--as-color-f4f4f5)!important;border-color:var(--as-color-29292d)!important}
 
 /* The product canvas owns color; the complete outer shell is frosted. */
@@ -13869,8 +13870,8 @@ html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--au-frame:var(-
 .spx-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:24px 0 18px}
 .spx-section h2{font-size:18px;line-height:28px;margin:0}
 .spx-section p,.spx-caption{font-size:13px;color:var(--as-text-muted);line-height:22px;margin-top:5px}
-.spx-page>.asset-tabs{margin-bottom:20px}
-.spx-page .asset-subtabs{width:max-content;max-width:100%;margin:16px 0 20px}
+.spx-page>.asset-tabs{margin-bottom:12px}
+.spx-page .asset-subtabs{width:max-content;max-width:100%;margin:12px 0 14px}
 .spx-page .asset-grid{margin-top:18px}
 .spx-page .spx-resource{position:relative;display:flex;flex-direction:column;gap:12px}
 .spx-resource h3{font-size:17px;line-height:26px;margin:0}
@@ -14279,13 +14280,16 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .d
 .side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--as-text-muted)}
 
 /* Opaque themed surfaces prevent scrolling content showing through the header. */
-html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 20px;padding:var(--page-inset-y) var(--page-inset-x) 12px;background:var(--page-header-bg,var(--as-bg,var(--as-color-white)));isolation:isolate}
+html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 12px;padding:var(--page-inset-y) var(--page-inset-x) 8px;background:var(--page-header-bg,var(--as-bg,var(--as-color-white)));isolation:isolate}
 html body #demo.slack-shell .as-page-header>.proj-sticky{position:static!important;top:auto!important;margin:0!important;padding:0!important;background:var(--as-color-transparent)!important;backdrop-filter:none!important}
 html body #demo.slack-shell .as-page-header>.demohead{position:static!important;background:var(--as-color-transparent)!important}
 html body #demo.slack-shell .as-page-header>:last-child{margin-bottom:0!important}
 :root[data-glass] body #demo.slack-shell .as-page-header{background:var(--as-color-rgba-248-250-253-p94);backdrop-filter:blur(20px)}
 :root[data-appearance-style="dark"][data-glass] body #demo.slack-shell .as-page-header{background:var(--as-color-rgba-24-26-30-p96)}
 :root[data-appearance-style="liquid"] body #demo.slack-shell .sps-settings-content>.as-page-header{background:color-mix(in srgb,var(--as-bg) 18%,var(--as-color-transparent));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+/* Secondary lists share the same neutral selection as the navigation panels. */
+#demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected){background:var(--as-border)!important;border-color:var(--as-color-transparent)!important;box-shadow:none!important}
+#demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected)::before{display:none!important}
 
 .sps-secondary-settings{margin-top:32px;padding-top:24px;border-top:1px solid var(--as-border-soft)}
 .sps-secondary-settings>h4{font-size:14px;color:var(--as-text);margin:0 0 8px}
