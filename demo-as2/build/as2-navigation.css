@@ -19,14 +19,12 @@
 #demo.slack-shell .sidehead h3{font-weight:600;line-height:22px}
 
 /* The inset content starts 4px lower; sidebar headers share its divider baseline. */
-:root[data-appearance-family="aurora"]{--agentspace-side-head-height:calc(var(--agentspace-header-height) + 4px);--agentspace-side-head-offset:4px}
 :root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--agentspace-side-head-offset)!important}
 
 /* One neutral hover overlay for both levels of aurora's light navigation. */
 :root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--devui-list-item-hover-bg:rgba(0,0,0,.04)!important}
 
 /* Selected navigation labels and icons share the primary neutral ink. */
-:root[data-appearance-family="aurora"]{--agentspace-nav1-active-font-weight:600}
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--devui-text)!important;font-weight:600!important}
 
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--devui-text)!important}

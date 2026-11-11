@@ -1,6 +1,5 @@
-/* minimal-dark.css — appearance style "dark" (:root.dark / data-theme=dark).
-   Full set, including tokens that match classic, so the file stands alone.
-   Aurora dark also carries these selectors, then overrides them in its own file. */
+/* minimal-dark.css — appearance "dark". Full set, so it does not rely on classic.
+   Aurora dark also matches :root.dark, then overrides this file. */
 :root.dark,
 :root[data-theme="dark"] {
 color-scheme: light;
@@ -132,7 +131,7 @@ color-scheme: light;
   --agentspace-ease-raise:  cubic-bezier(.6, .6, 0, 1);     /* 按钮按压 */
 
   /* ---------- 13. 布局 ---------- */
-  --agentspace-rail-width:     64px;
+  --agentspace-rail-width: 72px;
   --agentspace-sidebar-width:  256px;
   --agentspace-frame-gap:  8px;
   --agentspace-reading-width:  760px;   /* 对话 / 长回复最大行宽 */
@@ -140,12 +139,13 @@ color-scheme: light;
 
   /* Official tokens whose current render differs from designTokens.md defaults. */
   --agentspace-global-bg-image: none;
-  --agentspace-page-bg: #FCFCFC;
   --agentspace-menu-bg: #ffffff;
   --agentspace-nav1-active-font-weight: 500;
   --agentspace-nav2-active-font-weight: 500;
   --agentspace-nav1-hover-bg: rgba(0, 0, 0, .05);
   --agentspace-nav2-hover-bg: rgba(0, 0, 0, .05);
+  --agentspace-nav1-active-bg: var(--rail-tile);
+  --agentspace-nav2-active-bg: #EDEEF1;
   --agentspace-font-size-xs: 11px;
   --agentspace-font-size-xxl: 28px;
   --agentspace-font-size-hero: 40px;
@@ -155,6 +155,7 @@ color-scheme: light;
   --devui-font-title-weight: 600;
   --devui-font-content-weight: 400;
   --devui-line-height-base: 1.5;
+  --agentspace-header-height: 48px;
 color-scheme: dark;
 
   --agentspace-neutral-bg: #0C0C0D;--agentspace-global-bg: #0C0C0D;
@@ -228,18 +229,14 @@ color-scheme: dark;
   --agentspace-shadow-dialog:0 24px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08);
 
   --agentspace-global-bg-image: none;
-  --agentspace-page-bg: #121213;
   --agentspace-menu-bg: #121213;
   --agentspace-nav1-active-font-weight: 500;
   --agentspace-nav2-active-font-weight: 500;
   --agentspace-nav1-hover-bg: rgba(255, 255, 255, .07);
   --agentspace-nav2-hover-bg: rgba(255, 255, 255, .07);
-  --agentspace-nav1-active-bg: #19191B;
-  --agentspace-nav2-active-bg: #19191B;
+  --agentspace-nav1-active-bg: var(--rail-tile);
+  --agentspace-nav2-active-bg: #2A2B30;
   --devui-primary: var(--devui-brand);
   --devui-primary-hover: var(--devui-brand-hover);
   --devui-card-bg: var(--devui-base-bg);
-}
-@media (prefers-reduced-motion: reduce) {
-  :root { --devui-animation-duration-fast: 0ms; --agentspace-duration: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; --agentspace-duration-enter: 0ms; }
 }

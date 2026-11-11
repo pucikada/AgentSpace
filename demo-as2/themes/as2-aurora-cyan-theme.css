@@ -1,11 +1,8 @@
-/* as2-aurora-cyan-theme.css — aurora accent 冰川青 #06B6D4.
-   Light, mixed and dark are sections of this file.
-   Accent-derived colors use --agentspace-accent, set to this file's accent.
-   JS also writes the accent inline; the literal below is this theme's value.
-   Dark does not inherit the light aurora surface block: appearance style
-   switches to "dark" in that mode, matching the live cascade. */
-:root[data-appearance-family="aurora"][data-au-accent="06B6D4"]:not([data-au-mode="dark"]) {
-  --agentspace-accent: #06B6D4;
+/* as2-aurora-cyan-theme.css — aurora 冰川青 #06B6D4. Light, mixed and dark are sections.
+   Values match the render. Accent-derived colors use --agentspace-accent.
+   This file is complete for non-accent tokens; it does not import another theme. */
+:root[data-appearance-style="aurora"] {
+  color-scheme: light;
 color-scheme: light;
 
   /* ---------- 1. 表面层级（由底到顶，靠微差而不是阴影分层） ---------- */
@@ -135,7 +132,7 @@ color-scheme: light;
   --agentspace-ease-raise:  cubic-bezier(.6, .6, 0, 1);     /* 按钮按压 */
 
   /* ---------- 13. 布局 ---------- */
-  --agentspace-rail-width:     64px;
+  --agentspace-rail-width: 72px;
   --agentspace-sidebar-width:  256px;
   --agentspace-frame-gap:  8px;
   --agentspace-reading-width:  760px;   /* 对话 / 长回复最大行宽 */
@@ -143,12 +140,13 @@ color-scheme: light;
 
   /* Official tokens whose current render differs from designTokens.md defaults. */
   --agentspace-global-bg-image: none;
-  --agentspace-page-bg: #FCFCFC;
   --agentspace-menu-bg: #ffffff;
   --agentspace-nav1-active-font-weight: 500;
   --agentspace-nav2-active-font-weight: 500;
   --agentspace-nav1-hover-bg: rgba(0, 0, 0, .05);
   --agentspace-nav2-hover-bg: rgba(0, 0, 0, .05);
+  --agentspace-nav1-active-bg: var(--rail-tile);
+  --agentspace-nav2-active-bg: #EDEEF1;
   --agentspace-font-size-xs: 11px;
   --agentspace-font-size-xxl: 28px;
   --agentspace-font-size-hero: 40px;
@@ -158,46 +156,72 @@ color-scheme: light;
   --devui-font-title-weight: 600;
   --devui-font-content-weight: 400;
   --devui-line-height-base: 1.5;
---agentspace-resize-a: var(--agentspace-accent, #3F6BFF); --agentspace-resize-b: color-mix(in srgb, var(--agentspace-accent, #3F6BFF) 55%, #22D3EE);
+  --agentspace-header-height: 48px;
+color-scheme: light;
+  --agentspace-aurora-gap-right: 8px; --agentspace-aurora-gap-bottom: 8px;
+  --agentspace-accent: #06B6D4; --agentspace-aurora-accent-2: color-mix(in srgb, var(--agentspace-accent) 72%, #fff); --agentspace-aurora-navy: color-mix(in srgb, var(--agentspace-accent) 16%, #070B16);
+  --agentspace-neutral-bg: #EEF2FB;--agentspace-global-bg: #EEF2FB; --agentspace-panel-bg: #FFFFFF; --agentspace-panel-stroke: rgba(63,107,255,.12); --devui-base-bg: #FFFFFF; --agentspace-stage-bg: #EEF2FB; --agentspace-sunken-bg: #E9EEFA; --devui-feedback-overlay-backdrop: rgba(8,14,40,.4);
+  --devui-text: #12182B; --devui-text-weak: #333B55; --devui-aide-text: #636C86; --agentspace-text-subtle: #8791AB; --devui-light-text: #FFFFFF;
+  --devui-line: rgba(30,50,110,.12); --agentspace-border-soft: rgba(30,50,110,.07); --agentspace-border-strong: rgba(30,50,110,.22);
+  --devui-list-item-hover-bg: rgba(18,24,43,.035);--agentspace-nav1-hover-bg: rgba(18,24,43,.035);--agentspace-nav2-hover-bg: rgba(18,24,43,.035); --agentspace-pressed-bg: rgba(18,24,43,.07); --agentspace-muted-bg: #F0F3FB;
+  --devui-list-item-active-bg: #E6EAF4; --devui-list-item-active-text: #12182B;
+  --devui-brand: var(--agentspace-accent); --devui-brand-hover: color-mix(in srgb, var(--agentspace-accent) 86%, #000); --devui-primary-bg: #E6EAF4; --devui-primary-line: rgba(30,40,80,.28); --agentspace-focus-ring: var(--agentspace-accent); --devui-form-control-interactive-outline: color-mix(in srgb, var(--agentspace-accent) 22%, transparent);
+  --agentspace-btn-top: #2C344C; --agentspace-btn-bottom: #161B2C; --agentspace-btn-top-hover: #38425E; --agentspace-btn-bottom-hover: #1C2236;
+  --agentspace-btn-edge-1: #2C344C; --agentspace-btn-edge-2: #161B2C; --agentspace-btn-edge-3: #0E121F; --agentspace-btn-ring: rgba(22,27,44,.4); --agentspace-btn-ink: #FFFFFF;
+  --agentspace-btn-shadow: 0 8px 18px -8px rgba(12,16,32,.6);
+  --devui-btn-common-bg: #FFFFFF; --devui-btn-common-color-hover: #12182B;
+  --agentspace-run-color: var(--agentspace-accent); --agentspace-run-bg: color-mix(in srgb, var(--agentspace-accent) 10%, #fff); --agentspace-run-line: color-mix(in srgb, var(--agentspace-accent) 35%, transparent);
+  --agentspace-id-human-bg: #E6ECFF; --agentspace-id-human-color: #2442B8; --agentspace-agent-bg: color-mix(in srgb, var(--agentspace-accent) 13%, #fff); --agentspace-agent-color: color-mix(in srgb, var(--agentspace-accent) 78%, #12182B);
+  --devui-border-radius: 8px; --agentspace-radius-sm: 10px; --devui-border-radius-card: 12px; --agentspace-radius-row: 12px; --agentspace-radius-card: 18px; --devui-border-radius-card-xl: 18px; --agentspace-radius-panel: 22px; --agentspace-radius-input: 12px; --devui-border-radius-full: 999px;
+  --agentspace-shadow-card: 0 10px 26px -16px color-mix(in srgb, var(--agentspace-accent) 40%, transparent), 0 1px 2px rgba(18,24,43,.06);
+  --agentspace-shadow-tile: 0 6px 16px -10px color-mix(in srgb, var(--agentspace-accent) 35%, transparent), 0 0 0 1px rgba(30,50,110,.06);
+  --agentspace-shadow-panel: none;
+  --agentspace-shadow-pop: 0 18px 44px -12px rgba(10,20,70,.28), 0 0 0 1px rgba(30,50,110,.1); --agentspace-shadow-dialog: 0 30px 80px -20px rgba(10,20,70,.4), 0 0 0 1px rgba(30,50,110,.1);
+  --rail-tile: color-mix(in srgb, var(--agentspace-accent) 24%, #0B1020); --rail-ink: #FFFFFF; --rail-tile-shadow: none;  /* --rail-tile 同时用作图标镂空线的颜色，需与选中块底色接近 */
+  --agentspace-menu-bg: radial-gradient(85% 42% at 0% 0%, color-mix(in srgb, var(--agentspace-accent) 52%, transparent), transparent 68%), radial-gradient(75% 40% at 100% 100%, color-mix(in srgb, var(--agentspace-accent) 30%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in srgb, var(--agentspace-accent) 16%, #0B1020), #070B16);
   --agentspace-accent: #06B6D4;
-  --agentspace-global-bg: #EEF2FB;
-  --agentspace-global-bg-image: radial-gradient(ellipse 270px 240px at -30px -25px,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-corner,0%),transparent),transparent 80%),radial-gradient(ellipse 390px 260px at 28% 70px,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-top,12%),transparent),transparent 80%),radial-gradient(ellipse 310px 250px at 96% 104%,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-right,8%),transparent),transparent 80%),radial-gradient(ellipse 330px 290px at -30px 103%,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-left,10%),transparent),transparent 80%);
-  --agentspace-page-bg: #FFFFFF;
-  --agentspace-menu-bg: rgba(245,247,252,.46);
+
   --agentspace-nav1-active-font-weight: 600;
   --agentspace-nav2-active-font-weight: 600;
-  --agentspace-nav1-hover-bg: rgba(0,0,0,.04);
-  --agentspace-nav2-hover-bg: rgba(0,0,0,.04);
-  --agentspace-agent-color: #4B4BC4;
-  --agentspace-agent-bg: #EEEDFB;
+  --agentspace-side-head-height: calc(var(--agentspace-header-height) + 4px);
+  --agentspace-side-head-offset: 4px;
+  --agentspace-shadow-card: none !important;
+  --agentspace-shadow-tile: none !important;
+  --agentspace-shadow-panel: none !important;
+  --agentspace-btn-shadow: none !important;
+  --agentspace-aurora-ink: color-mix(in srgb, var(--agentspace-accent) 60%, #0B1020);
+  --agentspace-nav2-active-bg: rgba(255,255,255,.17);
+  --agentspace-aurora-shell-shadow: 0 8px 24px -16px rgba(18,22,34,.2), 0 1px 5px rgba(18,22,34,.06);
 }
-:root[data-appearance-family="aurora"][data-au-accent="06B6D4"][data-au-mode="light"] {
+html:root[data-appearance-family="aurora"][data-au-mode="light"] {
   --agentspace-accent: #06B6D4;
-  --agentspace-global-bg: #F1F3F7;
-  --agentspace-page-bg: #FFFFFF;
   --agentspace-menu-bg: rgba(245,247,252,.46);
+  --agentspace-page-bg: #FFFFFF;
+  --rail-tile: #FFFFFF;
+  --rail-ink: var(--devui-text);
+  --agentspace-nav1-active-bg: #FFFFFF;
+  --agentspace-nav2-active-bg: #FFFFFF;
   --agentspace-aurora-canvas-top: 13%;
   --agentspace-aurora-canvas-right: 12%;
   --agentspace-aurora-canvas-left: 19%;
   --agentspace-aurora-canvas-corner: 17%;
   --agentspace-nav1-hover-bg: rgba(0,0,0,.04);
   --agentspace-nav2-hover-bg: rgba(0,0,0,.04);
-  --agentspace-nav1-active-bg: #ffffff;
-  --agentspace-nav2-active-bg: #ffffff;
 }
-:root[data-appearance-family="aurora"][data-au-accent="06B6D4"][data-au-mode="mixed"] {
+html:root[data-appearance-family="aurora"][data-au-mode="mixed"] {
   --agentspace-accent: #06B6D4;
-  --agentspace-global-bg: #EEF2FB;
-  --agentspace-page-bg: #F7F9FE;
+  --agentspace-aurora-mixed-gradient: radial-gradient(ellipse 420px 210px at 18% 0%, color-mix(in srgb, var(--agentspace-accent) 22%, transparent), transparent 76%), radial-gradient(ellipse 280px 160px at 100% 100%, color-mix(in srgb, var(--agentspace-accent) 10%, transparent), transparent 78%), linear-gradient(180deg, rgba(17,20,32,.97), rgba(9,12,21,.98));
   --agentspace-menu-bg: var(--agentspace-aurora-mixed-gradient);
+  --agentspace-nav1-active-bg: var(--agentspace-aurora-mixed-gradient);
+  --agentspace-nav2-active-bg: rgba(255,255,255,.17);
   --agentspace-aurora-canvas-top: 13%;
   --agentspace-aurora-canvas-right: 12%;
   --agentspace-aurora-canvas-left: 19%;
   --agentspace-aurora-canvas-corner: 17%;
+  --agentspace-aurora-shell-shadow: 0 8px 24px -16px rgba(18,22,34,.2), 0 1px 5px rgba(18,22,34,.06);
 }
-:root[data-appearance-family="aurora"][data-au-accent="06B6D4"][data-au-mode="dark"] {
+html:root[data-appearance-family="aurora"][data-au-mode="dark"] {
   color-scheme: dark;
-  --agentspace-accent: #06B6D4;
 color-scheme: dark;
 
   --agentspace-neutral-bg: #0C0C0D;--agentspace-global-bg: #0C0C0D;
@@ -271,18 +295,34 @@ color-scheme: dark;
   --agentspace-shadow-dialog:0 24px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08);
 
   --agentspace-global-bg-image: none;
-  --agentspace-page-bg: #121213;
   --agentspace-menu-bg: #121213;
   --agentspace-nav1-active-font-weight: 500;
   --agentspace-nav2-active-font-weight: 500;
   --agentspace-nav1-hover-bg: rgba(255, 255, 255, .07);
   --agentspace-nav2-hover-bg: rgba(255, 255, 255, .07);
+  --agentspace-nav1-active-bg: var(--rail-tile);
+  --agentspace-nav2-active-bg: #2A2B30;
   --devui-primary: var(--devui-brand);
   --devui-primary-hover: var(--devui-brand-hover);
   --devui-card-bg: var(--devui-base-bg);
   --agentspace-accent: #06B6D4;
-  --agentspace-global-bg: #101012;
+  --agentspace-aurora-gap-right: 8px;
+  --agentspace-aurora-gap-bottom: 8px;
+  --agentspace-page-bg: #151517;
+  --agentspace-aurora-column-bg: #1A1A1D;
+  --agentspace-aurora-column-line: rgba(255,255,255,.07);
+  --devui-brand: color-mix(in srgb, var(--agentspace-accent) 76%, #fff);
+  --devui-brand-hover: color-mix(in srgb, var(--agentspace-accent) 64%, #fff);
+  --devui-primary-bg: color-mix(in srgb, var(--agentspace-accent) 12%, #242427);
+  --devui-primary-line: color-mix(in srgb, var(--agentspace-accent) 40%, transparent);
+  --agentspace-focus-ring: var(--devui-brand);
+  --devui-list-item-active-bg: var(--devui-primary-bg);
+  --devui-list-item-active-text: var(--devui-brand);
+  --agentspace-run-color: var(--devui-brand);
+  --agentspace-run-bg: var(--devui-primary-bg);
+  --agentspace-run-line: var(--devui-primary-line);
   --agentspace-neutral-bg: #101012;
+  --agentspace-global-bg: #101012;
   --agentspace-stage-bg: #151517;
   --agentspace-panel-bg: #151517;
   --devui-base-bg: #232326;
@@ -295,29 +335,22 @@ color-scheme: dark;
   --devui-line: rgba(255,255,255,.12);
   --agentspace-border-soft: rgba(255,255,255,.07);
   --agentspace-border-strong: rgba(255,255,255,.24);
+  --agentspace-input: #28282B;
   --devui-list-item-hover-bg: rgba(255,255,255,.06);
   --agentspace-nav1-hover-bg: rgba(255,255,255,.06);
   --agentspace-nav2-hover-bg: rgba(255,255,255,.06);
-  --devui-brand: color-mix(in srgb, var(--agentspace-accent) 76%, #fff);
-  --devui-brand-hover: color-mix(in srgb, var(--agentspace-accent) 64%, #fff);
-  --devui-primary-bg: color-mix(in srgb, var(--agentspace-accent) 12%, #242427);
-  --devui-primary-line: color-mix(in srgb, var(--agentspace-accent) 40%, transparent);
-  --agentspace-focus-ring: var(--devui-brand);
-  --devui-list-item-active-bg: var(--devui-primary-bg);
-  --devui-list-item-active-text: var(--devui-brand);
-  --agentspace-run-color: var(--devui-brand);
-  --agentspace-run-bg: var(--devui-primary-bg);
-  --agentspace-run-line: var(--devui-primary-line);
-  --agentspace-page-bg: #151517;
   --agentspace-menu-bg: rgba(40,40,45,.48);
-  --agentspace-aurora-column-bg: #1A1A1D;
-  --agentspace-aurora-column-line: rgba(255,255,255,.07);
-  --agentspace-aurora-gap-right: 8px;
-  --agentspace-aurora-gap-bottom: 8px;
+  --agentspace-nav1-active-bg: var(--devui-primary-bg);
+  --agentspace-nav2-active-bg: #2A2B30;
   --agentspace-nav1-active-font-weight: 600;
   --agentspace-nav2-active-font-weight: 600;
-  --agentspace-nav1-active-bg: #232326;
-  --agentspace-nav2-active-bg: #232326;
+  --agentspace-side-head-height: calc(var(--agentspace-header-height) + 4px);
+  --agentspace-side-head-offset: 4px;
+  --agentspace-shadow-card: none !important;
+  --agentspace-shadow-tile: none !important;
+  --agentspace-shadow-panel: none !important;
+  --agentspace-btn-shadow: none !important;
+  --agentspace-aurora-shell-shadow: 0 8px 24px -16px rgba(0,0,0,.5), 0 1px 5px rgba(0,0,0,.25);
   --devui-primary: var(--devui-brand);
   --devui-card-bg: var(--devui-base-bg);
 }

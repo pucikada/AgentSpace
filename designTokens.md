@@ -515,7 +515,7 @@ Aurora 系列各自的光晕主色：
 
 以下变量是 demo-as2 在迁到本文件的令牌名时新增的 `--agentspace-*` 扩展。组件在没有语义对应的 DevUI / 上文 18 个 AgentSpace 令牌时使用它们。取值来自迁之前的界面，不是本文件前面的默认值。
 
-经典浅色（`classic`）和深色（`dark`）列的是 `:root` / `:root.dark` 上的值。幻彩列取 `as2-aurora-theme.css`（`#3F6BFF`）里该变量的最后一次赋值，深色段在文件后部，所以只在深色段写过的变量会显示深色值。五个幻彩强调色共用同一套扩展，差别在 `--agentspace-accent` 与由它推导的 `--agentspace-global-bg-image`。`--agentspace-nav1-active-bg` / `--agentspace-nav2-active-bg` 属于上面的 18 个正式令牌，浅色 `#ffffff`、深色 `#19191B`，导航选中底仍走现有规则，尚未改读这两个变量。
+经典浅色（`classic`）和深色（`dark`）列的是 `:root` / `:root.dark` 上的值。幻彩列取 `as2-aurora-theme.css`（`#3F6BFF`）里该变量的最后一次赋值，深色段在文件后部，所以只在深色段写过的变量会显示深色值。五个幻彩强调色共用同一套扩展，差别在 `--agentspace-accent` 与由它推导的 `--agentspace-global-bg-image`。`--agentspace-nav1-active-bg` 和 `--agentspace-nav2-active-bg` 已接到主导航与二级导航的选中底。经典浅色是 `#ffffff` / `#EDEEF1`，经典深色跟随 `--rail-tile` / `#2A2B30`。幻彩浅色两者都是 `#ffffff`，深浅映衬的一级导航是混合渐变、二级是 `rgba(255,255,255,.17)`，深色一级跟随品牌浅底、二级是 `#2A2B30`。液态玻璃、像素和 Bento 在各自的外观规则里覆盖这两个变量。
 
 | 变量 | 含义 | 经典浅色 | 经典深色 | 幻彩浅色 |
 | :--- | :--- | :--- | :--- | :--- |

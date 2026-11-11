@@ -5,28 +5,13 @@
 .user-menu.um-managed .um-fly{animation:none!important}
 
 /* Aurora full dark shares the dark surface system and retains its own accent. */
-:root[data-appearance-family="aurora"][data-au-mode="dark"]{
-  color-scheme:dark;
-  --agentspace-aurora-gap-right:8px;--agentspace-aurora-gap-bottom:8px;--agentspace-menu-bg:#1B1B1E;--agentspace-page-bg:#151517;
-  --agentspace-aurora-column-bg:#1A1A1D;--agentspace-aurora-column-line:rgba(255,255,255,.07);
-  --devui-brand:color-mix(in srgb,var(--agentspace-accent) 76%,#fff);
-  --devui-brand-hover:color-mix(in srgb,var(--agentspace-accent) 64%,#fff);
-  --devui-primary-bg:color-mix(in srgb,var(--agentspace-accent) 12%,#242427);
-  --devui-primary-line:color-mix(in srgb,var(--agentspace-accent) 40%,transparent);
-  --agentspace-focus-ring:var(--devui-brand);--devui-list-item-active-bg:var(--devui-primary-bg);--devui-list-item-active-text:var(--devui-brand);
-  --agentspace-run-color:var(--devui-brand);--agentspace-run-bg:var(--devui-primary-bg);--agentspace-run-line:var(--devui-primary-line);
-  --agentspace-neutral-bg: #101012;--agentspace-global-bg: #101012;--agentspace-stage-bg:#151517;--agentspace-panel-bg:#151517;--devui-base-bg:#232326;--agentspace-sunken-bg:#101012;
-  --agentspace-muted-bg:#2B2B2F;--devui-text:#F4F4F5;--devui-text-weak:#D4D4D8;--devui-aide-text:#A1A1AA;--agentspace-text-subtle:#92929A;
-  --devui-line:rgba(255,255,255,.12);--agentspace-border-soft:rgba(255,255,255,.07);--agentspace-border-strong:rgba(255,255,255,.24);
-  --agentspace-input:#28282B;--devui-list-item-hover-bg: rgba(255,255,255,.06);--agentspace-nav1-hover-bg: rgba(255,255,255,.06);--agentspace-nav2-hover-bg: rgba(255,255,255,.06);
-}
+
 :root[data-appearance-family="aurora"][data-au-mode="dark"] body{background:var(--agentspace-global-bg)!important}
 :root[data-appearance-family="aurora"][data-au-mode="dark"] .appbar{background:var(--agentspace-global-bg)!important}
 :root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell>.demoside{background:transparent!important;border:0!important;box-shadow:none!important}
 :root[data-appearance-family="aurora"][data-au-mode="dark"] .demorail button.active{--rail-tile:var(--devui-primary-bg);--rail-ink:var(--devui-text)}
 
 /* Flat cards in all three aurora themes; floating surfaces keep their elevation. */
-:root[data-appearance-family="aurora"]{--agentspace-shadow-card:none!important;--agentspace-shadow-tile:none!important;--agentspace-shadow-panel:none!important;--agentspace-btn-shadow:none!important}
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :is(.card,.benchcard,.wfcard,.runcard,.extension-card,.automation-card,.collaboration-task-card,.knowledge-space-card,.project-channel-card,.project-agent-card,.kanban-card,.evo-panel,.evo-stage,.evo-memory-card,.as2-stat,.tablewrap,.project-overview-metrics>button,.wb-dash-panel,.threadlink,.co-thread-entry,.co-decision,.wc-plan,.as-tasklist,.as-tool-group,.tk-card,.bn-card,.pc-card,.ac-card,.ca-book,.ab-side-card,.ab-asset-card,.ab-create-card,.sps-env-card){box-shadow:none!important;transform:none!important}
 :root[data-appearance-family="aurora"] .ap-art--aurora[data-tone="dark"]{background:#101012!important}
 :root[data-appearance-family="aurora"] .ap-art--aurora[data-tone="dark"] .ap2-main{background:#151517!important}
@@ -51,13 +36,7 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell :i
 :root[data-theme="dark"] #demo.slack-shell .co-mgroup>b{background:#3D3D43!important;color:#F4F4F5!important;border-color:#29292D!important}
 
 /* The product canvas owns color; the complete outer shell is frosted. */
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{--agentspace-menu-bg:rgba(245,247,252,.46);--agentspace-page-bg:#FFFFFF}
-html:root[data-appearance-family="aurora"][data-au-mode="mixed"]{
-  --agentspace-aurora-mixed-gradient:radial-gradient(ellipse 420px 210px at 18% 0%,color-mix(in srgb,var(--agentspace-accent) 22%,transparent),transparent 76%),radial-gradient(ellipse 280px 160px at 100% 100%,color-mix(in srgb,var(--agentspace-accent) 10%,transparent),transparent 78%),linear-gradient(180deg,rgba(17,20,32,.97),rgba(9,12,21,.98));
-  --agentspace-menu-bg:var(--agentspace-aurora-mixed-gradient);
-}
 html:root[data-appearance-family="aurora"][data-au-mode="mixed"] body #demo.slack-shell.slack-shell .demorail.demorail button.active{background:var(--agentspace-aurora-mixed-gradient)!important}
-html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--agentspace-menu-bg:rgba(27,27,30,.72);--agentspace-page-bg:#151517}
 html:root[data-appearance-family="aurora"][data-au-mode] body{
   --agentspace-global-bg-image:radial-gradient(ellipse 270px 240px at -30px -25px,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-corner,0%),transparent),transparent 80%),radial-gradient(ellipse 390px 260px at 28% 70px,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-top,12%),transparent),transparent 80%),radial-gradient(ellipse 310px 250px at 96% 104%,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-right,8%),transparent),transparent 80%),radial-gradient(ellipse 330px 290px at -30px 103%,color-mix(in srgb,var(--agentspace-accent) var(--agentspace-aurora-canvas-left,10%),transparent),transparent 80%);background-image:var(--agentspace-global-bg-image)!important;
 }
@@ -65,10 +44,7 @@ html:root[data-appearance-family="aurora"][data-au-mode="light"] body{--agentspa
 html:root[data-appearance-family="aurora"] #demo.slack-shell::before{-webkit-backdrop-filter:blur(18px) saturate(110%);backdrop-filter:blur(18px) saturate(110%)}
 
 /* Elevate the complete half-enclosed shell; inset panels remain flat. */
-:root[data-appearance-family="aurora"]{--agentspace-aurora-shell-shadow:0 8px 24px -16px rgba(18,22,34,.2),0 1px 5px rgba(18,22,34,.06)}
-:root[data-appearance-family="aurora"][data-au-mode="dark"]{--agentspace-aurora-shell-shadow:0 8px 24px -16px rgba(0,0,0,.5),0 1px 5px rgba(0,0,0,.25)}
 
-html:root[data-appearance-family="aurora"][data-au-mode="light"]{--rail-ink:var(--devui-text);--rail-tile:#FFFFFF}
 
 /* Navigation is transparent within the shared shell, with no extra glass sheet. */
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell>.demoside,
@@ -78,7 +54,6 @@ html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .m
 }
 
 /* Let localized canvas color show through the complete light/mixed frame. */
-html:root[data-appearance-family="aurora"]:is([data-au-mode="light"],[data-au-mode="mixed"]){--agentspace-aurora-canvas-top:13%;--agentspace-aurora-canvas-right:12%;--agentspace-aurora-canvas-left:19%;--agentspace-aurora-canvas-corner:17%}
 html:root[data-appearance-family="aurora"]:is([data-au-mode="light"],[data-au-mode="mixed"]) #demo.slack-shell::before{-webkit-backdrop-filter:blur(24px) saturate(125%);backdrop-filter:blur(24px) saturate(125%)}
 /* The header shares the continuous product canvas instead of masking it. */
 html:root[data-appearance-family="aurora"]:is([data-au-mode="light"],[data-au-mode="mixed"]) body .appbar:not(#au-header){background:transparent!important}
@@ -97,4 +72,3 @@ html:root[data-appearance-family="aurora"]:is([data-au-mode="mixed"],[data-au-mo
 }
 
 html:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shell::after{background:rgba(255,255,255,.09)}
-html:root[data-appearance-family="aurora"][data-au-mode="dark"]{--agentspace-menu-bg:rgba(40,40,45,.48)}
