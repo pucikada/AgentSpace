@@ -63,7 +63,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 
 #demo.slack-shell .demoarea, body[data-view] #demo.slack-shell .demoarea {
   background: var(--agentspace-panel-bg) !important; border: 1px solid var(--agentspace-panel-stroke) !important; border-radius: var(--agentspace-radius-panel) !important;
-  box-shadow: var(--agentspace-shadow-panel) !important; margin: 0 var(--agentspace-frame-gap) var(--agentspace-frame-gap) 0; }
+  box-shadow: var(--agentspace-shadow-panel) !important; margin: 0 8px 8px 0; }
 #demo.slack-shell .democrumb { background: transparent !important; border-bottom: 1px solid var(--devui-line) !important; color: var(--devui-aide-text) !important; font-size: var(--devui-font-size-md) !important; height: 48px; }
 #demo.slack-shell .democrumb b { color: var(--devui-aide-text) !important; font-weight: 400; }
 #demo.slack-shell .democrumb > span:not(.spacer) { color: var(--devui-text) !important; }
@@ -314,7 +314,7 @@ input[type=checkbox], input[type=radio], input[type=range] { accent-color: var(-
   #demo.slack-shell > .demoside:not(:empty) {
     background: var(--agentspace-panel-bg) !important; border: 1px solid var(--agentspace-panel-stroke) !important; border-right: 1px solid var(--devui-line) !important;
     border-radius: var(--agentspace-radius-panel) 0 0 var(--agentspace-radius-panel) !important; box-shadow: var(--agentspace-shadow-panel) !important;
-    margin-bottom: var(--agentspace-frame-gap); overflow: hidden; }
+    margin-bottom: 8px; overflow: hidden; }
   #demo.slack-shell > .demoside:not(:empty) + .demoarea, body[data-view] #demo.slack-shell > .demoside:not(:empty) + .demoarea {
     border-left: 0 !important; border-radius: 0 var(--agentspace-radius-panel) var(--agentspace-radius-panel) 0 !important; }
 }
@@ -458,7 +458,7 @@ body[data-view="evolution"] #demo.slack-shell .demoarea { background: var(--agen
 
 /* 全局偏好生效 */
 :root[data-unread-badge="off"] #demo .rail-unread { display: none !important; }
-:root[data-motion="reduce"] { --devui-animation-duration-fast: 0ms; --agentspace-duration: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; --agentspace-duration-enter: 0ms; }
+:root[data-motion="reduce"] { --devui-animation-duration-fast: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; }
 :root[data-motion="reduce"] *, :root[data-motion="reduce"] *::before, :root[data-motion="reduce"] *::after { animation: none !important; transition: none !important; }
 :root[data-density="compact"] #demo.slack-shell .sidenav { height: 28px; min-height: 28px !important; }
 :root[data-density="compact"] #demo.slack-shell .democrumb { height: 40px; }
@@ -500,12 +500,12 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
  * 下拉：去原生箭头，右侧 32px 留给中性 chevron；搜索框容器与文本框同规格，内层输入透明
  * 多行文本（非 Composer）：上下 8 · 左右 12 · 行高 20 · 最小 72
  * 全局搜索弹窗：大号 40px。Composer 内的输入不在此列。 */
-:root { --agentspace-control-height: 32px; --agentspace-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23737373' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); }
+:root { --devui-btn-height: 32px; --devui-btn-sm-height: 28px; --agentspace-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23737373' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); }
 :root.dark, :root[data-theme="dark"] { --agentspace-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%238F8F8F' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); }
-:root[data-density="compact"] { --agentspace-control-height: 28px; }
+:root[data-density="compact"] { --devui-btn-height: 28px; }
 
 :is(#demo, #modalHost) :is(input:not([type]), input[type=text], input[type=search], input[type=number], input[type=email], input[type=url], input[type=date], input[type=time], select) {
-  box-sizing: border-box; height: var(--agentspace-control-height) !important; min-height: 0 !important; padding: 0 12px !important; margin: 0;
+  box-sizing: border-box; height: var(--devui-btn-height) !important; min-height: 0 !important; padding: 0 12px !important; margin: 0;
   font: 400 var(--devui-font-size-md)/20px var(--agentspace-font-family) !important; color: var(--devui-text) !important;
   background-color: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-strong) !important; border-radius: var(--devui-border-radius-card) !important; box-shadow: none !important; }
 /* :not([multiple]) lifts specificity to match the generic control rule above (:is() takes its highest argument). */
@@ -520,7 +520,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 
 /* 搜索框 / 带图标的选择器：外层容器就是输入框 */
 :is(#demo, #modalHost) :is(.ms-list-search, .evo-searchbox, .co-members-search, .wc-popover-search, .ms-directory-search, .evo-scope) {
-  box-sizing: border-box; display: flex; align-items: center; gap: 8px; height: var(--agentspace-control-height) !important; min-height: 0 !important; padding: 0 12px !important;
+  box-sizing: border-box; display: flex; align-items: center; gap: 8px; height: var(--devui-btn-height) !important; min-height: 0 !important; padding: 0 12px !important;
   background: var(--devui-base-bg) !important; border: 1px solid var(--agentspace-border-strong) !important; border-radius: var(--devui-border-radius-card) !important; box-shadow: none !important; outline: none !important;
   color: var(--devui-aide-text); }
 :is(#demo, #modalHost) :is(.ms-list-search, .evo-searchbox, .co-members-search, .wc-popover-search, .ms-directory-search, .evo-scope):focus-within {
@@ -538,7 +538,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 #demo.slack-shell :is(.aggregate-filter-fields, .field) label, #modalHost .field > label, #demo.slack-shell .aggregate-filters label {
   font-size: var(--devui-font-size-sm) !important; color: var(--devui-aide-text) !important; font-weight: 400; }
 #demo.slack-shell .aggregate-filters label { display: flex; flex-direction: column; gap: 6px; }
-.settings-select { height: var(--agentspace-control-height); }
+.settings-select { height: var(--devui-btn-height); }
 #demo.slack-shell .aggregate-filters select { min-width: 128px; }
 
 /* ===================== Composer（Kobra Chat Input + affectUI Chat Composer） =====================
@@ -731,7 +731,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 #demo.slack-shell .demorail { padding-top: 0 !important; }
 
 /* ===================== Sidebar v2（Kobra Sidebar：active line · highlight · press · collapse · team switch） ===================== */
-:root { --agentspace-ease-drawer: cubic-bezier(.32, .72, 0, 1); --agentspace-ease-pop: cubic-bezier(.16, 1, .3, 1); }
+:root { --agentspace-ease-drawer: cubic-bezier(.32, .72, 0, 1); }
 
 /* 菜单行：32px · 8px 圆角 · 左 10 右 8；未选 80% 文字，选中只加深文字 + 加粗图标，不铺底 */
 #demo.slack-shell .sidebody { position: relative; isolation: isolate; }
@@ -797,7 +797,7 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 .as2-switcher { position: fixed; z-index: 200; width: 300px; max-height: min(420px, calc(100dvh - 80px)); display: flex; flex-direction: column; padding: 6px;
   background: var(--devui-base-bg); border-radius: var(--agentspace-radius-card); color: var(--devui-text);
   box-shadow: 0 0 0 1px var(--agentspace-border-strong), 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
-  transform-origin: top left; animation: as2-pop-in 150ms var(--agentspace-ease-pop) both; }
+  transform-origin: top left; animation: as2-pop-in 150ms var(--devui-animation-ease-out) both; }
 :root[data-theme="dark"] .as2-switcher { box-shadow: 0 0 0 1px var(--agentspace-border-strong), 0 10px 24px -3px rgba(0,0,0,.5); }
 @keyframes as2-pop-in { from { opacity: 0; transform: scale(.96) translateY(-4px); } to { opacity: 1; transform: none; } }
 .as2-switcher-search { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 8px 0 10px; margin-bottom: 4px; border-bottom: 1px solid var(--devui-line); }
@@ -998,7 +998,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
   --agentspace-status-review: #B8B8FF; --agentspace-status-review-bg: rgba(184,184,255,.10); --agentspace-status-review-line: rgba(184,184,255,.35);
   --devui-success: #7EE2A8; --devui-success-bg: rgba(126,226,168,.10); --devui-success-line: rgba(126,226,168,.35);
   --agentspace-status-fail: var(--px-hot); --devui-danger-bg: rgba(255,90,54,.10); --devui-danger-line: rgba(255,90,54,.45);
-  --agentspace-status-idle: #8C8C8C; --agentspace-status-idle-bg: #181818; --agentspace-status-idle-line: #333;
+  --agentspace-status-idle: #8C8C8C; --agentspace-status-idle-bg: #181818;
   --agentspace-id-human-bg: #1E1E1E; --agentspace-id-human-color: #EDEDED; --agentspace-agent-bg: #1E1E1E; --agentspace-agent-color: #EDEDED;
   --devui-border-radius: 0px; --agentspace-radius-sm: 0px; --devui-border-radius-card: 0px; --agentspace-radius-row: 0px; --agentspace-radius-card: 0px; --devui-border-radius-card-xl: 0px; --agentspace-radius-panel: 0px; --agentspace-radius-input: 0px; --devui-border-radius-full: 0px;
   --agentspace-shadow-card: none; --agentspace-shadow-tile: inset 0 0 0 1px #2E2E2E; --agentspace-shadow-panel: none;
@@ -2530,7 +2530,7 @@ html:root[data-appearance-style="pixel"] body #demo.slack-shell :is(.ca-viewer, 
   --agentspace-status-review: #4A4AB5; --agentspace-status-review-bg: rgba(74,74,181,.10); --agentspace-status-review-line: rgba(74,74,181,.35);
   --devui-success: #0E6E40; --devui-success-bg: rgba(14,110,64,.10); --devui-success-line: rgba(14,110,64,.35);
   --agentspace-status-fail: #C0310F; --devui-danger-bg: rgba(192,49,15,.10); --devui-danger-line: rgba(192,49,15,.4);
-  --agentspace-status-idle: #5C5C5C; --agentspace-status-idle-bg: #E0E0E0; --agentspace-status-idle-line: #B0B0B0;
+  --agentspace-status-idle: #5C5C5C; --agentspace-status-idle-bg: #E0E0E0;
   --agentspace-id-human-bg: #DCDCDC; --agentspace-id-human-color: #111111; --agentspace-agent-bg: #111111; --agentspace-agent-color: #FFFFFF;
   --agentspace-shadow-card: none; --agentspace-shadow-tile: inset 0 0 0 1px #A3A3A3; --agentspace-shadow-panel: none;
   --agentspace-shadow-pop: 0 0 0 1px #111111; --agentspace-shadow-dialog: 0 0 0 1px #111111, 8px 8px 0 0 rgba(17,17,17,.16);

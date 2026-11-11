@@ -526,12 +526,10 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-aurora-canvas-right` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 12% |
 | `--agentspace-aurora-canvas-top` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 13% |
 | `--agentspace-aurora-column-bg` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | #1A1A1D |
-| `--agentspace-aurora-column-line` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | rgba(255,255,255,.07) |
 | `--agentspace-aurora-gap-bottom` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 8px |
 | `--agentspace-aurora-gap-right` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 8px |
 | `--agentspace-aurora-ink` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-aurora-mixed-gradient` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
-| `--agentspace-aurora-navy` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-aurora-shell-shadow` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-blue` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-border-soft` | 卡片细边，原 --as-border-soft | rgba(10, 10, 10, .06) | rgba(255, 255, 255, .07) | rgba(255,255,255,.07) |
@@ -551,29 +549,20 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-code-add` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(24, 121, 78, .10) | rgba(76, 195, 138, .14) | rgba(76, 195, 138, .14) |
 | `--agentspace-code-del` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(217, 58, 43, .08) | rgba(255, 110, 100, .12) | rgba(255, 110, 100, .12) |
 | `--agentspace-code-key` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(0, 0, 0, .88) | rgba(255, 255, 255, .9) | rgba(255, 255, 255, .9) |
-| `--agentspace-code-num` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | #B25B0C | #F2A65A | #F2A65A |
 | `--agentspace-code-str` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(0, 123, 172, .9) | #5FC8E8 | #5FC8E8 |
-| `--agentspace-control-height` | 控件高度 | — | — | — |
 | `--agentspace-count-bg` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-dawn` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-decision-width` | 决策卡最大宽度 | 512px | 512px | 512px |
-| `--agentspace-duration` | 通用过渡时长，原 180ms | 0ms | 0ms | 180ms |
-| `--agentspace-duration-enter` | 列表进入时长，原 400ms | 0ms | 0ms | 400ms |
 | `--agentspace-ease-drawer` | 抽屉 / 导航滑动曲线 | — | — | — |
-| `--agentspace-ease-out` | 另一条 ease-out，与 DevUI ease-out 的取值不同 | — | — | — |
-| `--agentspace-ease-pop` | 弹出曲线 | — | — | — |
 | `--agentspace-ease-raise` | 按钮按压曲线 | cubic-bezier(.6, .6, 0, 1) | cubic-bezier(.6, .6, 0, 1) | cubic-bezier(.6, .6, 0, 1) |
-| `--agentspace-ease-spring` | 弹性曲线 | — | — | — |
 | `--agentspace-focus-ring` | 焦点环颜色，原 --as-focus-ring | rgba(10, 89, 247, .45) | rgba(77, 141, 255, .55) | var(--devui-brand) |
 | `--agentspace-font-family-mono` | 等宽字体栈 | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace |
-| `--agentspace-frame-gap` | 框架间距 | 8px | 8px | 8px |
 | `--agentspace-glass` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-header-height` | 页头高度 | — | — | — |
 | `--agentspace-id-human-bg` | 人员身份底 | #E8EEFE | rgba(77, 141, 255, .18) | rgba(77, 141, 255, .18) |
 | `--agentspace-id-human-color` | 人员身份文字 | #0846C4 | #8AB4FF | #8AB4FF |
 | `--agentspace-id-system-bg` | 系统身份底 | #FDF3E7 | rgba(242, 166, 90, .14) | rgba(242, 166, 90, .14) |
 | `--agentspace-id-system-color` | 系统身份文字 | #9A4F0A | #F2A65A | #F2A65A |
-| `--agentspace-id-tool-bg` | 工具身份底 | #F2F2F3 | rgba(255, 255, 255, .07) | rgba(255, 255, 255, .07) |
 | `--agentspace-id-tool-color` | 工具身份文字 | #404040 | #C8C8CC | #C8C8CC |
 | `--agentspace-input` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
 | `--agentspace-line-height-body` | 正文行高 | 22px | 22px | 22px |
@@ -602,10 +591,6 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-reading-width` | 长文最大行宽 | 760px | 760px | 760px |
 | `--agentspace-resize-a` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | var(--agentspace-accent, #3F6BFF) |
 | `--agentspace-resize-b` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | color-mix(in srgb, var(--agentspace-accent, #3F6BFF) 55%, #22D3EE) |
-| `--agentspace-ring` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | 0 0 0 1px var(--agentspace-border-soft) | 0 0 0 1px var(--agentspace-border-soft) | 0 0 0 1px var(--agentspace-border-soft) |
-| `--agentspace-risk-destructive` | 破坏性风险，指向失败色 | var(--agentspace-status-fail) | var(--agentspace-status-fail) | var(--agentspace-status-fail) |
-| `--agentspace-risk-risky` | 中风险，指向等待色 | var(--devui-warning) | var(--devui-warning) | var(--devui-warning) |
-| `--agentspace-risk-safe` | 低风险，指向空闲色 | var(--agentspace-status-idle) | var(--agentspace-status-idle) | var(--agentspace-status-idle) |
 | `--agentspace-run-bg` | 运行中浅底，与 run-color 成对 | rgba(10, 89, 247, .08) | rgba(77, 141, 255, .14) | var(--devui-primary-bg) |
 | `--agentspace-run-line` | 运行中描边 | rgba(10, 89, 247, .22) | rgba(77, 141, 255, .30) | var(--devui-primary-line) |
 | `--agentspace-segment-selected` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
@@ -625,7 +610,6 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-status-fail` | 失败文字色。深色下与 --devui-danger 分开 | #D93A2B | #FF7B72 | #FF7B72 |
 | `--agentspace-status-idle` | 空闲文字色 | #737373 | #8F8F8F | #8F8F8F |
 | `--agentspace-status-idle-bg` | 空闲浅底 | rgba(0, 0, 0, .05) | rgba(255, 255, 255, .06) | rgba(255, 255, 255, .06) |
-| `--agentspace-status-idle-line` | 空闲描边 | rgba(0, 0, 0, .10) | rgba(255, 255, 255, .12) | rgba(255, 255, 255, .12) |
 | `--agentspace-status-review` | 待验收文字色 | #5B5BD6 | #A5A5FF | #A5A5FF |
 | `--agentspace-status-review-bg` | 待验收浅底 | rgba(91, 91, 214, .09) | rgba(165, 165, 255, .13) | rgba(165, 165, 255, .13) |
 | `--agentspace-status-review-line` | 待验收描边 | rgba(91, 91, 214, .24) | rgba(165, 165, 255, .28) | rgba(165, 165, 255, .28) |
@@ -635,4 +619,4 @@ Aurora 系列各自的光晕主色：
 | `--agentspace-text-tertiary` | 第三级文字，原 --as-text-3 | — | — | — |
 | `--agentspace-thread-width` | 线程栏运行时宽度（脚本写入） | — | — | — |
 
-共 115 个扩展变量。字号按 DevUI / 文档档位使用：h1 28px 仍是 `--devui-font-size-h1-title`；区块标题 20px 改用 `--devui-font-size-h3-title`（已删除 `--agentspace-font-size-h2`）；控件、导航和表格从 13px 改为 `--devui-font-size-md`（14px）；长文从 15px 改为 `--devui-font-size`（14px）；徽标和计数从 11px 改为 `--devui-font-size-sm`（12px）。`--agentspace-font-size-display` 改为文档的 48px，目前没有元素引用它。`--agentspace-font-size-xs` 没有引用，改回文档的 10px。`--agentspace-font-size-hero` 仍是当前渲染的 40px，不是文档的 56px。行高扩展保持原值，不改成 1.5。间距不再单列变量，调用处写回原来的 px。
+共 99 个扩展变量。已删除或并入的 A 类：`--agentspace-code-num` 并入 `--devui-warning`；`--agentspace-ease-out` 并入 `--devui-animation-ease-out`；`--agentspace-control-height` 并入 `--devui-btn-height`（紧凑仍是 28px）；`--agentspace-frame-gap` 写成 8px；`--agentspace-selected-bg` 与 `--agentspace-shadow-float` 用掉已有回退。无引用而删除的是 `--agentspace-ring`、`--agentspace-status-idle-line`、`--agentspace-risk-destructive`、`--agentspace-risk-risky`、`--agentspace-risk-safe`、`--agentspace-id-tool-bg`、`--agentspace-duration`、`--agentspace-ease-spring`、`--agentspace-aurora-navy`、`--agentspace-aurora-column-line`。动效 B 类两处：列表进入 400ms 改为 `--devui-animation-duration-slow`（300ms），弹出曲线改为 `--devui-animation-ease-out`。其余 B 类和全部 C 类保持原值。幻彩下与目标不一致、因而保留的 A 类包括 `--agentspace-status-idle`、`--agentspace-run-bg`、`--agentspace-id-human-color`、`--agentspace-id-tool-color`；像素和 Bento 会改写 `--agentspace-btn-ink`，因此也不并入。仍被页面读取、不能删的还有 `--agentspace-input`、`--agentspace-count-bg`、`--agentspace-segment-selected`、`--agentspace-text-tertiary`、`--agentspace-card-bg`、`--agentspace-muted`、`--agentspace-side-head-height`、`--agentspace-side-head-offset`、`--agentspace-aurora-ink`、`--agentspace-aurora-accent-2`、`--agentspace-aurora-shell-shadow`、`--agentspace-aurora-column-bg` 以及脚本写入的 `--agentspace-side-width`、`--agentspace-thread-width`。字号与行高沿用上一轮。

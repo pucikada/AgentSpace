@@ -62,23 +62,23 @@ color-scheme: light;
   --agentspace-status-review:     #5B5BD6;  --agentspace-status-review-bg:  rgba(91, 91, 214, .09);  --agentspace-status-review-line:  rgba(91, 91, 214, .24);
   --devui-success:       #18794E;  --devui-success-bg:    rgba(24, 121, 78, .09);  --devui-success-line:    rgba(24, 121, 78, .22);
   --agentspace-status-fail:       #D93A2B;  --devui-danger-bg:    rgba(217, 58, 43, .06);  --devui-danger-line:    rgba(217, 58, 43, .18);
-  --agentspace-status-idle:       #737373;  --agentspace-status-idle-bg:    rgba(0, 0, 0, .05);      --agentspace-status-idle-line:    rgba(0, 0, 0, .10);
+  --agentspace-status-idle:       #737373;  --agentspace-status-idle-bg:    rgba(0, 0, 0, .05);
 
   /* 风险等级（Approval / Permission / Autonomy 共用） */
-  --agentspace-risk-safe:        var(--agentspace-status-idle);
-  --agentspace-risk-risky:       var(--devui-warning);
-  --agentspace-risk-destructive: var(--agentspace-status-fail);
+
+
+
 
   /* 身份色（头像底，非大面积使用） */
   --agentspace-id-human-bg:   #E8EEFE;  --agentspace-id-human-color:  #0846C4;
   --agentspace-agent-bg:   #EEEDFB;  --agentspace-agent-color:  #4B4BC4;
-  --agentspace-id-tool-bg:    #F2F2F3;  --agentspace-id-tool-color:   #404040;
+  --agentspace-id-tool-color:   #404040;
   --agentspace-id-system-bg:  #FDF3E7;  --agentspace-id-system-color: #9A4F0A;
 
   /* 代码高亮（取自 affectUI Tool Call Card） */
   --agentspace-code-key:   rgba(0, 0, 0, .88);
   --agentspace-code-str:   rgba(0, 123, 172, .9);
-  --agentspace-code-num:   #B25B0C;
+
   --agentspace-code-add:   rgba(24, 121, 78, .10);
   --agentspace-code-del:   rgba(217, 58, 43, .08);
 
@@ -109,7 +109,7 @@ color-scheme: light;
   --devui-border-radius-full: 999px;    /* 按钮、徽标、状态胶囊、分段控件 */
 
   /* ---------- 11. 层级 ---------- */
-  --agentspace-ring:         0 0 0 1px var(--agentspace-border-soft);
+
   --agentspace-shadow-card:  0 1px 1.5px rgba(0,0,0,.04), inset 0 -1px 0 rgba(0,0,0,.06);
   --agentspace-shadow-tile:  0 0 0 .5px rgba(0,0,0,.06), 0 1px 1px -1px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.05);
   --agentspace-shadow-panel: 0 1px 0 rgba(0,0,0,.04), 0 2px 1px -1px rgba(0,0,0,.05);
@@ -118,17 +118,17 @@ color-scheme: light;
 
   /* ---------- 12. 动效 ---------- */
   --devui-animation-duration-fast:    150ms;  /* hover、焦点、按钮材质 */
-  --agentspace-duration:         180ms;  /* 通用、流式显现 */
+  /* 通用、流式显现 */
   --devui-animation-duration-base:   200ms;  /* 图标 / 文案 / 状态轻切换 */
   --devui-animation-duration-slow:  300ms;  /* 高度展开（grid-rows 0fr→1fr） */
-  --agentspace-duration-enter:   400ms;  /* 列表行 / trace 行进入 */
+  /* 列表行 / trace 行进入 */
   --devui-animation-ease-out:        cubic-bezier(.22, 1, .36, 1);   /* 默认 ease-out */
   --agentspace-ease-raise:  cubic-bezier(.6, .6, 0, 1);     /* 按钮按压 */
 
   /* ---------- 13. 布局 ---------- */
   --agentspace-rail-width: 72px;
   --agentspace-sidebar-width:  256px;
-  --agentspace-frame-gap:  8px;
+
   --agentspace-reading-width:  760px;   /* 对话 / 长回复最大行宽 */
   --agentspace-decision-width: 512px;   /* 决策卡最大宽（Kobra max-w-lg） */
 

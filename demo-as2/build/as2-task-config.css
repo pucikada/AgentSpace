@@ -13,7 +13,7 @@
 .ntc-custom-option strong{font-size:13px;line-height:20px;font-weight:500}
 .ntc-custom-option small{font-size:11px;line-height:17px;color:var(--devui-aide-text)}
 .ntc-menu-empty{padding:10px;font-size:12px;line-height:20px;color:var(--devui-aide-text)}
-.ntc-template-preview{position:absolute;z-index:1;background:var(--devui-base-bg);color:var(--devui-text);border:1px solid var(--agentspace-border-soft);border-radius:16px;box-shadow:var(--agentspace-shadow-float,0 12px 40px #18203a26);max-height:min(580px,calc(100vh - 32px));display:flex;flex-direction:column;overflow:visible}
+.ntc-template-preview{position:absolute;z-index:1;background:var(--devui-base-bg);color:var(--devui-text);border:1px solid var(--agentspace-border-soft);border-radius:16px;box-shadow:0 12px 40px #18203a26;max-height:min(580px,calc(100vh - 32px));display:flex;flex-direction:column;overflow:visible}
 .ntc-template-preview:before{content:'';position:absolute;inset:0 -12px;z-index:-1}
 .ntc-template-preview>header,.ntc-template-preview>footer{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
 .ntc-template-preview>header{border-bottom:1px solid var(--agentspace-border-soft)}
@@ -27,7 +27,7 @@
 .ntc-preview-steps small{display:block;color:var(--devui-aide-text);margin-top:6px}
 .ntc-preview-steps p{font-size:12px;line-height:1.6;margin-top:6px}
 .ntc-drawer-backdrop{position:fixed;inset:0;z-index:240;background:#11182733}
-.ntc-drawer{position:absolute;inset:0 0 0 auto;width:min(560px,100%);display:flex;flex-direction:column;background:var(--devui-base-bg);color:var(--devui-text);box-shadow:-12px 0 48px #10182b26;animation:ntc-enter .24s var(--agentspace-ease-out,ease-out)}
+.ntc-drawer{position:absolute;inset:0 0 0 auto;width:min(560px,100%);display:flex;flex-direction:column;background:var(--devui-base-bg);color:var(--devui-text);box-shadow:-12px 0 48px #10182b26;animation:ntc-enter .24s var(--devui-animation-ease-out,ease-out)}
 .ntc-drawer>header{padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--agentspace-border-soft);flex-shrink:0}
 .ntc-drawer>header h2{font-size:20px;line-height:30px;margin:0}
 .ntc-drawer>header p{font-size:12px;color:var(--devui-aide-text);margin-top:5px}
@@ -39,7 +39,7 @@
 .ntc-stage input{min-width:0;flex:1}
 .ntc-stage nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .ntc-stage nav button{padding:7px 10px;border:0;border-radius:8px;background:var(--agentspace-neutral-bg);color:var(--devui-aide-text);font-size:12px;cursor:pointer}
-.ntc-stage nav button.active{background:var(--agentspace-selected-bg,var(--devui-list-item-hover-bg));color:var(--devui-text);font-weight:600}
+.ntc-stage nav button.active{background:var(--devui-list-item-hover-bg);color:var(--devui-text);font-weight:600}
 .ntc-series{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--agentspace-border-soft)}
 :root[data-appearance-style="liquid"] .ntc-template-preview,:root[data-appearance-style="liquid"] .ntc-drawer{background:rgba(250,252,255,.98);--devui-base-bg:#fafcff;--devui-text:#1d232d;--devui-aide-text:#626c78;backdrop-filter:blur(28px)}
 @keyframes ntc-enter{from{transform:translateX(32px);opacity:0}to{transform:none;opacity:1}}

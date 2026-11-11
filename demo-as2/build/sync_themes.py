@@ -22,7 +22,7 @@ ORDER = [
 START = '/* AS2 THEME FILES START */'
 END = '/* AS2 THEME FILES END */'
 REDUCED = """@media (prefers-reduced-motion: reduce) {
-  :root { --devui-animation-duration-fast: 0ms; --agentspace-duration: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; --agentspace-duration-enter: 0ms; }
+  :root { --devui-animation-duration-fast: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; }
 }
 """
 
@@ -156,7 +156,7 @@ def write_theme_files(html: str) -> None:
   --agentspace-aurora-gap-bottom: 8px;
   --agentspace-page-bg: #151517;
   --agentspace-aurora-column-bg: #1A1A1D;
-  --agentspace-aurora-column-line: rgba(255,255,255,.07);
+
   --devui-brand: color-mix(in srgb, var(--agentspace-accent) 76%, #fff);
   --devui-brand-hover: color-mix(in srgb, var(--agentspace-accent) 64%, #fff);
   --devui-primary-bg: color-mix(in srgb, var(--agentspace-accent) 12%, #242427);
@@ -211,7 +211,7 @@ def strip_duplicates(html: str) -> str:
     if i < 0:
         raise SystemExit('tokens banner missing')
     # through the reduced-motion block that follows the dark sheet
-    end_marker = '@media (prefers-reduced-motion: reduce) {\n  :root { --devui-animation-duration-fast: 0ms; --agentspace-duration: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; --agentspace-duration-enter: 0ms; }\n}'
+    end_marker = '@media (prefers-reduced-motion: reduce) {\n  :root { --devui-animation-duration-fast: 0ms; --devui-animation-duration-base: 0ms; --devui-animation-duration-slow: 0ms; }\n}'
     j = html.find(end_marker, i)
     if j < 0:
         raise SystemExit('reduced-motion block missing')
