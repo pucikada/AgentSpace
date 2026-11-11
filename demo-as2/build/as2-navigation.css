@@ -1,17 +1,17 @@
 .appbar .anh-search-group{display:flex;align-items:center;gap:12px;width:100%;max-width:690px;min-width:0;justify-self:center}
 .appbar .anh-search-group>.appsearch{flex:1;min-width:0}
 .anh-search-group .anh-history{display:flex;align-items:center;gap:2px;flex:none}
-.anh-search-group .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:transparent;box-shadow:none;color:var(--as-text-2);border-radius:8px}
+.anh-search-group .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:transparent;box-shadow:none;color:var(--devui-text-weak);border-radius:8px}
 .anh-search-group .anh-history .iconbtn:disabled{opacity:.32;cursor:default;pointer-events:none}
-.anh-search-group .anh-history .iconbtn:not(:disabled):hover{background:var(--as-muted-bg);color:var(--as-text)}
-.anh-search-group .anh-history .iconbtn:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
+.anh-search-group .anh-history .iconbtn:not(:disabled):hover{background:var(--agentspace-muted-bg);color:var(--devui-text)}
+.anh-search-group .anh-history .iconbtn:focus-visible{outline:2px solid var(--devui-brand);outline-offset:2px}
 .anh-history .icon{width:16px;height:16px}
 .anh-history [data-a="anh-forward"]>.icon{transform:rotate(180deg)}
 @media(max-width:900px){.appbar .anh-search-group{gap:6px}}
 
 /* Navigation hierarchy uses spacing and weight, with primary ink at rest. */
-#demo.slack-shell>.demoside{--as-text-2:var(--as-text)!important;--as-text-muted:var(--as-text)!important;--as-text-subtle:var(--as-text)!important}
-#demo.slack-shell>.demorail{--as-text-muted:var(--as-text)!important;--as-text-subtle:var(--as-text)!important}
+#demo.slack-shell>.demoside{--devui-text-weak:var(--devui-text)!important;--devui-aide-text:var(--devui-text)!important;--agentspace-text-subtle:var(--devui-text)!important}
+#demo.slack-shell>.demorail{--devui-aide-text:var(--devui-text)!important;--agentspace-text-subtle:var(--devui-text)!important}
 #demo.slack-shell .side-sec-toggle{margin-bottom:4px;line-height:20px}
 #demo.slack-shell .side-sec-toggle em{font-size:11px;font-weight:400}
 #demo.slack-shell .side-sec.side-sec{margin-top:20px}
@@ -19,24 +19,24 @@
 #demo.slack-shell .sidehead h3{font-weight:600;line-height:22px}
 
 /* The inset content starts 4px lower; sidebar headers share its divider baseline. */
-:root[data-appearance-family="aurora"]{--as-side-head-h:calc(var(--as-head-h) + 4px);--as-side-head-offset:4px}
-:root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--as-side-head-offset)!important}
+:root[data-appearance-family="aurora"]{--agentspace-side-head-height:calc(var(--agentspace-header-height) + 4px);--agentspace-side-head-offset:4px}
+:root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--agentspace-side-head-offset)!important}
 
 /* One neutral hover overlay for both levels of aurora's light navigation. */
-:root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--as-hover:rgba(0,0,0,.04)!important}
+:root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--devui-list-item-hover-bg:rgba(0,0,0,.04)!important}
 
 /* Selected navigation labels and icons share the primary neutral ink. */
-:root[data-appearance-family="aurora"]{--as-nav-selected-weight:600}
-html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--as-text)!important;font-weight:600!important}
+:root[data-appearance-family="aurora"]{--agentspace-nav1-active-font-weight:600}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--devui-text)!important;font-weight:600!important}
 
-html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--as-text)!important}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--devui-text)!important}
 
-.side-task-scope-menu button>small{color:var(--as-text-muted);font-size:12px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.side-task-scope-menu button[aria-expanded="true"]{background:var(--as-hover)}
-.side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--as-text-muted)}
+.side-task-scope-menu button>small{color:var(--devui-aide-text);font-size:12px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-task-scope-menu button[aria-expanded="true"]{background:var(--devui-list-item-hover-bg)}
+.side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--devui-aide-text)}
 
 /* Opaque themed surfaces prevent scrolling content showing through the header. */
-html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 20px;padding:var(--page-inset-y) var(--page-inset-x) 12px;background:var(--page-header-bg,var(--as-bg,#fff));isolation:isolate}
+html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 20px;padding:var(--page-inset-y) var(--page-inset-x) 12px;background:var(--page-header-bg,var(--agentspace-neutral-bg,#fff));isolation:isolate}
 html body #demo.slack-shell .as-page-header>.proj-sticky{position:static!important;top:auto!important;margin:0!important;padding:0!important;background:transparent!important;backdrop-filter:none!important}
 html body #demo.slack-shell .as-page-header>.demohead{position:static!important;background:transparent!important}
 html body #demo.slack-shell .as-page-header>:last-child{margin-bottom:0!important}
@@ -44,9 +44,9 @@ html body #demo.slack-shell .as-page-header>:last-child{margin-bottom:0!importan
 :root[data-appearance-style="dark"][data-glass] body #demo.slack-shell .as-page-header{background:rgba(24,26,30,.96)}
 
 /* One elevation treatment for interactive cards; selection remains separate. */
-html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):not(.active){border-color:var(--as-border-soft)!important;transition:box-shadow .18s ease!important}
+html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):not(.active){border-color:var(--agentspace-border-soft)!important;transition:box-shadow .18s ease!important}
 html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):hover{box-shadow:0 8px 24px -12px rgba(18,24,43,.22),0 2px 6px rgba(18,24,43,.06)!important;transform:none!important}
 html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):hover :is(.ab-card-actions,.bench-card-actions,.ac-card-actions,.ext-item-actions,.tk-actions,.asset-card-acts,footer)>:is(.btn,.iconbtn,.ac-more){box-shadow:0 3px 10px rgba(18,24,43,.14)!important}
 
-html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo{--as-hover:rgba(0,0,0,.04);--au-hover:rgba(0,0,0,.04)}
+html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo{--devui-list-item-hover-bg: rgba(0,0,0,.04);--agentspace-nav1-hover-bg: rgba(0,0,0,.04);--agentspace-nav2-hover-bg: rgba(0,0,0,.04);--agentspace-nav1-hover-bg:rgba(0,0,0,.04)}
 html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo.slack-shell .demoside .sidenav:not(.active):hover{background:transparent!important}

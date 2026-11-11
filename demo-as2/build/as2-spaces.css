@@ -1,6 +1,6 @@
 .spx-section{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:24px 0 18px}
 .spx-section h2{font-size:18px;line-height:28px;margin:0}
-.spx-section p,.spx-caption{font-size:13px;color:var(--as-text-muted);line-height:22px;margin-top:5px}
+.spx-section p,.spx-caption{font-size:13px;color:var(--devui-aide-text);line-height:22px;margin-top:5px}
 .spx-page>.asset-tabs{margin-bottom:20px}
 .spx-page .asset-subtabs{width:max-content;max-width:100%;margin:16px 0 20px}
 .spx-page .asset-grid{margin-top:18px}
@@ -9,15 +9,15 @@
 .spx-resource>p{font-size:13px;line-height:22px;margin:0}
 .spx-facts{display:grid;gap:10px;font-size:13px;margin:8px 0}
 .spx-facts>div{display:grid;grid-template-columns:85px minmax(0,1fr);gap:12px}
-.spx-facts dt{color:var(--as-text-muted)}
-.spx-facts dd{margin:0;overflow-wrap:anywhere;color:var(--as-text)}
-.spx-resource footer{position:absolute;z-index:3;right:12px;bottom:12px;display:flex;gap:8px;margin:0;padding:6px;border:1px solid var(--as-border-soft);border-radius:999px;background:var(--as-card);opacity:0;pointer-events:none;transition:opacity .15s ease}
+.spx-facts dt{color:var(--devui-aide-text)}
+.spx-facts dd{margin:0;overflow-wrap:anywhere;color:var(--devui-text)}
+.spx-resource footer{position:absolute;z-index:3;right:12px;bottom:12px;display:flex;gap:8px;margin:0;padding:6px;border:1px solid var(--agentspace-border-soft);border-radius:999px;background:var(--devui-base-bg);opacity:0;pointer-events:none;transition:opacity .15s ease}
 .spx-resource:is(:hover,:focus-within,:has([aria-expanded="true"])) footer{opacity:1;pointer-events:auto}
 @media(hover:none){.spx-resource footer{opacity:1;pointer-events:auto}}
 .spx-links{display:flex;flex-wrap:wrap;gap:6px;font-size:12px}
 .spx-list-tools{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0}
 .spx-list-tools select{max-width:280px}
-.spx-page .demotable td small{display:block;color:var(--as-text-muted);margin-top:5px;font-size:12px}
+.spx-page .demotable td small{display:block;color:var(--devui-aide-text);margin-top:5px;font-size:12px}
 .spx-page .ab-stats{gap:4px;margin:0;grid-template-columns:repeat(2,minmax(70px,1fr))}
 .spx-page .ab-stats button{padding:6px}
 .spx-page .ab-stats strong{font-size:16px}
@@ -39,17 +39,17 @@
 #demo .spx-env-card-head>.asset-ic{width:36px;height:36px;min-width:36px;flex:none;margin:0}
 .spx-env-card-head>div{flex:1;min-width:0}
 #demo .spx-env-card-head h3{font-size:15px;line-height:22px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.spx-env-card-head p{font-size:12px;line-height:20px;color:var(--as-text-muted);margin:5px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spx-env-card-head p{font-size:12px;line-height:20px;color:var(--devui-aide-text);margin:5px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .spx-env-card-head>.tag{flex:none;align-self:flex-start;font-size:11px}
-.spx-env-summary{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:12px;color:var(--as-text-muted);min-width:0}
+.spx-env-summary{display:flex;align-items:center;gap:14px;margin-top:16px;font-size:12px;color:var(--devui-aide-text);min-width:0}
 .spx-env-summary>span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .spx-env-summary>span:last-child{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .spx-env-summary .icon{width:13px;height:13px;flex:none}
-.spx-env-counts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--as-text-subtle);min-height:22px}
+.spx-env-counts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--agentspace-text-subtle);min-height:22px}
 .spx-env-counts>button{padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer}
-.spx-env-counts>button:hover{color:var(--as-brand)}
-#demo .spx-env-card:hover .spx-env-card-head h3{color:var(--as-brand)}
-#demo .spx-env-card:focus-visible{outline:2px solid var(--as-brand);outline-offset:3px}
+.spx-env-counts>button:hover{color:var(--devui-brand)}
+#demo .spx-env-card:hover .spx-env-card-head h3{color:var(--devui-brand)}
+#demo .spx-env-card:focus-visible{outline:2px solid var(--devui-brand);outline-offset:3px}
 
 #demo .spx-env-card footer{right:16px;bottom:16px;padding:0;border:0;background:transparent}
 
@@ -59,29 +59,29 @@
 #modalHost .spx-env-detail-modal .modalbody{padding:4px 24px 24px}
 .spx-detail-overview{display:flex;align-items:flex-start;gap:14px;padding:4px 0 24px}
 .spx-detail-overview>.asset-ic{width:40px;height:40px;margin:0;flex:none}
-.spx-detail-overview p{font-size:13px;line-height:22px;margin:0;color:var(--as-text-2)}
-.spx-detail-meta{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12px;color:var(--as-text-muted)}
-.spx-detail-section{border-top:1px solid var(--as-border-soft);padding-top:22px}
+.spx-detail-overview p{font-size:13px;line-height:22px;margin:0;color:var(--devui-text-weak)}
+.spx-detail-meta{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:12px;color:var(--devui-aide-text)}
+.spx-detail-section{border-top:1px solid var(--agentspace-border-soft);padding-top:22px}
 .spx-detail-section+.spx-detail-section{margin-top:24px}
 .spx-detail-section h3{display:flex;align-items:center;gap:10px;margin:0 0 18px;font-size:14px;line-height:22px;font-weight:600}
-.spx-detail-section h3>small{font-size:12px;font-weight:400;color:var(--as-text-muted)}
+.spx-detail-section h3>small{font-size:12px;font-weight:400;color:var(--devui-aide-text)}
 .spx-env-detail-modal .ab-readonly{border:0;border-radius:0;padding:0;gap:22px 32px;margin:0}
 .spx-env-detail-modal .ab-readonly small{font-size:12px;line-height:20px;margin-bottom:5px}
 .spx-env-detail-modal .ab-readonly b{font-size:13px;line-height:22px;font-weight:400}
 .spx-detail-versions{display:flex;gap:8px;flex-wrap:wrap}
-#modalHost .spx-env-detail-modal .modalfoot{padding:16px 24px;gap:10px;border-top:1px solid var(--as-border-soft)}
+#modalHost .spx-env-detail-modal .modalfoot{padding:16px 24px;gap:10px;border-top:1px solid var(--agentspace-border-soft)}
 @media(max-width:600px){.spx-env-detail-modal .ab-readonly{grid-template-columns:1fr}}
 
 /* Repository rows sit directly on the space canvas, with no zebra card surface. */
 .spx-repo-list{width:100%;overflow-x:auto}
 #demo .spx-page .spx-repo-list .demotable{width:100%;border-collapse:collapse;min-width:680px}
 #demo .spx-page .spx-repo-list .demotable :is(thead,tbody,tr,th,td){background:transparent!important;box-shadow:none!important}
-#demo .spx-page .spx-repo-list .demotable :is(th,td){padding:14px 16px;border:0;border-bottom:1px solid var(--as-border-soft)!important;text-align:left;vertical-align:middle}
-#demo .spx-page .spx-repo-list .demotable th{font-size:12px!important;font-weight:400!important;color:var(--as-text-muted)!important;padding-top:10px;padding-bottom:10px}
-#demo .spx-page .spx-repo-list .demotable td{font-size:13px;color:var(--as-text-2)!important;font-weight:400}
+#demo .spx-page .spx-repo-list .demotable :is(th,td){padding:14px 16px;border:0;border-bottom:1px solid var(--agentspace-border-soft)!important;text-align:left;vertical-align:middle}
+#demo .spx-page .spx-repo-list .demotable th{font-size:12px!important;font-weight:400!important;color:var(--devui-aide-text)!important;padding-top:10px;padding-bottom:10px}
+#demo .spx-page .spx-repo-list .demotable td{font-size:13px;color:var(--devui-text-weak)!important;font-weight:400}
 #demo .spx-page .spx-repo-list .demotable td:first-child{width:50%;font-weight:400}
-#demo .spx-page .spx-repo-list .demotable td:first-child>b{font-size:13px;font-weight:600;color:var(--as-text)}
-#demo .spx-page .spx-repo-list .demotable td small{display:block;max-width:min(42vw,520px);margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:var(--as-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#demo .spx-page .spx-repo-list .demotable td:first-child>b{font-size:13px;font-weight:600;color:var(--devui-text)}
+#demo .spx-page .spx-repo-list .demotable td small{display:block;max-width:min(42vw,520px);margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:var(--devui-aide-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #demo .spx-page .spx-repo-list .demotable :is(th,td):last-child{text-align:right;white-space:nowrap}
 #demo .spx-page .spx-repo-list .demotable .btn.link{padding:0;min-height:28px;border:0;box-shadow:none;background:transparent}
 
@@ -90,10 +90,10 @@
 .spx-page .spx-template-grid>.spx-template-card{gap:18px;cursor:default}
 
 #demo .spx-page .asset-subtabs button{display:inline-flex;align-items:center;gap:7px}
-#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:rgba(0,0,0,.055)!important;color:var(--as-text-muted)!important;font-size:11px;font-weight:500;line-height:20px}
-:root[data-theme="dark"] #demo .spx-page .asset-subtabs .spx-count{background:rgba(255,255,255,.1)!important;color:var(--as-text)!important}
+#demo .spx-page .asset-subtabs .spx-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;box-sizing:border-box;border:0;border-radius:999px;background:rgba(0,0,0,.055)!important;color:var(--devui-aide-text)!important;font-size:11px;font-weight:500;line-height:20px}
+:root[data-theme="dark"] #demo .spx-page .asset-subtabs .spx-count{background:rgba(255,255,255,.1)!important;color:var(--devui-text)!important}
 #demo .spx-list-tools{justify-content:flex-start;gap:12px;flex-wrap:wrap;margin:16px 0}
 #demo .spx-list-tools select{flex:0 1 auto;width:200px;max-width:100%}
 #demo .spx-list-tools [data-spx-instance-status]{width:124px}
-#demo .spx-list-tools>small{margin-left:auto;color:var(--as-text-muted)}
+#demo .spx-list-tools>small{margin-left:auto;color:var(--devui-aide-text)}
 @media(max-width:760px){#demo .spx-list-tools{flex-direction:row;align-items:center}#demo .spx-list-tools>small{flex-basis:100%;margin-left:0}}

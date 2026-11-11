@@ -88,10 +88,10 @@ def split_top(s, sep):
 
 # ---------------------------------------------------------- colour → token
 FAMILY = {  # strong, soft bg, line
-    'brand': ('var(--as-brand)', 'var(--as-brand-soft)', 'var(--as-brand-line)'),
-    'done':  ('var(--as-done)', 'var(--as-done-bg)', 'var(--as-done-line)'),
-    'wait':  ('var(--as-wait)', 'var(--as-wait-bg)', 'var(--as-wait-line)'),
-    'fail':  ('var(--as-fail)', 'var(--as-fail-bg)', 'var(--as-fail-line)'),
+    'brand': ('var(--devui-brand)', 'var(--devui-primary-bg)', 'var(--devui-primary-line)'),
+    'done':  ('var(--devui-success)', 'var(--devui-success-bg)', 'var(--devui-success-line)'),
+    'wait':  ('var(--devui-warning)', 'var(--devui-warning-bg)', 'var(--devui-warning-line)'),
+    'fail':  ('var(--agentspace-status-fail)', 'var(--devui-danger-bg)', 'var(--devui-danger-line)'),
 }
 HUE_FALLBACK = 220  # legacy hsl(var(--ap-hue) …) resolved as blue
 
@@ -139,34 +139,34 @@ def token_for(rgba, role):
     if a == 0: return 'transparent'
     if fam is None:  # neutral
         if role == 'text':
-            if l > .93: return '#fff' if a > .6 else 'var(--as-text-subtle)'
+            if l > .93: return '#fff' if a > .6 else 'var(--agentspace-text-subtle)'
             ink = 1 - (1 - l) * a if l < .5 else l
-            if ink < .2: return 'var(--as-text)'
-            if ink < .36: return 'var(--as-text-2)'
-            if ink < .62: return 'var(--as-text-muted)'
-            return 'var(--as-text-subtle)'
+            if ink < .2: return 'var(--devui-text)'
+            if ink < .36: return 'var(--devui-text-weak)'
+            if ink < .62: return 'var(--devui-aide-text)'
+            return 'var(--agentspace-text-subtle)'
         if role == 'border':
             if l > .5:  # white-ish line (usually on dark/rail)
-                return 'var(--as-border-soft)'
-            if a < .9: return 'var(--as-border-soft)' if a < .09 else 'var(--as-border-strong)'
-            if l > .87: return 'var(--as-border)'
-            if l > .7: return 'var(--as-border-strong)'
-            return 'var(--as-text-muted)'
+                return 'var(--agentspace-border-soft)'
+            if a < .9: return 'var(--agentspace-border-soft)' if a < .09 else 'var(--agentspace-border-strong)'
+            if l > .87: return 'var(--devui-line)'
+            if l > .7: return 'var(--agentspace-border-strong)'
+            return 'var(--devui-aide-text)'
         if role == 'shadow':
             return f'rgba(0,0,0,{min(a, .12):.3g})'
         # background / fill
         if a < .9:
             if l > .5:
-                return 'var(--as-card)' if a >= .55 else 'var(--as-hover)'
-            if a < .06: return 'var(--as-muted-bg)'
-            if a < .12: return 'var(--as-hover)'
-            return 'var(--as-overlay)'
-        if l >= .995: return 'var(--as-card)'
-        if l >= .978: return 'var(--as-stage)'
-        if l >= .955: return 'var(--as-bg)'
-        if l >= .86: return 'var(--as-border)'
-        if l < .3: return 'var(--as-text)'
-        return 'var(--as-text-muted)'
+                return 'var(--devui-base-bg)' if a >= .55 else 'var(--devui-list-item-hover-bg)'
+            if a < .06: return 'var(--agentspace-muted-bg)'
+            if a < .12: return 'var(--devui-list-item-hover-bg)'
+            return 'var(--devui-feedback-overlay-backdrop)'
+        if l >= .995: return 'var(--devui-base-bg)'
+        if l >= .978: return 'var(--agentspace-stage-bg)'
+        if l >= .955: return 'var(--agentspace-neutral-bg)'
+        if l >= .86: return 'var(--devui-line)'
+        if l < .3: return 'var(--devui-text)'
+        return 'var(--devui-aide-text)'
     strong, soft, line = FAMILY[fam]
     # The legacy theme used faint blue-grey tints as its neutral surfaces; in AS2 those are grey.
     chroma = (max(r, g, b) - min(r, g, b)) * a
@@ -177,15 +177,15 @@ def token_for(rgba, role):
         return token_for((l, l, l, a), role)
     if role == 'text':
         if fam == 'brand':
-            if l < .22: return 'var(--as-text)'
-            return 'var(--as-selected-ink)' if l < .42 else 'var(--as-brand)'
+            if l < .22: return 'var(--devui-text)'
+            return 'var(--devui-list-item-active-text)' if l < .42 else 'var(--devui-brand)'
         return strong
     if role == 'border':
         return line if (l > .78 or a < .4) else strong
     if role == 'shadow':
         return f'rgba(0,0,0,{min(a, .1):.3g})'
     if l > .82 or a < .3: return soft
-    if fam == 'brand' and l < .22: return 'var(--as-text)'
+    if fam == 'brand' and l < .22: return 'var(--devui-text)'
     return strong
 
 COLOR_RE = re.compile(r'#[0-9a-fA-F]{3,8}\b|(?:rgba?|hsla?)\((?:[^()]|\([^()]*\))*\)')
@@ -194,26 +194,26 @@ def tokenize_colors(value, role):
     def sub(m):
         c = parse_color(m.group(0))
         return token_for(c, role) if c else m.group(0)
-    v = re.sub(r'rgba\(var\(--ap-panel-rgb\),[^)]*\)', 'var(--as-panel)', value)
+    v = re.sub(r'rgba\(var\(--ap-panel-rgb\),[^)]*\)', 'var(--agentspace-panel-bg)', value)
     # Named colours were missed before (legacy `background:white` stayed white in dark themes).
     v = re.sub(r'(?<![-\w#])white(?![-\w])', '#ffffff', v)
     v = re.sub(r'(?<![-\w#])black(?![-\w])', '#000000', v)
     return COLOR_RE.sub(sub, v)
 
 # ------------------------------------------------------ other literal maps
-RADIUS = [(4.5, 'var(--as-r-xs)'), (6.5, 'var(--as-r-sm)'), (8.5, 'var(--as-r-md)'), (11.5, 'var(--as-r-row)'),
-          (14.5, 'var(--as-r-card)'), (16.5, 'var(--as-r-dec)'), (20.5, 'var(--as-r-panel)'), (34, 'var(--as-r-input)')]
+RADIUS = [(4.5, 'var(--devui-border-radius)'), (6.5, 'var(--agentspace-radius-sm)'), (8.5, 'var(--devui-border-radius-card)'), (11.5, 'var(--agentspace-radius-row)'),
+          (14.5, 'var(--agentspace-radius-card)'), (16.5, 'var(--devui-border-radius-card-xl)'), (20.5, 'var(--agentspace-radius-panel)'), (34, 'var(--agentspace-radius-input)')]
 def snap_radius(v):
     def one(m):
         x = float(m.group(1))
         if x <= 1.5: return m.group(0)
         for lim, tok in RADIUS:
             if x <= lim: return tok
-        return 'var(--as-r-pill)'
+        return 'var(--devui-border-radius-full)'
     return re.sub(r'(?<![\w.-])(\d+(?:\.\d+)?)px', one, v)
 
-FS = [(11.6, 'var(--as-fs-micro)'), (12.5, 'var(--as-fs-meta)'), (13.5, 'var(--as-fs-ui)'), (14.5, 'var(--as-fs-body)'),
-      (15.5, 'var(--as-fs-reading)'), (17.5, 'var(--as-fs-h3)'), (19, '18px'), (23.5, 'var(--as-fs-h2)'), (31, 'var(--as-fs-h1)')]
+FS = [(11.6, 'var(--agentspace-font-size-micro)'), (12.5, 'var(--devui-font-size-sm)'), (13.5, 'var(--agentspace-font-size-ui)'), (14.5, 'var(--devui-font-size)'),
+      (15.5, 'var(--agentspace-font-size-reading)'), (17.5, 'var(--devui-font-size-card-title)'), (19, '18px'), (23.5, 'var(--agentspace-font-size-h2)'), (31, 'var(--devui-font-size-h1-title)')]
 def snap_fs(px):
     for lim, tok in FS:
         if px <= lim: return tok
@@ -240,10 +240,10 @@ def map_shadow(value, selector):
         else:
             lift = True
     if lift:
-        tok = ('var(--as-shadow-dialog)' if DIALOG_SEL.search(selector) else
-               'var(--as-shadow-pop)' if POP_SEL.search(selector) else 'var(--as-shadow-tile)')
-        if ':hover' in selector and tok == 'var(--as-shadow-tile)':
-            tok = 'var(--as-shadow-tile)'
+        tok = ('var(--agentspace-shadow-dialog)' if DIALOG_SEL.search(selector) else
+               'var(--agentspace-shadow-pop)' if POP_SEL.search(selector) else 'var(--agentspace-shadow-tile)')
+        if ':hover' in selector and tok == 'var(--agentspace-shadow-tile)':
+            tok = 'var(--agentspace-shadow-tile)'
         keep.append(tok)
     return ', '.join(keep) if keep else 'none'
 
@@ -263,13 +263,13 @@ def process_decl(prop, value, selector):
     if p in ('backdrop-filter', '-webkit-backdrop-filter'):
         return None
     if p == 'font-family':
-        return prop, ('var(--as-font-mono)' if re.search(r'mono|consol|menlo|courier', v, re.I) else 'var(--as-font)') + (' !important' if '!important' in v else '')
+        return prop, ('var(--agentspace-font-family-mono)' if re.search(r'mono|consol|menlo|courier', v, re.I) else 'var(--agentspace-font-family)') + (' !important' if '!important' in v else '')
     if p == 'font':
         m = re.match(r'^(.*?\d+(?:\.\d+)?px(?:/[\d.]+(?:px)?)?)\s+["\'a-zA-Z].*?(\s*!important)?$', v.strip())
         if m:
             size = re.search(r'(\d+(?:\.\d+)?)px', m.group(1))
             pre = m.group(1)[:size.start()] + snap_fs(float(size.group(1))) + m.group(1)[size.end():]
-            return prop, f'{pre} var(--as-font){m.group(2) or ""}'
+            return prop, f'{pre} var(--agentspace-font-family){m.group(2) or ""}'
         return prop, v
     if p == 'font-size':
         v = re.sub(r'^(\d+(?:\.\d+)?)px', lambda m: snap_fs(float(m.group(1))), v.strip())
@@ -297,12 +297,12 @@ def process_decl(prop, value, selector):
     if p in TEXT_PROPS:
         return prop, tokenize_colors(v, 'text')
     if p == 'scrollbar-color':
-        return prop, 'var(--as-border-strong) transparent'
+        return prop, 'var(--agentspace-border-strong) transparent'
     if BORDER_PROPS.match(p):
         v = tokenize_colors(v, 'border')
         # Hover is not selection: a hovered edge darkens to the strong neutral line, never brand.
         if all(':hover' in part for part in split_top(selector, ',')):
-            v = v.replace('var(--as-brand-line)', 'var(--as-border-strong)').replace('var(--as-brand)', 'var(--as-border-strong)')
+            v = v.replace('var(--devui-primary-line)', 'var(--agentspace-border-strong)').replace('var(--devui-brand)', 'var(--agentspace-border-strong)')
         return prop, v
     if p.startswith('background') or p in ('outline-color',):
         return prop, tokenize_colors(v, 'bg')
@@ -323,23 +323,23 @@ def process_body(body, selector):
 # ------------------------------------------------- legacy appearance → AS2
 AP_ROOT = """
 --ap-hue:220;--ap-companion-hue:200;--ap-surface-alpha:1;--ap-card-alpha:1;--ap-rail-alpha:1;--ap-panel-rgb:252,252,252;
---ap-text:var(--as-text);--ap-muted:var(--as-text-muted);--ap-weak:var(--as-text-subtle);
---ap-accent:var(--as-brand);--ap-action:var(--as-btn-bottom);--ap-action-hover:var(--as-btn-top-hover);--ap-button-ink:var(--as-btn-ink);
---ap-link:var(--as-brand);--ap-base:var(--as-bg);--ap-dialog:var(--as-card);--ap-input:var(--as-card);
---ap-line:var(--as-border);--ap-line-strong:var(--as-border-strong);
---ap-surface:var(--as-panel);--ap-card:var(--as-card);--ap-side:var(--as-bg);--ap-rail:var(--as-bg);--ap-rail-ink:var(--as-text-muted);
---ap-selected:var(--as-selected);--ap-selected-ink:var(--as-selected-ink);--ap-hover:var(--as-hover);
---ap-tint:var(--as-muted-bg);--ap-tint-strong:var(--as-brand-soft);--ap-bubble:var(--as-sunken);
---ap-hero:var(--as-card);--ap-wallpaper:none;--ap-shadow:none;--ap-dialog-shadow:var(--as-shadow-dialog);--ap-backdrop:var(--as-overlay);
---ap-play-font:var(--as-font);--ap-sketch-ink:var(--as-text);
---ink:var(--as-text);--muted:var(--as-text-muted);--line:var(--as-border);--outline:var(--as-border-strong);
---primary:var(--as-brand);--accent:var(--as-brand);--purple:var(--as-brand);--blue:var(--as-brand);
---primary-soft:var(--as-brand-soft);--soft:var(--as-muted-bg);--plum:var(--as-stage);--plum2:var(--as-stage);
---bg:var(--as-bg);--surface:var(--as-card);--success:var(--as-done);--green:var(--as-done);--teal:var(--as-done);--tealbg:var(--as-done-bg);
---gold:var(--as-wait);--goldbg:var(--as-wait-bg);--red:var(--as-fail);--redbg:var(--as-fail-bg);--alert:var(--as-fail);--yellow:var(--as-wait);
---radius:var(--as-r-row);--shadow:none;--shadow-hover:none;
---nova-violet:var(--as-brand);--nova-sky:var(--as-brand);--nova-mint:var(--as-done);--nova-coral:var(--as-brand);
---sl-ui:var(--as-font)
+--ap-text:var(--devui-text);--ap-muted:var(--devui-aide-text);--ap-weak:var(--agentspace-text-subtle);
+--ap-accent:var(--devui-brand);--ap-action:var(--agentspace-btn-bottom);--ap-action-hover:var(--agentspace-btn-top-hover);--ap-button-ink:var(--agentspace-btn-ink);
+--ap-link:var(--devui-brand);--ap-base:var(--agentspace-neutral-bg);--ap-dialog:var(--devui-base-bg);--ap-input:var(--devui-base-bg);
+--ap-line:var(--devui-line);--ap-line-strong:var(--agentspace-border-strong);
+--ap-surface:var(--agentspace-panel-bg);--ap-card:var(--devui-base-bg);--ap-side:var(--agentspace-neutral-bg);--ap-rail:var(--agentspace-neutral-bg);--ap-rail-ink:var(--devui-aide-text);
+--ap-selected:var(--devui-list-item-active-bg);--ap-selected-ink:var(--devui-list-item-active-text);--ap-hover:var(--devui-list-item-hover-bg);
+--ap-tint:var(--agentspace-muted-bg);--ap-tint-strong:var(--devui-primary-bg);--ap-bubble:var(--agentspace-sunken-bg);
+--ap-hero:var(--devui-base-bg);--ap-wallpaper:none;--ap-shadow:none;--ap-dialog-shadow:var(--agentspace-shadow-dialog);--ap-backdrop:var(--devui-feedback-overlay-backdrop);
+--ap-play-font:var(--agentspace-font-family);--ap-sketch-ink:var(--devui-text);
+--ink:var(--devui-text);--muted:var(--devui-aide-text);--line:var(--devui-line);--outline:var(--agentspace-border-strong);
+--primary:var(--devui-brand);--accent:var(--devui-brand);--purple:var(--devui-brand);--blue:var(--devui-brand);
+--primary-soft:var(--devui-primary-bg);--soft:var(--agentspace-muted-bg);--plum:var(--agentspace-stage-bg);--plum2:var(--agentspace-stage-bg);
+--bg:var(--agentspace-neutral-bg);--surface:var(--devui-base-bg);--success:var(--devui-success);--green:var(--devui-success);--teal:var(--devui-success);--tealbg:var(--devui-success-bg);
+--gold:var(--devui-warning);--goldbg:var(--devui-warning-bg);--red:var(--agentspace-status-fail);--redbg:var(--devui-danger-bg);--alert:var(--agentspace-status-fail);--yellow:var(--devui-warning);
+--radius:var(--agentspace-radius-row);--shadow:none;--shadow-hover:none;
+--nova-violet:var(--devui-brand);--nova-sky:var(--devui-brand);--nova-mint:var(--devui-success);--nova-coral:var(--devui-brand);
+--sl-ui:var(--agentspace-font-family)
 """
 
 DROP_SEL = re.compile(r'data-appearance-(style|color)=')
