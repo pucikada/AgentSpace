@@ -17,7 +17,8 @@ def sync_build(html):
             else:
                 at = html.rfind('</script>')
                 html = html[:at] + chunk + html[at:]
-    return html
+    from sync_themes import inline_themes
+    return inline_themes(html)
 
 
 if __name__ == '__main__':

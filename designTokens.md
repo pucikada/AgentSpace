@@ -511,3 +511,112 @@ Aurora 系列各自的光晕主色：
 1. 覆盖语义色时，必须同步其 `-hover` / `-active` / `-disabled` 派生色，否则交互态会与主色脱节。
 2. 暗色主题通过同名 CSS 变量覆盖，业务不要写 `[data-theme='dark']` 特判。
 3. 组件内局部覆盖（如 data-grid 的表头底、table 的 hover 底）会绕过主题变量，定制时需评估影响面。
+### demo-as2 扩展变量
+
+以下变量是 demo-as2 在迁到本文件的令牌名时新增的 `--agentspace-*` 扩展。组件在没有语义对应的 DevUI / 上文 18 个 AgentSpace 令牌时使用它们。取值来自迁之前的界面，不是本文件前面的默认值。
+
+经典浅色（`classic`）和深色（`dark`）列的是 `:root` / `:root.dark` 上的值。幻彩列取 `as2-aurora-theme.css`（`#3F6BFF`）里该变量的最后一次赋值，深色段在文件后部，所以只在深色段写过的变量会显示深色值。五个幻彩强调色共用同一套扩展，差别在 `--agentspace-accent` 与由它推导的 `--agentspace-global-bg-image`。`--agentspace-nav1-active-bg` 和 `--agentspace-nav2-active-bg` 已接到主导航与二级导航的选中底。经典浅色是 `#ffffff` / `#EDEEF1`，经典深色跟随 `--rail-tile` / `#2A2B30`。幻彩浅色两者都是 `#ffffff`，深浅映衬的一级导航是混合渐变、二级是 `rgba(255,255,255,.17)`，深色一级跟随品牌浅底、二级是 `#2A2B30`。液态玻璃、像素和 Bento 在各自的外观规则里覆盖这两个变量。
+
+| 变量 | 含义 | 经典浅色 | 经典深色 | 幻彩浅色 |
+| :--- | :--- | :--- | :--- | :--- |
+| `--agentspace-accent` | 幻彩强调色。五个主题文件各写自己的色值，设置脚本再用内联样式覆盖 | — | — | #3F6BFF |
+| `--agentspace-aurora-accent-2` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-aurora-canvas-corner` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 17% |
+| `--agentspace-aurora-canvas-left` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 19% |
+| `--agentspace-aurora-canvas-right` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 12% |
+| `--agentspace-aurora-canvas-top` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 13% |
+| `--agentspace-aurora-column-bg` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | #1A1A1D |
+| `--agentspace-aurora-gap-bottom` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 8px |
+| `--agentspace-aurora-gap-right` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | 8px |
+| `--agentspace-aurora-ink` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-aurora-mixed-gradient` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-aurora-shell-shadow` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-blue` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-border-soft` | 卡片细边，原 --as-border-soft | rgba(10, 10, 10, .06) | rgba(255, 255, 255, .07) | rgba(255,255,255,.07) |
+| `--agentspace-border-strong` | 输入与可交互边界，原 --as-border-strong | rgba(10, 10, 10, .12) | rgba(255, 255, 255, .14) | rgba(255,255,255,.24) |
+| `--agentspace-btn-bottom` | 主按钮渐变下色 | #201E25 | #E4E4E7 | #E4E4E7 |
+| `--agentspace-btn-bottom-hover` | 主按钮悬停下色 | #29272F | #ECECEF | #ECECEF |
+| `--agentspace-btn-edge-1` | 主按钮边缘色 1 | #4B4951 | #FFFFFF | #FFFFFF |
+| `--agentspace-btn-edge-2` | 主按钮边缘色 2 | #31303A | #F0F0F2 | #F0F0F2 |
+| `--agentspace-btn-edge-3` | 主按钮边缘色 3 | #18171B | #D4D4D8 | #D4D4D8 |
+| `--agentspace-btn-ink` | 主按钮文字 | #FAFAFA | #121213 | #121213 |
+| `--agentspace-btn-ring` | 主按钮外环 | #0D0D0D | rgba(0, 0, 0, .60) | rgba(0, 0, 0, .60) |
+| `--agentspace-btn-shadow` | 主按钮阴影 | 0 0 0 1px var(--agentspace-btn-ring), 0 1px 1px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.10) | 0 0 0 1px var(--agentspace-btn-ring), 0 2px 4px rgba(0,0,0,.30) | 0 0 0 1px var(--agentspace-btn-ring), 0 2px 4px rgba(0,0,0,.30) |
+| `--agentspace-btn-top` | 主按钮渐变上色 | #323137 | #F4F4F5 | #F4F4F5 |
+| `--agentspace-btn-top-hover` | 主按钮悬停上色 | #3C3B42 | #FFFFFF | #FFFFFF |
+| `--agentspace-card-bg` | 卡片底的历史别名 | — | — | — |
+| `--agentspace-chevron` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-code-add` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(24, 121, 78, .10) | rgba(76, 195, 138, .14) | rgba(76, 195, 138, .14) |
+| `--agentspace-code-del` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(217, 58, 43, .08) | rgba(255, 110, 100, .12) | rgba(255, 110, 100, .12) |
+| `--agentspace-code-key` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(0, 0, 0, .88) | rgba(255, 255, 255, .9) | rgba(255, 255, 255, .9) |
+| `--agentspace-code-str` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | rgba(0, 123, 172, .9) | #5FC8E8 | #5FC8E8 |
+| `--agentspace-count-bg` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-dawn` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-decision-width` | 决策卡最大宽度 | 512px | 512px | 512px |
+| `--agentspace-ease-drawer` | 抽屉 / 导航滑动曲线 | — | — | — |
+| `--agentspace-ease-raise` | 按钮按压曲线 | cubic-bezier(.6, .6, 0, 1) | cubic-bezier(.6, .6, 0, 1) | cubic-bezier(.6, .6, 0, 1) |
+| `--agentspace-focus-ring` | 焦点环颜色，原 --as-focus-ring | rgba(10, 89, 247, .45) | rgba(77, 141, 255, .55) | var(--devui-brand) |
+| `--agentspace-font-family-mono` | 等宽字体栈 | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace | ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace |
+| `--agentspace-glass` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-header-height` | 页头高度 | — | — | — |
+| `--agentspace-id-human-bg` | 人员身份底 | #E8EEFE | rgba(77, 141, 255, .18) | rgba(77, 141, 255, .18) |
+| `--agentspace-id-human-color` | 人员身份文字 | #0846C4 | #8AB4FF | #8AB4FF |
+| `--agentspace-id-system-bg` | 系统身份底 | #FDF3E7 | rgba(242, 166, 90, .14) | rgba(242, 166, 90, .14) |
+| `--agentspace-id-system-color` | 系统身份文字 | #9A4F0A | #F2A65A | #F2A65A |
+| `--agentspace-id-tool-color` | 工具身份文字 | #404040 | #C8C8CC | #C8C8CC |
+| `--agentspace-input` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-line-height-body` | 正文行高 | 22px | 22px | 22px |
+| `--agentspace-line-height-display` | 展示标题行高 | 44px | 44px | 44px |
+| `--agentspace-line-height-h1` | 页面标题行高 | 36px | 36px | 36px |
+| `--agentspace-line-height-h2` | 区块标题行高 | 28px | 28px | 28px |
+| `--agentspace-line-height-h3` | 卡片标题行高 | 24px | 24px | 24px |
+| `--agentspace-line-height-meta` | 元信息行高 | 18px | 18px | 18px |
+| `--agentspace-line-height-micro` | 徽标行高 | 16px | 16px | 16px |
+| `--agentspace-line-height-reading` | 长文行高 | 24px | 24px | 24px |
+| `--agentspace-line-height-ui` | 控件行高 | 20px | 20px | 20px |
+| `--agentspace-mist` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-muted` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-muted-bg` | 弱填充底，原 --as-muted-bg | rgba(0, 0, 0, .04) | rgba(255, 255, 255, .05) | #2B2B2F |
+| `--agentspace-neutral-bg` | 原 --as-bg。内层中性表面。幻彩浅色画布改走 global-bg，此值仍是内层表面 | #F5F5F5 | #0C0C0D | #101012 |
+| `--agentspace-orange` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-panel-bg` | 主内容面板底，原 --as-panel | #FCFCFC | #121213 | #151517 |
+| `--agentspace-panel-stroke` | 面板描边，原 --as-panel-stroke | #ECECEC | #222224 | #222224 |
+| `--agentspace-pressed-bg` | 按下态底，原 --as-pressed | rgba(0, 0, 0, .08) | rgba(255, 255, 255, .10) | rgba(255, 255, 255, .10) |
+| `--agentspace-radius-card` | 14px 通用卡片圆角 | 14px | 14px | 14px |
+| `--agentspace-radius-input` | Composer 外层圆角 | 24px | 24px | 24px |
+| `--agentspace-radius-panel` | 大面板圆角。当前 18px，不是文档里 card-xl 的 16px | 18px | 18px | 18px |
+| `--agentspace-radius-row` | 10px 行圆角 | 10px | 10px | 10px |
+| `--agentspace-radius-sm` | 6px 小圆角（标签） | 6px | 6px | 6px |
+| `--agentspace-rail-width` | 主导航宽度。基础令牌 64px，页面随后在 :root 定为 72px | 64px | 64px | 64px |
+| `--agentspace-reading-width` | 长文最大行宽 | 760px | 760px | 760px |
+| `--agentspace-resize-a` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | var(--agentspace-accent, #3F6BFF) |
+| `--agentspace-resize-b` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | color-mix(in srgb, var(--agentspace-accent, #3F6BFF) 55%, #22D3EE) |
+| `--agentspace-run-bg` | 运行中浅底，与 run-color 成对 | rgba(10, 89, 247, .08) | rgba(77, 141, 255, .14) | var(--devui-primary-bg) |
+| `--agentspace-run-line` | 运行中描边 | rgba(10, 89, 247, .22) | rgba(77, 141, 255, .30) | var(--devui-primary-line) |
+| `--agentspace-segment-selected` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-selected-bg` | 选中底的另一处别名 | — | — | — |
+| `--agentspace-shadow-card` | 卡片阴影 | 0 1px 1.5px rgba(0,0,0,.04), inset 0 -1px 0 rgba(0,0,0,.06) | 0 1px 1.5px rgba(0,0,0,.30), inset 0 -1px 0 rgba(255,255,255,.04) | 0 1px 1.5px rgba(0,0,0,.30), inset 0 -1px 0 rgba(255,255,255,.04) |
+| `--agentspace-shadow-dialog` | 对话框阴影 | 0 24px 80px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.06) | 0 24px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08) | 0 24px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08) |
+| `--agentspace-shadow-float` | 浮动层阴影 | — | — | — |
+| `--agentspace-shadow-panel` | 面板阴影 | 0 1px 0 rgba(0,0,0,.04), 0 2px 1px -1px rgba(0,0,0,.05) | 0 1px 0 rgba(0,0,0,.45), 0 2px 1px -1px rgba(0,0,0,.50) | 0 1px 0 rgba(0,0,0,.45), 0 2px 1px -1px rgba(0,0,0,.50) |
+| `--agentspace-shadow-pop` | 浮层阴影 | 0 4px 42px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.06) | 0 4px 42px rgba(0,0,0,.40), 0 0 0 1px rgba(255,255,255,.08) | 0 4px 42px rgba(0,0,0,.40), 0 0 0 1px rgba(255,255,255,.08) |
+| `--agentspace-shadow-tile` | 小瓷砖阴影 | 0 0 0 .5px rgba(0,0,0,.06), 0 1px 1px -1px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.05) | 0 0 0 .5px rgba(255,255,255,.10), 0 1px 2px rgba(0,0,0,.40) | 0 0 0 .5px rgba(255,255,255,.10), 0 1px 2px rgba(0,0,0,.40) |
+| `--agentspace-side-head-height` | 幻彩侧栏头高度 | — | — | — |
+| `--agentspace-side-head-offset` | 幻彩侧栏头上偏移 | — | — | — |
+| `--agentspace-side-width` | 侧栏运行时宽度（脚本写入） | — | — | — |
+| `--agentspace-sidebar-width` | 侧栏设计宽度 | 256px | 256px | 256px |
+| `--agentspace-sky` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-stage-bg` | 卡片内舞台 / 代码区底，原 --as-stage | #FAFAFA | #1F1F21 | #151517 |
+| `--agentspace-status-fail` | 失败文字色。深色下与 --devui-danger 分开 | #D93A2B | #FF7B72 | #FF7B72 |
+| `--agentspace-status-idle` | 空闲文字色 | #737373 | #8F8F8F | #8F8F8F |
+| `--agentspace-status-idle-bg` | 空闲浅底 | rgba(0, 0, 0, .05) | rgba(255, 255, 255, .06) | rgba(255, 255, 255, .06) |
+| `--agentspace-status-review` | 待验收文字色 | #5B5BD6 | #A5A5FF | #A5A5FF |
+| `--agentspace-status-review-bg` | 待验收浅底 | rgba(91, 91, 214, .09) | rgba(165, 165, 255, .13) | rgba(165, 165, 255, .13) |
+| `--agentspace-status-review-line` | 待验收描边 | rgba(91, 91, 214, .24) | rgba(165, 165, 255, .28) | rgba(165, 165, 255, .28) |
+| `--agentspace-success` | 由原 --as-* / --au-* 迁入，语义与迁前同名变量一致 | — | — | — |
+| `--agentspace-sunken-bg` | 输入与 Composer 凹陷底，原 --as-sunken | #F2F2F3 | #1C1C1E | #101012 |
+| `--agentspace-text-subtle` | 时间戳、占位、禁用文字，原 --as-text-subtle | rgba(0, 0, 0, .40) | rgba(255, 255, 255, .40) | #92929A |
+| `--agentspace-text-tertiary` | 第三级文字，原 --as-text-3 | — | — | — |
+| `--agentspace-thread-width` | 线程栏运行时宽度（脚本写入） | — | — | — |
+
+共 99 个扩展变量。已删除或并入的 A 类：`--agentspace-code-num` 并入 `--devui-warning`；`--agentspace-ease-out` 并入 `--devui-animation-ease-out`；`--agentspace-control-height` 并入 `--devui-btn-height`（紧凑仍是 28px）；`--agentspace-frame-gap` 写成 8px；`--agentspace-selected-bg` 与 `--agentspace-shadow-float` 用掉已有回退。无引用而删除的是 `--agentspace-ring`、`--agentspace-status-idle-line`、`--agentspace-risk-destructive`、`--agentspace-risk-risky`、`--agentspace-risk-safe`、`--agentspace-id-tool-bg`、`--agentspace-duration`、`--agentspace-ease-spring`、`--agentspace-aurora-navy`、`--agentspace-aurora-column-line`。动效 B 类两处：列表进入 400ms 改为 `--devui-animation-duration-slow`（300ms），弹出曲线改为 `--devui-animation-ease-out`。其余 B 类和全部 C 类保持原值。幻彩下与目标不一致、因而保留的 A 类包括 `--agentspace-status-idle`、`--agentspace-run-bg`、`--agentspace-id-human-color`、`--agentspace-id-tool-color`；像素和 Bento 会改写 `--agentspace-btn-ink`，因此也不并入。仍被页面读取、不能删的还有 `--agentspace-input`、`--agentspace-count-bg`、`--agentspace-segment-selected`、`--agentspace-text-tertiary`、`--agentspace-card-bg`、`--agentspace-muted`、`--agentspace-side-head-height`、`--agentspace-side-head-offset`、`--agentspace-aurora-ink`、`--agentspace-aurora-accent-2`、`--agentspace-aurora-shell-shadow`、`--agentspace-aurora-column-bg` 以及脚本写入的 `--agentspace-side-width`、`--agentspace-thread-width`。字号与行高沿用上一轮。

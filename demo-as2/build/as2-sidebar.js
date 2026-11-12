@@ -92,7 +92,7 @@ sidebarDecorate();sidebarSoloSync();
 
 // Resizable sidebar width (Kobra: 200–360px). Stored per viewer; double-click resets.
 const SIDE_MIN=200,SIDE_MAX=360,SIDE_DEFAULT=240;
-function sideWidthApply(w){const v=Math.max(SIDE_MIN,Math.min(SIDE_MAX,Math.round(w)));document.documentElement.style.setProperty('--as-side-w',v+'px');return v;}
+function sideWidthApply(w){const v=Math.max(SIDE_MIN,Math.min(SIDE_MAX,Math.round(w)));document.documentElement.style.setProperty('--agentspace-side-width',v+'px');return v;}
 function sideWidthSave(v){try{localStorage.setItem('as2-side-w',String(v));}catch(e){}}
 (()=>{let w=SIDE_DEFAULT;try{w=Number(localStorage.getItem('as2-side-w'))||SIDE_DEFAULT;}catch(e){}sideWidthApply(w);})();
 document.addEventListener('pointerdown',e=>{
@@ -112,7 +112,7 @@ document.addEventListener('keydown',e=>{
 
 // Resizable Thread panel: drag the divider on its left edge; stored per viewer; double-click resets.
 const THREAD_MIN=320,CHANNEL_MIN=360;
-function threadWidthApply(px){if(px==null){document.documentElement.style.removeProperty('--as-thread-w');return null;}document.documentElement.style.setProperty('--as-thread-w',Math.round(px)+'px');return Math.round(px);}
+function threadWidthApply(px){if(px==null){document.documentElement.style.removeProperty('--agentspace-thread-width');return null;}document.documentElement.style.setProperty('--agentspace-thread-width',Math.round(px)+'px');return Math.round(px);}
 function threadWidthSave(v){try{v==null?localStorage.removeItem('as2-thread-w'):localStorage.setItem('as2-thread-w',String(v));}catch(e){}}
 (()=>{try{const w=Number(localStorage.getItem('as2-thread-w'));if(w)threadWidthApply(w);}catch(e){}})();
 function threadClamp(wrap,px){const r=wrap.getBoundingClientRect();return Math.max(THREAD_MIN,Math.min(r.width-CHANNEL_MIN,px));}

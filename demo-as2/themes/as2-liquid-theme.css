@@ -1,0 +1,81 @@
+/* as2-liquid-theme.css — token values for appearance "liquid".
+   Extracted from the current render. JS still writes the live accent
+   (--lq-a/--lq-b, --px-ink*, --bn). Component rules stay in the page. */
+
+:root[data-appearance-style="liquid"] {
+  /* 皮肤配色：两个变量（主色 / 辅色），其余全部派生；JS 在 :root 上写入 --lq-a / --lq-b */ --agentspace-blue: var(--lq-a, #2B76F0);
+  --agentspace-orange: var(--lq-b, #F08A3C);
+  --agentspace-sky: color-mix(in srgb, var(--agentspace-blue) 22%, white);
+  --agentspace-dawn: color-mix(in srgb, var(--agentspace-orange) 20%, white);
+  --agentspace-mist: color-mix(in srgb, var(--agentspace-blue) 8%, #EEF1F5);
+  --agentspace-neutral-bg: var(--agentspace-mist);
+  --agentspace-global-bg: var(--agentspace-mist);
+  --agentspace-panel-bg: rgba(255,255,255,.50);
+  --agentspace-panel-stroke: rgba(255,255,255,.72);
+  --devui-base-bg: rgba(255,255,255,.64);
+  --agentspace-stage-bg: rgba(255,255,255,.40);
+  --agentspace-sunken-bg: rgba(255,255,255,.52);
+  --devui-line: rgba(30,55,90,.09);
+  --agentspace-border-soft: rgba(30,55,90,.06);
+  --agentspace-border-strong: rgba(30,55,90,.15);
+  --devui-list-item-hover-bg: rgba(255,255,255,.58);
+  --agentspace-nav1-hover-bg: rgba(255,255,255,.58);
+  --agentspace-nav2-hover-bg: rgba(255,255,255,.58);
+  --agentspace-pressed-bg: rgba(255,255,255,.72);
+  --agentspace-muted-bg: rgba(30,55,90,.05);
+  --devui-brand: var(--agentspace-blue);
+  --devui-brand-hover: color-mix(in srgb, var(--agentspace-blue) 82%, black);
+  --devui-primary-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent);
+  --devui-primary-line: color-mix(in srgb, var(--agentspace-blue) 28%, transparent);
+  --devui-list-item-active-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent);
+  --devui-list-item-active-text: color-mix(in srgb, var(--agentspace-blue) 78%, black);
+  --agentspace-focus-ring: color-mix(in srgb, var(--agentspace-blue) 50%, transparent);
+  --devui-form-control-interactive-outline: color-mix(in srgb, var(--agentspace-blue) 14%, transparent);
+  --agentspace-run-color: var(--agentspace-blue);
+  --agentspace-run-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent);
+  --agentspace-run-line: color-mix(in srgb, var(--agentspace-blue) 26%, transparent);
+  --devui-warning: color-mix(in srgb, var(--agentspace-orange) 82%, black);
+  --devui-warning-bg: color-mix(in srgb, var(--agentspace-orange) 15%, transparent);
+  --devui-warning-line: color-mix(in srgb, var(--agentspace-orange) 34%, transparent);
+  --agentspace-radius-panel: 24px;
+  --agentspace-radius-card: 18px;
+  --devui-border-radius-card-xl: 20px;
+  --agentspace-glass: blur(28px) saturate(170%);
+  --agentspace-shadow-panel: 0 12px 44px rgba(31,53,89,.10), inset 0 1px 0 rgba(255,255,255,.85);
+  --agentspace-shadow-tile: 0 4px 16px rgba(31,53,89,.08), inset 0 1px 0 rgba(255,255,255,.92);
+  --agentspace-shadow-pop: 0 20px 56px rgba(31,53,89,.18), 0 0 0 1px rgba(255,255,255,.75), inset 0 1px 0 rgba(255,255,255,.9);
+  --agentspace-shadow-dialog: 0 28px 80px rgba(31,53,89,.22), 0 0 0 1px rgba(255,255,255,.75), inset 0 1px 0 rgba(255,255,255,.9);
+  --devui-feedback-overlay-backdrop: rgba(60,85,120,.16);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+:root[data-appearance-style="liquid"] {
+  --agentspace-panel-bg: rgba(255,255,255,.92);
+  --devui-base-bg: #fff;
+}
+}
+
+:root[data-appearance-style="liquid"] {
+  --devui-aide-text: #595959;
+  --agentspace-text-subtle: rgba(0,0,0,.62);
+  --devui-brand: color-mix(in srgb, var(--agentspace-blue) 80%, black);
+  --agentspace-run-color: color-mix(in srgb, var(--agentspace-blue) 78%, black);
+  --devui-warning: color-mix(in srgb, var(--agentspace-orange) 58%, black);
+  --agentspace-code-str: color-mix(in srgb, var(--agentspace-blue) 70%, black);
+}
+
+:root[data-appearance-style="liquid"] {
+  --agentspace-resize-a: var(--lq-a, #2B76F0);
+  --agentspace-resize-b: var(--lq-b, #F08A3C);
+}
+
+:root[data-appearance-style="liquid"] {
+  --agentspace-nav2-active-bg: var(--devui-base-bg);
+  --rail-tile: rgba(255, 255, 255, .82);
+  --rail-tile-shadow: 0 2px 10px rgba(31, 53, 89, .10), inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+:root[data-appearance-style="liquid"] {
+  --vb-a: var(--lq-a, #2B76F0);
+  --vb-b: var(--lq-b, #F08A3C);
+}
