@@ -17,19 +17,6 @@
   --as-file-ts-ink: var(--as-color-1d5fd1);
   --as-file-md-bg: var(--as-color-e3f6ea);
   --as-file-md-ink: var(--as-color-1a8c4e);
-  --as-muted: var(--as-text-muted);
-  --as-text-3: var(--as-text-muted);
-  --as-success: var(--as-done);
-  --as-selected-bg: var(--as-selected);
-  --as-card-bg: var(--as-card);
-  --as-shadow-float: var(--as-shadow-pop);
-  --as-side-w: var(--as-sidebar-w);
-  --as-thread-w: var(--as-reading-w);
-  --devui-brand: var(--as-brand);
-  --devui-ext-accent: var(--as-brand);
-  --devui-border-radius-full: var(--as-r-pill);
-  --devui-list-item-active-bg: var(--as-selected);
-  --devui-list-item-active-text: var(--as-selected-ink);
 }
 :root.dark, :root[data-theme="dark"] {
   --as-tone-blue: var(--as-color-86a8ff);
@@ -39,6 +26,6 @@
   --as-tone-slate: var(--as-color-b4bece);
   --as-tone-orange: var(--as-color-ff9f72);
   --as-tone-green: var(--as-color-62d79c);
-  --as-file-ts-bg: var(--as-run-bg); --as-file-ts-ink: var(--as-run);
-  --as-file-md-bg: var(--as-done-bg); --as-file-md-ink: var(--as-done);
+  --as-file-ts-bg: var(--agentspace-run-bg); --as-file-ts-ink: var(--agentspace-run-color);
+  --as-file-md-bg: var(--devui-success-bg); --as-file-md-ink: var(--devui-success);
 }

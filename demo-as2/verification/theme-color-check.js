@@ -16,19 +16,19 @@
    const st=settingsConfig();Object.assign(st,{auroraMode:style==='aurora'?mode:'light',bentoMode:style==='bento'?mode:'light',pixelMode:style==='pixel'?mode:'light',reduceMotion:true});pixelInkNormalize(st);appearanceSelect('style',style);appearanceApply();settingsApply();
    const key=style+'/'+mode,cs=getComputedStyle(root),tokens=Object.fromEntries(names.map(n=>[n,cs.getPropertyValue(n).trim()]));
    check(key+' theme attributes',root.dataset.theme===(mode==='dark'?'dark':'light'));
-   for(const n of ['--as-bg','--as-card','--as-text','--as-brand','--as-btn-ink','--as-wait','--as-tone-blue','--as-muted'])check(key+' '+n,!!tokens[n]);
+   for(const n of ['--agentspace-neutral-bg','--devui-base-bg','--devui-text','--devui-brand','--agentspace-btn-ink','--devui-warning','--as-tone-blue','--agentspace-muted'])check(key+' '+n,!!tokens[n]);
    check(key+' color input data',liquidPalettes().every(x=>/^#[\da-f]{6}$/i.test(x[2])&&/^#[\da-f]{6}$/i.test(x[3]))&&pixelInks().every(x=>/^#[\da-f]{6}$/i.test(x[0]))&&auroraAccents().every(x=>/^#[\da-f]{6}$/i.test(x[0])));
-   const bg=over(rgba(tokens['--as-card']),over(rgba(tokens['--as-bg']),[255,255,255,1]));
+   const bg=over(rgba(tokens['--devui-base-bg']),over(rgba(tokens['--agentspace-neutral-bg']),[255,255,255,1]));
    const ratios={};
-   for(const [f,b]of [['--as-text','--as-card'],['--as-text-2','--as-card'],['--as-text-muted','--as-card'],['--as-text-subtle','--as-card'],['--as-brand','--as-card'],['--as-wait','--as-card'],['--as-fail','--as-card'],['--as-done','--as-card'],['--as-btn-ink','--as-btn-top'],['--as-btn-ink','--as-btn-bottom'],['--as-selected-ink','--as-selected']]){
-    const backing=b==='--as-card'?bg:over(rgba(tokens[b]),bg);ratios[f+'/'+b]=contrast(over(rgba(tokens[f]),backing),backing);
+   for(const [f,b]of [['--devui-text','--devui-base-bg'],['--devui-text-weak','--devui-base-bg'],['--devui-aide-text','--devui-base-bg'],['--agentspace-text-subtle','--devui-base-bg'],['--devui-brand','--devui-base-bg'],['--devui-warning','--devui-base-bg'],['--agentspace-status-fail','--devui-base-bg'],['--devui-success','--devui-base-bg'],['--agentspace-btn-ink','--agentspace-btn-top'],['--agentspace-btn-ink','--agentspace-btn-bottom'],['--devui-list-item-active-text','--devui-list-item-active-bg']]){
+    const backing=b==='--devui-base-bg'?bg:over(rgba(tokens[b]),bg);ratios[f+'/'+b]=contrast(over(rgba(tokens[f]),backing),backing);
    }
    const routes=[];
    for(const route of ['home','board','studio','settings']){
     closeModal();s.newTask=null;s.taskDetail=null;s.automationDetail=null;
     if(route==='home')action('nav-personal','benches');else if(route==='board'){s.view='team';s.page='board';s.teamPage='board';s.projectBoard=newBoardState();render();}else if(route==='studio')action('studio','@home');else openSettings('appearance');
     check(key+' '+route+' rendered',!!document.querySelector(route==='settings'?'.sps-settings-page':'#demo'));
-    if(route==='board'){for(const col of document.querySelectorAll('.tk-col[data-col="wait"]'))check(key+' waiting column uses semantic color',getComputedStyle(col).getPropertyValue('--tk-accent').trim()===getComputedStyle(col).getPropertyValue('--as-wait').trim());}
+    if(route==='board'){for(const col of document.querySelectorAll('.tk-col[data-col="wait"]'))check(key+' waiting column uses semantic color',getComputedStyle(col).getPropertyValue('--tk-accent').trim()===getComputedStyle(col).getPropertyValue('--devui-warning').trim());}
     routes.push(route);
    }
    themes.push({style,mode,tokens,ratios,routes});

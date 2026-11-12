@@ -45,7 +45,7 @@
 
 ## 2. 两套体系的边界
 
-产品使用 `--as-*` 语义变量；DevUI 官方主题使用 `--devui-*`。产品页面的 `data-theme=light/dark` 与 DevUI 的 `data-theme=as-ink/default/...` 不是同一命名空间，不能同时写到同一根元素上。
+demo-as2 的主题令牌使用 `--devui-*` 与项目扩展 `--agentspace-*`。取值只写在 `themes/`，由 `build/sync_themes.py` 内联到页面末尾。`tokens.css` 不再存放这批值。DevUI 官方组件库仍然使用自己的 `--devui-*` 主题文件；产品页面的 `data-theme=light/dark` 与 DevUI 的 `data-theme=as-ink/default/...` 不是同一命名空间，不能同时写到同一根元素上。
 
 DevUI 组件主题的八套历史配置继续以 [独立 DevUI 文档](../devui-multitheme/DESIGN.md) 和其 `dist/` 为准。它们不代表产品设置里的八套外观。旧 `as-glass` 固定极光底、旧 `as-pixel` 米色纸底也不等于当前产品风格；本次没有修改独立组件库的主题产物，不能声称它们已经被删除或升级。
 
@@ -54,11 +54,11 @@ DevUI 组件主题的八套历史配置继续以 [独立 DevUI 文档](../devui-
 ## 3. Token 分层与禁止硬编码
 
 ```text
-palette.css                         固定色值、透明色、RGB 通道、固定图像种子
+palette.css                         固定色值、透明色、RGB 通道、固定图像种子（--as-color-* / --as-image-* / --as-channel-*）
     ↓
-tokens.css + 各风格的变量块           产品语义 --as-*；风格种子 --au/--bn/--lq-*/--px-*
+themes/*.css                        主题令牌 --devui-* 与 --agentspace-*；风格种子 --au / --bn / --lq-* / --px-*
     ↓
-semantic-colors.css                  分类色、文件色、项目色、兼容桥接
+semantic-colors.css                  分类色、文件色、项目色（--as-tone-* / --as-project-tone-* / --as-file-*）
     ↓
 组件局部变量 --tc/--pt/--tint/...      只通过 var() 派生或接收用户输入
     ↓
@@ -67,7 +67,17 @@ CSS 属性、内联 style、SVG、Canvas
 
 **硬规则：固定颜色字面量只允许定义在 `build/design-system/palette.css` 的登记表。** 组件、主题覆盖、JS 色板和 inline SVG 必须引用变量。该规则包括 hex、rgb/rgba、hsl/hsla、白/黑/透明命名色、渐变各 stop、阴影、描边、SVG `fill/stroke/stop-color`、`var()` 的 fallback，以及分离的 RGB 通道。`none` / `inherit` / `currentColor` 是绘制或继承指令，可直接使用。
 
-- 新业务优先消费 `--as-text / --as-card / --as-wait` 等语义变量，不能因为两个值刚好相同就混用含义。
+- 新业务优先消费 `--devui-text`、`--devui-base-bg`、`--devui-warning` 以及 `designTokens.md` 里已有的 `--agentspace-*`。不能因为两个值刚好相同就混用含义。不要把 `--as-text` 一类旧语义名加回来。
+
+### 3.1 开发约束
+
+与仓库根目录 `designTokens.md` 的「开发约束」相同，改 demo-as2 时遵守：
+
+1. 样式使用 `--devui-*` 和已登记的 `--agentspace-*`。不要写死颜色、字号、圆角、时长或其他设计值，也不要新增一套 `--as-*` 语义变量。颜色字面量仍只进 `palette.css`。间距按 `designTokens.md` 的 4px 栅格写 px。
+2. 没有合适变量时，先写入 `designTokens.md` 和 `themes/` 里相关主题文件，再在组件里引用。
+3. 新增或修改令牌时适配极简浅色、极简深色、幻彩（5 个强调色 × 浅色 / 映衬 / 深色）、液态玻璃、像素浅色和深色、Bento 浅色和深色。每个主题取适合自己的值。`--lq-a` / `--lq-b`、像素墨色、`--bn` 仍由 JS 驱动。
+4. 主题文件是取值的唯一来源，经 `sync_themes.py` 内联。不要在 `tokens.css` 或第二个 `:root` 里重复定义。
+5. 新增主题时在 `themes/` 增加专用 CSS，结构与现有 10 个文件一致，写出全套令牌，并登记到 `sync_themes.py` 的 `ORDER`。深色表在与 `:root.dark` 优先级相同时排在后面。不要把新主题的令牌值只放在 `tokens.css`、`as2-bridge.css` 或 JS 注入的 `:root`。
 - `--as-color-*` 是原始色板种子。迁移保留了风格模板、预览缩略图、既有装饰的精确取值；固定色板并不自动随明暗反转。主题覆盖选择种子，产品语义决定其使用场景。
 - 分类色、项目色、文件色有明确的 `--as-tone-* / --as-project-tone-* / --as-file-*` 层；深色文件色改用当前状态三件套。
 - `color-mix()` / HSL / RGBA 可以由变量和数值参数派生，但不能夹带固定颜色字面量。`--as-color-white-rgb` 等三通道值也集中登记。
@@ -76,8 +86,8 @@ CSS 属性、内联 style、SVG、Canvas
 - 固定的位图照片/头像/壁纸像素与品牌图片文件属于媒体资源，不作为界面 token 重着色。CSS 内嵌的固定箭头 SVG 数据 URI 已整体登记为 `--as-image-chevron-*`，不依靠图片内的 `var()` 继承宿主颜色。遮罩/位移贴图中的黑白与 RGB 是算法通道，也必须从登记的种子读取，不能改成随主题变化的正文色。
 
 ```css
-/* 正确：组件消费语义；固定色值由 palette.css 登记。 */
-.notice { color: var(--as-wait); background: var(--as-wait-bg); border-color: var(--as-wait-line); }
+/* 正确：组件消费设计令牌；固定色值由 palette.css 登记。 */
+.notice { color: var(--devui-warning); background: var(--devui-warning-bg); border-color: var(--devui-warning-line); }
 .preview { background: linear-gradient(var(--as-color-liquid-blue), var(--as-color-liquid-orange)); }
 ```
 
@@ -85,7 +95,7 @@ CSS 属性、内联 style、SVG、Canvas
 
 ### 4.1 极简·经典
 
-默认品牌蓝只承担链接、焦点、运行与信息强调；主操作使用 `--as-btn-*` 的中性 raise 材质。主按钮文字始终读取 `--as-btn-ink`；深色按钮反转，不能用固定白字。运行时可能有更晚的中性色覆盖，最终值查 §5，而非只抄 `tokens.css` 的第一段。
+默认品牌蓝只承担链接、焦点、运行与信息强调；主操作使用 `--agentspace-btn-*` 的中性 raise 材质。主按钮文字始终读取 `--agentspace-btn-ink`；深色按钮反转，不能用固定白字。运行时可能有更晚的中性色覆盖，最终值以 `themes/minimal-*.css` 为准。§5 的生成表仍是色板迁移时的快照变量名（`--as-bg` 对应现在的 `--agentspace-neutral-bg`，`--as-card` 对应 `--devui-base-bg`，`--as-text` 对应 `--devui-text`，`--as-wait` 对应 `--devui-warning`）。分类色 `--as-tone-*` 的名字没有改。
 
 ### 4.2 极简·Bento
 

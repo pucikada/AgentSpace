@@ -56,7 +56,7 @@
   const actions=[...document.querySelectorAll('.co-message-actions')];
   check('深色频道操作栏无整条底色',actions.length>0&&actions.every(e=>getComputedStyle(e).backgroundColor==='rgba(0, 0, 0, 0)'));
   userColorApply('aurora|mode:light');s.view='personal';s.page='personal';s.personalPage='benches';render();await pause();
-  const primary=getComputedStyle(document.querySelector('.demoside')).getPropertyValue('--as-text').trim();
+  const primary=getComputedStyle(document.querySelector('.demoside')).getPropertyValue('--devui-text').trim();
   check('侧栏默认导航使用主文本色',[...document.querySelectorAll('.sidenav:not(.active),.side-sec-toggle')].every(e=>getComputedStyle(e).color==='rgb(17, 26, 51)'));
   check('保留工作台彩色图标',new Set([...document.querySelectorAll('.side-bench-icon svg')].map(e=>getComputedStyle(e).color)).size>1);
   check('主导航行高36px',document.querySelector('.side-newtask').getBoundingClientRect().height===36);

@@ -1,17 +1,17 @@
 .appbar .anh-search-group{display:flex;align-items:center;gap:12px;width:100%;max-width:690px;min-width:0;justify-self:center}
 .appbar .anh-search-group>.appsearch{flex:1;min-width:0}
 .anh-search-group .anh-history{display:flex;align-items:center;gap:2px;flex:none}
-.anh-search-group .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:var(--as-color-transparent);box-shadow:none;color:var(--as-text-2);border-radius:8px}
+.anh-search-group .anh-history .iconbtn{display:grid;place-items:center;width:28px;height:28px;min-height:28px;padding:5px;border:0;background:var(--as-color-transparent);box-shadow:none;color:var(--devui-text-weak);border-radius:8px}
 .anh-search-group .anh-history .iconbtn:disabled{opacity:.32;cursor:default;pointer-events:none}
-.anh-search-group .anh-history .iconbtn:not(:disabled):hover{background:var(--as-muted-bg);color:var(--as-text)}
-.anh-search-group .anh-history .iconbtn:focus-visible{outline:2px solid var(--as-brand);outline-offset:2px}
+.anh-search-group .anh-history .iconbtn:not(:disabled):hover{background:var(--agentspace-muted-bg);color:var(--devui-text)}
+.anh-search-group .anh-history .iconbtn:focus-visible{outline:2px solid var(--devui-brand);outline-offset:2px}
 .anh-history .icon{width:16px;height:16px}
 .anh-history [data-a="anh-forward"]>.icon{transform:rotate(180deg)}
 @media(max-width:900px){.appbar .anh-search-group{gap:6px}}
 
 /* Navigation hierarchy uses spacing and weight, with primary ink at rest. */
-#demo.slack-shell>.demoside{--as-text-2:var(--as-text)!important;--as-text-muted:var(--as-text)!important;--as-text-subtle:var(--as-text)!important}
-#demo.slack-shell>.demorail{--as-text-muted:var(--as-text)!important;--as-text-subtle:var(--as-text)!important}
+#demo.slack-shell>.demoside{--devui-text-weak:var(--devui-text)!important;--devui-aide-text:var(--devui-text)!important;--agentspace-text-subtle:var(--devui-text)!important}
+#demo.slack-shell>.demorail{--devui-aide-text:var(--devui-text)!important;--agentspace-text-subtle:var(--devui-text)!important}
 #demo.slack-shell .side-sec-toggle{margin-bottom:4px;line-height:20px}
 #demo.slack-shell .side-sec-toggle em{font-size:11px;font-weight:400}
 #demo.slack-shell .side-sec.side-sec{margin-top:20px}
@@ -19,72 +19,72 @@
 #demo.slack-shell .sidehead h3{font-weight:600;line-height:22px}
 
 /* The inset content starts 4px lower; sidebar headers share its divider baseline. */
-:root[data-appearance-family="aurora"]{--as-side-head-h:calc(var(--as-head-h) + 4px);--as-side-head-offset:4px}
-:root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--as-side-head-offset)!important}
+
+:root[data-appearance-family="aurora"] #demo.slack-shell .demoside .sidehead{padding-top:var(--agentspace-side-head-offset)!important}
 
 /* One neutral hover overlay for both levels of aurora's light navigation. */
-:root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--as-hover:var(--as-color-rgba-0-0-0-p04)!important}
+:root[data-appearance-family="aurora"][data-au-mode="light"] #demo.slack-shell>:is(.demorail,.demoside){--devui-list-item-hover-bg:var(--as-color-rgba-0-0-0-p04)!important}
 
 /* Selected navigation labels and icons share the primary neutral ink. */
-:root[data-appearance-family="aurora"]{--as-nav-selected-weight:600}
-html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--as-text)!important;font-weight:600!important}
 
-html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--as-text)!important}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>span:not(.side-soon){color:var(--devui-text)!important;font-weight:600!important}
 
-.side-task-scope-menu button>small{color:var(--as-text-muted);font-size:12px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.side-task-scope-menu button[aria-expanded="true"]{background:var(--as-hover)}
-.side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--as-text-muted)}
+html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active>.icon{color:var(--devui-text)!important}
+
+.side-task-scope-menu button>small{color:var(--devui-aide-text);font-size:12px;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-task-scope-menu button[aria-expanded="true"]{background:var(--devui-list-item-hover-bg)}
+.side-task-submenu{width:218px}.side-task-submenu button>.icon:first-child{color:var(--devui-aide-text)}
 
 /* Opaque themed surfaces prevent scrolling content showing through the header. */
-html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 8px;padding:var(--page-inset-y) var(--page-inset-x) 4px;background:var(--page-header-bg,var(--as-bg,var(--as-color-white)));isolation:isolate}
+html body #demo.slack-shell .as-page-header{position:sticky;top:calc(-1 * var(--page-inset-y));z-index:24;margin:calc(-1 * var(--page-inset-y)) calc(-1 * var(--page-inset-x)) 8px;padding:var(--page-inset-y) var(--page-inset-x) 4px;background:var(--page-header-bg,var(--agentspace-neutral-bg,var(--as-color-white)));isolation:isolate}
 html body #demo.slack-shell .as-page-header>.proj-sticky{position:static!important;top:auto!important;margin:0!important;padding:0!important;background:var(--as-color-transparent)!important;backdrop-filter:none!important}
 html body #demo.slack-shell .as-page-header>.demohead{position:static!important;background:var(--as-color-transparent)!important}
 html body #demo.slack-shell .as-page-header>:last-child{margin-bottom:0!important}
 :root[data-glass] body #demo.slack-shell .as-page-header{background:var(--as-color-rgba-248-250-253-p94);backdrop-filter:blur(20px)}
 :root[data-appearance-style="dark"][data-glass] body #demo.slack-shell .as-page-header{background:var(--as-color-rgba-24-26-30-p96)}
-:root[data-appearance-style="liquid"] body #demo.slack-shell .sps-settings-content>.as-page-header{background:color-mix(in srgb,var(--as-bg) 18%,var(--as-color-transparent));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+:root[data-appearance-style="liquid"] body #demo.slack-shell .sps-settings-content>.as-page-header{background:color-mix(in srgb,var(--agentspace-neutral-bg) 18%,var(--as-color-transparent));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 /* Secondary lists share the same neutral selection as the navigation panels. */
-#demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected){background:var(--as-border)!important;border-color:var(--as-color-transparent)!important;box-shadow:none!important}
+#demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected){background:var(--devui-line)!important;border-color:var(--as-color-transparent)!important;box-shadow:none!important}
 #demo.slack-shell .ms-list-pane :is(.ms-conversation.selected,.ms-contact-item.selected)::before{display:none!important}
 
-.sps-secondary-settings{margin-top:32px;padding-top:24px;border-top:1px solid var(--as-border-soft)}
-.sps-secondary-settings>h4{font-size:14px;color:var(--as-text);margin:0 0 8px}
+.sps-secondary-settings{margin-top:32px;padding-top:24px;border-top:1px solid var(--agentspace-border-soft)}
+.sps-secondary-settings>h4{font-size:14px;color:var(--devui-text);margin:0 0 8px}
 .sps-secondary-settings>.settings-note{margin:0 0 16px;font-size:12px;line-height:20px}
 .sps-secondary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.sps-secondary-card{min-width:0;padding:16px;border:1px solid var(--as-border-soft);border-radius:16px;background:var(--as-card)}
+.sps-secondary-card{min-width:0;padding:16px;border:1px solid var(--agentspace-border-soft);border-radius:16px;background:var(--devui-base-bg)}
 .sps-secondary-card>header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px}
-.sps-secondary-card h5{margin:0;font-size:13px;color:var(--as-text)}
-.sps-secondary-card header small{font-size:11px;color:var(--as-text-muted)}
-.sps-secondary-row{display:flex;align-items:center;gap:7px;min-height:44px;padding:5px 4px;border-top:1px solid var(--as-border-soft)}
+.sps-secondary-card h5{margin:0;font-size:13px;color:var(--devui-text)}
+.sps-secondary-card header small{font-size:11px;color:var(--devui-aide-text)}
+.sps-secondary-row{display:flex;align-items:center;gap:7px;min-height:44px;padding:5px 4px;border-top:1px solid var(--agentspace-border-soft)}
 .sps-secondary-row[draggable="true"]{cursor:grab}
 .sps-secondary-row.is-hidden{opacity:.52}
-.sps-secondary-row>.icon{width:16px;height:16px;flex:none;color:var(--as-text-2)}
+.sps-secondary-row>.icon{width:16px;height:16px;flex:none;color:var(--devui-text-weak)}
 .sps-secondary-row>b{flex:1;min-width:0;font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sps-secondary-row>small{font-size:11px;color:var(--as-text-muted)}
-.sps-secondary-grip{width:12px;flex:none;color:var(--as-text-muted);font-size:17px;line-height:1}
+.sps-secondary-row>small{font-size:11px;color:var(--devui-aide-text)}
+.sps-secondary-grip{width:12px;flex:none;color:var(--devui-aide-text);font-size:17px;line-height:1}
 .sps-secondary-row>.iconbtn{width:22px;height:22px;min-height:22px;padding:2px;flex:none}
 .sps-secondary-row>.as2-switch{flex:none;transform:scale(.8);transform-origin:right center;margin-left:2px}
 @media(max-width:950px){.sps-secondary-grid{grid-template-columns:1fr}}
 
 /* One elevation treatment for interactive cards; selection remains separate. */
-html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):not(.active){border-color:var(--as-border-soft)!important;transition:box-shadow .18s ease!important}
+html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):not(.active){border-color:var(--agentspace-border-soft)!important;transition:box-shadow .18s ease!important}
 html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):hover{box-shadow:0 8px 24px -12px var(--as-color-rgba-18-24-43-p22),0 2px 6px var(--as-color-rgba-18-24-43-p06)!important;transform:none!important}
 html:root body #demo.slack-shell.slack-shell :is(.ab-start-card,.ab-side-card,.ab-asset,.spx-resource,.spx-env-card,.benchcard,.asset-card,.knowledge-space-card,.extension-card,.catalog-card,.kanban-card,.tk-card,.pc-card,.ac-card,.rl-card,.bd-card,.ps-card,.pt-card,.art-card,.project-channel-card,.project-agent-card,.wfcard,.automation-card,.collaboration-task-card,.runcard,.evo-memory-card,.directory-card,.co-agent-card,.co-ev-card,.bx2-card,.bn-card,.bn-mk-card,.wfp-card,.wb-source-card):not(#_hover0):not(#_hover1):not(#_hover2):not(#_hover3):not(#_hover4):not(#_hover5):not(#_hover6):not(#_hover7):not(#_hover8):not(#_hover9):not(#_hover10):not(#_hover11):not(#_hover12):not(#_hover13):not(#_hover14):not(#_hover15):hover :is(.ab-card-actions,.bench-card-actions,.ac-card-actions,.ext-item-actions,.tk-actions,.asset-card-acts,footer)>:is(.btn,.iconbtn,.ac-more){box-shadow:0 3px 10px var(--as-color-rgba-18-24-43-p14)!important}
 
-html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo{--as-hover:var(--as-color-rgba-0-0-0-p04);--au-hover:var(--as-color-rgba-0-0-0-p04)}
+html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo{--devui-list-item-hover-bg:var(--as-color-rgba-0-0-0-p04);--au-hover:var(--as-color-rgba-0-0-0-p04)}
 html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo.slack-shell .demoside .sidenav:not(.active):hover{background:var(--as-color-transparent)!important}
 
 /* Dropdowns use neutral hover and a soft theme tint for selection. */
-:root{--as-menu-hover:var(--as-color-rgba-0-0-0-p04)}
-:root:is(.dark,[data-theme="dark"],[data-appearance-tone="dark"],[data-appearance-style="dark"]){--as-menu-hover:var(--as-color-rgba-255-255-255-p06)}
-html:root body:not(#as2-menu-state) :is(.as2-menu,.as2-selmenu,.as2-switcher,.user-menu,.ms-menu-list,.wc-quick-menu){--as-hover:var(--as-menu-hover)!important}
-html:root body:not(#as2-menu-state) :is(.as2-menu,.user-menu) :is(button[aria-checked="true"],button.selected,button[data-selected="true"]){background:var(--as-brand-soft)!important;color:var(--as-text)!important;font-weight:500}
+
+:root:is(.dark,[data-theme="dark"],[data-appearance-tone="dark"],[data-appearance-style="dark"]){--agentspace-menu-hover:var(--as-color-rgba-255-255-255-p06)}
+html:root body:not(#as2-menu-state) :is(.as2-menu,.as2-selmenu,.as2-switcher,.user-menu,.ms-menu-list,.wc-quick-menu){--devui-list-item-hover-bg:var(--agentspace-menu-hover)!important}
+html:root body:not(#as2-menu-state) :is(.as2-menu,.user-menu) :is(button[aria-checked="true"],button.selected,button[data-selected="true"]){background:var(--devui-primary-bg)!important;color:var(--devui-text)!important;font-weight:500}
 html:root body:not(#as2-menu-state) :is(.as2-menu>button,.as2-model-list>button,.ab-create-menu>button,.ntc-template-option,.ntc-custom-option,.as2-switcher-item,.user-menu>button,.user-menu .um-opt,.ms-menu-list>button,.wc-quick-menu>button):is(:hover,:focus-visible),
 html:root body:not(#as2-menu-state) .user-menu .um-item:is(:hover,:focus-within)>button.um-group,
-html:root body:not(#as2-menu-state) .as2-menu button[aria-expanded="true"]{background:var(--as-menu-hover)!important;outline:none}
-html:root body:not(#as2-menu-state) :is(.as2-menu,.user-menu) :is(button[aria-checked="true"],button.selected,button[data-selected="true"]):is(:hover,:focus-visible){background:var(--as-brand-soft)!important}
-html:root body:not(#as2-menu-state) :is(.user-menu .um-opt>i .icon,.as2-switcher-check .icon,.side-task-submenu button[aria-checked="true"]>.icon:last-child,.ntc-selected-icon){color:var(--as-brand)!important}
-html:root body:not(#as2-menu-state) .as2-switcher .as2-switcher-item[aria-selected="true"]{background:var(--as-brand-soft)!important;color:var(--as-text)!important}
+html:root body:not(#as2-menu-state) .as2-menu button[aria-expanded="true"]{background:var(--agentspace-menu-hover)!important;outline:none}
+html:root body:not(#as2-menu-state) :is(.as2-menu,.user-menu) :is(button[aria-checked="true"],button.selected,button[data-selected="true"]):is(:hover,:focus-visible){background:var(--devui-primary-bg)!important}
+html:root body:not(#as2-menu-state) :is(.user-menu .um-opt>i .icon,.as2-switcher-check .icon,.side-task-submenu button[aria-checked="true"]>.icon:last-child,.ntc-selected-icon){color:var(--devui-brand)!important}
+html:root body:not(#as2-menu-state) .as2-switcher .as2-switcher-item[aria-selected="true"]{background:var(--devui-primary-bg)!important;color:var(--devui-text)!important}
 
 /* Project switching alone keeps a check. */
 html:root body .user-menu .um-opt>i,
@@ -94,11 +94,11 @@ html:root body .ntc-menu .ntc-selected-icon{display:none!important}
 
 /* Search focus follows the neutral dropdown border without an outer halo. */
 html:root body :is(#demo,#modalHost) input:is([type="search"],[placeholder*="搜索"],[placeholder*="查找"]):focus{
-  border-color:var(--as-border-strong)!important;
+  border-color:var(--agentspace-border-strong)!important;
   box-shadow:none!important;
   outline:none!important;
 }
 html:root body #demo.slack-shell :is(.ms-list-search,.evo-searchbox,.co-members-search,.wc-popover-search,.ms-directory-search):focus-within{
-  border-color:var(--as-border-strong)!important;
+  border-color:var(--agentspace-border-strong)!important;
   box-shadow:none!important;
 }

@@ -1,0 +1,15 @@
+---
+description: demo-as2 必须使用 designTokens 中的变量，并按现有主题文件适配全部外观
+globs: demo-as2/**/*.{css,html,js,py,md},designTokens.md
+alwaysApply: true
+---
+
+# demo-as2 设计令牌约束
+
+令牌名单以仓库根目录 `designTokens.md` 为准，主题取值只来自 `demo-as2/themes/`。不要另建令牌来源，也不要写一份与该文档冲突的规则。`designTokens.md` 开头的「开发约束」是同一条规则的完整表述。
+
+1. 样式必须使用 `designTokens.md` 里的 `--devui-*` 和已登记的 `--agentspace-*`。不要写死颜色、字号、圆角、时长或其他设计值，也不要为新代码引入并行变量族（例如恢复 `--as-*` 语义令牌）。`--as-color-*`、`--as-image-*`、`--as-channel-*` 只属于 `demo-as2/build/design-system/palette.css`；`--as-tone-*`、`--as-project-tone-*`、`--as-file-*` 只属于 `semantic-colors.css`。间距按 `designTokens.md` 的 4px 栅格写 px，不单列间距变量。
+2. 没有满足需求的变量时，先把变量加进 `designTokens.md`，并写入 `demo-as2/themes/` 里相关主题文件，然后再在组件 CSS/JS 中引用。不要使用字面量或未列入令牌表的临时变量。
+3. 新增或修改令牌时，适配每个会展示该表面的主题：极简浅色（classic）、极简深色、幻彩（5 个强调色 × 浅色 / 映衬 / 深色）、液态玻璃、像素（浅色和深色）、Bento（浅色和深色）。每个主题用适合自己外观的值。液态玻璃 `--lq-a` / `--lq-b`、像素墨色、Bento `--bn` 仍由 JS 驱动，但新令牌必须在每种模式下解析正确。
+4. 主题文件是这些取值的唯一来源。改完运行 `python3 demo-as2/build/sync_themes.py`（或 `sync_build.py`）内联到 `index.html` 的 `<style>` 末尾。不要在 `tokens.css` 或第二个 `:root` 里再定义同一批令牌。
+5. 新增主题（新外观、新模式或新强调色家族）时，在 `demo-as2/themes/` 增加专用 CSS，选择器和结构与 `minimal-light.css`、`minimal-dark.css`、五个 `as2-aurora-*-theme.css`、`as2-liquid-theme.css`、`as2-pixel-theme.css`、`as2-bento-theme.css` 一致。新文件必须写出全套 `--devui-*` / `--agentspace-*`，不能只写差异项，并登记到 `sync_themes.py` 的 `ORDER`。与 `:root.dark` 优先级相同时，深色表排在浅色表之后。不要把新主题的令牌值只放在 `tokens.css`、`as2-bridge.css` 或 JS 注入的 `:root` 里。JS 可以继续驱动预设强调色，但主题自己的令牌表是必需的。

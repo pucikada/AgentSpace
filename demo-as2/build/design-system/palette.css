@@ -843,4 +843,11 @@
   --as-channel-212-87-26: 212, 87, 26;
   --as-channel-20-22-30: 20,22,30;
   --as-channel-255-255-255: 255,255,255;
+
+  --as-color-1f2430: #1F2430;
+  --as-color-f3f5f9: #F3F5F9;
+  --as-color-2a2d33: #2A2D33;
+  --as-color-e8ecf3: #E8ECF3;
+  --as-color-rgba-16-24-40-p10: rgba(16,24,40,.10);
+  --as-color-rgba-16-24-40-p16: rgba(16, 24, 40, .16);
 }
