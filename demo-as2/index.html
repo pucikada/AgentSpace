@@ -3,7 +3,6 @@
 <!-- Original AgentSpace interface inspired by Slack's official visual language: https://slack.design/articles/a-new-visual-language-for-slack/ . Blue colorway with additional channel conversations and linked Thread examples; existing application behavior is preserved. --><style>
 /* Theme token values are inlined from demo-as2/themes/ at the end of this style block. */
 
-
 /* ===== AgentSpace 2.0 Design System · components.css ===== */
 /* ==========================================================================
  * AgentSpace 2.0 · Components
@@ -7548,7 +7547,6 @@ input[type=checkbox], input[type=radio] { accent-color: var(--devui-brand) !impo
 @media (prefers-reduced-motion: reduce) { .as2-switcher, #demo .demoarea.as2-switch-in > * { animation: none !important; } .as2-nav-line, .as2-nav-hover { transition: none !important; } }
 /* 收起动画中内容保持原宽度、只做裁切（不重新换行） */
 
-
 /* 页面级 Tabs 统一：无外框、仅底部 1px 分隔；间距 24；按钮上下 12；选中 2px 墨色下划线 */
 #demo.slack-shell :is(.projecttabs, .board-main-tabs, .channelhead .dtabs, .demohead + .dtabs) {
   display: flex; gap: 24px !important; padding: 0 !important; border: 0 !important; border-bottom: 1px solid var(--devui-line) !important;
@@ -7597,29 +7595,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
 #demo.slack-shell .sidehead--switch > :is(.projectswitch, .as2-side-toggle) { margin: 0 !important; }
 
 /* ===================== 个性化皮肤「晴空」：蓝橙渐变 + 液态玻璃 ===================== */
-:root[data-appearance-style="liquid"] {
-  /* 皮肤配色：两个变量（主色 / 辅色），其余全部派生；JS 在 :root 上写入 --lq-a / --lq-b */
-  --agentspace-blue: var(--lq-a, #2B76F0); --agentspace-orange: var(--lq-b, #F08A3C);
-  --agentspace-sky: color-mix(in srgb, var(--agentspace-blue) 22%, white); --agentspace-dawn: color-mix(in srgb, var(--agentspace-orange) 20%, white);
-  --agentspace-mist: color-mix(in srgb, var(--agentspace-blue) 8%, #EEF1F5);
-  --agentspace-neutral-bg: var(--agentspace-mist);--agentspace-global-bg: var(--agentspace-mist); --agentspace-panel-bg: rgba(255,255,255,.50); --agentspace-panel-stroke: rgba(255,255,255,.72); --devui-base-bg: rgba(255,255,255,.64);
-  --agentspace-stage-bg: rgba(255,255,255,.40); --agentspace-sunken-bg: rgba(255,255,255,.52);
-  --devui-line: rgba(30,55,90,.09); --agentspace-border-soft: rgba(30,55,90,.06); --agentspace-border-strong: rgba(30,55,90,.15);
-  --devui-list-item-hover-bg: rgba(255,255,255,.58);--agentspace-nav1-hover-bg: rgba(255,255,255,.58);--agentspace-nav2-hover-bg: rgba(255,255,255,.58); --agentspace-pressed-bg: rgba(255,255,255,.72); --agentspace-muted-bg: rgba(30,55,90,.05);
-  --devui-brand: var(--agentspace-blue); --devui-brand-hover: color-mix(in srgb, var(--agentspace-blue) 82%, black);
-  --devui-primary-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent); --devui-primary-line: color-mix(in srgb, var(--agentspace-blue) 28%, transparent);
-  --devui-list-item-active-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent); --devui-list-item-active-text: color-mix(in srgb, var(--agentspace-blue) 78%, black);
-  --agentspace-focus-ring: color-mix(in srgb, var(--agentspace-blue) 50%, transparent); --devui-form-control-interactive-outline: color-mix(in srgb, var(--agentspace-blue) 14%, transparent);
-  --agentspace-run-color: var(--agentspace-blue); --agentspace-run-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent); --agentspace-run-line: color-mix(in srgb, var(--agentspace-blue) 26%, transparent);
-  --devui-warning: color-mix(in srgb, var(--agentspace-orange) 82%, black); --devui-warning-bg: color-mix(in srgb, var(--agentspace-orange) 15%, transparent); --devui-warning-line: color-mix(in srgb, var(--agentspace-orange) 34%, transparent);
-  --agentspace-radius-panel: 24px; --agentspace-radius-card: 18px; --devui-border-radius-card-xl: 20px;
-  --agentspace-glass: blur(28px) saturate(170%);
-  --agentspace-shadow-panel: 0 12px 44px rgba(31,53,89,.10), inset 0 1px 0 rgba(255,255,255,.85);
-  --agentspace-shadow-tile: 0 4px 16px rgba(31,53,89,.08), inset 0 1px 0 rgba(255,255,255,.92);
-  --agentspace-shadow-pop: 0 20px 56px rgba(31,53,89,.18), 0 0 0 1px rgba(255,255,255,.75), inset 0 1px 0 rgba(255,255,255,.9);
-  --agentspace-shadow-dialog: 0 28px 80px rgba(31,53,89,.22), 0 0 0 1px rgba(255,255,255,.75), inset 0 1px 0 rgba(255,255,255,.9);
-  --devui-feedback-overlay-backdrop: rgba(60,85,120,.16);
-}
+
 :root[data-appearance-style="liquid"] body {
   background: radial-gradient(120% 70% at 10% 0%, color-mix(in srgb, var(--agentspace-blue) 32%, transparent) 0%, transparent 60%),
               radial-gradient(90% 60% at 100% 100%, color-mix(in srgb, var(--agentspace-orange) 40%, transparent) 0%, transparent 60%),
@@ -7673,7 +7649,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
 .settings-theme-options { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
 @media (max-width: 760px) { .settings-theme-options { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media (prefers-reduced-transparency: reduce) {
-  :root[data-appearance-style="liquid"] { --agentspace-panel-bg: rgba(255,255,255,.92); --devui-base-bg: #fff; }
+  
   :root[data-appearance-style="liquid"] * { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
 }
 #demo.slack-shell .ms-new-divider::before, #demo.slack-shell .ms-new-divider::after { background: var(--devui-line) !important; }
@@ -7700,28 +7676,6 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
  * 参考 Spatial Systems UI：基础色 R=G=B；白色 = 选中，橙红 = 异常；结构靠细线与对齐，不靠投影。 */
 :root[data-appearance-style="pixel"] {
   color-scheme: dark;
-  --px-font: "JetBrains Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
-  --px-display: "Silkscreen", "JetBrains Mono", ui-monospace, "PingFang SC", monospace;
-  --px-shadow: 3px 3px 0 0 #000; --px-hot: #FF5A36;
-  --agentspace-font-family: var(--px-font); --agentspace-font-family-mono: var(--px-font);
-  --agentspace-neutral-bg: #0A0A0A;--agentspace-global-bg: #0A0A0A; --agentspace-panel-bg: #101010; --agentspace-panel-stroke: #262626; --devui-base-bg: #141414; --agentspace-stage-bg: #0D0D0D; --agentspace-sunken-bg: #0D0D0D; --devui-feedback-overlay-backdrop: rgba(0,0,0,.6);
-  --devui-text: #EDEDED; --devui-text-weak: #C2C2C2; --devui-aide-text: #8C8C8C; --agentspace-text-subtle: #5E5E5E; --devui-light-text: #0A0A0A;
-  --devui-line: #262626; --agentspace-border-soft: #1D1D1D; --agentspace-border-strong: #3B3B3B;
-  --devui-list-item-hover-bg: #1B1B1B;--agentspace-nav1-hover-bg: #1B1B1B;--agentspace-nav2-hover-bg: #1B1B1B; --agentspace-pressed-bg: #222; --agentspace-muted-bg: #181818; --devui-list-item-active-bg: var(--px-ink, #F2F2F2); --devui-list-item-active-text: #0A0A0A;
-  --devui-brand: var(--px-ink, #F2F2F2); --devui-brand-hover: #FFFFFF; --devui-primary-bg: #1F1F1F; --devui-primary-line: #4A4A4A; --agentspace-focus-ring: var(--px-ink, #F2F2F2); --devui-form-control-interactive-outline: rgba(242,242,242,.10);
-  --agentspace-btn-top: var(--px-ink, #F2F2F2); --agentspace-btn-bottom: var(--px-ink, #F2F2F2); --agentspace-btn-top-hover: #FFFFFF; --agentspace-btn-bottom-hover: #FFFFFF;
-  --agentspace-btn-edge-1: var(--px-ink, #F2F2F2); --agentspace-btn-edge-2: var(--px-ink, #F2F2F2); --agentspace-btn-edge-3: var(--px-ink, #F2F2F2); --agentspace-btn-ring: var(--px-ink, #F2F2F2); --agentspace-btn-ink: #0A0A0A; --agentspace-btn-shadow: var(--px-shadow);
-  --devui-btn-common-bg: #1A1A1A; --devui-btn-common-color-hover: #EDEDED; --devui-danger: var(--px-hot);
-  --agentspace-run-color: var(--px-ink, #F2F2F2); --agentspace-run-bg: #1F1F1F; --agentspace-run-line: #4A4A4A;
-  --devui-warning: #FFB020; --devui-warning-bg: rgba(255,176,32,.10); --devui-warning-line: rgba(255,176,32,.40);
-  --agentspace-status-review: #B8B8FF; --agentspace-status-review-bg: rgba(184,184,255,.10); --agentspace-status-review-line: rgba(184,184,255,.35);
-  --devui-success: #7EE2A8; --devui-success-bg: rgba(126,226,168,.10); --devui-success-line: rgba(126,226,168,.35);
-  --agentspace-status-fail: var(--px-hot); --devui-danger-bg: rgba(255,90,54,.10); --devui-danger-line: rgba(255,90,54,.45);
-  --agentspace-status-idle: #8C8C8C; --agentspace-status-idle-bg: #181818;
-  --agentspace-id-human-bg: #1E1E1E; --agentspace-id-human-color: #EDEDED; --agentspace-agent-bg: #1E1E1E; --agentspace-agent-color: #EDEDED;
-  --devui-border-radius: 0px; --agentspace-radius-sm: 0px; --devui-border-radius-card: 0px; --agentspace-radius-row: 0px; --agentspace-radius-card: 0px; --devui-border-radius-card-xl: 0px; --agentspace-radius-panel: 0px; --agentspace-radius-input: 0px; --devui-border-radius-full: 0px;
-  --agentspace-shadow-card: none; --agentspace-shadow-tile: inset 0 0 0 1px #2E2E2E; --agentspace-shadow-panel: none;
-  --agentspace-shadow-pop: 0 0 0 1px #3B3B3B, var(--px-shadow); --agentspace-shadow-dialog: 0 0 0 1px #3B3B3B, 6px 6px 0 0 #000;
 }
 :root[data-appearance-style="pixel"] body {
   background-color: var(--agentspace-neutral-bg) !important;
@@ -7814,10 +7768,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
 /* 像素主题 · 可读性修正（全局对比度 ≥ 4.5:1）
  * 灰阶上调：正文 #D4D4D4 / 次要 #A6A6A6 / 弱 #8A8A8A（在 #141414 上约 5:1）。
  * 选中改为“深色抬升块 + 白字 + 1px 白描边”：保留「白色 = 选中」，避免白底配浅字或黑字落在深底。 */
-:root[data-appearance-style="pixel"] {
-  --devui-text: #F0F0F0; --devui-text-weak: #D4D4D4; --devui-aide-text: #A6A6A6; --agentspace-text-subtle: #8A8A8A;
-  --devui-list-item-active-bg: #262626; --devui-list-item-active-text: #FFFFFF; --devui-primary-bg: #222222;
-}
+
 :root[data-appearance-style="pixel"] #demo.slack-shell :is(.ms-conversation.selected, .ms-contact-item.selected, .co-thread-entry.selected, .wc-ext-row.selected,
   .wc-project-row.selected, .co-thread-index-card.selected, .threadlink.selected, .searchresult.selected) {
   background: #262626 !important; box-shadow: inset 0 0 0 1px var(--px-ink, #F2F2F2) !important; border-color: var(--px-ink, #F2F2F2) !important; }
@@ -7854,10 +7805,7 @@ html body :is(#demo, #modalHost, .appbar) .as2-photo.as2-photo--agent.as2-photo-
 :root:not(.dark):not([data-theme="dark"]) { --devui-warning: #9A4D08; --agentspace-status-idle: #626262; --agentspace-code-str: #006A96; }
 .appbar .appbrand b small { color: var(--devui-text-weak) !important; }
 /* 流光 · 半透明面板上的文字与链接加深 */
-:root[data-appearance-style="liquid"] {
-  --devui-aide-text: #595959; --agentspace-text-subtle: rgba(0,0,0,.62);
-  --devui-brand: color-mix(in srgb, var(--agentspace-blue) 80%, black); --agentspace-run-color: color-mix(in srgb, var(--agentspace-blue) 78%, black);
-  --devui-warning: color-mix(in srgb, var(--agentspace-orange) 58%, black); --agentspace-code-str: color-mix(in srgb, var(--agentspace-blue) 70%, black); }
+
 :root[data-appearance-style="liquid"] :is(#demo, #modalHost) .btn.link { color: var(--devui-list-item-active-text) !important; }
 :root:not(.dark):not([data-theme="dark"]) { --devui-aide-text: #616161; }
 :root[data-appearance-style="liquid"] #demo .minirow span { color: var(--devui-text-weak) !important; }
@@ -8121,10 +8069,9 @@ html body #demo.slack-shell :is(.composer, .ms-composer, .wc-composer-card) :is(
 html body #demo.slack-shell :is(.composer, .ms-composer, .wc-composer-card) :is(.co-compose-hint, .composerfoot > span:not(.spacer), .wc-compose-foot > small) { font-size: 12px !important; color: var(--agentspace-text-subtle) !important; padding: 0 6px; }
 /* ---- 可拖拽分割线（侧栏 / Thread）：主题色渐变 · 上下两端渐隐；静止时为普通细线 */
 :root { --agentspace-resize-a: var(--devui-brand); --agentspace-resize-b: var(--agentspace-status-review); }
-:root[data-appearance-style="liquid"] { --agentspace-resize-a: var(--lq-a, #2B76F0); --agentspace-resize-b: var(--lq-b, #F08A3C); }
-:root[data-appearance-style="pixel"] { --agentspace-resize-a: var(--px-ink, #F2F2F2); --agentspace-resize-b: var(--px-hot, #FF5A36); }
+
 :root[data-appearance-style="aurora"] { --agentspace-resize-a: var(--agentspace-accent, #3F6BFF); --agentspace-resize-b: color-mix(in srgb, var(--agentspace-accent, #3F6BFF) 55%, #22D3EE); }
-:root[data-appearance-style="bento"] { --agentspace-resize-a: var(--bn, #F2541B); --agentspace-resize-b: color-mix(in srgb, var(--bn, #F2541B) 50%, #FFC24D); }
+
 body[data-theme] { --agentspace-resize-a: var(--devui-brand); --agentspace-resize-b: var(--devui-ext-accent); }
 .as2-resizer::after { background: transparent !important; }
 .as2-resizer:hover::after, .as2-resizer:focus-visible::after, :root[data-resizing] .as2-resizer::after {
@@ -8177,8 +8124,7 @@ body[data-theme] { --agentspace-resize-a: var(--devui-brand); --agentspace-resiz
 .as2-run .as-tstep__pct:not(:empty) { padding: 1px 6px; border-radius: 6px; background: var(--agentspace-muted-bg); font-size: 11px; }
 /* ---- 左侧导航栏：正方形图标选中块 · 选中图标实色填充 · hover 微动效 */
 :root { --rail-tile: var(--devui-base-bg); --rail-ink: var(--devui-text); --rail-tile-shadow: var(--agentspace-shadow-tile); }
-:root[data-appearance-style="liquid"] { --agentspace-nav2-active-bg: var(--devui-base-bg); --rail-tile: rgba(255, 255, 255, .82); --rail-tile-shadow: 0 2px 10px rgba(31, 53, 89, .10), inset 0 1px 0 rgba(255,255,255,.9); }
-:root[data-appearance-style="pixel"] { --agentspace-nav1-active-bg: var(--px-ink, #F2F2F2); --agentspace-nav2-active-bg: var(--px-ink, #F2F2F2); --rail-tile: var(--px-ink, #F2F2F2); --rail-ink: #0A0A0A; --rail-tile-shadow: none; }
+
 body[data-theme] { --rail-tile: var(--devui-list-item-active-bg); --rail-ink: var(--devui-list-item-active-text); --rail-tile-shadow: none; }
 html body #demo.slack-shell.slack-shell .demorail { gap: 6px !important; padding-top: 6px !important; }
 html:root body #demo.slack-shell.slack-shell .demorail.demorail button {
@@ -9232,25 +9178,6 @@ html:root[data-appearance-style="pixel"] body #demo.slack-shell :is(.ca-viewer, 
  * 选中 = 黑块白字；强调 = 橙色填充（文字用深橙保证对比度）；无投影，结构靠 1px 线。 */
 :root[data-appearance-style="pixel"][data-px-mode="light"] {
   color-scheme: light;
-  --px-shadow: none; --px-hot: #D93A12;
-  --agentspace-neutral-bg: #E2E2E2;--agentspace-global-bg: #E2E2E2; --agentspace-panel-bg: #E8E8E8; --agentspace-panel-stroke: #9C9C9C; --devui-base-bg: #F6F6F6; --agentspace-stage-bg: #EDEDED; --agentspace-sunken-bg: #DEDEDE; --devui-feedback-overlay-backdrop: rgba(17,17,17,.38);
-  --devui-text: #111111; --devui-text-weak: #2E2E2E; --devui-aide-text: #555555; --agentspace-text-subtle: #6B6B6B; --devui-light-text: #FFFFFF;
-  --devui-line: #A3A3A3; --agentspace-border-soft: #C0C0C0; --agentspace-border-strong: #6E6E6E;
-  --devui-list-item-hover-bg: #DADADA;--agentspace-nav1-hover-bg: #DADADA;--agentspace-nav2-hover-bg: #DADADA; --agentspace-pressed-bg: #D0D0D0; --agentspace-muted-bg: #DEDEDE; --devui-list-item-active-bg: #111111; --devui-list-item-active-text: #FFFFFF;
-  --devui-brand: var(--px-ink-text, #B83E00); --devui-brand-hover: #8F2F00; --devui-primary-bg: color-mix(in srgb, var(--px-ink, #FF6B1A) 14%, transparent); --devui-primary-line: color-mix(in srgb, var(--px-ink, #FF6B1A) 50%, transparent);
-  --agentspace-focus-ring: var(--px-ink, #FF6B1A); --devui-form-control-interactive-outline: color-mix(in srgb, var(--px-ink, #FF6B1A) 18%, transparent);
-  --agentspace-btn-top: var(--px-ink, #FF6B1A); --agentspace-btn-bottom: var(--px-ink, #FF6B1A); --agentspace-btn-top-hover: color-mix(in srgb, var(--px-ink, #FF6B1A) 88%, white); --agentspace-btn-bottom-hover: color-mix(in srgb, var(--px-ink, #FF6B1A) 88%, white);
-  --agentspace-btn-edge-1: var(--px-ink, #FF6B1A); --agentspace-btn-edge-2: var(--px-ink, #FF6B1A); --agentspace-btn-edge-3: var(--px-ink, #FF6B1A); --agentspace-btn-ring: var(--px-ink, #FF6B1A); --agentspace-btn-ink: var(--px-on-ink, #111111); --agentspace-btn-shadow: none;
-  --devui-btn-common-bg: #F6F6F6; --devui-btn-common-color-hover: #111111; --devui-danger: var(--px-hot);
-  --agentspace-run-color: var(--px-ink-text, #B83E00); --agentspace-run-bg: color-mix(in srgb, var(--px-ink, #FF6B1A) 14%, transparent); --agentspace-run-line: color-mix(in srgb, var(--px-ink, #FF6B1A) 50%, transparent);
-  --devui-warning: #8A4600; --devui-warning-bg: rgba(138,70,0,.10); --devui-warning-line: rgba(138,70,0,.4);
-  --agentspace-status-review: #4A4AB5; --agentspace-status-review-bg: rgba(74,74,181,.10); --agentspace-status-review-line: rgba(74,74,181,.35);
-  --devui-success: #0E6E40; --devui-success-bg: rgba(14,110,64,.10); --devui-success-line: rgba(14,110,64,.35);
-  --agentspace-status-fail: #C0310F; --devui-danger-bg: rgba(192,49,15,.10); --devui-danger-line: rgba(192,49,15,.4);
-  --agentspace-status-idle: #5C5C5C; --agentspace-status-idle-bg: #E0E0E0;
-  --agentspace-id-human-bg: #DCDCDC; --agentspace-id-human-color: #111111; --agentspace-agent-bg: #111111; --agentspace-agent-color: #FFFFFF;
-  --agentspace-shadow-card: none; --agentspace-shadow-tile: inset 0 0 0 1px #A3A3A3; --agentspace-shadow-panel: none;
-  --agentspace-shadow-pop: 0 0 0 1px #111111; --agentspace-shadow-dialog: 0 0 0 1px #111111, 8px 8px 0 0 rgba(17,17,17,.16);
 }
 :root[data-appearance-style="pixel"][data-px-mode="light"] body {
   background-color: var(--agentspace-neutral-bg) !important;
@@ -9351,7 +9278,7 @@ html:root[data-appearance-style="pixel"][data-px-mode="light"] body #modalHost .
 :root[data-appearance-style="pixel"] body #demo.slack-shell :is(.ms-list-search, .co-members-search):focus-within { border-color: var(--devui-text) !important; box-shadow: none !important; }
 :root[data-appearance-style="pixel"] body #demo.slack-shell :is(.composer, .ms-composer, .wc-composer-card):focus-within { box-shadow: none !important; }
 /* 像素：强调色填充上的文字 / 图标一律用 --px-on-ink（墨黑 / 蓝 / 绿 / 粉下为白，橙 / 单色下为黑） */
-:root[data-appearance-style="pixel"] { --rail-ink: var(--px-on-ink, #0A0A0A); }
+
 :root[data-appearance-style="pixel"] .as2-hint-pop { color: var(--px-on-ink, #0A0A0A) !important; }
 /* 对比度修正：空内容发送钮（浅色蓝图）、深色主题下的节点 / 节点库色调、快捷键标签 */
 :root[data-appearance-style="pixel"][data-px-mode="light"] #demo.slack-shell :is(.composer, .ms-composer):has(textarea:placeholder-shown) :is(.composerfoot, .ms-compose-toolbar) .btn.primary,
@@ -10077,7 +10004,6 @@ html:root body .as2-menu.bc-menu b, html:root body .as2-menu.bc-menu small { dis
 .as2-menu.bc-menu { background: rgba(255,255,255,.97) !important; -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); box-shadow: 0 18px 48px rgba(31,53,89,.22), 0 0 0 1px rgba(31,53,89,.08) !important; }
 :root[data-appearance-style="dark"] .as2-menu.bc-menu { background: rgba(28,28,31,.97) !important; }
 
-
 /* 侧栏栏目行右侧的「···」（移到分区）：悬停才出现，覆盖在数量徽标 / 状态图标位置 */
 #demo.slack-shell .demoside .sidenav { position: relative; }
 .side-ent-more { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; color: var(--devui-aide-text); opacity: 0; transition: opacity .12s, background .12s; }
@@ -10096,8 +10022,7 @@ html:root body .as2-menu.bc-menu b, html:root body .as2-menu.bc-menu small { dis
 /* ===================== 顶栏版本徽标「2.0」：渐变描边胶囊，随主题换色 ===================== */
 :root { --vb-a: #2B6CFF; --vb-b: #7C5CE0; }
 :root[data-appearance-style="dark"] { --vb-a: #6FA1FF; --vb-b: #B39BFF; }
-:root[data-appearance-style="liquid"] { --vb-a: var(--lq-a, #2B76F0); --vb-b: var(--lq-b, #F08A3C); }
-:root[data-appearance-style="pixel"] { --vb-a: var(--px-ink, #FF6B1A); --vb-b: var(--px-ink, #FF6B1A); }
+
 :root[data-appearance-style="aurora"] { --vb-a: var(--agentspace-accent, #3F6BFF); --vb-b: color-mix(in srgb, var(--agentspace-accent, #3F6BFF) 70%, #fff); }
 :root[data-appearance-style="aurora"] .appbar .appbrand b small { color: color-mix(in srgb, var(--vb-a) 80%, #000) !important; }
 html:root body .appbar .appbrand b small { display: inline-flex; align-items: center; height: 20px; padding: 0 9px !important; margin-left: 6px; border: 0 !important; border-radius: 999px !important;
@@ -10370,7 +10295,7 @@ html:root[data-appearance-style="aurora"] body :is(#demo, #modalHost) :is(.btn.l
 /* [P1 对比度] 液态玻璃：消息列表未读数在辅色（浅橙）上白字仅 2.5:1，底色加深 */
 :root[data-appearance-style="liquid"] #demo .ms-unread { background: color-mix(in srgb, var(--lq-b, #F08A3C) 62%, #000) !important; color: #FFFFFF !important; }
 /* [P2 对比度] 像素主题：最弱一级文字在面板上 4.35:1，略提亮到 ≥4.5:1 */
-:root[data-appearance-style="pixel"] { --agentspace-text-subtle: #959595; }
+
 /* [P2 点击热区] 20px 的提示按钮视觉不变，命中区扩到 28px（WCAG 2.5.8 ≥24px） */
 .as2-hint-btn { position: relative; }
 .as2-hint-btn::after { content: ""; position: absolute; inset: -4px; }
@@ -10392,23 +10317,6 @@ html:root[data-appearance-style="aurora"] body #demo.slack-shell.slack-shell > .
  * ===================================================================== */
 :root[data-appearance-style="bento"] {
   color-scheme: light;
-  --bn: #F2541B; --bn-ink: #17181C; --bn-canvas: #E8E9EC; --bn-hatch: repeating-linear-gradient(135deg, rgba(20,22,30,.22) 0 1.5px, transparent 1.5px 5px);
-  --agentspace-neutral-bg: var(--bn-canvas);--agentspace-global-bg: var(--bn-canvas); --agentspace-panel-bg: #FFFFFF; --agentspace-panel-stroke: transparent; --devui-base-bg: #FFFFFF; --agentspace-stage-bg: var(--bn-canvas); --agentspace-sunken-bg: #F3F4F6; --devui-feedback-overlay-backdrop: rgba(20,22,30,.4);
-  --devui-text: #17181C; --devui-text-weak: #3B3E46; --devui-aide-text: #6C7078; --agentspace-text-subtle: #8A9099; --devui-light-text: #FFFFFF;
-  --devui-line: rgba(20,22,30,.09); --agentspace-border-soft: rgba(20,22,30,.06); --agentspace-border-strong: rgba(20,22,30,.18);
-  --devui-list-item-hover-bg: rgba(20,22,30,.045);--agentspace-nav1-hover-bg: rgba(20,22,30,.045);--agentspace-nav2-hover-bg: rgba(20,22,30,.045); --agentspace-pressed-bg: rgba(20,22,30,.08); --agentspace-muted-bg: #F3F4F6;
-  --devui-list-item-active-bg: #17181C; --devui-list-item-active-text: #FFFFFF;
-  --devui-brand: var(--bn); --devui-brand-hover: color-mix(in srgb, var(--bn) 86%, #000); --devui-primary-bg: color-mix(in srgb, var(--bn) 10%, #fff); --devui-primary-line: color-mix(in srgb, var(--bn) 38%, transparent); --agentspace-focus-ring: #2B5BE8; --devui-form-control-interactive-outline: rgba(43,91,232,.2);
-  --agentspace-btn-top: var(--bn); --agentspace-btn-bottom: var(--bn); --agentspace-btn-top-hover: color-mix(in srgb, var(--bn) 90%, #000); --agentspace-btn-bottom-hover: color-mix(in srgb, var(--bn) 90%, #000);
-  --agentspace-btn-edge-1: var(--bn); --agentspace-btn-edge-2: var(--bn); --agentspace-btn-edge-3: var(--bn); --agentspace-btn-ring: transparent; --agentspace-btn-ink: #FFFFFF; --agentspace-btn-shadow: none;
-  --devui-btn-common-bg: #FFFFFF; --devui-btn-common-color-hover: #17181C;
-  --agentspace-run-color: #2B5BE8; --agentspace-run-bg: #E4EBFD; --agentspace-run-line: rgba(43,91,232,.35);
-  --agentspace-id-human-bg: #FFE3D6; --agentspace-id-human-color: #8A2E0A; --agentspace-agent-bg: #DDE6FD; --agentspace-agent-color: #1F3FA8;
-  --devui-border-radius: 8px; --agentspace-radius-sm: 10px; --devui-border-radius-card: 14px; --agentspace-radius-row: 12px; --agentspace-radius-card: 26px; --devui-border-radius-card-xl: 26px; --agentspace-radius-panel: 28px; --agentspace-radius-input: 999px; --devui-border-radius-full: 999px;
-  --agentspace-shadow-card: 0 1px 2px rgba(20,22,30,.04), 0 14px 30px -20px rgba(20,22,30,.18); --agentspace-shadow-tile: 0 1px 2px rgba(20,22,30,.04); --agentspace-shadow-panel: 0 1px 2px rgba(20,22,30,.04), 0 14px 30px -20px rgba(20,22,30,.18);
-  --agentspace-shadow-pop: 0 18px 44px -14px rgba(20,22,30,.28), 0 0 0 1px rgba(20,22,30,.06); --agentspace-shadow-dialog: 0 30px 80px -24px rgba(20,22,30,.4), 0 0 0 1px rgba(20,22,30,.06);
-  --rail-tile: #17181C; --rail-ink: #FFFFFF; --rail-tile-shadow: none;
-  --vb-a: var(--bn); --vb-b: color-mix(in srgb, var(--bn) 70%, #fff);
 }
 :root[data-appearance-style="bento"] body { background: var(--bn-canvas) !important; background-image: none !important; }
 :root[data-appearance-style="bento"] :is(.appbar, #demo, #demo.slack-shell) { background: transparent !important; }
@@ -10507,7 +10415,7 @@ html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .ms-
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .ms-primary-tabs button.active:not(#_x) { border-bottom-color: #17181C !important; color: var(--bn-ink) !important; }
 
 /* ===== Bento · 第二轮：右侧整体是一张大卡片；圆角收小；主按钮中性；选中变轻（仅左侧入口保持深色） ===== */
-:root[data-appearance-style="bento"] { --agentspace-radius-card: 18px; --devui-border-radius-card-xl: 18px; --agentspace-radius-panel: 20px; --devui-border-radius-card: 12px; }
+
 /* 右侧内容区 = 一张白色大卡片；多面板页面（任务详情 / 消息 / 频道）仍保持各自分块 */
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell > .demoarea:not(#_x) { background: var(--bn-surface) !important; border-radius: 20px !important; overflow: hidden !important; box-shadow: var(--agentspace-shadow-card) !important; margin: 4px 0 10px 0 !important; }
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell > .demoarea:not(#_x):has(> .tp-page, > .messenger-shell, > .channelwrap, .tp-page, .messenger-shell) { background: transparent !important; box-shadow: none !important; overflow: visible !important; }
@@ -10524,7 +10432,7 @@ html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .thr
 html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) .btn.primary:not(#_x) { background: var(--bn-strong) !important; color: var(--bn-on-strong) !important; }
 html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) .btn.primary:not(#_x):hover { background: var(--bn-strong-hover) !important; }
 html:root[data-appearance-style="bento"] body #demo.slack-shell .wc-send:not(#_x) { background: var(--bn-strong) !important; }
-:root[data-appearance-style="bento"] { --agentspace-btn-top: #17181C; --agentspace-btn-bottom: #17181C; --agentspace-btn-top-hover: #2B2E37; --agentspace-btn-bottom-hover: #2B2E37; --agentspace-btn-edge-1: #17181C; --agentspace-btn-edge-2: #17181C; --agentspace-btn-edge-3: #17181C; }
+
 /* 选中变轻：标签页 / 筛选胶囊 = 未选透明，选中浅灰底深字；分段 = 白色滑块；菜单选项 = 浅灰 */
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .dtabs > button:not(#_x) { background: transparent !important; box-shadow: none !important; color: var(--devui-aide-text) !important; font-weight: 500; }
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .dtabs > button:not(#_x):hover { background: var(--bn-soft2) !important; color: var(--devui-text) !important; }
@@ -10564,7 +10472,7 @@ html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .dem
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .demoside .sidebody .sidenav.active:not(#_x) small { background: var(--bn-surface) !important; color: var(--bn-ink) !important; }
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_x) { background: var(--bn-surface) !important; color: var(--bn-ink) !important; box-shadow: 0 1px 2px rgba(20,22,30,.08), 0 6px 14px -8px rgba(20,22,30,.2) !important; border-radius: 14px !important; }
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_x) :is(svg.icon.lucide, span, small) { background: transparent !important; color: var(--bn-ink) !important; }
-:root[data-appearance-style="bento"] { --agentspace-nav2-active-bg: var(--bn-soft2, #F1F2F5); --rail-tile: #FFFFFF; --rail-ink: #17181C; }
+
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_x) .rail-unread { border-color: #FFFFFF !important; }
 /* Bento：选中用白色底。侧栏块改成极浅灰，白色选中块才有对比（轻投影）；左侧入口同样是白色块 */
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell > .demoside:not(#_x) { background: var(--bn-inset) !important; }
@@ -10635,29 +10543,10 @@ html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .dem
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell :is(.wc-send, .ms-send, .composerfoot .btn.primary):not(#_a):not(#_b):not(#_c):not(#_d), html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell :is(.wc-send, .ms-send, .composerfoot .btn.primary) :is(svg, .icon, path, i, span):not(#_a):not(#_b):not(#_c):not(#_d) { color: var(--bn-on-strong) !important; stroke: var(--bn-on-strong); }
 html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell :is(.wc-send, .ms-send):not(#_a):not(#_b):not(#_c):not(#_d) svg path { fill: none; }
 
-
 /* Bento 明暗：表面 / 文字 / 线条都走变量，浅色和深色共用同一套规则 */
-:root[data-appearance-style="bento"] { --bn-surface:#FFFFFF; --bn-inset:#F5F6F8; --bn-soft:#ECEEF2; --bn-soft2:#F1F2F5; --bn-hover:#F7F8FA; --bn-chip:#F0F1F4; --bn-strong:#17181C; --bn-strong-hover:#2B2E37; --bn-on-strong:#FFFFFF; --bn-ink:#17181C; --bn-rgb:20,22,30; }
+
 :root[data-appearance-style="bento"][data-bn-mode="dark"] {
   color-scheme: dark;
-  --bn-canvas:#0D0E10; --bn-surface:#17181C; --bn-inset:#1F2126; --bn-soft:#2C2F37; --bn-soft2:#262930; --bn-hover:#1C1E23; --bn-chip:#2C2F37; --bn-strong:#F2F3F5; --bn-strong-hover:#FFFFFF; --bn-on-strong:#17181C; --bn-ink:#F2F3F5; --bn-rgb:255,255,255;
-  --agentspace-neutral-bg: #0D0E10;--agentspace-global-bg: #0D0E10; --agentspace-panel-bg:#17181C; --devui-base-bg:#17181C; --agentspace-stage-bg:#0D0E10; --agentspace-sunken-bg:#1F2126; --devui-feedback-overlay-backdrop:rgba(0,0,0,.6);
-  --devui-text:#F2F3F5; --devui-text-weak:#CDD0D6; --devui-aide-text:#9AA0AB; --agentspace-text-subtle:#6F7580; --devui-light-text:#17181C;
-  --devui-line:rgba(255,255,255,.1); --agentspace-border-soft:rgba(255,255,255,.06); --agentspace-border-strong:rgba(255,255,255,.2);
-  --devui-list-item-hover-bg: rgba(255,255,255,.06);--agentspace-nav1-hover-bg: rgba(255,255,255,.06);--agentspace-nav2-hover-bg: rgba(255,255,255,.06); --agentspace-pressed-bg:rgba(255,255,255,.1); --agentspace-muted-bg:#1F2126;
-  --devui-list-item-active-bg:#2C2F37; --devui-list-item-active-text:#F2F3F5;
-  --agentspace-btn-top:#F2F3F5; --agentspace-btn-bottom:#F2F3F5; --agentspace-btn-top-hover:#FFFFFF; --agentspace-btn-bottom-hover:#FFFFFF; --agentspace-btn-edge-1:#F2F3F5; --agentspace-btn-edge-2:#F2F3F5; --agentspace-btn-edge-3:#F2F3F5; --agentspace-btn-ink:#17181C;
-  --devui-btn-common-bg:#1F2126; --devui-btn-common-color-hover:#F2F3F5;
-  --agentspace-run-color:#6B93FF; --agentspace-run-bg:rgba(107,147,255,.14); --agentspace-run-line:rgba(107,147,255,.4);
-  --agentspace-id-human-bg:#3A2A22; --agentspace-id-human-color:#FFC9B0; --agentspace-agent-bg:#222B44; --agentspace-agent-color:#B8CCFF;
-  --devui-warning:#FFB84D; --devui-warning-bg:rgba(255,184,77,.14); --devui-warning-line:rgba(255,184,77,.4);
-  --agentspace-status-review:#B9A2FF; --agentspace-status-review-bg:rgba(185,162,255,.14); --agentspace-status-review-line:rgba(185,162,255,.4);
-  --devui-success:#5FD39B; --devui-success-bg:rgba(95,211,155,.14); --devui-success-line:rgba(95,211,155,.4);
-  --agentspace-status-fail:#FF7A6B; --devui-danger-bg:rgba(255,122,107,.14); --devui-danger-line:rgba(255,122,107,.4);
-  --agentspace-status-idle:#9AA0AB; --agentspace-status-idle-bg:#1F2126;
-  --agentspace-focus-ring:#6B93FF; --devui-form-control-interactive-outline:rgba(107,147,255,.28);
-  --agentspace-shadow-card:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -20px rgba(0,0,0,.6); --agentspace-shadow-pop:0 18px 44px -14px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08); --agentspace-shadow-dialog:0 30px 80px -24px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08);
-  --rail-tile:#262930; --rail-ink:#F2F3F5;
 }
 :root[data-appearance-style="bento"][data-bn-mode="dark"] body { background: #0D0E10 !important; }
 :root[data-appearance-style="bento"][data-bn-mode="dark"] ::selection { background: rgba(255,255,255,.22); color: #fff; }
@@ -10681,7 +10570,7 @@ html:root[data-appearance-style="bento"][data-bn-mode="dark"] body #demo.slack-s
 .user-menu .um-sw--dot { width: 16px; height: 16px; border-radius: 50%; }
 .user-menu .um-fly2 .as2-menu-sep { margin: 4px 6px; }
 /* Bento 深色：左侧入口选中块是白色（浅色块 + 深色图标 / 文字），红点描边跟随 */
-:root[data-appearance-style="bento"][data-bn-mode="dark"] { --rail-tile: #F2F3F5; --rail-ink: #17181C; }
+
 html:root[data-appearance-style="bento"][data-bn-mode="dark"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d) { background: #F2F3F5 !important; color: #17181C !important; box-shadow: 0 6px 16px -8px rgba(0,0,0,.6) !important; }
 html:root[data-appearance-style="bento"][data-bn-mode="dark"] body #demo.slack-shell.slack-shell .demorail.demorail button.active:not(#_a):not(#_b):not(#_c):not(#_d) :is(svg.icon.lucide, span, small):not(.rail-unread) { background: transparent !important; color: #17181C !important; }
 html:root[data-appearance-style="bento"][data-bn-mode="dark"] body #demo.slack-shell.slack-shell .demorail.demorail button.active .rail-unread:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e) { border-color: #F2F3F5 !important; }
@@ -10823,12 +10712,11 @@ html:root[data-appearance-style="bento"] body #demo.slack-shell.slack-shell .tp-
 html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) select:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236C7078' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important; background-repeat: no-repeat !important; background-position: right 12px center !important; background-size: 14px 14px !important; padding-right: 32px !important; }
 html:root[data-appearance-style="bento"][data-bn-mode="dark"] body :is(#demo, #modalHost) select:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239AA0AB' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important; }
 /* 2) 链接按钮（打开工作台 / 继续修改 等）文字与箭头图标原来是白色，在浅色卡片上看不见 */
-:root[data-appearance-style="bento"] { --bn-link: #2B5BE8; }
-:root[data-appearance-style="bento"][data-bn-mode="dark"] { --bn-link: #8FADFF; }
+
 html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) :is(.btn.link, .openbench):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) { color: var(--bn-link) !important; }
 html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) :is(.btn.link, .openbench):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) :is(svg, .icon, path):not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) { color: var(--bn-link) !important; stroke: currentColor; }
 /* 3) 深色下强调色会被当作文字 / 图标色使用：提亮，避免「墨黑」等深色强调色在深底上看不见 */
-:root[data-appearance-style="bento"][data-bn-mode="dark"] { --devui-brand: color-mix(in srgb, var(--bn) 58%, #FFFFFF); --devui-brand-hover: color-mix(in srgb, var(--bn) 45%, #FFFFFF); --devui-primary-bg: rgba(255,255,255,.08); --devui-primary-line: rgba(255,255,255,.28); }
+
 /* 4) 空状态图标略提高对比 */
 html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) .tk-empty:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) svg, html:root[data-appearance-style="bento"] body :is(#demo, #modalHost) .tk-empty:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f) .icon { color: rgba(var(--bn-rgb), .38) !important; }
 
@@ -12284,19 +12172,6 @@ html:root[data-appearance-style="aurora"][data-au-mode="light"] body #demo.slack
 html:root body #modalHost .ap-styles:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h) { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 12px !important; }
 html:root body #modalHost .ap-style .ap-style-copy small:not(#_a):not(#_b):not(#_c):not(#_d):not(#_e):not(#_f):not(#_g):not(#_h) { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Personal task aggregation */
 #demo .tk-project-origin{display:flex;align-items:center;gap:5px;min-width:0;font-size:11px;line-height:18px;color:var(--devui-aide-text);margin:6px 0}
 #demo .tk-project-origin .icon{width:12px;height:12px;flex:none}
@@ -12306,7 +12181,6 @@ html:root body #modalHost .ap-style .ap-style-copy small:not(#_a):not(#_b):not(#
 .appactions .legacy-version-link:hover{background:var(--agentspace-muted-bg);color:var(--devui-brand)}
 .personal-ext-status{position:absolute;top:16px;right:16px}
 #demo .personal-ext-guidance{margin:0 0 18px;font-size:12px;line-height:20px}
-
 
 #demo .side-sec-head>.side-task-filter-icon{display:grid;place-items:center;flex:none;width:26px;height:26px;min-height:26px;padding:5px;border:0;border-radius:7px;background:transparent;color:var(--devui-aide-text);cursor:pointer}
 #demo .side-task-filter-icon .icon{width:15px;height:15px}
@@ -12331,7 +12205,6 @@ html:root body #modalHost .ap-style .ap-style-copy small:not(#_a):not(#_b):not(#
 #demo .ps-template p{font-size:13px;line-height:22px;color:var(--devui-aide-text);margin:4px 0 8px}
 .ps-template-actions{display:flex;flex-wrap:wrap;gap:8px;flex:none}
 @media(max-width:720px){#demo .project-settings-flat .ps-foot{padding-left:0}#demo .ps-template{align-items:flex-start;flex-direction:column;gap:12px}}
-
 
 /* AS2 BUILD V36 css START */
 /* Build uses the existing AS2 tokens and controls. */
@@ -12418,7 +12291,6 @@ html:root[data-appearance-style="aurora"] body :is(#demo.slack-shell.slack-shell
 .bench-preview-updated{display:flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap}
 .bench-preview-updated .icon{width:13px;height:13px}
 .bench-preview-meta>.iconbtn{width:28px;height:28px;min-height:28px;flex-shrink:0}
-
 
 .bench-cover-wrap{position:relative}
 .bench-card-actions{position:absolute;z-index:2;right:12px;bottom:12px;display:flex;align-items:center;gap:6px;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .16s,transform .16s,visibility .16s}
@@ -12665,7 +12537,6 @@ html:root[data-appearance-family="aurora"] #demo.slack-shell::before{-webkit-bac
 
 /* Elevate the complete half-enclosed shell; inset panels remain flat. */
 
-
 /* Navigation is transparent within the shared shell, with no extra glass sheet. */
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell>.demoside,
 html:root[data-appearance-family="aurora"] body #demo.slack-shell.slack-shell .ms-list-pane{
@@ -12726,8 +12597,6 @@ html:root[data-appearance-family="aurora"][data-au-mode="dark"] #demo.slack-shel
 .spx-page .knowledge-space-card{position:relative;display:flex;flex-direction:column;gap:14px}
 .spx-page .knowledge-space-card>.btn{position:absolute;right:12px;bottom:12px;margin:0}
 @media(max-width:760px){.spx-section{align-items:flex-start;flex-direction:column}.spx-list-tools{align-items:flex-start;flex-direction:column}.spx-page .demotable{min-width:680px}}
-
-
 
 #demo .spx-env-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 @media(max-width:1200px){#demo .spx-env-grid{grid-template-columns:minmax(0,1fr)!important}}
@@ -13119,11 +12988,504 @@ html:root[data-appearance-family="aurora"][data-au-mode="light"] body #demo.slac
 /* AS2 NAVIGATION css END */
 
 
-
-
-
 /* AS2 THEME FILES START */
 /* Generated from demo-as2/themes/. Edit the theme files, then run sync_themes.py. */
+/* ----- themes/as2-liquid-theme.css ----- */
+/* as2-liquid-theme.css — token values for appearance "liquid".
+   Extracted from the current render. JS still writes the live accent
+   (--lq-a/--lq-b, --px-ink*, --bn). Component rules stay in the page. */
+
+:root[data-appearance-style="liquid"] {
+  /* 皮肤配色：两个变量（主色 / 辅色），其余全部派生；JS 在 :root 上写入 --lq-a / --lq-b */ --agentspace-blue: var(--lq-a, #2B76F0);
+  --agentspace-orange: var(--lq-b, #F08A3C);
+  --agentspace-sky: color-mix(in srgb, var(--agentspace-blue) 22%, white);
+  --agentspace-dawn: color-mix(in srgb, var(--agentspace-orange) 20%, white);
+  --agentspace-mist: color-mix(in srgb, var(--agentspace-blue) 8%, #EEF1F5);
+  --agentspace-neutral-bg: var(--agentspace-mist);
+  --agentspace-global-bg: var(--agentspace-mist);
+  --agentspace-panel-bg: rgba(255,255,255,.50);
+  --agentspace-panel-stroke: rgba(255,255,255,.72);
+  --devui-base-bg: rgba(255,255,255,.64);
+  --agentspace-stage-bg: rgba(255,255,255,.40);
+  --agentspace-sunken-bg: rgba(255,255,255,.52);
+  --devui-line: rgba(30,55,90,.09);
+  --agentspace-border-soft: rgba(30,55,90,.06);
+  --agentspace-border-strong: rgba(30,55,90,.15);
+  --devui-list-item-hover-bg: rgba(255,255,255,.58);
+  --agentspace-nav1-hover-bg: rgba(255,255,255,.58);
+  --agentspace-nav2-hover-bg: rgba(255,255,255,.58);
+  --agentspace-pressed-bg: rgba(255,255,255,.72);
+  --agentspace-muted-bg: rgba(30,55,90,.05);
+  --devui-brand: var(--agentspace-blue);
+  --devui-brand-hover: color-mix(in srgb, var(--agentspace-blue) 82%, black);
+  --devui-primary-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent);
+  --devui-primary-line: color-mix(in srgb, var(--agentspace-blue) 28%, transparent);
+  --devui-list-item-active-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent);
+  --devui-list-item-active-text: color-mix(in srgb, var(--agentspace-blue) 78%, black);
+  --agentspace-focus-ring: color-mix(in srgb, var(--agentspace-blue) 50%, transparent);
+  --devui-form-control-interactive-outline: color-mix(in srgb, var(--agentspace-blue) 14%, transparent);
+  --agentspace-run-color: var(--agentspace-blue);
+  --agentspace-run-bg: color-mix(in srgb, var(--agentspace-blue) 12%, transparent);
+  --agentspace-run-line: color-mix(in srgb, var(--agentspace-blue) 26%, transparent);
+  --devui-warning: color-mix(in srgb, var(--agentspace-orange) 82%, black);
+  --devui-warning-bg: color-mix(in srgb, var(--agentspace-orange) 15%, transparent);
+  --devui-warning-line: color-mix(in srgb, var(--agentspace-orange) 34%, transparent);
+  --agentspace-radius-panel: 24px;
+  --agentspace-radius-card: 18px;
+  --devui-border-radius-card-xl: 20px;
+  --agentspace-glass: blur(28px) saturate(170%);
+  --agentspace-shadow-panel: 0 12px 44px rgba(31,53,89,.10), inset 0 1px 0 rgba(255,255,255,.85);
+  --agentspace-shadow-tile: 0 4px 16px rgba(31,53,89,.08), inset 0 1px 0 rgba(255,255,255,.92);
+  --agentspace-shadow-pop: 0 20px 56px rgba(31,53,89,.18), 0 0 0 1px rgba(255,255,255,.75), inset 0 1px 0 rgba(255,255,255,.9);
+  --agentspace-shadow-dialog: 0 28px 80px rgba(31,53,89,.22), 0 0 0 1px rgba(255,255,255,.75), inset 0 1px 0 rgba(255,255,255,.9);
+  --devui-feedback-overlay-backdrop: rgba(60,85,120,.16);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+:root[data-appearance-style="liquid"] {
+  --agentspace-panel-bg: rgba(255,255,255,.92);
+  --devui-base-bg: #fff;
+}
+}
+
+:root[data-appearance-style="liquid"] {
+  --devui-aide-text: #595959;
+  --agentspace-text-subtle: rgba(0,0,0,.62);
+  --devui-brand: color-mix(in srgb, var(--agentspace-blue) 80%, black);
+  --agentspace-run-color: color-mix(in srgb, var(--agentspace-blue) 78%, black);
+  --devui-warning: color-mix(in srgb, var(--agentspace-orange) 58%, black);
+  --agentspace-code-str: color-mix(in srgb, var(--agentspace-blue) 70%, black);
+}
+
+:root[data-appearance-style="liquid"] {
+  --agentspace-resize-a: var(--lq-a, #2B76F0);
+  --agentspace-resize-b: var(--lq-b, #F08A3C);
+}
+
+:root[data-appearance-style="liquid"] {
+  --agentspace-nav2-active-bg: var(--devui-base-bg);
+  --rail-tile: rgba(255, 255, 255, .82);
+  --rail-tile-shadow: 0 2px 10px rgba(31, 53, 89, .10), inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+:root[data-appearance-style="liquid"] {
+  --vb-a: var(--lq-a, #2B76F0);
+  --vb-b: var(--lq-b, #F08A3C);
+}
+/* ----- themes/as2-pixel-theme.css ----- */
+/* as2-pixel-theme.css — token values for appearance "pixel".
+   Extracted from the current render. JS still writes the live accent
+   (--lq-a/--lq-b, --px-ink*, --bn). Component rules stay in the page. */
+
+:root[data-appearance-style="pixel"] {
+  --px-font: "JetBrains Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  --px-display: "Silkscreen", "JetBrains Mono", ui-monospace, "PingFang SC", monospace;
+  --px-shadow: 3px 3px 0 0 #000;
+  --px-hot: #FF5A36;
+  --agentspace-font-family: var(--px-font);
+  --agentspace-font-family-mono: var(--px-font);
+  --agentspace-neutral-bg: #0A0A0A;
+  --agentspace-global-bg: #0A0A0A;
+  --agentspace-panel-bg: #101010;
+  --agentspace-panel-stroke: #262626;
+  --devui-base-bg: #141414;
+  --agentspace-stage-bg: #0D0D0D;
+  --agentspace-sunken-bg: #0D0D0D;
+  --devui-feedback-overlay-backdrop: rgba(0,0,0,.6);
+  --devui-text: #EDEDED;
+  --devui-text-weak: #C2C2C2;
+  --devui-aide-text: #8C8C8C;
+  --agentspace-text-subtle: #5E5E5E;
+  --devui-light-text: #0A0A0A;
+  --devui-line: #262626;
+  --agentspace-border-soft: #1D1D1D;
+  --agentspace-border-strong: #3B3B3B;
+  --devui-list-item-hover-bg: #1B1B1B;
+  --agentspace-nav1-hover-bg: #1B1B1B;
+  --agentspace-nav2-hover-bg: #1B1B1B;
+  --agentspace-pressed-bg: #222;
+  --agentspace-muted-bg: #181818;
+  --devui-list-item-active-bg: var(--px-ink, #F2F2F2);
+  --devui-list-item-active-text: #0A0A0A;
+  --devui-brand: var(--px-ink, #F2F2F2);
+  --devui-brand-hover: #FFFFFF;
+  --devui-primary-bg: #1F1F1F;
+  --devui-primary-line: #4A4A4A;
+  --agentspace-focus-ring: var(--px-ink, #F2F2F2);
+  --devui-form-control-interactive-outline: rgba(242,242,242,.10);
+  --agentspace-btn-top: var(--px-ink, #F2F2F2);
+  --agentspace-btn-bottom: var(--px-ink, #F2F2F2);
+  --agentspace-btn-top-hover: #FFFFFF;
+  --agentspace-btn-bottom-hover: #FFFFFF;
+  --agentspace-btn-edge-1: var(--px-ink, #F2F2F2);
+  --agentspace-btn-edge-2: var(--px-ink, #F2F2F2);
+  --agentspace-btn-edge-3: var(--px-ink, #F2F2F2);
+  --agentspace-btn-ring: var(--px-ink, #F2F2F2);
+  --agentspace-btn-ink: #0A0A0A;
+  --agentspace-btn-shadow: var(--px-shadow);
+  --devui-btn-common-bg: #1A1A1A;
+  --devui-btn-common-color-hover: #EDEDED;
+  --devui-danger: var(--px-hot);
+  --agentspace-run-color: var(--px-ink, #F2F2F2);
+  --agentspace-run-bg: #1F1F1F;
+  --agentspace-run-line: #4A4A4A;
+  --devui-warning: #FFB020;
+  --devui-warning-bg: rgba(255,176,32,.10);
+  --devui-warning-line: rgba(255,176,32,.40);
+  --agentspace-status-review: #B8B8FF;
+  --agentspace-status-review-bg: rgba(184,184,255,.10);
+  --agentspace-status-review-line: rgba(184,184,255,.35);
+  --devui-success: #7EE2A8;
+  --devui-success-bg: rgba(126,226,168,.10);
+  --devui-success-line: rgba(126,226,168,.35);
+  --agentspace-status-fail: var(--px-hot);
+  --devui-danger-bg: rgba(255,90,54,.10);
+  --devui-danger-line: rgba(255,90,54,.45);
+  --agentspace-status-idle: #8C8C8C;
+  --agentspace-status-idle-bg: #181818;
+  --agentspace-id-human-bg: #1E1E1E;
+  --agentspace-id-human-color: #EDEDED;
+  --agentspace-agent-bg: #1E1E1E;
+  --agentspace-agent-color: #EDEDED;
+  --devui-border-radius: 0px;
+  --agentspace-radius-sm: 0px;
+  --devui-border-radius-card: 0px;
+  --agentspace-radius-row: 0px;
+  --agentspace-radius-card: 0px;
+  --devui-border-radius-card-xl: 0px;
+  --agentspace-radius-panel: 0px;
+  --agentspace-radius-input: 0px;
+  --devui-border-radius-full: 0px;
+  --agentspace-shadow-card: none;
+  --agentspace-shadow-tile: inset 0 0 0 1px #2E2E2E;
+  --agentspace-shadow-panel: none;
+  --agentspace-shadow-pop: 0 0 0 1px #3B3B3B, var(--px-shadow);
+  --agentspace-shadow-dialog: 0 0 0 1px #3B3B3B, 6px 6px 0 0 #000;
+}
+
+:root[data-appearance-style="pixel"] {
+  --devui-text: #F0F0F0;
+  --devui-text-weak: #D4D4D4;
+  --devui-aide-text: #A6A6A6;
+  --agentspace-text-subtle: #8A8A8A;
+  --devui-list-item-active-bg: #262626;
+  --devui-list-item-active-text: #FFFFFF;
+  --devui-primary-bg: #222222;
+}
+
+:root[data-appearance-style="pixel"] {
+  --agentspace-resize-a: var(--px-ink, #F2F2F2);
+  --agentspace-resize-b: var(--px-hot, #FF5A36);
+}
+
+:root[data-appearance-style="pixel"] {
+  --agentspace-nav1-active-bg: var(--px-ink, #F2F2F2);
+  --agentspace-nav2-active-bg: var(--px-ink, #F2F2F2);
+  --rail-tile: var(--px-ink, #F2F2F2);
+  --rail-ink: #0A0A0A;
+  --rail-tile-shadow: none;
+}
+
+:root[data-appearance-style="pixel"][data-px-mode="light"] {
+  --px-shadow: none;
+  --px-hot: #D93A12;
+  --agentspace-neutral-bg: #E2E2E2;
+  --agentspace-global-bg: #E2E2E2;
+  --agentspace-panel-bg: #E8E8E8;
+  --agentspace-panel-stroke: #9C9C9C;
+  --devui-base-bg: #F6F6F6;
+  --agentspace-stage-bg: #EDEDED;
+  --agentspace-sunken-bg: #DEDEDE;
+  --devui-feedback-overlay-backdrop: rgba(17,17,17,.38);
+  --devui-text: #111111;
+  --devui-text-weak: #2E2E2E;
+  --devui-aide-text: #555555;
+  --agentspace-text-subtle: #6B6B6B;
+  --devui-light-text: #FFFFFF;
+  --devui-line: #A3A3A3;
+  --agentspace-border-soft: #C0C0C0;
+  --agentspace-border-strong: #6E6E6E;
+  --devui-list-item-hover-bg: #DADADA;
+  --agentspace-nav1-hover-bg: #DADADA;
+  --agentspace-nav2-hover-bg: #DADADA;
+  --agentspace-pressed-bg: #D0D0D0;
+  --agentspace-muted-bg: #DEDEDE;
+  --devui-list-item-active-bg: #111111;
+  --devui-list-item-active-text: #FFFFFF;
+  --devui-brand: var(--px-ink-text, #B83E00);
+  --devui-brand-hover: #8F2F00;
+  --devui-primary-bg: color-mix(in srgb, var(--px-ink, #FF6B1A) 14%, transparent);
+  --devui-primary-line: color-mix(in srgb, var(--px-ink, #FF6B1A) 50%, transparent);
+  --agentspace-focus-ring: var(--px-ink, #FF6B1A);
+  --devui-form-control-interactive-outline: color-mix(in srgb, var(--px-ink, #FF6B1A) 18%, transparent);
+  --agentspace-btn-top: var(--px-ink, #FF6B1A);
+  --agentspace-btn-bottom: var(--px-ink, #FF6B1A);
+  --agentspace-btn-top-hover: color-mix(in srgb, var(--px-ink, #FF6B1A) 88%, white);
+  --agentspace-btn-bottom-hover: color-mix(in srgb, var(--px-ink, #FF6B1A) 88%, white);
+  --agentspace-btn-edge-1: var(--px-ink, #FF6B1A);
+  --agentspace-btn-edge-2: var(--px-ink, #FF6B1A);
+  --agentspace-btn-edge-3: var(--px-ink, #FF6B1A);
+  --agentspace-btn-ring: var(--px-ink, #FF6B1A);
+  --agentspace-btn-ink: var(--px-on-ink, #111111);
+  --agentspace-btn-shadow: none;
+  --devui-btn-common-bg: #F6F6F6;
+  --devui-btn-common-color-hover: #111111;
+  --devui-danger: var(--px-hot);
+  --agentspace-run-color: var(--px-ink-text, #B83E00);
+  --agentspace-run-bg: color-mix(in srgb, var(--px-ink, #FF6B1A) 14%, transparent);
+  --agentspace-run-line: color-mix(in srgb, var(--px-ink, #FF6B1A) 50%, transparent);
+  --devui-warning: #8A4600;
+  --devui-warning-bg: rgba(138,70,0,.10);
+  --devui-warning-line: rgba(138,70,0,.4);
+  --agentspace-status-review: #4A4AB5;
+  --agentspace-status-review-bg: rgba(74,74,181,.10);
+  --agentspace-status-review-line: rgba(74,74,181,.35);
+  --devui-success: #0E6E40;
+  --devui-success-bg: rgba(14,110,64,.10);
+  --devui-success-line: rgba(14,110,64,.35);
+  --agentspace-status-fail: #C0310F;
+  --devui-danger-bg: rgba(192,49,15,.10);
+  --devui-danger-line: rgba(192,49,15,.4);
+  --agentspace-status-idle: #5C5C5C;
+  --agentspace-status-idle-bg: #E0E0E0;
+  --agentspace-id-human-bg: #DCDCDC;
+  --agentspace-id-human-color: #111111;
+  --agentspace-agent-bg: #111111;
+  --agentspace-agent-color: #FFFFFF;
+  --agentspace-shadow-card: none;
+  --agentspace-shadow-tile: inset 0 0 0 1px #A3A3A3;
+  --agentspace-shadow-panel: none;
+  --agentspace-shadow-pop: 0 0 0 1px #111111;
+  --agentspace-shadow-dialog: 0 0 0 1px #111111, 8px 8px 0 0 rgba(17,17,17,.16);
+}
+
+:root[data-appearance-style="pixel"] {
+  --rail-ink: var(--px-on-ink, #0A0A0A);
+}
+
+:root[data-appearance-style="pixel"] {
+  --vb-a: var(--px-ink, #FF6B1A);
+  --vb-b: var(--px-ink, #FF6B1A);
+}
+
+:root[data-appearance-style="pixel"] {
+  --agentspace-text-subtle: #959595;
+}
+/* ----- themes/as2-bento-theme.css ----- */
+/* as2-bento-theme.css — token values for appearance "bento".
+   Extracted from the current render. JS still writes the live accent
+   (--lq-a/--lq-b, --px-ink*, --bn). Component rules stay in the page. */
+
+:root[data-appearance-style="bento"] {
+  --agentspace-resize-a: var(--bn, #F2541B);
+  --agentspace-resize-b: color-mix(in srgb, var(--bn, #F2541B) 50%, #FFC24D);
+}
+
+:root[data-appearance-style="bento"] {
+  --bn: #F2541B;
+  --bn-ink: #17181C;
+  --bn-canvas: #E8E9EC;
+  --bn-hatch: repeating-linear-gradient(135deg, rgba(20,22,30,.22) 0 1.5px, transparent 1.5px 5px);
+  --agentspace-neutral-bg: var(--bn-canvas);
+  --agentspace-global-bg: var(--bn-canvas);
+  --agentspace-panel-bg: #FFFFFF;
+  --agentspace-panel-stroke: transparent;
+  --devui-base-bg: #FFFFFF;
+  --agentspace-stage-bg: var(--bn-canvas);
+  --agentspace-sunken-bg: #F3F4F6;
+  --devui-feedback-overlay-backdrop: rgba(20,22,30,.4);
+  --devui-text: #17181C;
+  --devui-text-weak: #3B3E46;
+  --devui-aide-text: #6C7078;
+  --agentspace-text-subtle: #8A9099;
+  --devui-light-text: #FFFFFF;
+  --devui-line: rgba(20,22,30,.09);
+  --agentspace-border-soft: rgba(20,22,30,.06);
+  --agentspace-border-strong: rgba(20,22,30,.18);
+  --devui-list-item-hover-bg: rgba(20,22,30,.045);
+  --agentspace-nav1-hover-bg: rgba(20,22,30,.045);
+  --agentspace-nav2-hover-bg: rgba(20,22,30,.045);
+  --agentspace-pressed-bg: rgba(20,22,30,.08);
+  --agentspace-muted-bg: #F3F4F6;
+  --devui-list-item-active-bg: #17181C;
+  --devui-list-item-active-text: #FFFFFF;
+  --devui-brand: var(--bn);
+  --devui-brand-hover: color-mix(in srgb, var(--bn) 86%, #000);
+  --devui-primary-bg: color-mix(in srgb, var(--bn) 10%, #fff);
+  --devui-primary-line: color-mix(in srgb, var(--bn) 38%, transparent);
+  --agentspace-focus-ring: #2B5BE8;
+  --devui-form-control-interactive-outline: rgba(43,91,232,.2);
+  --agentspace-btn-top: var(--bn);
+  --agentspace-btn-bottom: var(--bn);
+  --agentspace-btn-top-hover: color-mix(in srgb, var(--bn) 90%, #000);
+  --agentspace-btn-bottom-hover: color-mix(in srgb, var(--bn) 90%, #000);
+  --agentspace-btn-edge-1: var(--bn);
+  --agentspace-btn-edge-2: var(--bn);
+  --agentspace-btn-edge-3: var(--bn);
+  --agentspace-btn-ring: transparent;
+  --agentspace-btn-ink: #FFFFFF;
+  --agentspace-btn-shadow: none;
+  --devui-btn-common-bg: #FFFFFF;
+  --devui-btn-common-color-hover: #17181C;
+  --agentspace-run-color: #2B5BE8;
+  --agentspace-run-bg: #E4EBFD;
+  --agentspace-run-line: rgba(43,91,232,.35);
+  --agentspace-id-human-bg: #FFE3D6;
+  --agentspace-id-human-color: #8A2E0A;
+  --agentspace-agent-bg: #DDE6FD;
+  --agentspace-agent-color: #1F3FA8;
+  --devui-border-radius: 8px;
+  --agentspace-radius-sm: 10px;
+  --devui-border-radius-card: 14px;
+  --agentspace-radius-row: 12px;
+  --agentspace-radius-card: 26px;
+  --devui-border-radius-card-xl: 26px;
+  --agentspace-radius-panel: 28px;
+  --agentspace-radius-input: 999px;
+  --devui-border-radius-full: 999px;
+  --agentspace-shadow-card: 0 1px 2px rgba(20,22,30,.04), 0 14px 30px -20px rgba(20,22,30,.18);
+  --agentspace-shadow-tile: 0 1px 2px rgba(20,22,30,.04);
+  --agentspace-shadow-panel: 0 1px 2px rgba(20,22,30,.04), 0 14px 30px -20px rgba(20,22,30,.18);
+  --agentspace-shadow-pop: 0 18px 44px -14px rgba(20,22,30,.28), 0 0 0 1px rgba(20,22,30,.06);
+  --agentspace-shadow-dialog: 0 30px 80px -24px rgba(20,22,30,.4), 0 0 0 1px rgba(20,22,30,.06);
+  --rail-tile: #17181C;
+  --rail-ink: #FFFFFF;
+  --rail-tile-shadow: none;
+  --vb-a: var(--bn);
+  --vb-b: color-mix(in srgb, var(--bn) 70%, #fff);
+}
+
+:root[data-appearance-style="bento"] {
+  --agentspace-radius-card: 18px;
+  --devui-border-radius-card-xl: 18px;
+  --agentspace-radius-panel: 20px;
+  --devui-border-radius-card: 12px;
+}
+
+:root[data-appearance-style="bento"] {
+  --agentspace-btn-top: #17181C;
+  --agentspace-btn-bottom: #17181C;
+  --agentspace-btn-top-hover: #2B2E37;
+  --agentspace-btn-bottom-hover: #2B2E37;
+  --agentspace-btn-edge-1: #17181C;
+  --agentspace-btn-edge-2: #17181C;
+  --agentspace-btn-edge-3: #17181C;
+}
+
+:root[data-appearance-style="bento"] {
+  --agentspace-nav2-active-bg: var(--bn-soft2, #F1F2F5);
+  --rail-tile: #FFFFFF;
+  --rail-ink: #17181C;
+}
+
+:root[data-appearance-style="bento"] {
+  --bn-surface:#FFFFFF;
+  --bn-inset:#F5F6F8;
+  --bn-soft:#ECEEF2;
+  --bn-soft2:#F1F2F5;
+  --bn-hover:#F7F8FA;
+  --bn-chip:#F0F1F4;
+  --bn-strong:#17181C;
+  --bn-strong-hover:#2B2E37;
+  --bn-on-strong:#FFFFFF;
+  --bn-ink:#17181C;
+  --bn-rgb:20,22,30;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --bn-canvas:#0D0E10;
+  --bn-surface:#17181C;
+  --bn-inset:#1F2126;
+  --bn-soft:#2C2F37;
+  --bn-soft2:#262930;
+  --bn-hover:#1C1E23;
+  --bn-chip:#2C2F37;
+  --bn-strong:#F2F3F5;
+  --bn-strong-hover:#FFFFFF;
+  --bn-on-strong:#17181C;
+  --bn-ink:#F2F3F5;
+  --bn-rgb:255,255,255;
+  --agentspace-neutral-bg: #0D0E10;
+  --agentspace-global-bg: #0D0E10;
+  --agentspace-panel-bg:#17181C;
+  --devui-base-bg:#17181C;
+  --agentspace-stage-bg:#0D0E10;
+  --agentspace-sunken-bg:#1F2126;
+  --devui-feedback-overlay-backdrop:rgba(0,0,0,.6);
+  --devui-text:#F2F3F5;
+  --devui-text-weak:#CDD0D6;
+  --devui-aide-text:#9AA0AB;
+  --agentspace-text-subtle:#6F7580;
+  --devui-light-text:#17181C;
+  --devui-line:rgba(255,255,255,.1);
+  --agentspace-border-soft:rgba(255,255,255,.06);
+  --agentspace-border-strong:rgba(255,255,255,.2);
+  --devui-list-item-hover-bg: rgba(255,255,255,.06);
+  --agentspace-nav1-hover-bg: rgba(255,255,255,.06);
+  --agentspace-nav2-hover-bg: rgba(255,255,255,.06);
+  --agentspace-pressed-bg:rgba(255,255,255,.1);
+  --agentspace-muted-bg:#1F2126;
+  --devui-list-item-active-bg:#2C2F37;
+  --devui-list-item-active-text:#F2F3F5;
+  --agentspace-btn-top:#F2F3F5;
+  --agentspace-btn-bottom:#F2F3F5;
+  --agentspace-btn-top-hover:#FFFFFF;
+  --agentspace-btn-bottom-hover:#FFFFFF;
+  --agentspace-btn-edge-1:#F2F3F5;
+  --agentspace-btn-edge-2:#F2F3F5;
+  --agentspace-btn-edge-3:#F2F3F5;
+  --agentspace-btn-ink:#17181C;
+  --devui-btn-common-bg:#1F2126;
+  --devui-btn-common-color-hover:#F2F3F5;
+  --agentspace-run-color:#6B93FF;
+  --agentspace-run-bg:rgba(107,147,255,.14);
+  --agentspace-run-line:rgba(107,147,255,.4);
+  --agentspace-id-human-bg:#3A2A22;
+  --agentspace-id-human-color:#FFC9B0;
+  --agentspace-agent-bg:#222B44;
+  --agentspace-agent-color:#B8CCFF;
+  --devui-warning:#FFB84D;
+  --devui-warning-bg:rgba(255,184,77,.14);
+  --devui-warning-line:rgba(255,184,77,.4);
+  --agentspace-status-review:#B9A2FF;
+  --agentspace-status-review-bg:rgba(185,162,255,.14);
+  --agentspace-status-review-line:rgba(185,162,255,.4);
+  --devui-success:#5FD39B;
+  --devui-success-bg:rgba(95,211,155,.14);
+  --devui-success-line:rgba(95,211,155,.4);
+  --agentspace-status-fail:#FF7A6B;
+  --devui-danger-bg:rgba(255,122,107,.14);
+  --devui-danger-line:rgba(255,122,107,.4);
+  --agentspace-status-idle:#9AA0AB;
+  --agentspace-status-idle-bg:#1F2126;
+  --agentspace-focus-ring:#6B93FF;
+  --devui-form-control-interactive-outline:rgba(107,147,255,.28);
+  --agentspace-shadow-card:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -20px rgba(0,0,0,.6);
+  --agentspace-shadow-pop:0 18px 44px -14px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08);
+  --agentspace-shadow-dialog:0 30px 80px -24px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08);
+  --rail-tile:#262930;
+  --rail-ink:#F2F3F5;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --rail-tile: #F2F3F5;
+  --rail-ink: #17181C;
+}
+
+:root[data-appearance-style="bento"] {
+  --bn-link: #2B5BE8;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --bn-link: #8FADFF;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --devui-brand: color-mix(in srgb, var(--bn) 58%, #FFFFFF);
+  --devui-brand-hover: color-mix(in srgb, var(--bn) 45%, #FFFFFF);
+  --devui-primary-bg: rgba(255,255,255,.08);
+  --devui-primary-line: rgba(255,255,255,.28);
+}
 /* ----- themes/minimal-light.css ----- */
 /* minimal-light.css — appearance "classic". Authoritative :root tokens.
    Rail is 72px and the header is 48px: those used to be later :root tweaks. */

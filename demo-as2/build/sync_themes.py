@@ -11,6 +11,9 @@ ROOT = HERE.parent
 THEMES = ROOT / 'themes'
 INDEX = ROOT / 'index.html'
 ORDER = [
+    'as2-liquid-theme.css',
+    'as2-pixel-theme.css',
+    'as2-bento-theme.css',
     'minimal-light.css',
     'minimal-dark.css',
     'as2-aurora-theme.css',
