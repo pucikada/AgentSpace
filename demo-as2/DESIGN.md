@@ -71,7 +71,7 @@ CSS 属性、内联 style、SVG、Canvas
 
 ### 3.1 开发约束
 
-与仓库根目录 `designTokens.md` 的「开发约束」相同，改 demo-as2 时遵守：
+与仓库根目录 `AGENTS.md`、`designTokens.md` 的「开发约束」相同，改 demo-as2 时遵守：
 
 1. 样式使用 `--devui-*` 和已登记的 `--agentspace-*`。不要写死颜色、字号、圆角、时长或其他设计值，也不要新增一套 `--as-*` 语义变量。颜色字面量仍只进 `palette.css`。间距按 `designTokens.md` 的 4px 栅格写 px。
 2. 没有合适变量时，先写入 `designTokens.md` 和 `themes/` 里相关主题文件，再在组件里引用。

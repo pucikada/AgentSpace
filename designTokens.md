@@ -5,7 +5,7 @@
 
 ## 开发约束
 
-这条约束适用于 demo-as2 的后续人工修改和编码代理。`designTokens.md` 是令牌名单的文档来源，`demo-as2/themes/` 是主题令牌取值的唯一实现来源。不要另建一套令牌或另一份互相矛盾的规则。
+这条约束适用于 demo-as2 的后续人工修改和编码代理。跨工具入口是仓库根目录 `AGENTS.md`。`designTokens.md` 是令牌名单的文档来源，`demo-as2/themes/` 是主题令牌取值的唯一实现来源。不要另建一套令牌或另一份互相矛盾的规则。
 
 1. 样式必须使用本文档中的变量（`--devui-*` 和已写明的 `--agentspace-*` 扩展）。不要把颜色、字号、圆角、时长或其他设计值写死，也不要为新代码再引入并行变量族（例如把 `--as-*` 语义令牌加回来）。色板种子 `--as-color-*`、图像种子 `--as-image-*`、通道 `--as-channel-*` 只登记在 `demo-as2/build/design-system/palette.css`；分类色 `--as-tone-*`、`--as-project-tone-*`、`--as-file-*` 只登记在 `semantic-colors.css`。组件消费 `--devui-*` / `--agentspace-*`。间距沿用本文「间距」一节：没有间距令牌，按 4px 栅格写 px。
 2. 如果没有满足需求的变量，先把变量加进 `designTokens.md`，并写进 `demo-as2/themes/` 里会用到它的主题文件，然后再在组件 CSS/JS 里引用。不要使用字面量，也不要使用未列入令牌表的临时变量。

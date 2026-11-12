@@ -25,7 +25,7 @@
 
 ## 开发约束
 
-与 `designTokens.md` 开头的「开发约束」是同一条，这里复述以便改主题的人直接看到：
+与仓库根目录 `AGENTS.md`、`designTokens.md` 开头的「开发约束」是同一条，这里复述以便改主题的人直接看到：
 
 1. 样式使用 `designTokens.md` 里的 `--devui-*` 和已登记的 `--agentspace-*`。不要写死颜色、字号、圆角、时长或其他设计值，也不要恢复 `--as-*` 作为新的语义令牌。色板种子仍只在 `palette.css`。间距按 `designTokens.md` 的 4px 栅格写 px，不单列间距变量。
 2. 没有合适的变量时，先写入 `designTokens.md` 和相关主题文件，再在组件里引用。
