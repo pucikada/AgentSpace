@@ -1,0 +1,350 @@
+/* as2-aurora-teal-theme.css — aurora 森林绿 #14B8A6. Light, mixed and dark are sections.
+   Values match the render. Accent-derived colors use --agentspace-accent.
+   This file is complete for non-accent tokens; it does not import another theme. */
+:root[data-appearance-style="aurora"] {
+  color-scheme: light;
+color-scheme: light;
+
+  /* ---------- 1. 表面层级（由底到顶，靠微差而不是阴影分层） ---------- */
+  --agentspace-neutral-bg: #F5F5F5;--agentspace-global-bg: #F5F5F5;  /* 应用画布（affectUI --bg） */
+  --agentspace-panel-bg:         #FCFCFC;  /* 主内容面板（18px 圆角大面板） */
+  --devui-base-bg:          #FFFFFF;  /* 卡片 / 弹层 / 控件表面 */
+  --agentspace-stage-bg:         #FAFAFA;  /* 卡片内的预览舞台、代码区、待办分组 */
+  --agentspace-sunken-bg:        #F2F2F3;  /* 输入框底、Composer 底（Kobra --muted 的取向） */
+  --devui-feedback-overlay-backdrop:       rgba(0, 0, 0, .20);
+
+  /* ---------- 2. 文字 ---------- */
+  --devui-text:          #0A0A0A;  /* 标题、核心信息 */
+  --devui-text-weak:        #404040;  /* 中文正文（比 affectUI muted 更深，保证长段阅读） */
+  --devui-aide-text:    #737373;  /* 描述、辅助标签 */
+  --agentspace-text-subtle:   rgba(0, 0, 0, .40); /* 时间戳、占位、禁用 */
+  --devui-light-text:   #FAFAFA;
+
+  /* ---------- 3. 边界 ---------- */
+  --devui-line:        #E5E5E5;  /* 一般分隔 */
+  --agentspace-border-soft:   rgba(10, 10, 10, .06); /* 卡片细边（affectUI --card-stroke 量级） */
+  --agentspace-border-strong: rgba(10, 10, 10, .12); /* 输入框、可交互对象边界 */
+  --agentspace-panel-stroke:  #ECECEC;
+
+  /* ---------- 4. 交互底色 ---------- */
+  --devui-list-item-hover-bg: rgba(0, 0, 0, .05);--agentspace-nav1-hover-bg: rgba(0, 0, 0, .05);--agentspace-nav2-hover-bg: rgba(0, 0, 0, .05);
+  --agentspace-pressed-bg:       rgba(0, 0, 0, .08);
+  --agentspace-muted-bg:      rgba(0, 0, 0, .04);
+  --devui-list-item-active-bg:      rgba(10, 89, 247, .08);
+  --devui-list-item-active-text:  #0846C4;
+
+  /* ---------- 5. 品牌（唯一品牌色，只做“选中 / 焦点 / 运行中 / 链接”） ---------- */
+  --devui-brand:         #0A59F7;
+  --devui-brand-hover:   #0846C4;
+  --devui-primary-bg:    rgba(10, 89, 247, .10);
+  --devui-primary-line:    rgba(10, 89, 247, .24);
+  --agentspace-focus-ring:    rgba(10, 89, 247, .45);
+  --devui-form-control-interactive-outline:    rgba(10, 89, 247, .12);
+
+  /* ---------- 6. 主操作：中性墨色 raise 按钮（affectUI 双层渐变 + Kobra raise） ---------- */
+  --agentspace-btn-top:         #323137;
+  --agentspace-btn-bottom:      #201E25;
+  --agentspace-btn-top-hover:   #3C3B42;
+  --agentspace-btn-bottom-hover:#29272F;
+  --agentspace-btn-edge-1:      #4B4951;
+  --agentspace-btn-edge-2:      #31303A;
+  --agentspace-btn-edge-3:      #18171B;
+  --agentspace-btn-ring:        #0D0D0D;
+  --agentspace-btn-ink:         #FAFAFA;
+  --agentspace-btn-shadow:      0 0 0 1px var(--agentspace-btn-ring), 0 1px 1px rgba(0,0,0,.10), 0 2px 4px rgba(0,0,0,.10);
+  --devui-danger:          #D93A2B;              /* 危险按钮底（白字），与状态文字色 --agentspace-status-fail 分开 */
+  --devui-btn-common-bg:         rgba(0, 0, 0, .04);   /* 次按钮：弱底无边 */
+  --devui-btn-common-color-hover:        #0A0A0A;
+
+  /* ---------- 7. 语义状态色（文字色 / 柔底 / 细线 三件套） ---------- */
+  --agentspace-run-color:        #0A59F7;  --agentspace-run-bg:     rgba(10, 89, 247, .08);  --agentspace-run-line:     rgba(10, 89, 247, .22);
+  --devui-warning:       #B25B0C;  --devui-warning-bg:    rgba(214, 125, 20, .10); --devui-warning-line:    rgba(214, 125, 20, .28);
+  --agentspace-status-review:     #5B5BD6;  --agentspace-status-review-bg:  rgba(91, 91, 214, .09);  --agentspace-status-review-line:  rgba(91, 91, 214, .24);
+  --devui-success:       #18794E;  --devui-success-bg:    rgba(24, 121, 78, .09);  --devui-success-line:    rgba(24, 121, 78, .22);
+  --agentspace-status-fail:       #D93A2B;  --devui-danger-bg:    rgba(217, 58, 43, .06);  --devui-danger-line:    rgba(217, 58, 43, .18);
+  --agentspace-status-idle:       #737373;  --agentspace-status-idle-bg:    rgba(0, 0, 0, .05);
+
+  /* 风险等级（Approval / Permission / Autonomy 共用） */
+
+
+
+
+  /* 身份色（头像底，非大面积使用） */
+  --agentspace-id-human-bg:   #E8EEFE;  --agentspace-id-human-color:  #0846C4;
+  --agentspace-agent-bg:   #EEEDFB;  --agentspace-agent-color:  #4B4BC4;
+  --agentspace-id-tool-color:   #404040;
+  --agentspace-id-system-bg:  #FDF3E7;  --agentspace-id-system-color: #9A4F0A;
+
+  /* 代码高亮（取自 affectUI Tool Call Card） */
+  --agentspace-code-key:   rgba(0, 0, 0, .88);
+  --agentspace-code-str:   rgba(0, 123, 172, .9);
+
+  --agentspace-code-add:   rgba(24, 121, 78, .10);
+  --agentspace-code-del:   rgba(217, 58, 43, .08);
+
+  /* ---------- 8. 字体 ---------- */
+  --agentspace-font-family: "Inter", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --agentspace-font-family-mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* 字号阶梯：size / line-height。行高保持原值。 */
+  --agentspace-font-size-display: 48px;  --agentspace-line-height-display: 44px;   /* 展示档改为文档 48px；行高仍 44px */
+  --devui-font-size-h1-title:      28px;  --agentspace-line-height-h1:      36px;   /* 页面标题，600，-0.7px */
+  --devui-font-size-h3-title:      20px;  --agentspace-line-height-h2:      28px;   /* 区块标题走 h3-title，行高仍是 h2 的 28px */
+  --devui-font-size-card-title:      16px;  --agentspace-line-height-h3:      24px;   /* 卡片标题，600 */
+  --devui-font-size:               14px;  --agentspace-line-height-body:    22px;   /* 正文；长文阅读也改用这一档 */
+  --devui-font-size-md:            14px;  --agentspace-line-height-reading: 24px;   /* 控件默认字号；阅读行高仍 24px */
+  --devui-font-size-sm:            12px;  --agentspace-line-height-ui:      20px;   /* 辅助 / 徽标；控件行高仍 20px */
+  --agentspace-line-height-meta:   18px;   /* 时间、来源、列头 */
+  --agentspace-line-height-micro:  16px;   /* 徽标行高，字号改走 font-size-sm */
+
+  /* ---------- 10. 圆角（按“对象层级”分工，嵌套时 内 = 外 − padding） ---------- */
+  --devui-border-radius:     4px;    /* kbd */
+  --agentspace-radius-sm:     6px;    /* tag、代码 token、焦点链接 */
+  --devui-border-radius-card:     8px;    /* 卡片内舞台、小图标按钮、输入 */
+  --agentspace-radius-row:   10px;    /* 选项行、菜单项、列表行 */
+  --agentspace-radius-card:  14px;    /* 通用卡：Task List / Tool Call / Trace / Attachment */
+  --devui-border-radius-card-xl:   16px;    /* 决策卡：Plan / Question / Approval / Permission */
+  --agentspace-radius-panel: 18px;    /* 大面板、菜单外层、气泡主角 */
+  --agentspace-radius-input: 24px;    /* Composer 外层 */
+  --devui-border-radius-full: 999px;    /* 按钮、徽标、状态胶囊、分段控件 */
+
+  /* ---------- 11. 层级 ---------- */
+
+  --agentspace-shadow-card:  0 1px 1.5px rgba(0,0,0,.04), inset 0 -1px 0 rgba(0,0,0,.06);
+  --agentspace-shadow-tile:  0 0 0 .5px rgba(0,0,0,.06), 0 1px 1px -1px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.05);
+  --agentspace-shadow-panel: 0 1px 0 rgba(0,0,0,.04), 0 2px 1px -1px rgba(0,0,0,.05);
+  --agentspace-shadow-pop:   0 4px 42px rgba(0,0,0,.06), 0 2px 6px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.06);
+  --agentspace-shadow-dialog:0 24px 80px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.06);
+
+  /* ---------- 12. 动效 ---------- */
+  --devui-animation-duration-fast:    150ms;  /* hover、焦点、按钮材质 */
+  /* 通用、流式显现 */
+  --devui-animation-duration-base:   200ms;  /* 图标 / 文案 / 状态轻切换 */
+  --devui-animation-duration-slow:  300ms;  /* 高度展开（grid-rows 0fr→1fr） */
+  /* 列表行 / trace 行进入 */
+  --devui-animation-ease-out:        cubic-bezier(.22, 1, .36, 1);   /* 默认 ease-out */
+  --agentspace-ease-raise:  cubic-bezier(.6, .6, 0, 1);     /* 按钮按压 */
+
+  /* ---------- 13. 布局 ---------- */
+  --agentspace-rail-width: 72px;
+  --agentspace-sidebar-width:  256px;
+
+  --agentspace-reading-width:  760px;   /* 对话 / 长回复最大行宽 */
+  --agentspace-decision-width: 512px;   /* 决策卡最大宽（Kobra max-w-lg） */
+
+  /* Official tokens whose current render differs from designTokens.md defaults. */
+  --agentspace-global-bg-image: none;
+  --agentspace-menu-bg: #ffffff;
+  --agentspace-nav1-active-font-weight: 500;
+  --agentspace-nav2-active-font-weight: 500;
+  --agentspace-nav1-hover-bg: rgba(0, 0, 0, .05);
+  --agentspace-nav2-hover-bg: rgba(0, 0, 0, .05);
+  --agentspace-nav1-active-bg: var(--rail-tile);
+  --agentspace-nav2-active-bg: #EDEEF1;
+  --agentspace-font-size-xs: 10px;
+  --agentspace-font-size-xxl: 28px;
+  --agentspace-font-size-hero: 40px;
+  --devui-primary: var(--devui-brand);
+  --devui-primary-hover: var(--devui-brand-hover);
+  --devui-card-bg: var(--devui-base-bg);
+  --devui-font-title-weight: 600;
+  --devui-font-content-weight: 400;
+  --devui-line-height-base: 1.5;
+  --agentspace-header-height: 48px;
+color-scheme: light;
+  --agentspace-aurora-gap-right: 8px; --agentspace-aurora-gap-bottom: 8px;
+  --agentspace-accent: #14B8A6; --agentspace-aurora-accent-2: color-mix(in srgb, var(--agentspace-accent) 72%, #fff);
+  --agentspace-neutral-bg: #EEF2FB;--agentspace-global-bg: #EEF2FB; --agentspace-panel-bg: #FFFFFF; --agentspace-panel-stroke: rgba(63,107,255,.12); --devui-base-bg: #FFFFFF; --agentspace-stage-bg: #EEF2FB; --agentspace-sunken-bg: #E9EEFA; --devui-feedback-overlay-backdrop: rgba(8,14,40,.4);
+  --devui-text: #12182B; --devui-text-weak: #333B55; --devui-aide-text: #636C86; --agentspace-text-subtle: #8791AB; --devui-light-text: #FFFFFF;
+  --devui-line: rgba(30,50,110,.12); --agentspace-border-soft: rgba(30,50,110,.07); --agentspace-border-strong: rgba(30,50,110,.22);
+  --devui-list-item-hover-bg: rgba(18,24,43,.035);--agentspace-nav1-hover-bg: rgba(18,24,43,.035);--agentspace-nav2-hover-bg: rgba(18,24,43,.035); --agentspace-pressed-bg: rgba(18,24,43,.07); --agentspace-muted-bg: #F0F3FB;
+  --devui-list-item-active-bg: #E6EAF4; --devui-list-item-active-text: #12182B;
+  --devui-brand: var(--agentspace-accent); --devui-brand-hover: color-mix(in srgb, var(--agentspace-accent) 86%, #000); --devui-primary-bg: #E6EAF4; --devui-primary-line: rgba(30,40,80,.28); --agentspace-focus-ring: var(--agentspace-accent); --devui-form-control-interactive-outline: color-mix(in srgb, var(--agentspace-accent) 22%, transparent);
+  --agentspace-btn-top: #2C344C; --agentspace-btn-bottom: #161B2C; --agentspace-btn-top-hover: #38425E; --agentspace-btn-bottom-hover: #1C2236;
+  --agentspace-btn-edge-1: #2C344C; --agentspace-btn-edge-2: #161B2C; --agentspace-btn-edge-3: #0E121F; --agentspace-btn-ring: rgba(22,27,44,.4); --agentspace-btn-ink: #FFFFFF;
+  --agentspace-btn-shadow: 0 8px 18px -8px rgba(12,16,32,.6);
+  --devui-btn-common-bg: #FFFFFF; --devui-btn-common-color-hover: #12182B;
+  --agentspace-run-color: var(--agentspace-accent); --agentspace-run-bg: color-mix(in srgb, var(--agentspace-accent) 10%, #fff); --agentspace-run-line: color-mix(in srgb, var(--agentspace-accent) 35%, transparent);
+  --agentspace-id-human-bg: #E6ECFF; --agentspace-id-human-color: #2442B8; --agentspace-agent-bg: color-mix(in srgb, var(--agentspace-accent) 13%, #fff); --agentspace-agent-color: color-mix(in srgb, var(--agentspace-accent) 78%, #12182B);
+  --devui-border-radius: 8px; --agentspace-radius-sm: 10px; --devui-border-radius-card: 12px; --agentspace-radius-row: 12px; --agentspace-radius-card: 18px; --devui-border-radius-card-xl: 18px; --agentspace-radius-panel: 22px; --agentspace-radius-input: 12px; --devui-border-radius-full: 999px;
+  --agentspace-shadow-card: 0 10px 26px -16px color-mix(in srgb, var(--agentspace-accent) 40%, transparent), 0 1px 2px rgba(18,24,43,.06);
+  --agentspace-shadow-tile: 0 6px 16px -10px color-mix(in srgb, var(--agentspace-accent) 35%, transparent), 0 0 0 1px rgba(30,50,110,.06);
+  --agentspace-shadow-panel: none;
+  --agentspace-shadow-pop: 0 18px 44px -12px rgba(10,20,70,.28), 0 0 0 1px rgba(30,50,110,.1); --agentspace-shadow-dialog: 0 30px 80px -20px rgba(10,20,70,.4), 0 0 0 1px rgba(30,50,110,.1);
+  --rail-tile: color-mix(in srgb, var(--agentspace-accent) 24%, #0B1020); --rail-ink: #FFFFFF; --rail-tile-shadow: none;  /* --rail-tile 同时用作图标镂空线的颜色，需与选中块底色接近 */
+  --agentspace-menu-bg: radial-gradient(85% 42% at 0% 0%, color-mix(in srgb, var(--agentspace-accent) 52%, transparent), transparent 68%), radial-gradient(75% 40% at 100% 100%, color-mix(in srgb, var(--agentspace-accent) 30%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in srgb, var(--agentspace-accent) 16%, #0B1020), #070B16);
+  --agentspace-accent: #14B8A6;
+
+  --agentspace-nav1-active-font-weight: 600;
+  --agentspace-nav2-active-font-weight: 600;
+  --agentspace-side-head-height: calc(var(--agentspace-header-height) + 4px);
+  --agentspace-side-head-offset: 4px;
+  --agentspace-shadow-card: none !important;
+  --agentspace-shadow-tile: none !important;
+  --agentspace-shadow-panel: none !important;
+  --agentspace-btn-shadow: none !important;
+  --agentspace-aurora-ink: color-mix(in srgb, var(--agentspace-accent) 60%, #0B1020);
+  --agentspace-nav2-active-bg: rgba(255,255,255,.17);
+  --agentspace-aurora-shell-shadow: 0 8px 24px -16px rgba(18,22,34,.2), 0 1px 5px rgba(18,22,34,.06);
+}
+html:root[data-appearance-family="aurora"][data-au-mode="light"] {
+  --agentspace-accent: #14B8A6;
+  --agentspace-menu-bg: rgba(245,247,252,.46);
+  --agentspace-page-bg: #FFFFFF;
+  --rail-tile: #FFFFFF;
+  --rail-ink: var(--devui-text);
+  --agentspace-nav1-active-bg: #FFFFFF;
+  --agentspace-nav2-active-bg: #FFFFFF;
+  --agentspace-aurora-canvas-top: 13%;
+  --agentspace-aurora-canvas-right: 12%;
+  --agentspace-aurora-canvas-left: 19%;
+  --agentspace-aurora-canvas-corner: 17%;
+  --agentspace-nav1-hover-bg: rgba(0,0,0,.04);
+  --agentspace-nav2-hover-bg: rgba(0,0,0,.04);
+}
+html:root[data-appearance-family="aurora"][data-au-mode="mixed"] {
+  --agentspace-accent: #14B8A6;
+  --agentspace-aurora-mixed-gradient: radial-gradient(ellipse 420px 210px at 18% 0%, color-mix(in srgb, var(--agentspace-accent) 22%, transparent), transparent 76%), radial-gradient(ellipse 280px 160px at 100% 100%, color-mix(in srgb, var(--agentspace-accent) 10%, transparent), transparent 78%), linear-gradient(180deg, rgba(17,20,32,.97), rgba(9,12,21,.98));
+  --agentspace-menu-bg: var(--agentspace-aurora-mixed-gradient);
+  --agentspace-nav1-active-bg: var(--agentspace-aurora-mixed-gradient);
+  --agentspace-nav2-active-bg: rgba(255,255,255,.17);
+  --agentspace-aurora-canvas-top: 13%;
+  --agentspace-aurora-canvas-right: 12%;
+  --agentspace-aurora-canvas-left: 19%;
+  --agentspace-aurora-canvas-corner: 17%;
+  --agentspace-aurora-shell-shadow: 0 8px 24px -16px rgba(18,22,34,.2), 0 1px 5px rgba(18,22,34,.06);
+}
+html:root[data-appearance-family="aurora"][data-au-mode="dark"] {
+  color-scheme: dark;
+color-scheme: dark;
+
+  --agentspace-neutral-bg: #0C0C0D;--agentspace-global-bg: #0C0C0D;
+  --agentspace-panel-bg:   #121213;
+  --devui-base-bg:    #19191B;
+  --agentspace-stage-bg:   #1F1F21;
+  --agentspace-sunken-bg:  #1C1C1E;
+  --devui-feedback-overlay-backdrop: rgba(0, 0, 0, .55);
+
+  --devui-text:        #EDEDED;
+  --devui-text-weak:      #C8C8CC;
+  --devui-aide-text:  #8F8F8F;
+  --agentspace-text-subtle: rgba(255, 255, 255, .40);
+  --devui-light-text: #121213;
+
+  --devui-line:        #262628;
+  --agentspace-border-soft:   rgba(255, 255, 255, .07);
+  --agentspace-border-strong: rgba(255, 255, 255, .14);
+  --agentspace-panel-stroke:  #222224;
+
+  --devui-list-item-hover-bg: rgba(255, 255, 255, .07);--agentspace-nav1-hover-bg: rgba(255, 255, 255, .07);--agentspace-nav2-hover-bg: rgba(255, 255, 255, .07);
+  --agentspace-pressed-bg:   rgba(255, 255, 255, .10);
+  --agentspace-muted-bg:  rgba(255, 255, 255, .05);
+  --devui-list-item-active-bg:  rgba(77, 141, 255, .14);
+  --devui-list-item-active-text: #8AB4FF;
+
+  --devui-brand:       #4D8DFF;
+  --devui-brand-hover: #6FA3FF;
+  --devui-primary-bg:  rgba(77, 141, 255, .14);
+  --devui-primary-line:  rgba(77, 141, 255, .30);
+  --agentspace-focus-ring:  rgba(77, 141, 255, .55);
+  --devui-form-control-interactive-outline:  rgba(77, 141, 255, .16);
+
+  --agentspace-btn-top:          #F4F4F5;
+  --agentspace-btn-bottom:       #E4E4E7;
+  --agentspace-btn-top-hover:    #FFFFFF;
+  --agentspace-btn-bottom-hover: #ECECEF;
+  --agentspace-btn-edge-1:       #FFFFFF;
+  --agentspace-btn-edge-2:       #F0F0F2;
+  --agentspace-btn-edge-3:       #D4D4D8;
+  --agentspace-btn-ring:         rgba(0, 0, 0, .60);
+  --agentspace-btn-ink:          #121213;
+  --agentspace-btn-shadow:       0 0 0 1px var(--agentspace-btn-ring), 0 2px 4px rgba(0,0,0,.30);
+  --devui-danger:           #D93A2B;
+  --devui-btn-common-bg:          rgba(255, 255, 255, .06);
+  --devui-btn-common-color-hover:         #EDEDED;
+
+  --agentspace-run-color:    #4D8DFF;  --agentspace-run-bg:    rgba(77, 141, 255, .14);  --agentspace-run-line:    rgba(77, 141, 255, .30);
+  --devui-warning:   #F2A65A;  --devui-warning-bg:   rgba(242, 166, 90, .13);  --devui-warning-line:   rgba(242, 166, 90, .30);
+  --agentspace-status-review: #A5A5FF;  --agentspace-status-review-bg: rgba(165, 165, 255, .13); --agentspace-status-review-line: rgba(165, 165, 255, .28);
+  --devui-success:   #4CC38A;  --devui-success-bg:   rgba(76, 195, 138, .12);  --devui-success-line:   rgba(76, 195, 138, .28);
+  --agentspace-status-fail:   #FF7B72;  --devui-danger-bg:   rgba(255, 110, 100, .08); --devui-danger-line:   rgba(255, 110, 100, .22);
+  --agentspace-status-idle:   #8F8F8F;  --agentspace-status-idle-bg:   rgba(255, 255, 255, .06);
+
+  --agentspace-id-human-bg:  rgba(77, 141, 255, .18);  --agentspace-id-human-color:  #8AB4FF;
+  --agentspace-agent-bg:  rgba(165, 165, 255, .16); --agentspace-agent-color:  #B9B9FF;
+ --agentspace-id-tool-color:   #C8C8CC;
+  --agentspace-id-system-bg: rgba(242, 166, 90, .14);  --agentspace-id-system-color: #F2A65A;
+
+  --agentspace-code-key: rgba(255, 255, 255, .9);
+  --agentspace-code-str: #5FC8E8;
+
+  --agentspace-code-add: rgba(76, 195, 138, .14);
+  --agentspace-code-del: rgba(255, 110, 100, .12);
+
+
+  --agentspace-shadow-card:  0 1px 1.5px rgba(0,0,0,.30), inset 0 -1px 0 rgba(255,255,255,.04);
+  --agentspace-shadow-tile:  0 0 0 .5px rgba(255,255,255,.10), 0 1px 2px rgba(0,0,0,.40);
+  --agentspace-shadow-panel: 0 1px 0 rgba(0,0,0,.45), 0 2px 1px -1px rgba(0,0,0,.50);
+  --agentspace-shadow-pop:   0 4px 42px rgba(0,0,0,.40), 0 0 0 1px rgba(255,255,255,.08);
+  --agentspace-shadow-dialog:0 24px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08);
+
+  --agentspace-global-bg-image: none;
+  --agentspace-menu-bg: #121213;
+  --agentspace-nav1-active-font-weight: 500;
+  --agentspace-nav2-active-font-weight: 500;
+  --agentspace-nav1-hover-bg: rgba(255, 255, 255, .07);
+  --agentspace-nav2-hover-bg: rgba(255, 255, 255, .07);
+  --agentspace-nav1-active-bg: var(--rail-tile);
+  --agentspace-nav2-active-bg: #2A2B30;
+  --devui-primary: var(--devui-brand);
+  --devui-primary-hover: var(--devui-brand-hover);
+  --devui-card-bg: var(--devui-base-bg);
+  --agentspace-accent: #14B8A6;
+  --agentspace-aurora-gap-right: 8px;
+  --agentspace-aurora-gap-bottom: 8px;
+  --agentspace-page-bg: #151517;
+  --agentspace-aurora-column-bg: #1A1A1D;
+
+  --devui-brand: color-mix(in srgb, var(--agentspace-accent) 76%, #fff);
+  --devui-brand-hover: color-mix(in srgb, var(--agentspace-accent) 64%, #fff);
+  --devui-primary-bg: color-mix(in srgb, var(--agentspace-accent) 12%, #242427);
+  --devui-primary-line: color-mix(in srgb, var(--agentspace-accent) 40%, transparent);
+  --agentspace-focus-ring: var(--devui-brand);
+  --devui-list-item-active-bg: var(--devui-primary-bg);
+  --devui-list-item-active-text: var(--devui-brand);
+  --agentspace-run-color: var(--devui-brand);
+  --agentspace-run-bg: var(--devui-primary-bg);
+  --agentspace-run-line: var(--devui-primary-line);
+  --agentspace-neutral-bg: #101012;
+  --agentspace-global-bg: #101012;
+  --agentspace-stage-bg: #151517;
+  --agentspace-panel-bg: #151517;
+  --devui-base-bg: #232326;
+  --agentspace-sunken-bg: #101012;
+  --agentspace-muted-bg: #2B2B2F;
+  --devui-text: #F4F4F5;
+  --devui-text-weak: #D4D4D8;
+  --devui-aide-text: #A1A1AA;
+  --agentspace-text-subtle: #92929A;
+  --devui-line: rgba(255,255,255,.12);
+  --agentspace-border-soft: rgba(255,255,255,.07);
+  --agentspace-border-strong: rgba(255,255,255,.24);
+  --agentspace-input: #28282B;
+  --devui-list-item-hover-bg: rgba(255,255,255,.06);
+  --agentspace-nav1-hover-bg: rgba(255,255,255,.06);
+  --agentspace-nav2-hover-bg: rgba(255,255,255,.06);
+  --agentspace-menu-bg: rgba(40,40,45,.48);
+  --agentspace-nav1-active-bg: var(--devui-primary-bg);
+  --agentspace-nav2-active-bg: #2A2B30;
+  --agentspace-nav1-active-font-weight: 600;
+  --agentspace-nav2-active-font-weight: 600;
+  --agentspace-side-head-height: calc(var(--agentspace-header-height) + 4px);
+  --agentspace-side-head-offset: 4px;
+  --agentspace-shadow-card: none !important;
+  --agentspace-shadow-tile: none !important;
+  --agentspace-shadow-panel: none !important;
+  --agentspace-btn-shadow: none !important;
+  --agentspace-aurora-shell-shadow: 0 8px 24px -16px rgba(0,0,0,.5), 0 1px 5px rgba(0,0,0,.25);
+  --devui-primary: var(--devui-brand);
+  --devui-card-bg: var(--devui-base-bg);
+}

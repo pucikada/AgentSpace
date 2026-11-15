@@ -1,0 +1,214 @@
+/* as2-bento-theme.css — token values for appearance "bento".
+   Extracted from the current render. JS still writes the live accent
+   (--lq-a/--lq-b, --px-ink*, --bn). Component rules stay in the page. */
+
+:root[data-appearance-style="bento"] {
+  --agentspace-resize-a: var(--bn, #F2541B);
+  --agentspace-resize-b: color-mix(in srgb, var(--bn, #F2541B) 50%, #FFC24D);
+}
+
+:root[data-appearance-style="bento"] {
+  --bn: #F2541B;
+  --bn-ink: #17181C;
+  --bn-canvas: #E8E9EC;
+  --bn-hatch: repeating-linear-gradient(135deg, rgba(20,22,30,.22) 0 1.5px, transparent 1.5px 5px);
+  --agentspace-neutral-bg: var(--bn-canvas);
+  --agentspace-global-bg: var(--bn-canvas);
+  --agentspace-panel-bg: #FFFFFF;
+  --agentspace-panel-stroke: transparent;
+  --devui-base-bg: #FFFFFF;
+  --agentspace-stage-bg: var(--bn-canvas);
+  --agentspace-sunken-bg: #F3F4F6;
+  --devui-feedback-overlay-backdrop: rgba(20,22,30,.4);
+  --devui-text: #17181C;
+  --devui-text-weak: #3B3E46;
+  --devui-aide-text: #6C7078;
+  --agentspace-text-subtle: #8A9099;
+  --devui-light-text: #FFFFFF;
+  --devui-line: rgba(20,22,30,.09);
+  --agentspace-border-soft: rgba(20,22,30,.06);
+  --agentspace-border-strong: rgba(20,22,30,.18);
+  --devui-list-item-hover-bg: rgba(20,22,30,.045);
+  --agentspace-nav1-hover-bg: rgba(20,22,30,.045);
+  --agentspace-nav2-hover-bg: rgba(20,22,30,.045);
+  --agentspace-pressed-bg: rgba(20,22,30,.08);
+  --agentspace-muted-bg: #F3F4F6;
+  --devui-list-item-active-bg: #17181C;
+  --devui-list-item-active-text: #FFFFFF;
+  --devui-brand: var(--bn);
+  --devui-brand-hover: color-mix(in srgb, var(--bn) 86%, #000);
+  --devui-primary-bg: color-mix(in srgb, var(--bn) 10%, #fff);
+  --devui-primary-line: color-mix(in srgb, var(--bn) 38%, transparent);
+  --agentspace-focus-ring: #2B5BE8;
+  --devui-form-control-interactive-outline: rgba(43,91,232,.2);
+  --agentspace-btn-top: var(--bn);
+  --agentspace-btn-bottom: var(--bn);
+  --agentspace-btn-top-hover: color-mix(in srgb, var(--bn) 90%, #000);
+  --agentspace-btn-bottom-hover: color-mix(in srgb, var(--bn) 90%, #000);
+  --agentspace-btn-edge-1: var(--bn);
+  --agentspace-btn-edge-2: var(--bn);
+  --agentspace-btn-edge-3: var(--bn);
+  --agentspace-btn-ring: transparent;
+  --agentspace-btn-ink: #FFFFFF;
+  --agentspace-btn-shadow: none;
+  --devui-btn-common-bg: #FFFFFF;
+  --devui-btn-common-color-hover: #17181C;
+  --agentspace-run-color: #2B5BE8;
+  --agentspace-run-bg: #E4EBFD;
+  --agentspace-run-line: rgba(43,91,232,.35);
+  --agentspace-id-human-bg: #FFE3D6;
+  --agentspace-id-human-color: #8A2E0A;
+  --agentspace-agent-bg: #DDE6FD;
+  --agentspace-agent-color: #1F3FA8;
+  --devui-border-radius: 8px;
+  --agentspace-radius-sm: 10px;
+  --devui-border-radius-card: 14px;
+  --agentspace-radius-row: 12px;
+  --agentspace-radius-card: 26px;
+  --devui-border-radius-card-xl: 26px;
+  --agentspace-radius-panel: 28px;
+  --agentspace-radius-input: 999px;
+  --devui-border-radius-full: 999px;
+  --agentspace-shadow-card: 0 1px 2px rgba(20,22,30,.04), 0 14px 30px -20px rgba(20,22,30,.18);
+  --agentspace-shadow-tile: 0 1px 2px rgba(20,22,30,.04);
+  --agentspace-shadow-panel: 0 1px 2px rgba(20,22,30,.04), 0 14px 30px -20px rgba(20,22,30,.18);
+  --agentspace-shadow-pop: 0 18px 44px -14px rgba(20,22,30,.28), 0 0 0 1px rgba(20,22,30,.06);
+  --agentspace-shadow-dialog: 0 30px 80px -24px rgba(20,22,30,.4), 0 0 0 1px rgba(20,22,30,.06);
+  --rail-tile: #17181C;
+  --rail-ink: #FFFFFF;
+  --rail-tile-shadow: none;
+  --vb-a: var(--bn);
+  --vb-b: color-mix(in srgb, var(--bn) 70%, #fff);
+}
+
+:root[data-appearance-style="bento"] {
+  --agentspace-radius-card: 18px;
+  --devui-border-radius-card-xl: 18px;
+  --agentspace-radius-panel: 20px;
+  --devui-border-radius-card: 12px;
+}
+
+:root[data-appearance-style="bento"] {
+  --agentspace-btn-top: #17181C;
+  --agentspace-btn-bottom: #17181C;
+  --agentspace-btn-top-hover: #2B2E37;
+  --agentspace-btn-bottom-hover: #2B2E37;
+  --agentspace-btn-edge-1: #17181C;
+  --agentspace-btn-edge-2: #17181C;
+  --agentspace-btn-edge-3: #17181C;
+}
+
+:root[data-appearance-style="bento"] {
+  --agentspace-nav2-active-bg: var(--bn-soft2, #F1F2F5);
+  --rail-tile: #FFFFFF;
+  --rail-ink: #17181C;
+}
+
+:root[data-appearance-style="bento"] {
+  --bn-surface:#FFFFFF;
+  --bn-inset:#F5F6F8;
+  --bn-soft:#ECEEF2;
+  --bn-soft2:#F1F2F5;
+  --bn-hover:#F7F8FA;
+  --bn-chip:#F0F1F4;
+  --bn-strong:#17181C;
+  --bn-strong-hover:#2B2E37;
+  --bn-on-strong:#FFFFFF;
+  --bn-ink:#17181C;
+  --bn-rgb:20,22,30;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --bn-canvas:#0D0E10;
+  --bn-surface:#17181C;
+  --bn-inset:#1F2126;
+  --bn-soft:#2C2F37;
+  --bn-soft2:#262930;
+  --bn-hover:#1C1E23;
+  --bn-chip:#2C2F37;
+  --bn-strong:#F2F3F5;
+  --bn-strong-hover:#FFFFFF;
+  --bn-on-strong:#17181C;
+  --bn-ink:#F2F3F5;
+  --bn-rgb:255,255,255;
+  --agentspace-neutral-bg: #0D0E10;
+  --agentspace-global-bg: #0D0E10;
+  --agentspace-panel-bg:#17181C;
+  --devui-base-bg:#17181C;
+  --agentspace-stage-bg:#0D0E10;
+  --agentspace-sunken-bg:#1F2126;
+  --devui-feedback-overlay-backdrop:rgba(0,0,0,.6);
+  --devui-text:#F2F3F5;
+  --devui-text-weak:#CDD0D6;
+  --devui-aide-text:#9AA0AB;
+  --agentspace-text-subtle:#6F7580;
+  --devui-light-text:#17181C;
+  --devui-line:rgba(255,255,255,.1);
+  --agentspace-border-soft:rgba(255,255,255,.06);
+  --agentspace-border-strong:rgba(255,255,255,.2);
+  --devui-list-item-hover-bg: rgba(255,255,255,.06);
+  --agentspace-nav1-hover-bg: rgba(255,255,255,.06);
+  --agentspace-nav2-hover-bg: rgba(255,255,255,.06);
+  --agentspace-pressed-bg:rgba(255,255,255,.1);
+  --agentspace-muted-bg:#1F2126;
+  --devui-list-item-active-bg:#2C2F37;
+  --devui-list-item-active-text:#F2F3F5;
+  --agentspace-btn-top:#F2F3F5;
+  --agentspace-btn-bottom:#F2F3F5;
+  --agentspace-btn-top-hover:#FFFFFF;
+  --agentspace-btn-bottom-hover:#FFFFFF;
+  --agentspace-btn-edge-1:#F2F3F5;
+  --agentspace-btn-edge-2:#F2F3F5;
+  --agentspace-btn-edge-3:#F2F3F5;
+  --agentspace-btn-ink:#17181C;
+  --devui-btn-common-bg:#1F2126;
+  --devui-btn-common-color-hover:#F2F3F5;
+  --agentspace-run-color:#6B93FF;
+  --agentspace-run-bg:rgba(107,147,255,.14);
+  --agentspace-run-line:rgba(107,147,255,.4);
+  --agentspace-id-human-bg:#3A2A22;
+  --agentspace-id-human-color:#FFC9B0;
+  --agentspace-agent-bg:#222B44;
+  --agentspace-agent-color:#B8CCFF;
+  --devui-warning:#FFB84D;
+  --devui-warning-bg:rgba(255,184,77,.14);
+  --devui-warning-line:rgba(255,184,77,.4);
+  --agentspace-status-review:#B9A2FF;
+  --agentspace-status-review-bg:rgba(185,162,255,.14);
+  --agentspace-status-review-line:rgba(185,162,255,.4);
+  --devui-success:#5FD39B;
+  --devui-success-bg:rgba(95,211,155,.14);
+  --devui-success-line:rgba(95,211,155,.4);
+  --agentspace-status-fail:#FF7A6B;
+  --devui-danger-bg:rgba(255,122,107,.14);
+  --devui-danger-line:rgba(255,122,107,.4);
+  --agentspace-status-idle:#9AA0AB;
+  --agentspace-status-idle-bg:#1F2126;
+  --agentspace-focus-ring:#6B93FF;
+  --devui-form-control-interactive-outline:rgba(107,147,255,.28);
+  --agentspace-shadow-card:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -20px rgba(0,0,0,.6);
+  --agentspace-shadow-pop:0 18px 44px -14px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08);
+  --agentspace-shadow-dialog:0 30px 80px -24px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08);
+  --rail-tile:#262930;
+  --rail-ink:#F2F3F5;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --rail-tile: #F2F3F5;
+  --rail-ink: #17181C;
+}
+
+:root[data-appearance-style="bento"] {
+  --bn-link: #2B5BE8;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --bn-link: #8FADFF;
+}
+
+:root[data-appearance-style="bento"][data-bn-mode="dark"] {
+  --devui-brand: color-mix(in srgb, var(--bn) 58%, #FFFFFF);
+  --devui-brand-hover: color-mix(in srgb, var(--bn) 45%, #FFFFFF);
+  --devui-primary-bg: rgba(255,255,255,.08);
+  --devui-primary-line: rgba(255,255,255,.28);
+}
